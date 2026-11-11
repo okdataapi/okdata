@@ -1,0 +1,39 @@
+{
+  "name": "okdata",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for okdata: Douyin, Xiaohongshu, WeChat, Bilibili, Weibo, TikTok, X and YouTube data for AI agents, paid per call. fetch-based, no dependencies.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist", "README.md", "LICENSE"],
+  "sideEffects": false,
+  "engines": { "node": ">=20.3" },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "keywords": [
+    "okdata", "social media api", "ai agents", "mcp", "douyin", "xiaohongshu", "rednote", "wechat", "bilibili",
+    "weibo", "tiktok", "twitter", "x", "youtube transcript", "sdk"
+  ],
+  "homepage": "https://okdata.online",
+  "repository": { "type": "git", "url": "git+https://github.com/okdataapi/okdata.git", "directory": "typescript" },
+  "bugs": "https://github.com/okdataapi/okdata/issues",
+  "license": "MIT",
+  "author": "okdata <hello@okdata.online>",
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@vitest/coverage-v8": "^2.1.8",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8"
+  }
+}

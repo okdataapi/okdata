@@ -1,0 +1,2652 @@
+{
+  "revision": "0.1.0",
+  "priceBook": "1",
+  "baseUrl": "https://api.okdata.online",
+  "platforms": [
+    {
+      "id": "douyin",
+      "name": {
+        "en": "Douyin",
+        "zh": "抖音"
+      },
+      "region": "cn",
+      "summary": {
+        "en": "China’s TikTok: videos, accounts, comments and the hot search board.",
+        "zh": "视频、账号、评论和热搜榜。"
+      }
+    },
+    {
+      "id": "xiaohongshu",
+      "name": {
+        "en": "Xiaohongshu (RedNote)",
+        "zh": "小红书"
+      },
+      "region": "cn",
+      "summary": {
+        "en": "Lifestyle notes, creators and what people search for.",
+        "zh": "笔记、博主和大家在搜什么。"
+      }
+    },
+    {
+      "id": "wechat_mp",
+      "name": {
+        "en": "WeChat Official Accounts",
+        "zh": "微信公众号"
+      },
+      "region": "cn",
+      "summary": {
+        "en": "Official Account articles and history, without a QR login.",
+        "zh": "公众号文章和历史文章，不用扫码。"
+      }
+    },
+    {
+      "id": "bilibili",
+      "name": {
+        "en": "Bilibili",
+        "zh": "B站"
+      },
+      "region": "cn",
+      "summary": {
+        "en": "Videos, comments and the popular board.",
+        "zh": "视频、评论和热门榜。"
+      }
+    },
+    {
+      "id": "weibo",
+      "name": {
+        "en": "Weibo",
+        "zh": "微博"
+      },
+      "region": "cn",
+      "summary": {
+        "en": "Posts, accounts and the hot search list.",
+        "zh": "微博、账号和热搜。"
+      }
+    },
+    {
+      "id": "tiktok",
+      "name": {
+        "en": "TikTok",
+        "zh": "TikTok"
+      },
+      "region": "global",
+      "summary": {
+        "en": "Videos, accounts and comments worldwide.",
+        "zh": "全球的视频、账号和评论。"
+      }
+    },
+    {
+      "id": "x",
+      "name": {
+        "en": "X (Twitter)",
+        "zh": "X（推特）"
+      },
+      "region": "global",
+      "summary": {
+        "en": "Posts, accounts, search and trends.",
+        "zh": "帖子、账号、搜索和趋势。"
+      }
+    },
+    {
+      "id": "youtube",
+      "name": {
+        "en": "YouTube",
+        "zh": "YouTube"
+      },
+      "region": "global",
+      "summary": {
+        "en": "Videos, comments and transcripts.",
+        "zh": "视频、评论和字幕。"
+      }
+    }
+  ],
+  "endpoints": [
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.02",
+      "id": "douyin.videos.search",
+      "platform": "douyin",
+      "object": "post",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.02",
+      "title": {
+        "en": "Douyin video search",
+        "zh": "抖音视频搜索"
+      },
+      "summary": {
+        "en": "Videos matching keywords, with likes, comments, shares and the author.",
+        "zh": "按关键词搜视频，带点赞、评论、转发和作者。"
+      },
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "required": true,
+          "example": "露营装备",
+          "description": {
+            "en": "Keywords, as a person would type them into the platform search box.",
+            "zh": "关键词，和在平台搜索框里输入的一样。"
+          }
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "relevance",
+            "latest",
+            "most_liked"
+          ],
+          "default": "relevance",
+          "description": {
+            "en": "Result order.",
+            "zh": "排序方式。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "content-research",
+        "competitor-monitoring"
+      ],
+      "path": "/v1/douyin/videos/search"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "douyin.videos.get",
+      "platform": "douyin",
+      "object": "post",
+      "list": false,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Douyin video detail",
+        "zh": "抖音视频详情"
+      },
+      "summary": {
+        "en": "One video by ID or share link: text, metrics, author, music and hashtags.",
+        "zh": "按 ID 或分享链接取一个视频：文案、数据、作者、音乐和话题。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "example": "7301234567890123456",
+          "description": {
+            "en": "The video ID. Give id or url.",
+            "zh": "视频 ID。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "example": "https://v.douyin.com/xxxxxx/",
+          "description": {
+            "en": "A share link or page URL; the ID is read from it.",
+            "zh": "分享链接或网页地址，会从中解析出 ID。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring",
+        "content-research"
+      ],
+      "path": "/v1/douyin/videos/get"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "douyin.videos.comments.list",
+      "platform": "douyin",
+      "object": "comment",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Douyin video comments",
+        "zh": "抖音视频评论"
+      },
+      "summary": {
+        "en": "Top-level comments on a video, newest or hottest first.",
+        "zh": "视频的一级评论，按最新或最热排序。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "example": "7301234567890123456",
+          "description": {
+            "en": "The video ID. Give id or url.",
+            "zh": "视频 ID。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "hot",
+            "latest"
+          ],
+          "default": "hot",
+          "description": {
+            "en": "Result order.",
+            "zh": "排序方式。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "word-of-mouth"
+      ],
+      "path": "/v1/douyin/videos/comments/list"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "douyin.users.get",
+      "platform": "douyin",
+      "object": "account",
+      "list": false,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Douyin account profile",
+        "zh": "抖音账号信息"
+      },
+      "summary": {
+        "en": "Followers, total likes, video count, bio and verification of an account.",
+        "zh": "账号的粉丝数、获赞数、作品数、简介和认证。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "example": "MS4wLjABAAAA...",
+          "description": {
+            "en": "The account ID (sec_uid / user id as the platform uses it).",
+            "zh": "账号 ID（平台自己的 sec_uid 或 user id）。"
+          }
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "example": "https://www.douyin.com/user/MS4wLjABAAAA...",
+          "description": {
+            "en": "A share link or page URL; the ID is read from it.",
+            "zh": "分享链接或网页地址，会从中解析出 ID。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring",
+        "creator-discovery"
+      ],
+      "path": "/v1/douyin/users/get"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "douyin.users.videos.list",
+      "platform": "douyin",
+      "object": "post",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Douyin account videos",
+        "zh": "抖音账号作品列表"
+      },
+      "summary": {
+        "en": "An account's videos, newest first, with metrics.",
+        "zh": "账号发布的视频，从新到旧，带数据。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "example": "MS4wLjABAAAA...",
+          "description": {
+            "en": "The account ID (sec_uid / user id as the platform uses it).",
+            "zh": "账号 ID（平台自己的 sec_uid 或 user id）。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring"
+      ],
+      "path": "/v1/douyin/users/videos/list"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "douyin.trends.list",
+      "platform": "douyin",
+      "object": "trend",
+      "list": true,
+      "pageSize": 50,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Douyin hot search board",
+        "zh": "抖音热搜榜"
+      },
+      "summary": {
+        "en": "The current hot search list with rank and heat.",
+        "zh": "当前热搜榜，带排名和热度。"
+      },
+      "params": [
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "trend-research"
+      ],
+      "path": "/v1/douyin/trends/list"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.02",
+      "id": "xiaohongshu.notes.search",
+      "platform": "xiaohongshu",
+      "object": "post",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.02",
+      "title": {
+        "en": "Xiaohongshu note search",
+        "zh": "小红书笔记搜索"
+      },
+      "summary": {
+        "en": "Notes matching keywords, newest or most popular first, with images and the author.",
+        "zh": "按关键词搜笔记，可按最新或最热，带图片和作者。"
+      },
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "required": true,
+          "example": "防晒霜 推荐",
+          "description": {
+            "en": "Keywords, as a person would type them into the platform search box.",
+            "zh": "关键词，和在平台搜索框里输入的一样。"
+          }
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "general",
+            "latest",
+            "popular"
+          ],
+          "default": "general",
+          "description": {
+            "en": "Result order.",
+            "zh": "排序方式。"
+          }
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "all",
+            "video",
+            "image"
+          ],
+          "default": "all",
+          "description": {
+            "en": "Note type.",
+            "zh": "笔记类型。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "content-research",
+        "word-of-mouth",
+        "competitor-monitoring"
+      ],
+      "path": "/v1/xiaohongshu/notes/search"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.02",
+      "id": "xiaohongshu.notes.get",
+      "platform": "xiaohongshu",
+      "object": "post",
+      "list": false,
+      "unit": "call",
+      "price": "0.02",
+      "title": {
+        "en": "Xiaohongshu note detail",
+        "zh": "小红书笔记详情"
+      },
+      "summary": {
+        "en": "Full text, all images or the video, likes, saves and comments count of one note.",
+        "zh": "一篇笔记的全文、全部图片或视频、点赞、收藏和评论数。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "example": "6650a1b2000000001e00abcd",
+          "description": {
+            "en": "The note ID. Give id or url.",
+            "zh": "笔记 ID。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "example": "https://www.xiaohongshu.com/explore/6650a1b2000000001e00abcd",
+          "description": {
+            "en": "A share link or page URL; the ID is read from it.",
+            "zh": "分享链接或网页地址，会从中解析出 ID。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "content-research",
+        "competitor-monitoring"
+      ],
+      "path": "/v1/xiaohongshu/notes/get"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.02",
+      "id": "xiaohongshu.notes.comments.list",
+      "platform": "xiaohongshu",
+      "object": "comment",
+      "list": true,
+      "pageSize": 10,
+      "unit": "call",
+      "price": "0.02",
+      "title": {
+        "en": "Xiaohongshu note comments",
+        "zh": "小红书笔记评论"
+      },
+      "summary": {
+        "en": "Comments on a note with likes and reply counts.",
+        "zh": "笔记下的评论，带点赞和回复数。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "example": "6650a1b2000000001e00abcd",
+          "description": {
+            "en": "The note ID. Give id or url.",
+            "zh": "笔记 ID。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "word-of-mouth"
+      ],
+      "path": "/v1/xiaohongshu/notes/comments/list"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.02",
+      "id": "xiaohongshu.users.get",
+      "platform": "xiaohongshu",
+      "object": "account",
+      "list": false,
+      "unit": "call",
+      "price": "0.02",
+      "title": {
+        "en": "Xiaohongshu account profile",
+        "zh": "小红书博主信息"
+      },
+      "summary": {
+        "en": "Followers, likes and saves, note count and bio of an account.",
+        "zh": "博主的粉丝、获赞与收藏、笔记数和简介。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "example": "5f1234567890abcdef123456",
+          "description": {
+            "en": "The account ID (sec_uid / user id as the platform uses it).",
+            "zh": "账号 ID（平台自己的 sec_uid 或 user id）。"
+          }
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "example": "https://www.xiaohongshu.com/user/profile/5f1234567890abcdef123456",
+          "description": {
+            "en": "A share link or page URL; the ID is read from it.",
+            "zh": "分享链接或网页地址，会从中解析出 ID。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "creator-discovery",
+        "competitor-monitoring"
+      ],
+      "path": "/v1/xiaohongshu/users/get"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.02",
+      "id": "xiaohongshu.users.notes.list",
+      "platform": "xiaohongshu",
+      "object": "post",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.02",
+      "title": {
+        "en": "Xiaohongshu account notes",
+        "zh": "小红书博主笔记列表"
+      },
+      "summary": {
+        "en": "An account's notes, newest first.",
+        "zh": "博主发布的笔记，从新到旧。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "example": "5f1234567890abcdef123456",
+          "description": {
+            "en": "The account ID (sec_uid / user id as the platform uses it).",
+            "zh": "账号 ID（平台自己的 sec_uid 或 user id）。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring",
+        "creator-discovery"
+      ],
+      "path": "/v1/xiaohongshu/users/notes/list"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.02",
+      "id": "xiaohongshu.trends.list",
+      "platform": "xiaohongshu",
+      "object": "trend",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.02",
+      "title": {
+        "en": "Xiaohongshu hot topics",
+        "zh": "小红书热点话题"
+      },
+      "summary": {
+        "en": "The hot topics Xiaohongshu suggests to creators right now, with heat.",
+        "zh": "小红书当前推荐给创作者的热点话题，带热度。"
+      },
+      "params": [
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "trend-research"
+      ],
+      "path": "/v1/xiaohongshu/trends/list"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.58",
+      "id": "wechat_mp.accounts.search",
+      "platform": "wechat_mp",
+      "object": "account",
+      "list": true,
+      "pageSize": 10,
+      "unit": "item",
+      "price": "0.058",
+      "title": {
+        "en": "Official Account search",
+        "zh": "公众号搜索"
+      },
+      "summary": {
+        "en": "Find Official Accounts by name or keyword, with their original ID (gh_…). Charged per account returned.",
+        "zh": "按名称或关键词找公众号，返回原始 ID（gh_…）。按返回的账号数计费。"
+      },
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "required": true,
+          "example": "36氪",
+          "description": {
+            "en": "Keywords, as a person would type them into the platform search box.",
+            "zh": "关键词，和在平台搜索框里输入的一样。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring"
+      ],
+      "path": "/v1/wechat_mp/accounts/search"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.04",
+      "id": "wechat_mp.accounts.articles.list",
+      "platform": "wechat_mp",
+      "object": "post",
+      "list": true,
+      "pageSize": 10,
+      "unit": "call",
+      "price": "0.04",
+      "title": {
+        "en": "Official Account article history",
+        "zh": "公众号历史文章"
+      },
+      "summary": {
+        "en": "An Official Account's published articles, newest first, without a QR login.",
+        "zh": "公众号已发布的文章，从新到旧，不用扫码登录。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "example": "gh_363b924965e9",
+          "description": {
+            "en": "The account original ID (gh_…) from accounts.search, or its WeChat ID.",
+            "zh": "accounts.search 返回的原始 ID（gh_…），或公众号的微信号。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring",
+        "content-research"
+      ],
+      "path": "/v1/wechat_mp/accounts/articles/list"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.02",
+      "id": "wechat_mp.articles.get",
+      "platform": "wechat_mp",
+      "object": "post",
+      "list": false,
+      "unit": "call",
+      "price": "0.02",
+      "title": {
+        "en": "Official Account article detail",
+        "zh": "公众号文章详情"
+      },
+      "summary": {
+        "en": "Full text of an article as plain text, with the account and the time it was published.",
+        "zh": "文章全文（纯文本），带公众号和发布时间。"
+      },
+      "params": [
+        {
+          "name": "url",
+          "type": "string",
+          "required": true,
+          "example": "https://mp.weixin.qq.com/s/xxxxxxxx",
+          "description": {
+            "en": "A share link or page URL; the ID is read from it.",
+            "zh": "分享链接或网页地址，会从中解析出 ID。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "content-research"
+      ],
+      "path": "/v1/wechat_mp/articles/get"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "bilibili.videos.search",
+      "platform": "bilibili",
+      "object": "post",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Bilibili video search",
+        "zh": "B站视频搜索"
+      },
+      "summary": {
+        "en": "Videos matching keywords, with views, danmaku, likes and coins.",
+        "zh": "按关键词搜视频，带播放、弹幕、点赞和投币。"
+      },
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "required": true,
+          "example": "Claude Code 教程",
+          "description": {
+            "en": "Keywords, as a person would type them into the platform search box.",
+            "zh": "关键词，和在平台搜索框里输入的一样。"
+          }
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "relevance",
+            "latest",
+            "most_viewed"
+          ],
+          "default": "relevance",
+          "description": {
+            "en": "Result order.",
+            "zh": "排序方式。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "content-research"
+      ],
+      "path": "/v1/bilibili/videos/search"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "bilibili.videos.get",
+      "platform": "bilibili",
+      "object": "post",
+      "list": false,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Bilibili video detail",
+        "zh": "B站视频详情"
+      },
+      "summary": {
+        "en": "One video by BV ID or link.",
+        "zh": "按 BV 号或链接取一个视频。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "example": "BV1xx411c7mD",
+          "description": {
+            "en": "The video ID. Give id or url.",
+            "zh": "视频 ID。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "example": "https://www.bilibili.com/video/BV1xx411c7mD",
+          "description": {
+            "en": "A share link or page URL; the ID is read from it.",
+            "zh": "分享链接或网页地址，会从中解析出 ID。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring"
+      ],
+      "path": "/v1/bilibili/videos/get"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "bilibili.videos.comments.list",
+      "platform": "bilibili",
+      "object": "comment",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Bilibili video comments",
+        "zh": "B站视频评论"
+      },
+      "summary": {
+        "en": "Comments on a video, hottest or newest first.",
+        "zh": "视频评论，按最热或最新。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "example": "BV1xx411c7mD",
+          "description": {
+            "en": "The video ID. Give id or url.",
+            "zh": "视频 ID。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "hot",
+            "latest"
+          ],
+          "default": "hot",
+          "description": {
+            "en": "Result order.",
+            "zh": "排序方式。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "word-of-mouth"
+      ],
+      "path": "/v1/bilibili/videos/comments/list"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "bilibili.trends.list",
+      "platform": "bilibili",
+      "object": "trend",
+      "list": true,
+      "pageSize": 50,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Bilibili popular board",
+        "zh": "B站热门榜"
+      },
+      "summary": {
+        "en": "The current popular videos board.",
+        "zh": "当前综合热门榜。"
+      },
+      "params": [
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "trend-research"
+      ],
+      "path": "/v1/bilibili/trends/list"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "weibo.posts.search",
+      "platform": "weibo",
+      "object": "post",
+      "list": true,
+      "pageSize": 10,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Weibo post search",
+        "zh": "微博搜索"
+      },
+      "summary": {
+        "en": "Posts matching keywords, latest or hot, with reposts, comments and likes.",
+        "zh": "按关键词搜微博，可按实时或热门，带转发、评论和点赞。"
+      },
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "required": true,
+          "example": "新品发布",
+          "description": {
+            "en": "Keywords, as a person would type them into the platform search box.",
+            "zh": "关键词，和在平台搜索框里输入的一样。"
+          }
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "hot",
+            "latest"
+          ],
+          "default": "hot",
+          "description": {
+            "en": "Result order.",
+            "zh": "排序方式。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "word-of-mouth",
+        "trend-research"
+      ],
+      "path": "/v1/weibo/posts/search"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "weibo.trends.list",
+      "platform": "weibo",
+      "object": "trend",
+      "list": true,
+      "pageSize": 50,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Weibo hot search",
+        "zh": "微博热搜"
+      },
+      "summary": {
+        "en": "The Weibo hot search list with rank and heat.",
+        "zh": "微博热搜榜，带排名和热度。"
+      },
+      "params": [
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "trend-research"
+      ],
+      "path": "/v1/weibo/trends/list"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "weibo.users.get",
+      "platform": "weibo",
+      "object": "account",
+      "list": false,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Weibo account profile",
+        "zh": "微博账号信息"
+      },
+      "summary": {
+        "en": "Followers, post count, verification and bio of an account.",
+        "zh": "账号的粉丝数、微博数、认证和简介。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "example": "1234567890",
+          "description": {
+            "en": "The account ID (sec_uid / user id as the platform uses it).",
+            "zh": "账号 ID（平台自己的 sec_uid 或 user id）。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring",
+        "creator-discovery"
+      ],
+      "path": "/v1/weibo/users/get"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "tiktok.videos.search",
+      "platform": "tiktok",
+      "object": "post",
+      "list": true,
+      "pageSize": 30,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "TikTok video search",
+        "zh": "TikTok 视频搜索"
+      },
+      "summary": {
+        "en": "Videos matching keywords worldwide, with plays, likes, comments and shares.",
+        "zh": "按关键词搜全球的 TikTok 视频，带播放、点赞、评论和分享。"
+      },
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "required": true,
+          "example": "ai agents",
+          "description": {
+            "en": "Keywords, as a person would type them into the platform search box.",
+            "zh": "关键词，和在平台搜索框里输入的一样。"
+          }
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "relevance",
+            "latest",
+            "most_liked"
+          ],
+          "default": "relevance",
+          "description": {
+            "en": "Result order.",
+            "zh": "排序方式。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "content-research",
+        "trend-research"
+      ],
+      "path": "/v1/tiktok/videos/search"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "tiktok.videos.get",
+      "platform": "tiktok",
+      "object": "post",
+      "list": false,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "TikTok video detail",
+        "zh": "TikTok 视频详情"
+      },
+      "summary": {
+        "en": "One video by ID or link.",
+        "zh": "按 ID 或链接取一个视频。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "example": "7305085486984858894",
+          "description": {
+            "en": "The video ID. Give id or url.",
+            "zh": "视频 ID。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "example": "https://www.tiktok.com/@user/video/7305085486984858894",
+          "description": {
+            "en": "A share link or page URL; the ID is read from it.",
+            "zh": "分享链接或网页地址，会从中解析出 ID。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring"
+      ],
+      "path": "/v1/tiktok/videos/get"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "tiktok.videos.comments.list",
+      "platform": "tiktok",
+      "object": "comment",
+      "list": true,
+      "pageSize": 50,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "TikTok video comments",
+        "zh": "TikTok 视频评论"
+      },
+      "summary": {
+        "en": "Comments on a video with likes and reply counts.",
+        "zh": "视频评论，带点赞和回复数。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "example": "7305085486984858894",
+          "description": {
+            "en": "The video ID. Give id or url.",
+            "zh": "视频 ID。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "word-of-mouth"
+      ],
+      "path": "/v1/tiktok/videos/comments/list"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.002",
+      "id": "tiktok.users.get",
+      "platform": "tiktok",
+      "object": "account",
+      "list": false,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "TikTok account profile",
+        "zh": "TikTok 账号信息"
+      },
+      "summary": {
+        "en": "Followers, likes, video count and bio of an account.",
+        "zh": "账号的粉丝、获赞、作品数和简介。"
+      },
+      "params": [
+        {
+          "name": "username",
+          "type": "string",
+          "required": true,
+          "example": "khaby.lame",
+          "description": {
+            "en": "The handle, with or without @.",
+            "zh": "用户名，带不带 @ 都行。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "creator-discovery",
+        "competitor-monitoring"
+      ],
+      "path": "/v1/tiktok/users/get"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.001",
+      "id": "x.posts.get",
+      "platform": "x",
+      "object": "post",
+      "list": false,
+      "unit": "call",
+      "price": "0.001",
+      "title": {
+        "en": "X post detail",
+        "zh": "X 帖子详情"
+      },
+      "summary": {
+        "en": "One post by ID or link: text, media, views, likes, reposts and replies.",
+        "zh": "按 ID 或链接取一条帖子：正文、媒体、浏览、点赞、转发和回复。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "example": "1850000000000000000",
+          "description": {
+            "en": "The post ID. Give id or url.",
+            "zh": "帖子 ID。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "example": "https://x.com/user/status/1850000000000000000",
+          "description": {
+            "en": "A share link or page URL; the ID is read from it.",
+            "zh": "分享链接或网页地址，会从中解析出 ID。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring",
+        "content-research"
+      ],
+      "path": "/v1/x/posts/get"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.006",
+      "id": "x.posts.search",
+      "platform": "x",
+      "object": "post",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.006",
+      "title": {
+        "en": "X post search",
+        "zh": "X 帖子搜索"
+      },
+      "summary": {
+        "en": "Posts matching a query (X search operators work), latest or top.",
+        "zh": "按查询词搜帖子（支持 X 的搜索语法），可按最新或热门。"
+      },
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "required": true,
+          "example": "\"claude code\" lang:zh",
+          "description": {
+            "en": "Keywords, as a person would type them into the platform search box.",
+            "zh": "关键词，和在平台搜索框里输入的一样。"
+          }
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "latest",
+            "top"
+          ],
+          "default": "latest",
+          "description": {
+            "en": "Result order.",
+            "zh": "排序方式。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "word-of-mouth",
+        "trend-research"
+      ],
+      "path": "/v1/x/posts/search"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.001",
+      "id": "x.users.get",
+      "platform": "x",
+      "object": "account",
+      "list": false,
+      "unit": "call",
+      "price": "0.001",
+      "title": {
+        "en": "X account profile",
+        "zh": "X 账号信息"
+      },
+      "summary": {
+        "en": "Followers, following, post count, bio and verification of an account.",
+        "zh": "账号的粉丝、关注、发帖数、简介和认证。"
+      },
+      "params": [
+        {
+          "name": "username",
+          "type": "string",
+          "required": true,
+          "example": "openai",
+          "description": {
+            "en": "The handle, with or without @.",
+            "zh": "用户名，带不带 @ 都行。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "creator-discovery",
+        "competitor-monitoring"
+      ],
+      "path": "/v1/x/users/get"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.006",
+      "id": "x.users.posts.list",
+      "platform": "x",
+      "object": "post",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.006",
+      "title": {
+        "en": "X account posts",
+        "zh": "X 账号帖子列表"
+      },
+      "summary": {
+        "en": "An account's posts, newest first.",
+        "zh": "账号发布的帖子，从新到旧。"
+      },
+      "params": [
+        {
+          "name": "username",
+          "type": "string",
+          "required": true,
+          "example": "openai",
+          "description": {
+            "en": "The handle, with or without @.",
+            "zh": "用户名，带不带 @ 都行。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring"
+      ],
+      "path": "/v1/x/users/posts/list"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.009",
+      "id": "x.trends.list",
+      "platform": "x",
+      "object": "trend",
+      "list": true,
+      "pageSize": 30,
+      "unit": "call",
+      "price": "0.009",
+      "title": {
+        "en": "X trending topics",
+        "zh": "X 趋势"
+      },
+      "summary": {
+        "en": "Trending topics worldwide or for one country.",
+        "zh": "全球或某个国家的趋势话题。"
+      },
+      "params": [
+        {
+          "name": "country",
+          "type": "string",
+          "required": false,
+          "example": "US",
+          "description": {
+            "en": "ISO country code; worldwide when omitted.",
+            "zh": "国家代码（ISO），不填为全球。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "trend-research"
+      ],
+      "path": "/v1/x/trends/list"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.004",
+      "id": "youtube.videos.search",
+      "platform": "youtube",
+      "object": "post",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.004",
+      "title": {
+        "en": "YouTube video search",
+        "zh": "YouTube 视频搜索"
+      },
+      "summary": {
+        "en": "Videos matching keywords with views, length and channel.",
+        "zh": "按关键词搜视频，带播放量、时长和频道。"
+      },
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "required": true,
+          "example": "claude code tutorial",
+          "description": {
+            "en": "Keywords, as a person would type them into the platform search box.",
+            "zh": "关键词，和在平台搜索框里输入的一样。"
+          }
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "relevance",
+            "latest",
+            "most_viewed"
+          ],
+          "default": "relevance",
+          "description": {
+            "en": "Result order.",
+            "zh": "排序方式。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "content-research"
+      ],
+      "path": "/v1/youtube/videos/search"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.004",
+      "id": "youtube.videos.get",
+      "platform": "youtube",
+      "object": "post",
+      "list": false,
+      "unit": "call",
+      "price": "0.004",
+      "title": {
+        "en": "YouTube video detail",
+        "zh": "YouTube 视频详情"
+      },
+      "summary": {
+        "en": "One video by ID or link: title, description, views, likes and channel.",
+        "zh": "按 ID 或链接取一个视频：标题、简介、播放、点赞和频道。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "example": "dQw4w9WgXcQ",
+          "description": {
+            "en": "The video ID. Give id or url.",
+            "zh": "视频 ID。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "example": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "description": {
+            "en": "A share link or page URL; the ID is read from it.",
+            "zh": "分享链接或网页地址，会从中解析出 ID。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring"
+      ],
+      "path": "/v1/youtube/videos/get"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.004",
+      "id": "youtube.videos.comments.list",
+      "platform": "youtube",
+      "object": "comment",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.004",
+      "title": {
+        "en": "YouTube video comments",
+        "zh": "YouTube 视频评论"
+      },
+      "summary": {
+        "en": "Comments on a video, top or newest first.",
+        "zh": "视频评论，按热门或最新。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "example": "dQw4w9WgXcQ",
+          "description": {
+            "en": "The video ID. Give id or url.",
+            "zh": "视频 ID。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "top",
+            "latest"
+          ],
+          "default": "top",
+          "description": {
+            "en": "Result order.",
+            "zh": "排序方式。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "word-of-mouth"
+      ],
+      "path": "/v1/youtube/videos/comments/list"
+    },
+    {
+      "method": "GET",
+      "status": "beta",
+      "maxCharge": "0.004",
+      "id": "youtube.videos.transcript.get",
+      "platform": "youtube",
+      "object": "transcript",
+      "list": false,
+      "unit": "call",
+      "price": "0.004",
+      "title": {
+        "en": "YouTube video transcript",
+        "zh": "YouTube 视频字幕"
+      },
+      "summary": {
+        "en": "The transcript of a video with timestamps, in the original or a chosen language.",
+        "zh": "视频字幕，带时间戳，原语言或指定语言。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "example": "dQw4w9WgXcQ",
+          "description": {
+            "en": "The video ID. Give id or url.",
+            "zh": "视频 ID。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "lang",
+          "type": "string",
+          "required": false,
+          "example": "en",
+          "description": {
+            "en": "Preferred transcript language.",
+            "zh": "优先的字幕语言。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string",
+          "required": false,
+          "example": "id,text,metrics.likes",
+          "description": {
+            "en": "Comma-separated fields to keep, to save tokens.",
+            "zh": "只保留这些字段，逗号分隔，用来省 token。"
+          }
+        }
+      ],
+      "jobs": [
+        "transcripts",
+        "content-research"
+      ],
+      "path": "/v1/youtube/videos/transcript/get"
+    }
+  ]
+}
