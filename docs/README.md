@@ -2,7 +2,7 @@
 
 <!-- Generated from the okdata catalog by scripts/export-public.mjs in the okdata monorepo. Do not edit by hand. -->
 
-214 endpoints on 17 platforms (19 of them listed as coming soon and not callable yet), catalog revision d54bb626c60b95fd, price book 1b273c48fea9634e. The same pages are at https://okdata.online/apis/. 中文在下面。
+214 endpoints on 17 platforms (13 of them listed as coming soon and not callable yet), catalog revision 2128c2e84655fc1f, price book 1b273c48fea9634e. The same pages are at https://okdata.online/apis/. 中文在下面。
 
 ## Files for agents and code
 
@@ -106,7 +106,7 @@
 | [Official Account article comments](apis/wechat_mp/articles/comments/list.md) | `wechat_mp.articles.comments.list` | $0.02 per call · about 20 comments per page |
 | [Official Account article stats](apis/wechat_mp/articles/metrics.md) | `wechat_mp.articles.metrics` | $0.02 per call |
 | [Official Account comment replies](apis/wechat_mp/comments/replies/list.md) | `wechat_mp.comments.replies.list` | $0.02 per call · about 3 comments per page |
-| [Official Account owner](apis/wechat_mp/accounts/owner/get.md) (coming soon) | `wechat_mp.accounts.owner.get` | $0.15 per call |
+| [Official Account owner](apis/wechat_mp/accounts/owner/get.md) | `wechat_mp.accounts.owner.get` | $0.15 per call |
 
 **Bilibili**
 
@@ -295,7 +295,7 @@
 | [WeChat Channels video stats](apis/wechat_channels/videos/metrics.md) | `wechat_channels.videos.metrics` | $0.015 per call |
 | [WeChat Channels account profile (backup)](apis/wechat_channels/backup/users/get.md) | `wechat_channels.backup.users.get` | $0.03 per call |
 | [WeChat Channels account videos (backup)](apis/wechat_channels/backup/users/videos/list.md) | `wechat_channels.backup.users.videos.list` | $0.06 per call · about 15 videos per page |
-| [WeChat Channels video search (backup)](apis/wechat_channels/backup/videos/search.md) (coming soon) | `wechat_channels.backup.videos.search` | $0.15 per call · about 10 videos per page |
+| [WeChat Channels video search (backup)](apis/wechat_channels/backup/videos/search.md) | `wechat_channels.backup.videos.search` | $0.15 per call · about 10 videos per page |
 
 **WeChat Search**
 
@@ -303,10 +303,10 @@
 |---|---|---|
 | [WeChat Search articles and videos](apis/wechat/posts/search.md) | `wechat.posts.search` | $0.02 per call · about 20 posts per page |
 | [WeChat Official Account live search](apis/wechat/accounts/search.md) | `wechat.accounts.search` | $0.02 per call · about 8 accounts per page |
-| [WeChat Index](apis/wechat/index/keywords/history.md) (coming soon) | `wechat.index.keywords.history` | $0.15 per call · about 1 results per page |
-| [WeChat Search suggestions](apis/wechat/keywords/related.md) (coming soon) | `wechat.keywords.related` | $0.15 per call · about 9 results per page |
-| [WeChat mini program search](apis/wechat/miniprograms/search.md) (coming soon) | `wechat.miniprograms.search` | $0.15 per call · about 25 results per page |
-| [WeChat Search articles and videos (backup)](apis/wechat/backup/posts/search.md) (coming soon) | `wechat.backup.posts.search` | $0.15 per call · about 20 posts per page |
+| [WeChat Index](apis/wechat/index/keywords/history.md) | `wechat.index.keywords.history` | $0.15 per call · about 1 results per page |
+| [WeChat Search suggestions](apis/wechat/keywords/related.md) | `wechat.keywords.related` | $0.15 per call · about 9 results per page |
+| [WeChat mini program search](apis/wechat/miniprograms/search.md) | `wechat.miniprograms.search` | $0.15 per call · about 25 results per page |
+| [WeChat Search articles and videos (backup)](apis/wechat/backup/posts/search.md) | `wechat.backup.posts.search` | $0.15 per call · about 20 posts per page |
 
 **Telegram**
 
@@ -412,7 +412,7 @@
 | [公众号文章评论](zh/apis/wechat_mp/articles/comments/list.md) | `wechat_mp.articles.comments.list` | $0.02/次 · 每页约 20 条评论 |
 | [公众号文章互动数据](zh/apis/wechat_mp/articles/metrics.md) | `wechat_mp.articles.metrics` | $0.02/次 |
 | [公众号评论回复](zh/apis/wechat_mp/comments/replies/list.md) | `wechat_mp.comments.replies.list` | $0.02/次 · 每页约 3 条评论 |
-| [公众号主体信息](zh/apis/wechat_mp/accounts/owner/get.md)（即将上线） | `wechat_mp.accounts.owner.get` | $0.15/次 |
+| [公众号主体信息](zh/apis/wechat_mp/accounts/owner/get.md) | `wechat_mp.accounts.owner.get` | $0.15/次 |
 
 **B站**
 
@@ -601,7 +601,7 @@
 | [视频号作品互动数据](zh/apis/wechat_channels/videos/metrics.md) | `wechat_channels.videos.metrics` | $0.015/次 |
 | [视频号账号信息（备用版）](zh/apis/wechat_channels/backup/users/get.md) | `wechat_channels.backup.users.get` | $0.03/次 |
 | [视频号账号作品（备用版）](zh/apis/wechat_channels/backup/users/videos/list.md) | `wechat_channels.backup.users.videos.list` | $0.06/次 · 每页约 15 条视频 |
-| [视频号视频搜索（备用版）](zh/apis/wechat_channels/backup/videos/search.md)（即将上线） | `wechat_channels.backup.videos.search` | $0.15/次 · 每页约 10 条视频 |
+| [视频号视频搜索（备用版）](zh/apis/wechat_channels/backup/videos/search.md) | `wechat_channels.backup.videos.search` | $0.15/次 · 每页约 10 条视频 |
 
 **微信搜一搜**
 
@@ -609,10 +609,10 @@
 |---|---|---|
 | [微信搜一搜综合搜索](zh/apis/wechat/posts/search.md) | `wechat.posts.search` | $0.02/次 · 每页约 20 条帖子 |
 | [微信公众号实时查找](zh/apis/wechat/accounts/search.md) | `wechat.accounts.search` | $0.02/次 · 每页约 8 个账号 |
-| [微信指数](zh/apis/wechat/index/keywords/history.md)（即将上线） | `wechat.index.keywords.history` | $0.15/次 · 每页约 1 条结果 |
-| [微信搜一搜推荐词](zh/apis/wechat/keywords/related.md)（即将上线） | `wechat.keywords.related` | $0.15/次 · 每页约 9 条结果 |
-| [微信小程序搜索](zh/apis/wechat/miniprograms/search.md)（即将上线） | `wechat.miniprograms.search` | $0.15/次 · 每页约 25 条结果 |
-| [微信搜一搜综合搜索（备用版）](zh/apis/wechat/backup/posts/search.md)（即将上线） | `wechat.backup.posts.search` | $0.15/次 · 每页约 20 条帖子 |
+| [微信指数](zh/apis/wechat/index/keywords/history.md) | `wechat.index.keywords.history` | $0.15/次 · 每页约 1 条结果 |
+| [微信搜一搜推荐词](zh/apis/wechat/keywords/related.md) | `wechat.keywords.related` | $0.15/次 · 每页约 9 条结果 |
+| [微信小程序搜索](zh/apis/wechat/miniprograms/search.md) | `wechat.miniprograms.search` | $0.15/次 · 每页约 25 条结果 |
+| [微信搜一搜综合搜索（备用版）](zh/apis/wechat/backup/posts/search.md) | `wechat.backup.posts.search` | $0.15/次 · 每页约 20 条帖子 |
 
 **Telegram**
 

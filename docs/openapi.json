@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "okdata API",
-    "version": "d54bb626c60b95fd",
+    "version": "2128c2e84655fc1f",
     "x-price-book": {
       "version": "1b273c48fea9634e",
       "effective_at": null,
@@ -37567,7 +37567,7 @@
       "get": {
         "operationId": "wechat_keywords_related",
         "summary": "WeChat Search suggestions",
-        "description": "The suggestions WeChat Search lists under its search box for a keyword, in its order, about 10 at a time. Words and their places only, without an index.\n\nPrice: $0.15 per call. 1,000 items take about 112 calls: $16.80. Failed calls are not charged.",
+        "description": "The suggestions WeChat Search lists under its search box for a keyword, in its order, about 9 at a time (the keyword itself left out). Words and their places only, without an index.\n\nPrice: $0.15 per call. 1,000 items take about 112 calls: $16.80. Failed calls are not charged.",
         "tags": [
           "wechat"
         ],
@@ -37758,7 +37758,7 @@
       "get": {
         "operationId": "wechat_miniprograms_search",
         "summary": "WeChat mini program search",
-        "description": "Mini programs for keywords through WeChat Search, the first page (about 25): name, description, icon, original ID and AppID, the owner and whether verified, recent users as WeChat shows them, and whether it is a mini game.\n\nPrice: $0.15 per call. 1,000 items take about 40 calls: $6.00. Failed calls are not charged.",
+        "description": "Mini programs for keywords through WeChat Search, the first page (about 25): name, description, icon, original ID and AppID (some brand ones show none), the owner and whether verified, recent users as WeChat shows them (the floor of its band: 100000 for 100k+), and whether it is a mini game.\n\nPrice: $0.15 per call. 1,000 items take about 40 calls: $6.00. Failed calls are not charged.",
         "tags": [
           "wechat"
         ],
@@ -38356,7 +38356,7 @@
       "get": {
         "operationId": "wechat_channels_backup_videos_search",
         "summary": "WeChat Channels video search (backup)",
-        "description": "The backup of wechat_channels.videos.search, from another source: the same parameters and result, without saves.\n\nPrice: $0.15 per call. 1,000 items take about 100 calls: $15.00. Failed calls are not charged.",
+        "description": "The backup of wechat_channels.videos.search, from another source: the same parameters and result, plus comment and share counts (no saves).\n\nPrice: $0.15 per call. 1,000 items take about 100 calls: $15.00. Failed calls are not charged.",
         "tags": [
           "wechat_channels"
         ],

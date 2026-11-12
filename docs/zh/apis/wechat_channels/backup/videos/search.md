@@ -1,6 +1,6 @@
 # 视频号视频搜索（备用版） API
 
-> wechat_channels.videos.search 的备用版，另一来源：参数和返回相同，不带收藏数。
+> wechat_channels.videos.search 的备用版，另一来源：参数和返回相同，另带评论数和转发数（没有收藏数）。
 
 网页版：https://okdata.online/zh/apis/wechat_channels/backup/videos/search/
 

@@ -95,7 +95,7 @@ The server has 5 tools:
 - No key needed: [catalog](https://api.okdata.online/v1/catalog) and [status](https://api.okdata.online/v1/catalog/status)
 - [Agent skills](https://okdata.online/.well-known/agent-skills/index.json), [MCP server card](https://okdata.online/.well-known/mcp/server-card.json), [API catalog](https://okdata.online/.well-known/api-catalog), [AI catalog](https://okdata.online/.well-known/ai-catalog.json)
 
-Generated from catalog d54bb626c60b95fd, price book 1b273c48fea9634e.
+Generated from catalog 2128c2e84655fc1f, price book 1b273c48fea9634e.
 
 ---
 
@@ -194,4 +194,4 @@ bearer_token_env_var = "OKDATA_API_KEY"
 - 不需要 Key：[接口目录](https://api.okdata.online/v1/catalog)和[服务状态](https://api.okdata.online/v1/catalog/status)
 - [Agent Skills](https://okdata.online/.well-known/agent-skills/index.json)、[MCP 服务卡片](https://okdata.online/.well-known/mcp/server-card.json)、[API 目录](https://okdata.online/.well-known/api-catalog)、[AI 目录](https://okdata.online/.well-known/ai-catalog.json)
 
-根据接口目录 d54bb626c60b95fd、价目表 1b273c48fea9634e 生成。
+根据接口目录 2128c2e84655fc1f、价目表 1b273c48fea9634e 生成。

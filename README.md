@@ -144,7 +144,7 @@ every endpoint on one page and [docs/prices.json](docs/prices.json) every price 
 |---|---|---|---|
 | [Douyin](docs/apis/douyin.md) | 38 | $0.002–$0.04 | China’s TikTok: videos, accounts, comments and the hot search board. |
 | [Xiaohongshu (RedNote)](docs/apis/xiaohongshu.md) | 30 | $0.02–$0.04 | Lifestyle notes, creators and what people search for. |
-| [WeChat Official Accounts](docs/apis/wechat_mp.md) | 8 (1 coming soon) | $0.02–$0.15 | Official Account articles and history, without a QR login. |
+| [WeChat Official Accounts](docs/apis/wechat_mp.md) | 8 | $0.02–$0.15 | Official Account articles and history, without a QR login. |
 | [Bilibili](docs/apis/bilibili.md) | 9 | $0.002–$0.0025 | Videos, comments and the popular board. |
 | [Weibo](docs/apis/weibo.md) | 11 | $0.002–$0.0025 | Posts, accounts and the hot search list. |
 | [TikTok](docs/apis/tiktok.md) | 17 | $0.002–$0.004 | Videos, accounts and comments worldwide. |
@@ -156,8 +156,8 @@ every endpoint on one page and [docs/prices.json](docs/prices.json) every price 
 | [Reddit](docs/apis/reddit.md) | 11 | $0.002–$0.004 | Posts, comments, communities, people and what is trending. |
 | [Kuaishou](docs/apis/kuaishou.md) | 8 | $0.002–$0.02 | Videos, accounts, comments and the hot list. |
 | [Zhihu](docs/apis/zhihu.md) | 15 (13 coming soon) | $0.002 | Questions and answers, articles, columns, people and the hot list. |
-| [WeChat Channels](docs/apis/wechat_channels.md) | 15 (1 coming soon) | $0.015–$0.15 | Channels videos, accounts, comments and live replays, without a QR login. |
-| [WeChat Search](docs/apis/wechat.md) | 6 (4 coming soon) | $0.02–$0.15 | WeChat Search across Official Account articles, Channels videos and mini programs. |
+| [WeChat Channels](docs/apis/wechat_channels.md) | 15 | $0.015–$0.15 | Channels videos, accounts, comments and live replays, without a QR login. |
+| [WeChat Search](docs/apis/wechat.md) | 6 | $0.02–$0.15 | WeChat Search across Official Account articles, Channels videos and mini programs. |
 | [Telegram](docs/apis/telegram.md) | 3 | $0.002 | Public channels and their messages. |
 <!-- okdata:platforms:en:end -->
 
@@ -279,7 +279,7 @@ MCP 有五个工具：`find`（用中文或英文找接口）、`describe`（看
 |---|---|---|---|
 | [抖音](docs/zh/apis/douyin.md) | 38 | $0.002–$0.04 | 视频、账号、评论和热搜榜。 |
 | [小红书](docs/zh/apis/xiaohongshu.md) | 30 | $0.02–$0.04 | 笔记、博主和大家在搜什么。 |
-| [微信公众号](docs/zh/apis/wechat_mp.md) | 8 (1 个即将上线) | $0.02–$0.15 | 公众号文章和历史文章，不用扫码。 |
+| [微信公众号](docs/zh/apis/wechat_mp.md) | 8 | $0.02–$0.15 | 公众号文章和历史文章，不用扫码。 |
 | [B站](docs/zh/apis/bilibili.md) | 9 | $0.002–$0.0025 | 视频、评论和热门榜。 |
 | [微博](docs/zh/apis/weibo.md) | 11 | $0.002–$0.0025 | 微博、账号和热搜。 |
 | [TikTok](docs/zh/apis/tiktok.md) | 17 | $0.002–$0.004 | 全球的视频、账号和评论。 |
@@ -291,8 +291,8 @@ MCP 有五个工具：`find`（用中文或英文找接口）、`describe`（看
 | [Reddit](docs/zh/apis/reddit.md) | 11 | $0.002–$0.004 | 帖子、评论、社区、用户和正在热的内容。 |
 | [快手](docs/zh/apis/kuaishou.md) | 8 | $0.002–$0.02 | 视频、账号、评论和热榜。 |
 | [知乎](docs/zh/apis/zhihu.md) | 15 (13 个即将上线) | $0.002 | 问题和回答、文章、专栏、用户和热榜。 |
-| [微信视频号](docs/zh/apis/wechat_channels.md) | 15 (1 个即将上线) | $0.015–$0.15 | 视频号的视频、账号、评论和直播回放，不用扫码。 |
-| [微信搜一搜](docs/zh/apis/wechat.md) | 6 (4 个即将上线) | $0.02–$0.15 | 微信搜一搜：公众号文章、视频号视频和小程序。 |
+| [微信视频号](docs/zh/apis/wechat_channels.md) | 15 | $0.015–$0.15 | 视频号的视频、账号、评论和直播回放，不用扫码。 |
+| [微信搜一搜](docs/zh/apis/wechat.md) | 6 | $0.02–$0.15 | 微信搜一搜：公众号文章、视频号视频和小程序。 |
 | [Telegram](docs/zh/apis/telegram.md) | 3 | $0.002 | 公开频道和频道消息。 |
 <!-- okdata:platforms:zh:end -->
 

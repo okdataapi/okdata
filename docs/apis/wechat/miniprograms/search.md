@@ -1,6 +1,6 @@
 # WeChat mini program search API
 
-> Mini programs for keywords through WeChat Search, the first page (about 25): name, description, icon, original ID and AppID, the owner and whether verified, recent users as WeChat shows them, and whether it is a mini game.
+> Mini programs for keywords through WeChat Search, the first page (about 25): name, description, icon, original ID and AppID (some brand ones show none), the owner and whether verified, recent users as WeChat shows them (the floor of its band: 100000 for 100k+), and whether it is a mini game.
 
 Canonical page: https://okdata.online/apis/wechat/miniprograms/search/
 

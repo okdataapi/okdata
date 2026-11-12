@@ -2,7 +2,7 @@
 
 > 全部 214 个接口，一行一个：名称（链接到完整说明的 Markdown）、请求、价格和返回内容。调用、计费和错误处理所有接口都一样，见 https://okdata.online/zh/llms.txt
 
-接口目录 d54bb626c60b95fd，价目表 1b273c48fea9634e。 English: https://okdata.online/llms-full.txt
+接口目录 2128c2e84655fc1f，价目表 1b273c48fea9634e。 English: https://okdata.online/llms-full.txt
 
 ## 抖音
 
@@ -87,7 +87,7 @@
 - [公众号文章评论](https://okdata.online/zh/apis/wechat_mp/articles/comments/list.md) `GET /v1/wechat_mp/articles/comments/list` $0.02/次 · 每页约 20 条评论。按文章链接取公众号文章的精选评论：内容、评论者、点赞、回复数、发布时间、IP 属地和是否置顶。评论的 id 可传给 wechat_mp.comments.replies.list 取回复。
 - [公众号文章互动数据](https://okdata.online/zh/apis/wechat_mp/articles/metrics.md) `GET /v1/wechat_mp/articles/metrics` $0.02/次。按文章链接取这篇文章此刻的数字：阅读、点赞、在看（ext.recommends）、分享、收藏和评论。只有数字：标题和正文用 wechat_mp.articles.get 取。
 - [公众号评论回复](https://okdata.online/zh/apis/wechat_mp/comments/replies/list.md) `GET /v1/wechat_mp/comments/replies/list` $0.02/次 · 每页约 3 条评论。按评论 ID 和文章链接取公众号文章一条评论下面的回复：内容、回复者、点赞、发布时间和 IP 属地。只返回第一批，不翻页。
-- [公众号主体信息](https://okdata.online/zh/apis/wechat_mp/accounts/owner/get.md) `GET /v1/wechat_mp/accounts/owner/get` $0.15/次。即将上线：已列出，暂不能调用。按原始 ID 取公众号背后的主体：公司、机构或个人的名称、类型、登记证照号码和国家或地区，认证状态、认证类型和日期，公众号注册日期，以及授权过的第三方服务商。
+- [公众号主体信息](https://okdata.online/zh/apis/wechat_mp/accounts/owner/get.md) `GET /v1/wechat_mp/accounts/owner/get` $0.15/次。按原始 ID 取公众号背后的主体：公司、机构或个人的名称、类型、登记证照号码和国家或地区，认证状态、认证类型和日期，公众号注册日期，以及授权过的第三方服务商。
 
 ## B站
 
@@ -252,16 +252,16 @@
 - [视频号作品互动数据](https://okdata.online/zh/apis/wechat_channels/videos/metrics.md) `GET /v1/wechat_channels/videos/metrics` $0.015/次。按作品 ID 取视频号作品最近的数字：点赞、评论、转发和收藏，带作品描述和发布账号。数字可能是几小时前的，ext.counted_at 写明取数时间。比取整个作品（wechat_channels.videos.get）便宜。
 - [视频号账号信息（备用版）](https://okdata.online/zh/apis/wechat_channels/backup/users/get.md) `GET /v1/wechat_channels/backup/users/get` $0.03/次。wechat_channels.users.get 的备用版，另一来源：参数和返回相同，不给作品数。
 - [视频号账号作品（备用版）](https://okdata.online/zh/apis/wechat_channels/backup/users/videos/list.md) `GET /v1/wechat_channels/backup/users/videos/list` $0.06/次 · 每页约 15 条视频。wechat_channels.users.videos.list 的备用版，另一来源：参数和返回相同，每页 15 条（正在直播时第一条是直播）。
-- [视频号视频搜索（备用版）](https://okdata.online/zh/apis/wechat_channels/backup/videos/search.md) `GET /v1/wechat_channels/backup/videos/search` $0.15/次 · 每页约 10 条视频。即将上线：已列出，暂不能调用。wechat_channels.videos.search 的备用版，另一来源：参数和返回相同，不带收藏数。
+- [视频号视频搜索（备用版）](https://okdata.online/zh/apis/wechat_channels/backup/videos/search.md) `GET /v1/wechat_channels/backup/videos/search` $0.15/次 · 每页约 10 条视频。wechat_channels.videos.search 的备用版，另一来源：参数和返回相同，另带评论数和转发数（没有收藏数）。
 
 ## 微信搜一搜
 
 - [微信搜一搜综合搜索](https://okdata.online/zh/apis/wechat/posts/search.md) `GET /v1/wechat/posts/search` $0.02/次 · 每页约 20 条帖子。按关键词取微信搜一搜结果：公众号文章和视频号视频混排（type 标明是哪种），可按相关、最新或最热排、按发布时间筛，也可只搜文章或只搜视频。标题或描述、来源账号名称、发布时间；文章带链接（部分带阅读数档位），视频带点赞数和可传给 wechat_channels.videos.get 的 export/ 加密 ID。搜一搜不给账号 ID。
 - [微信公众号实时查找](https://okdata.online/zh/apis/wechat/accounts/search.md) `GET /v1/wechat/accounts/search` $0.02/次 · 每页约 8 个账号。按关键词在微信搜一搜里实时找公众号和服务号，最像的排前面（后面可能跟着不太相关的）：原始 ID、微信号、名称、简介、头像、是否认证和认证主体、原创文章数。按次计费；不带粉丝和阅读数（要估计值用 wechat_mp.accounts.search）。
-- [微信指数](https://okdata.online/zh/apis/wechat/index/keywords/history.md) `GET /v1/wechat/index/keywords/history` $0.15/次 · 每页约 1 条结果。即将上线：已列出，暂不能调用。关键词最近 30 天的微信指数，一天一个数（points[].composite_index）。微信指数是微信综合搜一搜、文章、朋友圈等算出的热度分，不是搜索次数，不能和抖音、小红书的指数比；日期是中国时间（UTC+8）的自然日。
-- [微信搜一搜推荐词](https://okdata.online/zh/apis/wechat/keywords/related.md) `GET /v1/wechat/keywords/related` $0.15/次 · 每页约 9 条结果。即将上线：已列出，暂不能调用。微信搜一搜在搜索框下给一个关键词的联想推荐词，按它列出的顺序，一次约 10 个。只有词和名次，没有指数。
-- [微信小程序搜索](https://okdata.online/zh/apis/wechat/miniprograms/search.md) `GET /v1/wechat/miniprograms/search` $0.15/次 · 每页约 25 条结果。即将上线：已列出，暂不能调用。按关键词在微信搜一搜里找小程序，取第一页（约 25 个）：名称、简介、图标、原始 ID 和 AppID、主体和是否认证、平台显示的最近使用人数、是否小游戏。
-- [微信搜一搜综合搜索（备用版）](https://okdata.online/zh/apis/wechat/backup/posts/search.md) `GET /v1/wechat/backup/posts/search` $0.15/次 · 每页约 20 条帖子。即将上线：已列出，暂不能调用。wechat.posts.search 的备用版，另一来源：参数和返回相同。
+- [微信指数](https://okdata.online/zh/apis/wechat/index/keywords/history.md) `GET /v1/wechat/index/keywords/history` $0.15/次 · 每页约 1 条结果。关键词最近 30 天的微信指数，一天一个数（points[].composite_index）。微信指数是微信综合搜一搜、文章、朋友圈等算出的热度分，不是搜索次数，不能和抖音、小红书的指数比；日期是中国时间（UTC+8）的自然日。
+- [微信搜一搜推荐词](https://okdata.online/zh/apis/wechat/keywords/related.md) `GET /v1/wechat/keywords/related` $0.15/次 · 每页约 9 条结果。微信搜一搜在搜索框下给一个关键词的联想推荐词，按它列出的顺序，一次约 9 个（不含关键词本身）。只有词和名次，没有指数。
+- [微信小程序搜索](https://okdata.online/zh/apis/wechat/miniprograms/search.md) `GET /v1/wechat/miniprograms/search` $0.15/次 · 每页约 25 条结果。按关键词在微信搜一搜里找小程序，取第一页（约 25 个）：名称、简介、图标、原始 ID 和 AppID（部分品牌小程序不显示）、主体和是否认证、平台显示的最近使用人数（取档位下限，如 10万+ 记为 100000）、是否小游戏。
+- [微信搜一搜综合搜索（备用版）](https://okdata.online/zh/apis/wechat/backup/posts/search.md) `GET /v1/wechat/backup/posts/search` $0.15/次 · 每页约 20 条帖子。wechat.posts.search 的备用版，另一来源：参数和返回相同。
 
 ## Telegram
 

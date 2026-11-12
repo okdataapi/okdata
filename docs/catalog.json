@@ -1,5 +1,5 @@
 {
-  "revision": "d54bb626c60b95fd",
+  "revision": "2128c2e84655fc1f",
   "priceBook": "1b273c48fea9634e",
   "prices": {
     "version": "1b273c48fea9634e",
@@ -17775,7 +17775,7 @@
       "oneOf": [],
       "cursorTtlSeconds": null,
       "snapshotSeconds": null,
-      "paused": true,
+      "paused": false,
       "id": "wechat_mp.accounts.owner.get",
       "platform": "wechat_mp",
       "object": "account_owner",
@@ -17961,7 +17961,7 @@
       "oneOf": [],
       "cursorTtlSeconds": null,
       "snapshotSeconds": null,
-      "paused": true,
+      "paused": false,
       "id": "wechat.index.keywords.history",
       "platform": "wechat",
       "object": "keyword_history",
@@ -18054,7 +18054,7 @@
       "oneOf": [],
       "cursorTtlSeconds": null,
       "snapshotSeconds": null,
-      "paused": true,
+      "paused": false,
       "id": "wechat.keywords.related",
       "platform": "wechat",
       "object": "keyword_related",
@@ -18067,8 +18067,8 @@
         "zh": "微信搜一搜推荐词"
       },
       "summary": {
-        "en": "The suggestions WeChat Search lists under its search box for a keyword, in its order, about 10 at a time. Words and their places only, without an index.",
-        "zh": "微信搜一搜在搜索框下给一个关键词的联想推荐词，按它列出的顺序，一次约 10 个。只有词和名次，没有指数。"
+        "en": "The suggestions WeChat Search lists under its search box for a keyword, in its order, about 9 at a time (the keyword itself left out). Words and their places only, without an index.",
+        "zh": "微信搜一搜在搜索框下给一个关键词的联想推荐词，按它列出的顺序，一次约 9 个（不含关键词本身）。只有词和名次，没有指数。"
       },
       "params": [
         {
@@ -18147,7 +18147,7 @@
       "oneOf": [],
       "cursorTtlSeconds": null,
       "snapshotSeconds": null,
-      "paused": true,
+      "paused": false,
       "id": "wechat.miniprograms.search",
       "platform": "wechat",
       "object": "miniprogram",
@@ -18160,8 +18160,8 @@
         "zh": "微信小程序搜索"
       },
       "summary": {
-        "en": "Mini programs for keywords through WeChat Search, the first page (about 25): name, description, icon, original ID and AppID, the owner and whether verified, recent users as WeChat shows them, and whether it is a mini game.",
-        "zh": "按关键词在微信搜一搜里找小程序，取第一页（约 25 个）：名称、简介、图标、原始 ID 和 AppID、主体和是否认证、平台显示的最近使用人数、是否小游戏。"
+        "en": "Mini programs for keywords through WeChat Search, the first page (about 25): name, description, icon, original ID and AppID (some brand ones show none), the owner and whether verified, recent users as WeChat shows them (the floor of its band: 100000 for 100k+), and whether it is a mini game.",
+        "zh": "按关键词在微信搜一搜里找小程序，取第一页（约 25 个）：名称、简介、图标、原始 ID 和 AppID（部分品牌小程序不显示）、主体和是否认证、平台显示的最近使用人数（取档位下限，如 10万+ 记为 100000）、是否小游戏。"
       },
       "params": [
         {
@@ -18434,7 +18434,7 @@
       "oneOf": [],
       "cursorTtlSeconds": 86400,
       "snapshotSeconds": null,
-      "paused": true,
+      "paused": false,
       "id": "wechat_channels.backup.videos.search",
       "platform": "wechat_channels",
       "object": "post",
@@ -18447,8 +18447,8 @@
         "zh": "视频号视频搜索（备用版）"
       },
       "summary": {
-        "en": "The backup of wechat_channels.videos.search, from another source: the same parameters and result, without saves.",
-        "zh": "wechat_channels.videos.search 的备用版，另一来源：参数和返回相同，不带收藏数。"
+        "en": "The backup of wechat_channels.videos.search, from another source: the same parameters and result, plus comment and share counts (no saves).",
+        "zh": "wechat_channels.videos.search 的备用版，另一来源：参数和返回相同，另带评论数和转发数（没有收藏数）。"
       },
       "params": [
         {
@@ -18565,7 +18565,7 @@
       "oneOf": [],
       "cursorTtlSeconds": 86400,
       "snapshotSeconds": null,
-      "paused": true,
+      "paused": false,
       "id": "wechat.backup.posts.search",
       "platform": "wechat",
       "object": "post",

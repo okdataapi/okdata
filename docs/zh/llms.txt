@@ -2,7 +2,7 @@
 
 > 给 AI 智能体和代码用的公开社媒与内容数据：17 个平台共 214 个接口，一个 HTTP API 加一个 MCP 服务，按次付费，最低 $0.0001，失败不扣费。不需要平台账号、Cookie 或扫码登录。
 
-接口目录 d54bb626c60b95fd，价目表 1b273c48fea9634e。 English: https://okdata.online/llms.txt
+接口目录 2128c2e84655fc1f，价目表 1b273c48fea9634e。 English: https://okdata.online/llms.txt
 
 ## 调用方式
 
@@ -52,7 +52,7 @@
 
 - [抖音](https://okdata.online/zh/apis/douyin.md) `douyin` (38): videos.search, videos.get, videos.comments.list, users.get, users.videos.list, trends.list, xingtu.creators.search, xingtu.creators.rates.get, comments.replies.list, hashtags.videos.list, users.search, videos.metrics, videos.related, videos.trending, keywords.related, index.brands.history, index.brands.metrics, index.creators.videos.list, index.creators.audience.get, index.creators.metrics, index.keywords.audience.get, index.keywords.history, index.keywords.related, index.trends.list, index.videos.search, users.history, xingtu.creators.get, xingtu.creators.audience.get, xingtu.creators.metrics, xingtu.creators.videos.list, xingtu.creators.keywords.get, xingtu.creators.scores.get, xingtu.creators.content_mix.get, xingtu.creators.conversion.get, xingtu.campaigns.list, xingtu.videos.get, backup.users.videos.list, backup.videos.search
 - [小红书](https://okdata.online/zh/apis/xiaohongshu.md) `xiaohongshu` (30): notes.search, notes.get, notes.comments.list, users.get, users.notes.list, trends.list, pgy.creators.search, pgy.creators.get, shop.products.search, shop.products.reviews.list, images.search, comments.replies.list, topics.notes.list, topics.get, users.search, shop.products.get, keywords.related, videos.get, pgy.keywords.history, pgy.keywords.related, pgy.creators.audience.get, pgy.creators.metrics, pgy.creators.notes.list, pgy.creators.followers.history, pgy.creators.related, pgy.notes.trending, pgy.creators.costs.metrics, pgy.creators.followers.metrics, pgy.creators.costs.history, pgy.notes.get
-- [微信公众号](https://okdata.online/zh/apis/wechat_mp.md) `wechat_mp` (8): accounts.search, accounts.articles.list, articles.get, accounts.get, articles.comments.list, articles.metrics, comments.replies.list, accounts.owner.get (即将上线)
+- [微信公众号](https://okdata.online/zh/apis/wechat_mp.md) `wechat_mp` (8): accounts.search, accounts.articles.list, articles.get, accounts.get, articles.comments.list, articles.metrics, comments.replies.list, accounts.owner.get
 - [B站](https://okdata.online/zh/apis/bilibili.md) `bilibili` (9): videos.search, videos.get, videos.comments.list, trends.list, users.get, users.videos.list, comments.replies.list, videos.trending, backup.users.videos.list
 - [微博](https://okdata.online/zh/apis/weibo.md) `weibo` (11): posts.search, trends.list, users.get, posts.get, posts.comments.list, comments.replies.list, posts.likers.list, users.posts.list, users.followers.list, users.search, backup.trends.list
 - [TikTok](https://okdata.online/zh/apis/tiktok.md) `tiktok` (17): videos.search, videos.get, videos.comments.list, users.get, ads.search, creative_center.ads.search, shop.products.search, shop.products.get, shop.products.reviews.list, videos.transcript.get, comments.replies.list, users.search, users.videos.list, creative_center.ads.get, shop.sellers.products.list, users.followers.list, hashtags.videos.list
@@ -64,8 +64,8 @@
 - [Reddit](https://okdata.online/zh/apis/reddit.md) `reddit` (11): posts.search, posts.get, posts.comments.list, popular.posts.list, subreddits.posts.list, subreddits.get, trends.list, users.get, users.posts.list, users.subreddits.list, posts.transcript.get
 - [快手](https://okdata.online/zh/apis/kuaishou.md) `kuaishou` (8): videos.search, videos.get, videos.comments.list, comments.replies.list, users.get, users.search, users.videos.list, trends.list
 - [知乎](https://okdata.online/zh/apis/zhihu.md) `zhihu` (15): posts.search, questions.answers.list, questions.get (即将上线), answers.get (即将上线), answers.comments.list (即将上线), comments.replies.list (即将上线), articles.get (即将上线), columns.articles.list (即将上线), pins.get (即将上线), users.get (即将上线), users.search (即将上线), users.followers.list (即将上线), users.answers.list (即将上线), users.articles.list (即将上线), users.pins.list (即将上线)
-- [微信视频号](https://okdata.online/zh/apis/wechat_channels.md) `wechat_channels` (15): videos.search, users.search, users.get, users.videos.list, videos.get, videos.comments.list, comments.replies.list, users.live_replays.list, videos.share_link.get, users.collections.list, collections.videos.list, videos.metrics, backup.users.get, backup.users.videos.list, backup.videos.search (即将上线)
-- [微信搜一搜](https://okdata.online/zh/apis/wechat.md) `wechat` (6): posts.search, accounts.search, index.keywords.history (即将上线), keywords.related (即将上线), miniprograms.search (即将上线), backup.posts.search (即将上线)
+- [微信视频号](https://okdata.online/zh/apis/wechat_channels.md) `wechat_channels` (15): videos.search, users.search, users.get, users.videos.list, videos.get, videos.comments.list, comments.replies.list, users.live_replays.list, videos.share_link.get, users.collections.list, collections.videos.list, videos.metrics, backup.users.get, backup.users.videos.list, backup.videos.search
+- [微信搜一搜](https://okdata.online/zh/apis/wechat.md) `wechat` (6): posts.search, accounts.search, index.keywords.history, keywords.related, miniprograms.search, backup.posts.search
 - [Telegram](https://okdata.online/zh/apis/telegram.md) `telegram` (3): channels.get, channels.messages.list, messages.get
 
 ## 你的账户

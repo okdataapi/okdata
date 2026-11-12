@@ -1,6 +1,6 @@
 # WeChat Search suggestions API
 
-> The suggestions WeChat Search lists under its search box for a keyword, in its order, about 10 at a time. Words and their places only, without an index.
+> The suggestions WeChat Search lists under its search box for a keyword, in its order, about 9 at a time (the keyword itself left out). Words and their places only, without an index.
 
 Canonical page: https://okdata.online/apis/wechat/keywords/related/
 

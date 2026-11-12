@@ -1,6 +1,6 @@
 # WeChat Channels video search (backup) API
 
-> The backup of wechat_channels.videos.search, from another source: the same parameters and result, without saves.
+> The backup of wechat_channels.videos.search, from another source: the same parameters and result, plus comment and share counts (no saves).
 
 Canonical page: https://okdata.online/apis/wechat_channels/backup/videos/search/
 
