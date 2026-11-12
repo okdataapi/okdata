@@ -2,7 +2,7 @@
 
 <!-- Generated from the okdata catalog by scripts/export-public.mjs in the okdata monorepo. Do not edit by hand. -->
 
-196 endpoints on 17 platforms (6 of them listed as coming soon and not callable yet), catalog revision 2fb7095ff6401e35, price book f4f90b4727f4840a. The same pages are at https://okdata.online/apis/. 中文在下面。
+196 endpoints on 17 platforms (6 of them listed as coming soon and not callable yet), catalog revision 93bd2077ee161657, price book f4f90b4727f4840a. The same pages are at https://okdata.online/apis/. 中文在下面。
 
 ## Files for agents and code
 

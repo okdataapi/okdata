@@ -3,7 +3,6 @@ requires = ["hatchling>=1.26"]
 build-backend = "hatchling.build"
 
 [project]
-# The distribution name on PyPI; the import name is `okdata` as well.
 name = "okdata"
 dynamic = ["version"]
 description = "Python SDK for okdata: social data from Douyin, Xiaohongshu, WeChat, Bilibili, Weibo, TikTok, X, YouTube and more, for AI agents, paid per call. Typed methods per endpoint, sync and async, safe retries, paging with a spend limit."
@@ -33,11 +32,11 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://okdata.online"
+Homepage = "https://okdata.online/"
 Documentation = "https://okdata.online/docs/sdk/"
 Endpoints = "https://okdata.online/apis/"
 Pricing = "https://okdata.online/pricing/"
-Source = "https://github.com/okdataapi/okdata"
+Source = "https://github.com/okdataapi/okdata/tree/main/python"
 Issues = "https://github.com/okdataapi/okdata/issues"
 
 [project.optional-dependencies]
@@ -49,11 +48,13 @@ path = "src/okdata/_version.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/okdata"]
-# src/okdata/_generated is generated from the okdata catalog (git-ignored in the monorepo); ship it.
+# src/okdata/_generated is generated from the okdata catalog (git-ignored in the monorepo, committed in
+# the public repo); ship it either way.
 artifacts = ["src/okdata/_generated/*.py"]
 
 [tool.hatch.build.targets.sdist]
-include = ["src/okdata", "tests", "README.md", "LICENSE"]
+# Anchored ("/tests", not "tests"), so a virtualenv or any other folder in here never ships.
+include = ["/src/okdata", "/tests", "/README.md", "/LICENSE"]
 artifacts = ["src/okdata/_generated/*.py"]
 
 [tool.pytest.ini_options]

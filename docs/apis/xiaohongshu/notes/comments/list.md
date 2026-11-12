@@ -19,7 +19,7 @@ One call costs $0.02 and returns one page of about 10 comments. Collecting 1,000
 
 | Name | Type | Required | Default | Description |
 |---|---|---|---|---|
-| `id` | string | yes |  | The note ID. Give id or url. (e.g. `6650a1b2000000001e00abcd`) |
+| `id` | string | yes |  | The note ID. (e.g. `6650a1b2000000001e00abcd`) |
 | `cursor` | string | no |  | Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. |
 | `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
 | `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |

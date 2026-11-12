@@ -31,7 +31,7 @@
     "cursor",
     "codex"
   ],
-  "homepage": "https://okdata.online/docs/cli/",
+  "homepage": "https://okdata.online/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/okdataapi/okdata.git",

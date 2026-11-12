@@ -19,7 +19,7 @@ One call costs $0.002 and returns one page of about 20 comments. Collecting 1,00
 
 | Name | Type | Required | Default | Description |
 |---|---|---|---|---|
-| `id` | string | yes |  | The video ID. Give id or url. (e.g. `dQw4w9WgXcQ`) |
+| `id` | string | yes |  | The video ID. (e.g. `dQw4w9WgXcQ`) |
 | `sort` | string: top / latest | no | `top` | Result order. |
 | `cursor` | string | no |  | Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. |
 | `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |

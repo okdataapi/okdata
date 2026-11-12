@@ -43,7 +43,7 @@
     "instagram",
     "reddit"
   ],
-  "homepage": "https://okdata.online/docs/sdk/",
+  "homepage": "https://okdata.online/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/okdataapi/okdata.git",

@@ -21,7 +21,7 @@ export type DouyinVideosGetParams = CommonParams & ExactlyOne<{
 
 /** Parameters of Douyin video comments (`douyin.videos.comments.list`). */
 export type DouyinVideosCommentsListParams = CommonParams & {
-  /** The video ID. Give id or url. Example: `7301234567890123456`. */
+  /** The video ID. Example: `7301234567890123456`. */
   id: string;
   /** Result order. Only hot is available from our sources for now. Default `hot`. */
   sort?: 'hot';
@@ -73,7 +73,7 @@ export type XiaohongshuNotesGetParams = CommonParams & ExactlyOne<{
 
 /** Parameters of Xiaohongshu note comments (`xiaohongshu.notes.comments.list`). */
 export type XiaohongshuNotesCommentsListParams = CommonParams & {
-  /** The note ID. Give id or url. Example: `6650a1b2000000001e00abcd`. */
+  /** The note ID. Example: `6650a1b2000000001e00abcd`. */
   id: string;
   /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
   cursor?: string;
@@ -145,7 +145,7 @@ export type BilibiliVideosGetParams = CommonParams & ExactlyOne<{
 
 /** Parameters of Bilibili video comments (`bilibili.videos.comments.list`). */
 export type BilibiliVideosCommentsListParams = CommonParams & {
-  /** The video ID. Give id or url. Example: `BV1xx411c7mD`. */
+  /** The video ID. Example: `BV1xx411c7mD`. */
   id: string;
   /** Result order. Default `hot`. */
   sort?: 'hot' | 'latest';
@@ -201,7 +201,7 @@ export type TiktokVideosGetParams = CommonParams & ExactlyOne<{
 
 /** Parameters of TikTok video comments (`tiktok.videos.comments.list`). */
 export type TiktokVideosCommentsListParams = CommonParams & {
-  /** The video ID. Give id or url. Example: `7305085486984858894`. */
+  /** The video ID. Example: `7305085486984858894`. */
   id: string;
   /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
   cursor?: string;
@@ -277,7 +277,7 @@ export type YoutubeVideosGetParams = CommonParams & ExactlyOne<{
 
 /** Parameters of YouTube video comments (`youtube.videos.comments.list`). */
 export type YoutubeVideosCommentsListParams = CommonParams & {
-  /** The video ID. Give id or url. Example: `dQw4w9WgXcQ`. */
+  /** The video ID. Example: `dQw4w9WgXcQ`. */
   id: string;
   /** Result order. Default `top`. */
   sort?: 'top' | 'latest';
@@ -287,7 +287,7 @@ export type YoutubeVideosCommentsListParams = CommonParams & {
 
 /** Parameters of YouTube video transcript (`youtube.videos.transcript.get`). */
 export type YoutubeVideosTranscriptGetParams = CommonParams & {
-  /** The video ID. Give id or url. Example: `dQw4w9WgXcQ`. */
+  /** The video ID. Example: `dQw4w9WgXcQ`. */
   id: string;
   /** Preferred transcript language. The result's lang is the track actually returned. Example: `en`. */
   lang?: string;

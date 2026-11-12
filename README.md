@@ -177,7 +177,8 @@ committed and the few monorepo-only build settings rewritten, so every directory
 `docs/` and the platform tables in this README are generated too. Please do not edit generated files by hand;
 issues and pull requests on everything else are welcome.
 
-Build and test locally (no key, no network; the tests use local mock servers):
+Build and test locally (no key, no network; the tests use local mock servers), more in
+[CONTRIBUTING.md](CONTRIBUTING.md):
 
 ```bash
 npm ci && npm run typecheck && npm test && npm run build        # typescript/ and cli/

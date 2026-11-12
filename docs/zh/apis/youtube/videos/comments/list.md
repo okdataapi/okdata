@@ -19,7 +19,7 @@
 
 | 参数名 | 类型 | 必填 | 默认值 | 说明 |
 |---|---|---|---|---|
-| `id` | string | 是 |  | 视频 ID。id 和 url 二选一。（例：`dQw4w9WgXcQ`） |
+| `id` | string | 是 |  | 视频 ID。（例：`dQw4w9WgXcQ`） |
 | `sort` | string: top / latest | 否 | `top` | 排序方式。 |
 | `cursor` | string | 否 |  | 上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。 |
 | `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |

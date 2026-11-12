@@ -1,5 +1,5 @@
 {
-  "revision": "2fb7095ff6401e35",
+  "revision": "93bd2077ee161657",
   "priceBook": "f4f90b4727f4840a",
   "prices": {
     "version": "f4f90b4727f4840a",
@@ -470,8 +470,8 @@
           "required": true,
           "example": "7301234567890123456",
           "description": {
-            "en": "The video ID. Give id or url.",
-            "zh": "视频 ID。id 和 url 二选一。"
+            "en": "The video ID.",
+            "zh": "视频 ID。"
           }
         },
         {
@@ -1081,8 +1081,8 @@
           "required": true,
           "example": "6650a1b2000000001e00abcd",
           "description": {
-            "en": "The note ID. Give id or url.",
-            "zh": "笔记 ID。id 和 url 二选一。"
+            "en": "The note ID.",
+            "zh": "笔记 ID。"
           }
         },
         {
@@ -1950,8 +1950,8 @@
           "required": true,
           "example": "BV1xx411c7mD",
           "description": {
-            "en": "The video ID. Give id or url.",
-            "zh": "视频 ID。id 和 url 二选一。"
+            "en": "The video ID.",
+            "zh": "视频 ID。"
           }
         },
         {
@@ -2640,8 +2640,8 @@
           "required": true,
           "example": "7305085486984858894",
           "description": {
-            "en": "The video ID. Give id or url.",
-            "zh": "视频 ID。id 和 url 二选一。"
+            "en": "The video ID.",
+            "zh": "视频 ID。"
           }
         },
         {
@@ -3538,8 +3538,8 @@
           "required": true,
           "example": "dQw4w9WgXcQ",
           "description": {
-            "en": "The video ID. Give id or url.",
-            "zh": "视频 ID。id 和 url 二选一。"
+            "en": "The video ID.",
+            "zh": "视频 ID。"
           }
         },
         {
@@ -3645,8 +3645,8 @@
           "required": true,
           "example": "dQw4w9WgXcQ",
           "description": {
-            "en": "The video ID. Give id or url.",
-            "zh": "视频 ID。id 和 url 二选一。"
+            "en": "The video ID.",
+            "zh": "视频 ID。"
           }
         },
         {

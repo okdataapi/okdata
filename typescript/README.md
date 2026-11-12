@@ -7,8 +7,11 @@ No runtime dependencies; Node 20.3+ (or any runtime with `fetch` and `AbortSigna
 
 ```sh
 npm install @okdata/sdk
-export OKDATA_API_KEY=okd_...   # https://okdata.online/console/
+export OKDATA_API_KEY=okd_...
 ```
+
+No key yet? Sign up at [okdata.online](https://okdata.online/signup/?src=npm-okdata-sdk)
+(中文：[注册](https://okdata.online/zh/signup/?src=npm-okdata-sdk)).
 
 ## First call
 
@@ -92,21 +95,5 @@ with `ok.calls.get(err.requestId)` or `ok.calls.byKey(err.idempotencyKey)`. A lo
 `baseUrl` defaults to `OKDATA_BASE_URL`, then `https://api.okdata.online`. `source` and `endUser` are
 sent as `X-Source` and `X-End-User` for your usage figures; every call carries `X-Entry: sdk`. Keep keys
 on a server: a key in a browser bundle is a key anyone can read.
-
-## Development
-
-This directory is exported from the okdata monorepo. `src/generated/` (the typed methods, models and
-the error table) is generated there from the endpoint catalog and committed here, so the package builds
-on its own; please do not edit it by hand. Issues and pull requests on the hand-written files are welcome.
-
-In the repository root (one npm workspace for `typescript/` and `cli/`):
-
-```sh
-npm install
-npm run typecheck -w typescript
-npm test -w typescript          # unit tests against a local mock server: no key, no network
-npm run build -w typescript     # dist/
-OKDATA_LIVE_KEY=okd_... npm test -w typescript   # adds a live smoke test of the free routes only
-```
 
 MIT licensed.

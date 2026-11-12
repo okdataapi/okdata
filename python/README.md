@@ -6,8 +6,11 @@ Every endpoint is a typed method generated from the okdata catalog, with its pri
 
 ```sh
 pip install okdata          # Python 3.9+, one dependency (httpx)
-export OKDATA_API_KEY=okd_...   # https://okdata.online/console/
+export OKDATA_API_KEY=okd_...
 ```
+
+No key yet? Sign up at [okdata.online](https://okdata.online/signup/?src=pypi-okdata)
+(中文：[注册](https://okdata.online/zh/signup/?src=pypi-okdata)).
 
 ## First call
 
@@ -101,22 +104,5 @@ view="full")` (a result kept 24 h, read again for free) and `ok.calls.by_key(ide
 max_retry_delay=20.0, source=None, end_user=None, user_agent=None, http_client=None)`. `base_url`
 defaults to `OKDATA_BASE_URL`, then `https://api.okdata.online`. `source` and `end_user` are sent as
 `X-Source` and `X-End-User` for your usage figures; every call carries `X-Entry: sdk`.
-
-## Development
-
-This directory is exported from the okdata monorepo. `src/okdata/_generated/` (the typed methods,
-models and the error table) is generated there from the endpoint catalog and committed here; please do
-not edit it by hand.
-
-```sh
-python3 -m venv .venv && . .venv/bin/activate
-pip install -e '.[dev]'
-pytest                      # against a local mock server: no key, no network
-mypy                        # --strict; settings in pyproject.toml
-OKDATA_LIVE_KEY=okd_... pytest     # adds a live smoke test of the free routes
-```
-
-With uv: `uv run --extra dev pytest` and `uv run --extra dev mypy`. Build a wheel with `uv build` (or
-`python -m build`). The PyPI name and the import name are both `okdata`.
 
 MIT licensed.

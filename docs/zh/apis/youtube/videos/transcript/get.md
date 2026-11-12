@@ -19,7 +19,7 @@
 
 | 参数名 | 类型 | 必填 | 默认值 | 说明 |
 |---|---|---|---|---|
-| `id` | string | 是 |  | 视频 ID。id 和 url 二选一。（例：`dQw4w9WgXcQ`） |
+| `id` | string | 是 |  | 视频 ID。（例：`dQw4w9WgXcQ`） |
 | `lang` | string | 否 |  | 优先的字幕语言。结果里的 lang 是实际返回的字幕语言。（例：`en`） |
 | `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |
 | `fields` | string[] | 否 |  | 只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。 |

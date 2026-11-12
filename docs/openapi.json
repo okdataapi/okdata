@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "okdata API",
-    "version": "2fb7095ff6401e35",
+    "version": "93bd2077ee161657",
     "x-price-book": {
       "version": "f4f90b4727f4840a",
       "effective_at": null,
@@ -567,10 +567,10 @@
             "name": "id",
             "in": "query",
             "required": true,
-            "description": "The video ID. Give id or url.",
+            "description": "The video ID.",
             "schema": {
               "type": "string",
-              "description": "The video ID. Give id or url.",
+              "description": "The video ID.",
               "examples": [
                 "7301234567890123456"
               ]
@@ -1846,10 +1846,10 @@
             "name": "id",
             "in": "query",
             "required": true,
-            "description": "The note ID. Give id or url.",
+            "description": "The note ID.",
             "schema": {
               "type": "string",
-              "description": "The note ID. Give id or url.",
+              "description": "The note ID.",
               "examples": [
                 "6650a1b2000000001e00abcd"
               ]
@@ -3717,10 +3717,10 @@
             "name": "id",
             "in": "query",
             "required": true,
-            "description": "The video ID. Give id or url.",
+            "description": "The video ID.",
             "schema": {
               "type": "string",
-              "description": "The video ID. Give id or url.",
+              "description": "The video ID.",
               "examples": [
                 "BV1xx411c7mD"
               ]
@@ -5160,10 +5160,10 @@
             "name": "id",
             "in": "query",
             "required": true,
-            "description": "The video ID. Give id or url.",
+            "description": "The video ID.",
             "schema": {
               "type": "string",
-              "description": "The video ID. Give id or url.",
+              "description": "The video ID.",
               "examples": [
                 "7305085486984858894"
               ]
@@ -7208,10 +7208,10 @@
             "name": "id",
             "in": "query",
             "required": true,
-            "description": "The video ID. Give id or url.",
+            "description": "The video ID.",
             "schema": {
               "type": "string",
-              "description": "The video ID. Give id or url.",
+              "description": "The video ID.",
               "examples": [
                 "dQw4w9WgXcQ"
               ]
@@ -7425,10 +7425,10 @@
             "name": "id",
             "in": "query",
             "required": true,
-            "description": "The video ID. Give id or url.",
+            "description": "The video ID.",
             "schema": {
               "type": "string",
-              "description": "The video ID. Give id or url.",
+              "description": "The video ID.",
               "examples": [
                 "dQw4w9WgXcQ"
               ]

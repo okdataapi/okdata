@@ -5,7 +5,7 @@ from typing import Dict
 
 from .._types import EndpointInfo
 
-CATALOG_REVISION = "2fb7095ff6401e35"
+CATALOG_REVISION = "93bd2077ee161657"
 PRICE_BOOK = "f4f90b4727f4840a"
 
 # id: (id, path, list, post, batch_max, unit, price, max_charge, page_size, params, object, title, paused)

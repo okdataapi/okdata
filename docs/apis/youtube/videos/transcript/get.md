@@ -19,7 +19,7 @@ One call costs $0.004 and returns one transcript. 1,000 lookups cost $4.00. Fail
 
 | Name | Type | Required | Default | Description |
 |---|---|---|---|---|
-| `id` | string | yes |  | The video ID. Give id or url. (e.g. `dQw4w9WgXcQ`) |
+| `id` | string | yes |  | The video ID. (e.g. `dQw4w9WgXcQ`) |
 | `lang` | string | no |  | Preferred transcript language. The result's lang is the track actually returned. (e.g. `en`) |
 | `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
 | `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |

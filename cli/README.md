@@ -13,6 +13,9 @@ That second line is what the console Playground's 命令行 tab prints for a req
 then each parameter as `name=value` (quote values with spaces or Chinese). Lists are comma-separated
 (`ids=1,2,3`) or JSON (`ids=["1","2"]`); numbers and true/false are typed from the catalog.
 
+No account yet? Sign up at [okdata.online](https://okdata.online/signup/?src=npm-okdata)
+(中文：[注册](https://okdata.online/zh/signup/?src=npm-okdata)); `okdata login` then links this terminal to it.
+
 ## Commands
 
 | Command | Cost | What it does |
@@ -79,17 +82,5 @@ Cursor gets `~/.cursor/mcp.json` with `Bearer ${env:OKDATA_API_KEY}`; Codex gets
 The files hold only the variable's name, so set `OKDATA_API_KEY` where the client starts, or add
 `--write-key` to store the key `okdata login` saved (the files are then written 0600). `--print` only
 shows the entries; `--home DIR` writes under another home directory. Restart the client afterwards.
-
-## Development
-
-In the repository root (one npm workspace, in which `cli/` gets `../typescript` as `@okdata/sdk`):
-
-```sh
-npm install
-npm run typecheck -w cli
-npm test -w cli                 # in-process tests against a local mock API: no key, no network
-npm run build -w typescript && npm run build -w cli   # cli/dist/bin.js needs the SDK's dist first
-node cli/dist/bin.js find 小红书 评论
-```
 
 MIT licensed.
