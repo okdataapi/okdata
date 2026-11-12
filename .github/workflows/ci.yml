@@ -35,8 +35,10 @@ jobs:
 
   python:
     name: python ${{ matrix.python }}
-    runs-on: ubuntu-latest
+    # Ubuntu 26.04 (ubuntu-latest since 2026-10) has no Python 3.9 build; 24.04 has both versions.
+    runs-on: ubuntu-24.04
     strategy:
+      fail-fast: false
       matrix:
         python: ["3.9", "3.13"]
     defaults:
