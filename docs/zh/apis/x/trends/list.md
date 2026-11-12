@@ -8,7 +8,7 @@
 - **ID**：`x.trends.list`
 - **价格**：$0.009/次 · 每页约 30 条榜单
 - **返回**：一页约 30 条榜单（`data.items`，Trend 对象）
-- **状态**：公测
+- **状态**：预览
 - **适合**：热点研究
 
 ## 价格
@@ -22,7 +22,7 @@
 | `country` | string | 否 |  | 国家代码（ISO），不填为全球。（例：`US`） |
 | `cursor` | string | 否 |  | 上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。 |
 | `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |
-| `fields` | string | 否 |  | 只保留这些字段，逗号分隔，用来省 token。 |
+| `fields` | string[] | 否 |  | 只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。 |
 
 cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs/requests/)。
 
@@ -92,8 +92,7 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "x.trends.list",
-    "params": {}
+    "capability": "x.trends.list"
   }
 }
 ```
@@ -140,7 +139,7 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## 错误
 
-所有错误同一种结构，都不扣费；只有超时的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
+所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。错误不扣费；只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
 
 ## 常见问题
 
@@ -166,7 +165,22 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## X（推特）的其他接口
 
-- [X 帖子详情](https://okdata.online/zh/apis/x/posts/get/)：$0.001/次
-- [X 帖子搜索](https://okdata.online/zh/apis/x/posts/search/)：$0.006/次 · 每页约 20 条帖子
-- [X 账号信息](https://okdata.online/zh/apis/x/users/get/)：$0.001/次
-- [X 账号帖子列表](https://okdata.online/zh/apis/x/users/posts/list/)：$0.006/次 · 每页约 20 条帖子
+- [X 帖子详情](https://okdata.online/zh/apis/x/posts/get/)：$0.0003/次
+- [X 帖子搜索](https://okdata.online/zh/apis/x/posts/search/)：$0.002/次 · 每页约 20 条帖子
+- [X 账号信息](https://okdata.online/zh/apis/x/users/get/)：$0.0004/条 · 每次最多 $0.04
+- [X 账号帖子列表](https://okdata.online/zh/apis/x/users/posts/list/)：$0.002/次 · 每页约 20 条帖子
+- [X 帖子回复](https://okdata.online/zh/apis/x/posts/replies/list/)：$0.002/次 · 每页约 35 条帖子
+- [X 帖子引用](https://okdata.online/zh/apis/x/posts/quotes/list/)：$0.0003/条 · 每次最多 $0.006
+- [X 帖子转推用户](https://okdata.online/zh/apis/x/posts/retweeters/list/)：$0.002/次 · 每页约 100 个账号
+- [X 长文](https://okdata.online/zh/apis/x/posts/article/get/)：$0.002/次
+- [X 对话串](https://okdata.online/zh/apis/x/threads/posts/list/)：$0.0003/条 · 每次最多 $0.015
+- [X 账号搜索](https://okdata.online/zh/apis/x/users/search/)：$0.0004/条 · 每次最多 $0.008
+- [X 账号粉丝](https://okdata.online/zh/apis/x/users/followers/list/)：$0.0001/条 · 每次最多 $0.02
+- [X 账号关注](https://okdata.online/zh/apis/x/users/following/list/)：$0.0001/条 · 每次最多 $0.02
+- [X 账号被提及](https://okdata.online/zh/apis/x/users/mentions/list/)：$0.0003/条 · 每次最多 $0.006
+- [X 列表帖子](https://okdata.online/zh/apis/x/lists/posts/list/)：$0.002/次 · 每页约 100 条帖子
+- [X 列表成员](https://okdata.online/zh/apis/x/lists/members/list/)：$0.0004/条 · 每次最多 $0.008
+- [X 列表关注者](https://okdata.online/zh/apis/x/lists/followers/list/)：$0.0004/条 · 每次最多 $0.008
+- [X 社群资料](https://okdata.online/zh/apis/x/communities/get/)：$0.0004/次
+- [X 社群帖子](https://okdata.online/zh/apis/x/communities/posts/list/)：$0.0003/条 · 每次最多 $0.006
+- [X 社群成员](https://okdata.online/zh/apis/x/communities/members/list/)：$0.0004/条 · 每次最多 $0.008

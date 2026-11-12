@@ -1,6 +1,6 @@
 # Xiaohongshu note detail API
 
-> Full text, all images or the video, likes, saves and comments count of one note.
+> Full text, all images (a video note gives its cover, not the video file), likes, saves and comments count of one note.
 
 Canonical page: https://okdata.online/apis/xiaohongshu/notes/get/
 
@@ -8,7 +8,7 @@ Canonical page: https://okdata.online/apis/xiaohongshu/notes/get/
 - **ID**: `xiaohongshu.notes.get`
 - **Price**: $0.02 per call
 - **Returns**: one Post object (`data.item`)
-- **Status**: beta
+- **Status**: preview
 - **Good for**: Content research, Competitor monitoring
 
 ## Price
@@ -22,7 +22,7 @@ One call costs $0.02 and returns one post. 1,000 lookups cost $20.00. Failed cal
 | `id` | string | no |  | The note ID. Give id or url. (e.g. `6650a1b2000000001e00abcd`) |
 | `url` | string | no |  | A share link or page URL; the ID is read from it. (e.g. `https://www.xiaohongshu.com/explore/6650a1b2000000001e00abcd`) |
 | `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
-| `fields` | string | no |  | Comma-separated fields to keep, to save tokens. |
+| `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |
 
 Give id or url; one of the two is enough. 
 cursor, view and fields work as described in [Requests](https://okdata.online/docs/requests/).
@@ -39,7 +39,7 @@ Each item is a [Post](https://okdata.online/docs/objects/post/).
 | `title` | string \| null | Title, where the platform has one (videos, notes, articles). |
 | `text` | string | Caption, body or description as plain text; articles come as Markdown. |
 | `lang` | string \| null | Language code, as reported or detected. |
-| `published_at` | string | When it was published, ISO 8601 in UTC. |
+| `published_at` | string \| null | When it was published, ISO 8601 in UTC; null only where the platform gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics), then listed in meta.unavailable. |
 | `author` | AccountRef | Who posted it. |
 | `metrics` | Metrics | Counts at fetch time; a count the platform hides is null. |
 | `images` | string[] \| null | Image URLs for image posts and notes. |
@@ -102,10 +102,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "xiaohongshu.notes.get",
-    "params": {
-      "id": "6650a1b2000000001e00abcd"
-    }
+    "capability": "xiaohongshu.notes.get",
+    "id": "6650a1b2000000001e00abcd"
   }
 }
 ```
@@ -176,7 +174,7 @@ Or ask an agent that has the MCP server connected:
 
 ## Errors
 
-Errors share one shape and are never charged, except a timeout, whose charge is unknown until looked up. The full table: https://okdata.online/docs/errors/
+Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. They are not charged; only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
 
 ## Questions
 
@@ -207,3 +205,27 @@ The field is null, and meta.unavailable names it with the reason: platform (the 
 - [Xiaohongshu account profile](https://okdata.online/apis/xiaohongshu/users/get/): $0.02 per call
 - [Xiaohongshu account notes](https://okdata.online/apis/xiaohongshu/users/notes/list/): $0.02 per call · about 20 notes per page
 - [Xiaohongshu hot topics](https://okdata.online/apis/xiaohongshu/trends/list/): $0.02 per call · about 20 board entries per page
+- [Xiaohongshu PGY creator search](https://okdata.online/apis/xiaohongshu/pgy/creators/search/): $0.04 per call · about 20 creators per page
+- [Xiaohongshu PGY creator detail](https://okdata.online/apis/xiaohongshu/pgy/creators/get/): $0.04 per call
+- [Xiaohongshu shop product search](https://okdata.online/apis/xiaohongshu/shop/products/search/): $0.02 per call · about 20 products per page
+- [Xiaohongshu shop product reviews](https://okdata.online/apis/xiaohongshu/shop/products/reviews/list/): $0.02 per call · about 12 reviews per page
+- [Xiaohongshu image search](https://okdata.online/apis/xiaohongshu/images/search/): $0.02 per call · about 20 posts per page
+- [Xiaohongshu comment replies](https://okdata.online/apis/xiaohongshu/comments/replies/list/): $0.02 per call · about 5 comments per page
+- [Xiaohongshu topic notes](https://okdata.online/apis/xiaohongshu/topics/notes/list/): $0.02 per call · about 10 notes per page
+- [Xiaohongshu topic detail](https://okdata.online/apis/xiaohongshu/topics/get/): $0.02 per call
+- [Xiaohongshu account search](https://okdata.online/apis/xiaohongshu/users/search/): $0.02 per call · about 20 accounts per page
+- [Xiaohongshu shop product detail](https://okdata.online/apis/xiaohongshu/shop/products/get/): $0.02 per call
+- [Xiaohongshu search suggestions](https://okdata.online/apis/xiaohongshu/keywords/related/): $0.02 per call · about 10 results per page
+- [Xiaohongshu video note with its video](https://okdata.online/apis/xiaohongshu/videos/get/): $0.02 per call
+- [Xiaohongshu PGY keyword search index](https://okdata.online/apis/xiaohongshu/pgy/keywords/history/): $0.04 per call
+- [Xiaohongshu PGY related keywords](https://okdata.online/apis/xiaohongshu/pgy/keywords/related/): $0.04 per call · about 98 results per page
+- [Xiaohongshu PGY creator audience](https://okdata.online/apis/xiaohongshu/pgy/creators/audience/get/): $0.04 per call
+- [Xiaohongshu PGY creator note metrics](https://okdata.online/apis/xiaohongshu/pgy/creators/metrics/): $0.04 per call
+- [Xiaohongshu PGY creator notes](https://okdata.online/apis/xiaohongshu/pgy/creators/notes/list/): $0.04 per call · about 8 notes per page
+- [Xiaohongshu PGY creator follower history](https://okdata.online/apis/xiaohongshu/pgy/creators/followers/history/): $0.04 per call
+- [Xiaohongshu PGY similar creators](https://okdata.online/apis/xiaohongshu/pgy/creators/related/): $0.04 per call · about 4 creators per page
+- [Xiaohongshu PGY trending notes](https://okdata.online/apis/xiaohongshu/pgy/notes/trending/): $0.04 per call · about 34 notes per page
+- [Xiaohongshu PGY creator costs and summary](https://okdata.online/apis/xiaohongshu/pgy/creators/costs/metrics/): $0.04 per call
+- [Xiaohongshu PGY creator follower quality](https://okdata.online/apis/xiaohongshu/pgy/creators/followers/metrics/): $0.04 per call
+- [Xiaohongshu PGY creator core figures history](https://okdata.online/apis/xiaohongshu/pgy/creators/costs/history/): $0.04 per call
+- [Xiaohongshu PGY note figures](https://okdata.online/apis/xiaohongshu/pgy/notes/get/): $0.04 per call

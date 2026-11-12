@@ -1,28 +1,29 @@
 # 公众号历史文章 API
 
-> 公众号已发布的文章，从新到旧，不用扫码登录。
+> 公众号已发布的文章，从新到旧，不用扫码登录：默认是主页的“文章”栏，也可取“视频”或“贴图”栏。
 
 网页版：https://okdata.online/zh/apis/wechat_mp/accounts/articles/list/
 
 - **接口**：`GET /v1/wechat_mp/accounts/articles/list`
 - **ID**：`wechat_mp.accounts.articles.list`
-- **价格**：$0.04/次 · 每页约 10 篇文章
+- **价格**：$0.02/次 · 每页约 10 篇文章
 - **返回**：一页约 10 篇文章（`data.items`，Post 对象）
-- **状态**：公测
+- **状态**：预览
 - **适合**：竞品监控、内容调研
 
 ## 价格
 
-每次调用 $0.04，返回一页，约 10 篇文章。抓 1,000 篇文章大约要 100 次调用，合计 $4.00。每翻一页是一次单独的调用；失败的调用不扣费。
+每次调用 $0.02，返回一页，约 10 篇文章。抓 1,000 篇文章大约要 100 次调用，合计 $2.00。每翻一页是一次单独的调用；失败的调用不扣费。
 
 ## 参数
 
 | 参数名 | 类型 | 必填 | 默认值 | 说明 |
 |---|---|---|---|---|
 | `id` | string | 是 |  | accounts.search 返回的原始 ID（gh_…），或公众号的微信号。（例：`gh_363b924965e9`） |
+| `tab` | string: articles / videos / images | 否 | `articles` | 公众号主页的哪一栏：文章（默认）、视频或贴图。 |
 | `cursor` | string | 否 |  | 上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。 |
 | `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |
-| `fields` | string | 否 |  | 只保留这些字段，逗号分隔，用来省 token。 |
+| `fields` | string[] | 否 |  | 只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。 |
 
 cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs/requests/)。
 
@@ -38,7 +39,7 @@ cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs
 | `title` | string \| null | 标题（视频、笔记、文章才有）。 |
 | `text` | string | 文案、正文或简介，纯文本；文章为 Markdown。 |
 | `lang` | string \| null | 语言代码，平台给出或检测得到。 |
-| `published_at` | string | 发布时间，ISO 8601，UTC。 |
+| `published_at` | string \| null | 发布时间，ISO 8601，UTC；只有平台不给时间时为 null（wechat_mp.articles.metrics、wechat_channels.videos.metrics），并列在 meta.unavailable 里。 |
 | `author` | AccountRef | 发布者。 |
 | `metrics` | Metrics | 抓取时的数据；平台不公开的为 null。 |
 | `images` | string[] \| null | 图文内容的图片地址。 |
@@ -102,10 +103,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "wechat_mp.accounts.articles.list",
-    "params": {
-      "id": "gh_363b924965e9"
-    }
+    "capability": "wechat_mp.accounts.articles.list",
+    "id": "gh_363b924965e9"
   }
 }
 ```
@@ -159,9 +158,9 @@ console.log('cost: $' + body.meta.billing.amount);
   "meta": {
     "capability": "wechat_mp.accounts.articles.list",
     "billing": {
-      "amount": "0.04",
+      "amount": "0.02",
       "currency": "USD",
-      "balance_after": "9.96"
+      "balance_after": "9.98"
     },
     "unavailable": {
       "metrics.comments": "platform",
@@ -178,17 +177,17 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## 错误
 
-所有错误同一种结构，都不扣费；只有超时的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
+所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。错误不扣费；只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
 
 ## 常见问题
 
 ### 公众号历史文章接口多少钱？
 
-每次调用 $0.04，返回一页，约 10 篇文章。抓 1,000 篇文章大约要 100 次调用，合计 $4.00。每翻一页是一次单独的调用；失败的调用不扣费。
+每次调用 $0.02，返回一页，约 10 篇文章。抓 1,000 篇文章大约要 100 次调用，合计 $2.00。每翻一页是一次单独的调用；失败的调用不扣费。
 
 ### 怎么翻页？
 
-把返回里的 page.next_cursor 原样作为 cursor 参数传回去。page.has_more 为 false 时就没有下一页了。每一页都是一次 $0.04 的调用。
+把返回里的 page.next_cursor 原样作为 cursor 参数传回去。page.has_more 为 false 时就没有下一页了。每一页都是一次 $0.02 的调用。
 
 ### 需要微信公众号账号、Cookie 或扫码登录吗？
 
@@ -206,3 +205,8 @@ console.log('cost: $' + body.meta.billing.amount);
 
 - [公众号搜索](https://okdata.online/zh/apis/wechat_mp/accounts/search/)：$0.058/条 · 每次最多 $0.58
 - [公众号文章详情](https://okdata.online/zh/apis/wechat_mp/articles/get/)：$0.02/次
+- [公众号资料](https://okdata.online/zh/apis/wechat_mp/accounts/get/)：$0.02/次
+- [公众号文章评论](https://okdata.online/zh/apis/wechat_mp/articles/comments/list/)：$0.02/次 · 每页约 20 条评论
+- [公众号文章互动数据](https://okdata.online/zh/apis/wechat_mp/articles/metrics/)：$0.02/次
+- [公众号评论回复](https://okdata.online/zh/apis/wechat_mp/comments/replies/list/)：$0.02/次 · 每页约 3 条评论
+- [公众号主体信息](https://okdata.online/zh/apis/wechat_mp/accounts/owner/get/)：$0.15/次

@@ -8,7 +8,7 @@
 - **ID**：`tiktok.videos.comments.list`
 - **价格**：$0.002/次 · 每页约 50 条评论
 - **返回**：一页约 50 条评论（`data.items`，Comment 对象）
-- **状态**：公测
+- **状态**：预览
 - **适合**：口碑分析
 
 ## 价格
@@ -22,7 +22,7 @@
 | `id` | string | 是 |  | 视频 ID。id 和 url 二选一。（例：`7305085486984858894`） |
 | `cursor` | string | 否 |  | 上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。 |
 | `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |
-| `fields` | string | 否 |  | 只保留这些字段，逗号分隔，用来省 token。 |
+| `fields` | string[] | 否 |  | 只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。 |
 
 cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs/requests/)。
 
@@ -41,6 +41,7 @@ cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs
 | `likes` | integer \| null | 评论点赞数。 |
 | `replies` | integer \| null | 回复数。 |
 | `ip_location` | string \| null | 平台显示的 IP 属地（有的话）。 |
+| `ext` | object | 平台特有字段，只在 view=full 时返回。 |
 
 ## 请求示例
 
@@ -99,10 +100,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "tiktok.videos.comments.list",
-    "params": {
-      "id": "7305085486984858894"
-    }
+    "capability": "tiktok.videos.comments.list",
+    "id": "7305085486984858894"
   }
 }
 ```
@@ -161,7 +160,7 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## 错误
 
-所有错误同一种结构，都不扣费；只有超时的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
+所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。错误不扣费；只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
 
 ## 常见问题
 
@@ -190,3 +189,14 @@ console.log('cost: $' + body.meta.billing.amount);
 - [TikTok 视频搜索](https://okdata.online/zh/apis/tiktok/videos/search/)：$0.002/次 · 每页约 30 条视频
 - [TikTok 视频详情](https://okdata.online/zh/apis/tiktok/videos/get/)：$0.002/次
 - [TikTok 账号信息](https://okdata.online/zh/apis/tiktok/users/get/)：$0.002/次
+- [TikTok 广告库搜索](https://okdata.online/zh/apis/tiktok/ads/search/)：$0.004/次 · 每页约 12 条广告
+- [TikTok 创意中心热门广告](https://okdata.online/zh/apis/tiktok/creative_center/ads/search/)：$0.002/次 · 每页约 20 条广告
+- [TikTok Shop 商品搜索](https://okdata.online/zh/apis/tiktok/shop/products/search/)：$0.004/次 · 每页约 20 个商品
+- [TikTok Shop 商品详情](https://okdata.online/zh/apis/tiktok/shop/products/get/)：$0.002/次
+- [TikTok Shop 商品评价](https://okdata.online/zh/apis/tiktok/shop/products/reviews/list/)：$0.002/次 · 每页约 20 条评价
+- [TikTok 视频字幕](https://okdata.online/zh/apis/tiktok/videos/transcript/get/)：$0.002/次
+- [TikTok 评论回复](https://okdata.online/zh/apis/tiktok/comments/replies/list/)：$0.002/次 · 每页约 20 条评论
+- [TikTok 账号搜索](https://okdata.online/zh/apis/tiktok/users/search/)：$0.002/次 · 每页约 30 个账号
+- [TikTok 账号作品](https://okdata.online/zh/apis/tiktok/users/videos/list/)：$0.002/次 · 每页约 10 条视频
+- [TikTok 创意中心热门广告详情](https://okdata.online/zh/apis/tiktok/creative_center/ads/get/)：$0.002/次
+- [TikTok Shop 店铺商品](https://okdata.online/zh/apis/tiktok/shop/sellers/products/list/)：$0.002/次 · 每页约 20 个商品

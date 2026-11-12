@@ -8,7 +8,7 @@ Canonical page: https://okdata.online/apis/youtube/videos/transcript/get/
 - **ID**: `youtube.videos.transcript.get`
 - **Price**: $0.004 per call
 - **Returns**: one Transcript object (`data.item`)
-- **Status**: beta
+- **Status**: preview
 - **Good for**: Transcripts, Content research
 
 ## Price
@@ -20,9 +20,9 @@ One call costs $0.004 and returns one transcript. 1,000 lookups cost $4.00. Fail
 | Name | Type | Required | Default | Description |
 |---|---|---|---|---|
 | `id` | string | yes |  | The video ID. Give id or url. (e.g. `dQw4w9WgXcQ`) |
-| `lang` | string | no |  | Preferred transcript language. (e.g. `en`) |
+| `lang` | string | no |  | Preferred transcript language. The result's lang is the track actually returned. (e.g. `en`) |
 | `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
-| `fields` | string | no |  | Comma-separated fields to keep, to save tokens. |
+| `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |
 
 cursor, view and fields work as described in [Requests](https://okdata.online/docs/requests/).
 
@@ -93,10 +93,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "youtube.videos.transcript.get",
-    "params": {
-      "id": "dQw4w9WgXcQ"
-    }
+    "capability": "youtube.videos.transcript.get",
+    "id": "dQw4w9WgXcQ"
   }
 }
 ```
@@ -143,7 +141,7 @@ Or ask an agent that has the MCP server connected:
 
 ## Errors
 
-Errors share one shape and are never charged, except a timeout, whose charge is unknown until looked up. The full table: https://okdata.online/docs/errors/
+Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. They are not charged; only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
 
 ## Questions
 
@@ -166,5 +164,8 @@ The field is null, and meta.unavailable names it with the reason: platform (the 
 ## More YouTube endpoints
 
 - [YouTube video search](https://okdata.online/apis/youtube/videos/search/): $0.004 per call · about 20 videos per page
-- [YouTube video detail](https://okdata.online/apis/youtube/videos/get/): $0.004 per call
-- [YouTube video comments](https://okdata.online/apis/youtube/videos/comments/list/): $0.004 per call · about 20 comments per page
+- [YouTube video detail](https://okdata.online/apis/youtube/videos/get/): $0.002 per call
+- [YouTube video comments](https://okdata.online/apis/youtube/videos/comments/list/): $0.002 per call · about 20 comments per page
+- [YouTube comment replies](https://okdata.online/apis/youtube/comments/replies/list/): $0.002 per call · about 10 comments per page
+- [YouTube channel posts](https://okdata.online/apis/youtube/channels/posts/list/): $0.002 per call · about 10 posts per page
+- [YouTube post detail](https://okdata.online/apis/youtube/posts/get/): $0.002 per call

@@ -24,3 +24,6 @@ The same shape on every platform. A field a platform does not have is null, and 
 ## Endpoints that return a Transcript
 
 - [YouTube video transcript](https://okdata.online/apis/youtube/videos/transcript/get/) (`youtube.videos.transcript.get`): $0.004 per call
+- [Instagram reel transcript](https://okdata.online/apis/instagram/posts/transcript/get/) (`instagram.posts.transcript.get`): $0.004 per call
+- [Reddit video transcript](https://okdata.online/apis/reddit/posts/transcript/get/) (`reddit.posts.transcript.get`): $0.004 per call
+- [TikTok video transcript](https://okdata.online/apis/tiktok/videos/transcript/get/) (`tiktok.videos.transcript.get`): $0.002 per call

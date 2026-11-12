@@ -6,14 +6,14 @@ Canonical page: https://okdata.online/apis/youtube/videos/comments/list/
 
 - **Endpoint**: `GET /v1/youtube/videos/comments/list`
 - **ID**: `youtube.videos.comments.list`
-- **Price**: $0.004 per call · about 20 comments per page
+- **Price**: $0.002 per call · about 20 comments per page
 - **Returns**: a page of about 20 comments (`data.items`, Comment objects)
-- **Status**: beta
+- **Status**: preview
 - **Good for**: Word of mouth
 
 ## Price
 
-One call costs $0.004 and returns one page of about 20 comments. Collecting 1,000 comments takes about 50 calls, $0.20 in total. Each page is a separate call; failed calls are not charged.
+One call costs $0.002 and returns one page of about 20 comments. Collecting 1,000 comments takes about 50 calls, $0.10 in total. Each page is a separate call; failed calls are not charged.
 
 ## Parameters
 
@@ -23,7 +23,7 @@ One call costs $0.004 and returns one page of about 20 comments. Collecting 1,00
 | `sort` | string: top / latest | no | `top` | Result order. |
 | `cursor` | string | no |  | Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. |
 | `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
-| `fields` | string | no |  | Comma-separated fields to keep, to save tokens. |
+| `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |
 
 cursor, view and fields work as described in [Requests](https://okdata.online/docs/requests/).
 
@@ -42,6 +42,7 @@ Each item is a [Comment](https://okdata.online/docs/objects/comment/).
 | `likes` | integer \| null | Likes on the comment. |
 | `replies` | integer \| null | Replies under it. |
 | `ip_location` | string \| null | Region label the platform shows next to the comment, if any. |
+| `ext` | object | Platform-specific extras. Only returned with view=full. |
 
 ## Request examples
 
@@ -100,10 +101,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "youtube.videos.comments.list",
-    "params": {
-      "id": "dQw4w9WgXcQ"
-    }
+    "capability": "youtube.videos.comments.list",
+    "id": "dQw4w9WgXcQ"
   }
 }
 ```
@@ -148,9 +147,9 @@ Or ask an agent that has the MCP server connected:
   "meta": {
     "capability": "youtube.videos.comments.list",
     "billing": {
-      "amount": "0.004",
+      "amount": "0.002",
       "currency": "USD",
-      "balance_after": "9.996"
+      "balance_after": "9.998"
     },
     "unavailable": {},
     "cached": false,
@@ -162,17 +161,17 @@ Or ask an agent that has the MCP server connected:
 
 ## Errors
 
-Errors share one shape and are never charged, except a timeout, whose charge is unknown until looked up. The full table: https://okdata.online/docs/errors/
+Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. They are not charged; only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
 
 ## Questions
 
 ### How much does the YouTube video comments API cost?
 
-One call costs $0.004 and returns one page of about 20 comments. Collecting 1,000 comments takes about 50 calls, $0.20 in total. Each page is a separate call; failed calls are not charged.
+One call costs $0.002 and returns one page of about 20 comments. Collecting 1,000 comments takes about 50 calls, $0.10 in total. Each page is a separate call; failed calls are not charged.
 
 ### How do I get the next page?
 
-Pass page.next_cursor from the response back as the cursor parameter. When page.has_more is false there is nothing left. Every page is its own call at $0.004.
+Pass page.next_cursor from the response back as the cursor parameter. When page.has_more is false there is nothing left. Every page is its own call at $0.002.
 
 ### Do I need a YouTube account, cookies or a QR login?
 
@@ -189,5 +188,8 @@ The field is null, and meta.unavailable names it with the reason: platform (the 
 ## More YouTube endpoints
 
 - [YouTube video search](https://okdata.online/apis/youtube/videos/search/): $0.004 per call · about 20 videos per page
-- [YouTube video detail](https://okdata.online/apis/youtube/videos/get/): $0.004 per call
+- [YouTube video detail](https://okdata.online/apis/youtube/videos/get/): $0.002 per call
 - [YouTube video transcript](https://okdata.online/apis/youtube/videos/transcript/get/): $0.004 per call
+- [YouTube comment replies](https://okdata.online/apis/youtube/comments/replies/list/): $0.002 per call · about 10 comments per page
+- [YouTube channel posts](https://okdata.online/apis/youtube/channels/posts/list/): $0.002 per call · about 10 posts per page
+- [YouTube post detail](https://okdata.online/apis/youtube/posts/get/): $0.002 per call

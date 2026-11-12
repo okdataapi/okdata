@@ -8,7 +8,7 @@
 - **ID**：`youtube.videos.transcript.get`
 - **价格**：$0.004/次
 - **返回**：一个 Transcript 对象（`data.item`）
-- **状态**：公测
+- **状态**：预览
 - **适合**：视频转文字、内容调研
 
 ## 价格
@@ -20,9 +20,9 @@
 | 参数名 | 类型 | 必填 | 默认值 | 说明 |
 |---|---|---|---|---|
 | `id` | string | 是 |  | 视频 ID。id 和 url 二选一。（例：`dQw4w9WgXcQ`） |
-| `lang` | string | 否 |  | 优先的字幕语言。（例：`en`） |
+| `lang` | string | 否 |  | 优先的字幕语言。结果里的 lang 是实际返回的字幕语言。（例：`en`） |
 | `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |
-| `fields` | string | 否 |  | 只保留这些字段，逗号分隔，用来省 token。 |
+| `fields` | string[] | 否 |  | 只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。 |
 
 cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs/requests/)。
 
@@ -93,10 +93,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "youtube.videos.transcript.get",
-    "params": {
-      "id": "dQw4w9WgXcQ"
-    }
+    "capability": "youtube.videos.transcript.get",
+    "id": "dQw4w9WgXcQ"
   }
 }
 ```
@@ -143,7 +141,7 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## 错误
 
-所有错误同一种结构，都不扣费；只有超时的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
+所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。错误不扣费；只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
 
 ## 常见问题
 
@@ -166,5 +164,8 @@ console.log('cost: $' + body.meta.billing.amount);
 ## YouTube的其他接口
 
 - [YouTube 视频搜索](https://okdata.online/zh/apis/youtube/videos/search/)：$0.004/次 · 每页约 20 条视频
-- [YouTube 视频详情](https://okdata.online/zh/apis/youtube/videos/get/)：$0.004/次
-- [YouTube 视频评论](https://okdata.online/zh/apis/youtube/videos/comments/list/)：$0.004/次 · 每页约 20 条评论
+- [YouTube 视频详情](https://okdata.online/zh/apis/youtube/videos/get/)：$0.002/次
+- [YouTube 视频评论](https://okdata.online/zh/apis/youtube/videos/comments/list/)：$0.002/次 · 每页约 20 条评论
+- [YouTube 评论回复](https://okdata.online/zh/apis/youtube/comments/replies/list/)：$0.002/次 · 每页约 10 条评论
+- [YouTube 频道帖子](https://okdata.online/zh/apis/youtube/channels/posts/list/)：$0.002/次 · 每页约 10 条帖子
+- [YouTube 帖子详情](https://okdata.online/zh/apis/youtube/posts/get/)：$0.002/次

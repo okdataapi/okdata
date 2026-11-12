@@ -1,27 +1,29 @@
 # X account profile API
 
-> Followers, following, post count, bio and verification of an account.
+> An account by handle or numeric ID, or up to 100 accounts by ID in one call: followers, following, post count, bio and verification. IDs that find no account are listed under data.missing and not charged.
 
 Canonical page: https://okdata.online/apis/x/users/get/
 
 - **Endpoint**: `GET /v1/x/users/get`
 - **ID**: `x.users.get`
-- **Price**: $0.001 per call
+- **Price**: $0.0004 per account · at most $0.04 per call
 - **Returns**: one Account object (`data.item`)
-- **Status**: beta
+- **Status**: preview
 - **Good for**: Creator discovery, Competitor monitoring
 
 ## Price
 
-One call costs $0.001 and returns one account. 1,000 lookups cost $1.00. Failed calls are not charged.
+You pay $0.0004 for each of the accounts a call returns, at least one and at most $0.04 per call (100 accounts). 1,000 accounts cost $0.40. An empty page is billed as one item; failed calls are not charged.
 
 ## Parameters
 
 | Name | Type | Required | Default | Description |
 |---|---|---|---|---|
-| `username` | string | yes |  | The handle, with or without @. (e.g. `openai`) |
+| `id` | string | no |  | The numeric account ID. Give one of id, username or ids. (e.g. `4398626122`) |
+| `username` | string | no |  | The handle, with or without @. Give one of id, username or ids. (e.g. `openai`) |
+| `ids` | string[] | no |  | Up to 100 numeric account IDs (POST with a JSON body, or comma-separated in a GET). Give one of id, username or ids. (e.g. `4398626122,11348282`) |
 | `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
-| `fields` | string | no |  | Comma-separated fields to keep, to save tokens. |
+| `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |
 
 cursor, view and fields work as described in [Requests](https://okdata.online/docs/requests/).
 
@@ -51,7 +53,7 @@ Each item is a [Account](https://okdata.online/docs/objects/account/).
 ```bash
 curl -G "https://api.okdata.online/v1/x/users/get" \
   -H "Authorization: Bearer $OKDATA_API_KEY" \
-  --data-urlencode 'username=openai'
+  --data-urlencode 'id=4398626122'
 ```
 
 ### Python
@@ -63,7 +65,7 @@ import requests
 resp = requests.get(
     "https://api.okdata.online/v1/x/users/get",
     headers={"Authorization": f"Bearer {os.environ['OKDATA_API_KEY']}"},
-    params={"username": "openai"},
+    params={"id": "4398626122"},
     timeout=60,
 )
 body = resp.json()
@@ -79,7 +81,7 @@ print("cost: $" + body["meta"]["billing"]["amount"])
 
 ```ts
 const url = new URL('https://api.okdata.online/v1/x/users/get');
-url.searchParams.set('username', "openai");
+url.searchParams.set('id', "4398626122");
 
 const res = await fetch(url, {
   headers: {
@@ -100,10 +102,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "x.users.get",
-    "params": {
-      "username": "openai"
-    }
+    "capability": "x.users.get",
+    "id": "4398626122"
   }
 }
 ```
@@ -137,9 +137,9 @@ Or ask an agent that has the MCP server connected:
   "meta": {
     "capability": "x.users.get",
     "billing": {
-      "amount": "0.001",
+      "amount": "0.0004",
       "currency": "USD",
-      "balance_after": "9.999"
+      "balance_after": "9.9996"
     },
     "unavailable": {},
     "cached": false,
@@ -151,13 +151,13 @@ Or ask an agent that has the MCP server connected:
 
 ## Errors
 
-Errors share one shape and are never charged, except a timeout, whose charge is unknown until looked up. The full table: https://okdata.online/docs/errors/
+Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. They are not charged; only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
 
 ## Questions
 
 ### How much does the X account profile API cost?
 
-One call costs $0.001 and returns one account. 1,000 lookups cost $1.00. Failed calls are not charged.
+You pay $0.0004 for each of the accounts a call returns, at least one and at most $0.04 per call (100 accounts). 1,000 accounts cost $0.40. An empty page is billed as one item; failed calls are not charged.
 
 ### Do I need a X (Twitter) account, cookies or a QR login?
 
@@ -173,7 +173,22 @@ The field is null, and meta.unavailable names it with the reason: platform (the 
 
 ## More X (Twitter) endpoints
 
-- [X post detail](https://okdata.online/apis/x/posts/get/): $0.001 per call
-- [X post search](https://okdata.online/apis/x/posts/search/): $0.006 per call · about 20 posts per page
-- [X account posts](https://okdata.online/apis/x/users/posts/list/): $0.006 per call · about 20 posts per page
+- [X post detail](https://okdata.online/apis/x/posts/get/): $0.0003 per call
+- [X post search](https://okdata.online/apis/x/posts/search/): $0.002 per call · about 20 posts per page
+- [X account posts](https://okdata.online/apis/x/users/posts/list/): $0.002 per call · about 20 posts per page
 - [X trending topics](https://okdata.online/apis/x/trends/list/): $0.009 per call · about 30 board entries per page
+- [X post replies](https://okdata.online/apis/x/posts/replies/list/): $0.002 per call · about 35 posts per page
+- [X post quotes](https://okdata.online/apis/x/posts/quotes/list/): $0.0003 per post · at most $0.006 per call
+- [X post retweeters](https://okdata.online/apis/x/posts/retweeters/list/): $0.002 per call · about 100 accounts per page
+- [X article](https://okdata.online/apis/x/posts/article/get/): $0.002 per call
+- [X thread](https://okdata.online/apis/x/threads/posts/list/): $0.0003 per post · at most $0.015 per call
+- [X account search](https://okdata.online/apis/x/users/search/): $0.0004 per account · at most $0.008 per call
+- [X account followers](https://okdata.online/apis/x/users/followers/list/): $0.0001 per account · at most $0.02 per call
+- [X account following](https://okdata.online/apis/x/users/following/list/): $0.0001 per account · at most $0.02 per call
+- [X account mentions](https://okdata.online/apis/x/users/mentions/list/): $0.0003 per post · at most $0.006 per call
+- [X list posts](https://okdata.online/apis/x/lists/posts/list/): $0.002 per call · about 100 posts per page
+- [X list members](https://okdata.online/apis/x/lists/members/list/): $0.0004 per account · at most $0.008 per call
+- [X list followers](https://okdata.online/apis/x/lists/followers/list/): $0.0004 per account · at most $0.008 per call
+- [X community profile](https://okdata.online/apis/x/communities/get/): $0.0004 per call
+- [X community posts](https://okdata.online/apis/x/communities/posts/list/): $0.0003 per post · at most $0.006 per call
+- [X community members](https://okdata.online/apis/x/communities/members/list/): $0.0004 per account · at most $0.008 per call

@@ -1,6 +1,6 @@
-# B站热门榜 API
+# B站热搜榜 API
 
-> 当前综合热门榜。
+> B站当前的热搜词，最多 50 个，带名次和热度。
 
 网页版：https://okdata.online/zh/apis/bilibili/trends/list/
 
@@ -8,7 +8,7 @@
 - **ID**：`bilibili.trends.list`
 - **价格**：$0.002/次 · 每页约 50 条榜单
 - **返回**：一页约 50 条榜单（`data.items`，Trend 对象）
-- **状态**：公测
+- **状态**：预览
 - **适合**：热点研究
 
 ## 价格
@@ -19,9 +19,9 @@
 
 | 参数名 | 类型 | 必填 | 默认值 | 说明 |
 |---|---|---|---|---|
-| `cursor` | string | 否 |  | 上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。 |
+| `board` | string: hot_search | 否 | `hot_search` | 哪个榜：现在只有热搜榜。 |
 | `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |
-| `fields` | string | 否 |  | 只保留这些字段，逗号分隔，用来省 token。 |
+| `fields` | string[] | 否 |  | 只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。 |
 
 cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs/requests/)。
 
@@ -91,15 +91,14 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "bilibili.trends.list",
-    "params": {}
+    "capability": "bilibili.trends.list"
   }
 }
 ```
 
 或者对接好 MCP 的智能体直接说：
 
-> 用「B站热门榜」看看现在排名前十的是什么。
+> 用「B站热搜榜」看看现在排名前十的是什么。
 
 ## 返回示例
 
@@ -139,11 +138,11 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## 错误
 
-所有错误同一种结构，都不扣费；只有超时的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
+所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。错误不扣费；只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
 
 ## 常见问题
 
-### B站热门榜接口多少钱？
+### B站热搜榜接口多少钱？
 
 每次调用 $0.002，返回一页，约 50 条榜单。抓 1,000 条榜单大约要 20 次调用，合计 $0.04。每翻一页是一次单独的调用；失败的调用不扣费。
 
@@ -168,3 +167,8 @@ console.log('cost: $' + body.meta.billing.amount);
 - [B站视频搜索](https://okdata.online/zh/apis/bilibili/videos/search/)：$0.002/次 · 每页约 20 条视频
 - [B站视频详情](https://okdata.online/zh/apis/bilibili/videos/get/)：$0.002/次
 - [B站视频评论](https://okdata.online/zh/apis/bilibili/videos/comments/list/)：$0.002/次 · 每页约 20 条评论
+- [B站用户资料](https://okdata.online/zh/apis/bilibili/users/get/)：$0.002/次
+- [B站用户投稿](https://okdata.online/zh/apis/bilibili/users/videos/list/)：$0.002/次 · 每页约 30 条视频
+- [B站评论回复](https://okdata.online/zh/apis/bilibili/comments/replies/list/)：$0.002/次 · 每页约 20 条评论
+- [B站综合热门](https://okdata.online/zh/apis/bilibili/videos/trending/)：$0.002/次 · 每页约 20 条视频
+- [B站用户投稿（备用版）](https://okdata.online/zh/apis/bilibili/backup/users/videos/list/)：$0.0025/次 · 每页约 20 条视频

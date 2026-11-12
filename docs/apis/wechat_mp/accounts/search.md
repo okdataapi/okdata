@@ -1,6 +1,6 @@
 # Official Account search API
 
-> Find Official Accounts by name or keyword, with their original ID (gh_…). Charged per account returned.
+> Find Official Accounts by name or keyword, with their original ID (gh_…). Charged per account returned; when the balance is below a full page, the first page shrinks to what it covers.
 
 Canonical page: https://okdata.online/apis/wechat_mp/accounts/search/
 
@@ -8,7 +8,7 @@ Canonical page: https://okdata.online/apis/wechat_mp/accounts/search/
 - **ID**: `wechat_mp.accounts.search`
 - **Price**: $0.058 per account · at most $0.58 per call
 - **Returns**: a page of about 10 accounts (`data.items`, Account objects)
-- **Status**: beta
+- **Status**: preview
 - **Good for**: Competitor monitoring
 
 ## Price
@@ -22,7 +22,7 @@ You pay $0.058 for each of the accounts a call returns, at least one and at most
 | `query` | string | yes |  | Keywords, as a person would type them into the platform search box. (e.g. `36氪`) |
 | `cursor` | string | no |  | Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. |
 | `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
-| `fields` | string | no |  | Comma-separated fields to keep, to save tokens. |
+| `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |
 
 cursor, view and fields work as described in [Requests](https://okdata.online/docs/requests/).
 
@@ -102,10 +102,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "wechat_mp.accounts.search",
-    "params": {
-      "query": "36氪"
-    }
+    "capability": "wechat_mp.accounts.search",
+    "query": "36氪"
   }
 }
 ```
@@ -159,7 +157,7 @@ Or ask an agent that has the MCP server connected:
 
 ## Errors
 
-Errors share one shape and are never charged, except a timeout, whose charge is unknown until looked up. The full table: https://okdata.online/docs/errors/
+Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. They are not charged; only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
 
 ## Questions
 
@@ -185,5 +183,10 @@ The field is null, and meta.unavailable names it with the reason: platform (the 
 
 ## More WeChat Official Accounts endpoints
 
-- [Official Account article history](https://okdata.online/apis/wechat_mp/accounts/articles/list/): $0.04 per call · about 10 articles per page
+- [Official Account article history](https://okdata.online/apis/wechat_mp/accounts/articles/list/): $0.02 per call · about 10 articles per page
 - [Official Account article detail](https://okdata.online/apis/wechat_mp/articles/get/): $0.02 per call
+- [Official Account profile](https://okdata.online/apis/wechat_mp/accounts/get/): $0.02 per call
+- [Official Account article comments](https://okdata.online/apis/wechat_mp/articles/comments/list/): $0.02 per call · about 20 comments per page
+- [Official Account article stats](https://okdata.online/apis/wechat_mp/articles/metrics/): $0.02 per call
+- [Official Account comment replies](https://okdata.online/apis/wechat_mp/comments/replies/list/): $0.02 per call · about 3 comments per page
+- [Official Account owner](https://okdata.online/apis/wechat_mp/accounts/owner/get/): $0.15 per call

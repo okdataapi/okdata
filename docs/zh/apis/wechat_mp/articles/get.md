@@ -8,7 +8,7 @@
 - **ID**：`wechat_mp.articles.get`
 - **价格**：$0.02/次
 - **返回**：一个 Post 对象（`data.item`）
-- **状态**：公测
+- **状态**：预览
 - **适合**：内容调研
 
 ## 价格
@@ -21,7 +21,7 @@
 |---|---|---|---|---|
 | `url` | string | 是 |  | 分享链接或网页地址，会从中解析出 ID。（例：`https://mp.weixin.qq.com/s/xxxxxxxx`） |
 | `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |
-| `fields` | string | 否 |  | 只保留这些字段，逗号分隔，用来省 token。 |
+| `fields` | string[] | 否 |  | 只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。 |
 
 cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs/requests/)。
 
@@ -37,7 +37,7 @@ cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs
 | `title` | string \| null | 标题（视频、笔记、文章才有）。 |
 | `text` | string | 文案、正文或简介，纯文本；文章为 Markdown。 |
 | `lang` | string \| null | 语言代码，平台给出或检测得到。 |
-| `published_at` | string | 发布时间，ISO 8601，UTC。 |
+| `published_at` | string \| null | 发布时间，ISO 8601，UTC；只有平台不给时间时为 null（wechat_mp.articles.metrics、wechat_channels.videos.metrics），并列在 meta.unavailable 里。 |
 | `author` | AccountRef | 发布者。 |
 | `metrics` | Metrics | 抓取时的数据；平台不公开的为 null。 |
 | `images` | string[] \| null | 图文内容的图片地址。 |
@@ -100,10 +100,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "wechat_mp.articles.get",
-    "params": {
-      "url": "https://mp.weixin.qq.com/s/xxxxxxxx"
-    }
+    "capability": "wechat_mp.articles.get",
+    "url": "https://mp.weixin.qq.com/s/xxxxxxxx"
   }
 }
 ```
@@ -170,7 +168,7 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## 错误
 
-所有错误同一种结构，都不扣费；只有超时的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
+所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。错误不扣费；只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
 
 ## 常见问题
 
@@ -197,4 +195,9 @@ console.log('cost: $' + body.meta.billing.amount);
 ## 微信公众号的其他接口
 
 - [公众号搜索](https://okdata.online/zh/apis/wechat_mp/accounts/search/)：$0.058/条 · 每次最多 $0.58
-- [公众号历史文章](https://okdata.online/zh/apis/wechat_mp/accounts/articles/list/)：$0.04/次 · 每页约 10 篇文章
+- [公众号历史文章](https://okdata.online/zh/apis/wechat_mp/accounts/articles/list/)：$0.02/次 · 每页约 10 篇文章
+- [公众号资料](https://okdata.online/zh/apis/wechat_mp/accounts/get/)：$0.02/次
+- [公众号文章评论](https://okdata.online/zh/apis/wechat_mp/articles/comments/list/)：$0.02/次 · 每页约 20 条评论
+- [公众号文章互动数据](https://okdata.online/zh/apis/wechat_mp/articles/metrics/)：$0.02/次
+- [公众号评论回复](https://okdata.online/zh/apis/wechat_mp/comments/replies/list/)：$0.02/次 · 每页约 3 条评论
+- [公众号主体信息](https://okdata.online/zh/apis/wechat_mp/accounts/owner/get/)：$0.15/次

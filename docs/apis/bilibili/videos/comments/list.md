@@ -8,7 +8,7 @@ Canonical page: https://okdata.online/apis/bilibili/videos/comments/list/
 - **ID**: `bilibili.videos.comments.list`
 - **Price**: $0.002 per call · about 20 comments per page
 - **Returns**: a page of about 20 comments (`data.items`, Comment objects)
-- **Status**: beta
+- **Status**: preview
 - **Good for**: Word of mouth
 
 ## Price
@@ -23,7 +23,7 @@ One call costs $0.002 and returns one page of about 20 comments. Collecting 1,00
 | `sort` | string: hot / latest | no | `hot` | Result order. |
 | `cursor` | string | no |  | Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. |
 | `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
-| `fields` | string | no |  | Comma-separated fields to keep, to save tokens. |
+| `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |
 
 cursor, view and fields work as described in [Requests](https://okdata.online/docs/requests/).
 
@@ -42,6 +42,7 @@ Each item is a [Comment](https://okdata.online/docs/objects/comment/).
 | `likes` | integer \| null | Likes on the comment. |
 | `replies` | integer \| null | Replies under it. |
 | `ip_location` | string \| null | Region label the platform shows next to the comment, if any. |
+| `ext` | object | Platform-specific extras. Only returned with view=full. |
 
 ## Request examples
 
@@ -100,10 +101,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "bilibili.videos.comments.list",
-    "params": {
-      "id": "BV1xx411c7mD"
-    }
+    "capability": "bilibili.videos.comments.list",
+    "id": "BV1xx411c7mD"
   }
 }
 ```
@@ -162,7 +161,7 @@ Or ask an agent that has the MCP server connected:
 
 ## Errors
 
-Errors share one shape and are never charged, except a timeout, whose charge is unknown until looked up. The full table: https://okdata.online/docs/errors/
+Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. They are not charged; only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
 
 ## Questions
 
@@ -190,4 +189,9 @@ The field is null, and meta.unavailable names it with the reason: platform (the 
 
 - [Bilibili video search](https://okdata.online/apis/bilibili/videos/search/): $0.002 per call · about 20 videos per page
 - [Bilibili video detail](https://okdata.online/apis/bilibili/videos/get/): $0.002 per call
-- [Bilibili popular board](https://okdata.online/apis/bilibili/trends/list/): $0.002 per call · about 50 board entries per page
+- [Bilibili hot searches](https://okdata.online/apis/bilibili/trends/list/): $0.002 per call · about 50 board entries per page
+- [Bilibili account profile](https://okdata.online/apis/bilibili/users/get/): $0.002 per call
+- [Bilibili account videos](https://okdata.online/apis/bilibili/users/videos/list/): $0.002 per call · about 30 videos per page
+- [Bilibili comment replies](https://okdata.online/apis/bilibili/comments/replies/list/): $0.002 per call · about 20 comments per page
+- [Bilibili popular videos](https://okdata.online/apis/bilibili/videos/trending/): $0.002 per call · about 20 videos per page
+- [Bilibili account videos (backup)](https://okdata.online/apis/bilibili/backup/users/videos/list/): $0.0025 per call · about 20 videos per page

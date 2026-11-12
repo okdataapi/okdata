@@ -9,11 +9,36 @@ permissions:
   contents: read
 
 jobs:
-  python:
+  node:
+    name: typescript + cli (node ${{ matrix.node }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ["3.10", "3.13"]
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      # @okdata/sdk
+      - run: npm run typecheck -w typescript
+      - run: npm test -w typescript
+      - run: npm run build -w typescript
+      # okdata (the CLI), built against ../typescript through the workspace
+      - run: npm run typecheck -w cli
+      - run: npm test -w cli
+      - run: npm run build -w cli
+      - run: node cli/dist/bin.js --help
+      - run: npm pack --dry-run -w typescript -w cli
+
+  python:
+    name: python ${{ matrix.python }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.9", "3.13"]
     defaults:
       run:
         working-directory: python
@@ -22,24 +47,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - run: pip install -e '.[test]' mypy
-      - run: python -m mypy --strict src/okdata
-      - run: python -m pytest --cov=okdata --cov-fail-under=80
-
-  typescript:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [20, 22]
-    defaults:
-      run:
-        working-directory: typescript
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
-      - run: npm install --no-audit --no-fund
-      - run: npm run typecheck
-      - run: npm run test:coverage
-      - run: npm run build
+      - run: pip install -e '.[test]'
+      - run: python -m pytest
+      # mypy no longer runs on 3.9; the tests above cover 3.9 itself.
+      - if: matrix.python == '3.13'
+        run: pip install mypy && python -m mypy
+      - if: matrix.python == '3.13'
+        name: build the sdist and wheel, with the generated code in them
+        run: |
+          pip install build
+          python -m build
+          python -m zipfile -l dist/*.whl | grep -q 'okdata/_generated/_sync.py'

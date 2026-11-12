@@ -1,266 +1,273 @@
-import { readFileSync } from 'node:fs';
-import { inspect } from 'node:util';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { CATALOG_REVISION, ENDPOINTS, OkData, OkDataConnectionError, OkDataError, VERSION, maxCost } from '../src/index.js';
-import { MockApi, TEST_KEY, errorBody, okEnvelope } from './mock-api.js';
+import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
+import { OkData, OkDataConnectionError, OkDataError } from '../src/index.js';
+import { batchBody, errorReply, itemBody, pageBody, plainBody, startMock, type MockApi } from './mock-server.js';
 
 let api: MockApi;
-let sleeps: number[];
-let ok: OkData;
+let slept: number[];
+const KEY = 'okd_test_0123456789abcdef';
+const client = (extra: ConstructorParameters<typeof OkData>[0] = {}) =>
+  new OkData({ apiKey: KEY, baseUrl: api.url, sleep: async (ms) => { slept.push(ms); }, ...extra });
 
-const client = (extra: Partial<ConstructorParameters<typeof OkData>[0]> = {}) =>
-  new OkData({ apiKey: TEST_KEY, baseUrl: api.url, timeoutMs: 5_000, sleep: async (ms) => { sleeps.push(ms); }, ...extra });
-
-beforeEach(async () => {
-  vi.stubEnv('OKDATA_API_KEY', '');
-  vi.stubEnv('OKDATA_BASE_URL', '');
-  api = await MockApi.start();
-  sleeps = [];
-  ok = client();
-});
-
-afterEach(async () => {
-  vi.unstubAllEnvs();
-  await api.close();
-});
-
-const last = () => api.requests[api.requests.length - 1]!;
+beforeAll(async () => { api = await startMock(); });
+afterAll(async () => { await api.close(); });
+beforeEach(() => { api.seen.length = 0; slept = []; });
 
 describe('requests', () => {
-  it('reads the key from the environment and sends auth, idempotency and user agent headers', async () => {
-    vi.stubEnv('OKDATA_API_KEY', TEST_KEY);
-    vi.stubEnv('OKDATA_BASE_URL', api.url);
-    const page = await new OkData().douyin.trends.list();
+  it('sends a GET with flat params, view and fields, and the standard headers', async () => {
+    api.handle(() => ({ body: pageBody([{ id: '1' }], { next: 'c1.abc' }) }));
+    const page = await client({ source: 'weekly-report', endUser: 'u_42' }).douyin.videos.search({
+      query: '露营装备', sort: 'latest', view: 'compact', fields: ['id', 'metrics.likes'],
+    });
+    const req = api.seen[0]!;
+    expect(req.method).toBe('GET');
+    expect(req.path).toBe('/v1/douyin/videos/search');
+    expect(Object.fromEntries(req.query)).toEqual({ query: '露营装备', sort: 'latest', view: 'compact', fields: 'id,metrics.likes' });
+    expect(req.headers.authorization).toBe(`Bearer ${KEY}`);
+    expect(req.headers['x-entry']).toBe('sdk');
+    expect(req.headers['x-source']).toBe('weekly-report');
+    expect(req.headers['x-end-user']).toBe('u_42');
+    expect(req.headers['user-agent']).toMatch(/^okdata-sdk-js\/\d/);
+    expect(req.headers['idempotency-key']).toMatch(/^[0-9a-f-]{36}$/);
+    expect(req.headers['x-max-price']).toBeUndefined();
     expect(page.kind).toBe('page');
-    expect(last().path).toBe('/v1/douyin/trends/list');
-    expect(last().headers.authorization).toBe(`Bearer ${TEST_KEY}`);
-    expect(last().headers['user-agent']).toBe(`okdata-js/${VERSION}`);
-    expect(String(last().headers['idempotency-key'])).toHaveLength(36);
-  });
-
-  it('never shows the key when the client is printed or serialised', () => {
-    expect(inspect(ok, { depth: 5 })).not.toContain(TEST_KEY);
-    expect(JSON.stringify(ok)).not.toContain(TEST_KEY);
-    expect(JSON.stringify(ok)).toContain('"key":"set"');
-  });
-
-  it('sends params, view and fields and returns a page', async () => {
-    api.script('/v1/douyin/videos/search', { body: okEnvelope('douyin.videos.search', { items: [{ id: '7' }], nextCursor: 'c2', amount: '0.02' }) });
-    const page = await ok.douyin.videos.search({ query: '露营装备 帐篷', sort: 'latest', view: 'compact', fields: ['id', 'metrics.likes'] });
-    expect(last().query).toEqual({ query: '露营装备 帐篷', sort: 'latest', view: 'compact', fields: 'id,metrics.likes' });
-    expect(page.items).toEqual([{ id: '7' }]);
-    expect(page.nextCursor).toBe('c2');
+    expect(page.items).toEqual([{ id: '1' }]);
+    expect(page.nextCursor).toBe('c1.abc');
     expect(page.hasMore).toBe(true);
+    expect(page.returned).toBe(1);
     expect(page.cost).toBe('0.02');
+    expect(page.balanceAfter).toBe('9.98');
+    expect(page.resultStatus).toBe('complete');
+    expect(page.idempotencyKey).toBe(req.headers['idempotency-key']);
   });
 
-  it('leaves out undefined params', async () => {
-    await ok.x.trends.list({ country: undefined });
-    expect(last().query).toEqual({});
+  it('sends maxPrice as X-Max-Price and never in the query', async () => {
+    api.handle(() => ({ body: itemBody({ id: '1' }) }));
+    await client().x.posts.get({ id: '1850000000000000000', maxPrice: '0.05' });
+    await client().x.posts.get({ url: 'https://x.com/a/status/1', maxPrice: 0.0003 });
+    expect(api.seen[0]!.headers['x-max-price']).toBe('0.05');
+    expect(api.seen[0]!.query.has('maxPrice')).toBe(false);
+    expect(api.seen[1]!.headers['x-max-price']).toBe('0.0003');
   });
 
-  it('returns an item for single-object endpoints and takes id or url', async () => {
-    api.script('/v1/tiktok/videos/get', { body: okEnvelope('tiktok.videos.get', { item: { id: '9', title: 't' } }) });
-    const result = await ok.tiktok.videos.get({ url: 'https://www.tiktok.com/@a/video/9' });
-    expect(result.kind).toBe('item');
-    expect(result.item.id).toBe('9');
-    expect(last().query).toEqual({ url: 'https://www.tiktok.com/@a/video/9' });
+  it('refuses a malformed maxPrice, view or fields before sending anything', async () => {
+    const ok = client();
+    await expect(ok.x.posts.get({ id: '1', maxPrice: '5 dollars' })).rejects.toThrow(TypeError);
+    await expect(ok.x.posts.get({ id: '1', maxPrice: '123456789' })).rejects.toThrow(/7 digits/);
+    await expect(ok.call('x.posts.get', { id: '1', view: 'huge' })).rejects.toThrow(/view must be/);
+    await expect(ok.x.posts.get({ id: '1', fields: ['metrics likes'] })).rejects.toThrow(/dotted names/);
+    expect(api.seen).toHaveLength(0);
   });
 
-  it('rejects a bad view or fields before sending anything', async () => {
-    await expect(ok.weibo.trends.list({ view: 'tiny' as never })).rejects.toThrow(TypeError);
-    await expect(ok.weibo.trends.list({ fields: 'id,,metrics likes' })).rejects.toThrow(TypeError);
-    await expect(ok.weibo.trends.list({ fields: [] })).rejects.toThrow(TypeError);
-    expect(api.requests).toHaveLength(0);
+  it('sends the batch form as POST with a JSON body and returns items and missing', async () => {
+    api.handle(() => ({ body: batchBody([{ id: '1' }], [{ id: 'missing', reason: 'not_found' }]) }));
+    const batch = await client().x.users.get({ ids: ['1', 'missing'], fields: 'id,name' });
+    const req = api.seen[0]!;
+    expect(req.method).toBe('POST');
+    expect(req.path).toBe('/v1/x/users/get');
+    expect(req.body).toEqual({ ids: ['1', 'missing'], fields: ['id', 'name'] });
+    expect(req.headers['content-type']).toBe('application/json');
+    expect(batch.kind).toBe('batch');
+    expect(batch.items).toEqual([{ id: '1' }]);
+    expect(batch.missing).toEqual([{ id: 'missing', reason: 'not_found' }]);
+    expect(batch.resultStatus).toBe('partial');
+  });
+
+  it('keeps the single form of a batch endpoint a GET', async () => {
+    api.handle(() => ({ body: itemBody({ id: '1', name: 'OpenAI' }) }));
+    const one = await client().x.users.get({ username: 'openai' });
+    expect(api.seen[0]!.method).toBe('GET');
+    expect(one.kind).toBe('item');
+    expect(one.item.name).toBe('OpenAI');
+  });
+
+  it('calls an id the SDK does not know as a GET on its path', async () => {
+    api.handle(() => ({ body: pageBody([]) }));
+    await client().call('newplatform.things.list', { limit: 5, flag: true, tags: ['a', 'b'] });
+    expect(api.seen[0]!.path).toBe('/v1/newplatform/things/list');
+    expect(Object.fromEntries(api.seen[0]!.query)).toEqual({ limit: '5', flag: 'true', tags: 'a,b' });
+    await expect(client().call('not an id')).rejects.toThrow(/not an endpoint id/);
+  });
+
+  it('reuses a given idempotency key', async () => {
+    api.handle(() => ({ body: itemBody({ id: '1' }, { replayed: true, amount: '0' }) }));
+    const res = await client().x.posts.get({ id: '1' }, { idempotencyKey: 'job-7-post-1' });
+    expect(api.seen[0]!.headers['idempotency-key']).toBe('job-7-post-1');
+    expect(res.replayed).toBe(true);
+    expect(res.cost).toBe('0');
   });
 });
 
-describe('errors and retries', () => {
-  it('throws API errors with the charge and retry advice, without retrying final ones', async () => {
-    api.script('/v1/douyin/videos/get', { status: 404, body: errorBody('not_found', { message: 'No such video' }) });
-    const err = await ok.douyin.videos.get({ id: '1' }).catch((e: unknown) => e);
+describe('free routes', () => {
+  it('reads the catalog and status without a key, the account with one', async () => {
+    api.handle((req) => ({ body: plainBody({ path: req.path }) }));
+    const ok = client();
+    expect(await ok.catalog()).toEqual({ path: '/v1/catalog' });
+    expect(await ok.status()).toEqual({ path: '/v1/catalog/status' });
+    expect(api.seen[0]!.headers.authorization).toBeUndefined();
+    expect(api.seen[1]!.headers.authorization).toBeUndefined();
+    await ok.account();
+    expect(api.seen[2]!.headers.authorization).toBe(`Bearer ${KEY}`);
+    expect(api.seen[2]!.headers['idempotency-key']).toBeUndefined();
+  });
+
+  it('looks up calls, kept results and keys, and usage', async () => {
+    api.handle((req) => (req.path.endsWith('/result') ? { body: pageBody([{ id: '1' }], { amount: '0', replayed: true }) } : { body: plainBody({ ok: true }) }));
+    const ok = client();
+    await ok.calls.get('0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20');
+    const kept = await ok.calls.result('0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20', { view: 'full', fields: ['id'] });
+    await ok.calls.byKey('job-7');
+    await ok.usage({ groupBy: ['day', 'capability'], since: '2026-11-01' });
+    expect(api.seen.map((s) => `${s.path}?${s.query}`)).toEqual([
+      '/v1/calls/0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20?',
+      '/v1/calls/0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20/result?view=full&fields=id',
+      '/v1/calls?idempotency_key=job-7',
+      '/v1/usage?group_by=day%2Ccapability&since=2026-11-01',
+    ]);
+    expect(kept.replayed).toBe(true);
+    expect(() => ok.calls.get('../etc')).toThrow(TypeError);
+  });
+});
+
+describe('errors', () => {
+  it('carries every field of the error body', async () => {
+    api.handle(() => errorReply('invalid_params', { param: 'sort', problems: ['sort must be one of: relevance, latest'] }));
+    const err = await client().douyin.videos.search({ query: 'x' }).catch((e: unknown) => e);
     expect(err).toBeInstanceOf(OkDataError);
-    expect(err).toMatchObject({ code: 'not_found', status: 404, charged: false, retry: 'no', retryable: false, message: 'No such video' });
-    expect(api.requests).toHaveLength(1);
-    expect(sleeps).toEqual([]);
+    const e = err as OkDataError;
+    expect(e.code).toBe('invalid_params');
+    expect(e.status).toBe(400);
+    expect(e.charged).toBe(false);
+    expect(e.retry).toBe('after_fix');
+    expect(e.requestId).toMatch(/^0000/);
+    expect(e.message).toBe('message for invalid_params');
+    expect(e.messageZh).toBe('invalid_params 的中文');
+    expect(e.problems).toEqual(['sort must be one of: relevance, latest']);
+    expect(e.param).toBe('sort');
+    expect(e.docsUrl).toContain('#invalid_params');
+    expect(e.idempotencyKey).toMatch(/^[0-9a-f-]{36}$/);
+    expect(api.seen).toHaveLength(1); // after_fix: never retried
   });
 
-  it('gets unauthorized without a key', async () => {
-    const anon = new OkData({ baseUrl: api.url });
-    await expect(anon.weibo.trends.list()).rejects.toMatchObject({ code: 'unauthorized' });
-    expect(last().headers.authorization).toBeUndefined();
+  it('reports a charged not_found with its amount, without retrying', async () => {
+    api.handle(() => ({ status: 404, body: { ...errorReply('not_found').body, charged: true, amount: '0.002' } }));
+    const e = (await client().x.posts.get({ id: '1' }).catch((x: unknown) => x)) as OkDataError;
+    expect(e.charged).toBe(true);
+    expect(e.amount).toBe('0.002');
+    expect(api.seen).toHaveLength(1);
   });
 
-  it('retries upstream errors with the same Idempotency-Key', async () => {
-    api.script('/v1/bilibili/trends/list',
-      { status: 503, body: errorBody('upstream_busy', { retry: 'yes' }) },
-      { status: 502, body: errorBody('upstream_failed', { retry: 'yes' }) });
-    await ok.bilibili.trends.list();
-    expect(api.requests).toHaveLength(3);
-    expect(new Set(api.requests.map((r) => r.headers['idempotency-key'])).size).toBe(1);
-    expect(sleeps).toHaveLength(2);
+  it('turns a non-okdata answer into bad_response', async () => {
+    api.handle(() => ({ status: 403, text: '<html>blocked</html>' }));
+    const e = (await client().x.posts.get({ id: '1' }).catch((x: unknown) => x)) as OkDataError;
+    expect(e.code).toBe('bad_response');
+    expect(e.status).toBe(403);
+    expect(e.retry).toBe('no');
   });
 
-  it('waits exactly what the server asks on rate_limited, and throws when it is too long', async () => {
-    api.script('/v1/weibo/trends/list', { status: 429, body: errorBody('rate_limited', { retry: 'yes', retryAfterSeconds: 2 }) });
-    await ok.weibo.trends.list();
-    expect(sleeps).toEqual([2000]);
+  it('never shows the key', () => {
+    const ok = client();
+    expect(JSON.stringify(ok)).not.toContain(KEY);
+    expect(ok.hasKey).toBe(true);
+    expect(() => new OkData({ apiKey: 'okd_ bad key' })).toThrow(/spaces/);
+    expect(() => new OkData({ apiKey: KEY, baseUrl: 'ftp://x' })).toThrow(/baseUrl/);
+    expect(() => new OkData({ apiKey: KEY, source: 'has space' })).toThrow(/source/);
+  });
+});
 
-    api.script('/v1/weibo/trends/list', { status: 429, body: errorBody('rate_limited', { retry: 'yes', retryAfterSeconds: 600 }) });
-    await expect(ok.weibo.trends.list()).rejects.toMatchObject({ code: 'rate_limited', retryAfterSeconds: 600 });
-    expect(sleeps).toEqual([2000]);
+describe('retries', () => {
+  it('retries retry=yes with the same Idempotency-Key and succeeds', async () => {
+    api.handle((_req, n) => (n < 2 ? errorReply('upstream_failed') : { body: itemBody({ id: '1' }) }));
+    const res = await client().x.posts.get({ id: '1' });
+    expect(res.item).toEqual({ id: '1' });
+    expect(api.seen).toHaveLength(3);
+    expect(new Set(api.seen.map((s) => s.headers['idempotency-key'])).size).toBe(1);
+    expect(slept).toHaveLength(2);
   });
 
-  it('gives up after maxRetries', async () => {
-    const busy = { status: 503, body: errorBody('upstream_busy', { retry: 'yes' }) };
-    api.script('/v1/douyin/trends/list', busy, busy, busy, busy);
-    await expect(ok.douyin.trends.list()).rejects.toMatchObject({ code: 'upstream_busy' });
-    expect(api.requests).toHaveLength(ok.maxRetries + 1);
+  it('stops after maxRetries and throws the last error', async () => {
+    api.handle(() => errorReply('upstream_busy'));
+    const e = (await client({ maxRetries: 1 }).x.posts.get({ id: '1' }).catch((x: unknown) => x)) as OkDataError;
+    expect(e.code).toBe('upstream_busy');
+    expect(e.charged).toBe(false);
+    expect(api.seen).toHaveLength(2);
   });
 
-  it('retries a timeout with the caller key and reports the free replay', async () => {
-    api.script('/v1/youtube/videos/transcript/get',
-      { status: 504, body: errorBody('timeout', { retry: 'same_key', charged: null }) },
-      { body: okEnvelope('youtube.videos.transcript.get', { item: { video_id: 'v', text: 'hi' }, amount: '0', replayed: true }) });
-    const result = await ok.youtube.videos.transcript.get({ id: 'v' }, { idempotencyKey: 'my-key-1' });
-    expect(result.replayed).toBe(true);
-    expect(result.cost).toBe('0');
-    expect(api.requests.map((r) => r.headers['idempotency-key'])).toEqual(['my-key-1', 'my-key-1']);
+  it('waits retry_after_seconds, and throws when the wait is longer than allowed', async () => {
+    api.handle((_req, n) => (n === 0 ? errorReply('rate_limited', { retry_after_seconds: 2, reason: 'rate' }) : { body: itemBody({ id: '1' }) }));
+    await client().x.posts.get({ id: '1' });
+    expect(slept).toEqual([2000]);
+    api.handle(() => errorReply('cost_cap_exceeded', { retry_after_seconds: 36_000 }));
+    const e = (await client().x.posts.get({ id: '1' }).catch((x: unknown) => x)) as OkDataError;
+    expect(e.code).toBe('cost_cap_exceeded');
+    expect(e.retryAfterSeconds).toBe(36_000);
   });
 
-  it('retries a dropped connection', async () => {
-    api.script('/v1/x/trends/list', { drop: true });
-    await ok.x.trends.list({ country: 'US' });
-    expect(api.requests).toHaveLength(2);
-    expect(api.requests[0]!.headers['idempotency-key']).toBe(api.requests[1]!.headers['idempotency-key']);
+  it('never retries retry=no', async () => {
+    api.handle(() => errorReply('unauthorized', { reason: 'key_disabled' }));
+    const e = (await client().x.posts.get({ id: '1' }).catch((x: unknown) => x)) as OkDataError;
+    expect(e.code).toBe('unauthorized');
+    expect(e.reason).toBe('key_disabled');
+    expect(api.seen).toHaveLength(1);
   });
 
-  it('throws a connection error when nothing answers', async () => {
-    const dead = client({ baseUrl: 'http://127.0.0.1:9', maxRetries: 1 });
-    const err = await dead.weibo.trends.list().catch((e: unknown) => e);
-    expect(err).toBeInstanceOf(OkDataConnectionError);
-    expect(err).toMatchObject({ code: 'connection_error', charged: null, retryable: true });
-    expect(sleeps).toHaveLength(1);
+  it('tries retry=once one more time only', async () => {
+    api.handle(() => ({ status: 502, body: { ...errorReply('upstream_failed').body, retry: 'once' } }));
+    await client({ maxRetries: 5 }).x.posts.get({ id: '1' }).catch(() => undefined);
+    expect(api.seen).toHaveLength(2);
   });
 
-  it('waits for an in-flight call after a lost answer, with the same key', async () => {
-    const inFlight = { status: 429, body: errorBody('rate_limited', { retry: 'yes', retryAfterSeconds: 1 }) };
-    api.script('/v1/x/trends/list', { drop: true }, inFlight, inFlight, inFlight,
-      { body: okEnvelope('x.trends.list', { items: [], amount: '0', replayed: true }) });
-    const page = await ok.x.trends.list();
-    expect(page.replayed).toBe(true);
-    expect(api.requests).toHaveLength(5);
-    expect(new Set(api.requests.map((r) => r.headers['idempotency-key'])).size).toBe(1);
+  it('resends call_in_progress and settlement_unknown with the same key', async () => {
+    api.handle((_req, n) => (n === 0 ? errorReply('settlement_unknown') : n === 1 ? errorReply('call_in_progress', { retry_after_seconds: 1 }) : { body: itemBody({ id: '1' }, { replayed: true, amount: '0' }) }));
+    const res = await client().x.posts.get({ id: '1' });
+    expect(res.replayed).toBe(true);
+    expect(new Set(api.seen.map((s) => s.headers['idempotency-key'])).size).toBe(1);
   });
 
-  it('marks the charge unknown when the earlier attempt is still running', async () => {
-    const inFlight = { status: 429, body: errorBody('rate_limited', { retry: 'yes', retryAfterSeconds: 1 }) };
-    api.script('/v1/x/trends/list', { drop: true }, ...Array(20).fill(inFlight));
-    await expect(ok.x.trends.list()).rejects.toMatchObject({ code: 'rate_limited', charged: null });
+  it('marks the charge unknown when an earlier attempt may have run', async () => {
+    api.handle((_req, n) => (n === 0 ? { destroy: true } : errorReply('upstream_failed')));
+    const e = (await client({ maxRetries: 1 }).x.posts.get({ id: '1' }).catch((x: unknown) => x)) as OkDataError;
+    expect(e.code).toBe('upstream_failed');
+    expect(e.charged).toBeNull();
+    expect(e.idempotencyKey).toBe(api.seen[0]!.headers['idempotency-key']);
   });
 
-  it('keeps a plain rate limit as not charged', async () => {
-    api.script('/v1/x/trends/list', ...Array(5).fill({ status: 429, body: errorBody('rate_limited', { retry: 'yes', retryAfterSeconds: 1 }) }));
-    await expect(ok.x.trends.list()).rejects.toMatchObject({ code: 'rate_limited', charged: false });
-    expect(api.requests).toHaveLength(ok.maxRetries + 1);
+  it('retries a dropped connection, then reports connection_error with charged unknown', async () => {
+    api.handle(() => ({ destroy: true }));
+    const e = (await client({ maxRetries: 2 }).x.posts.get({ id: '1' }).catch((x: unknown) => x)) as OkDataError;
+    expect(e).toBeInstanceOf(OkDataConnectionError);
+    expect(e.code).toBe('connection_error');
+    expect(e.charged).toBeNull();
+    expect(api.seen).toHaveLength(3);
   });
 
-  it('makes a key when given an empty one, so retries stay safe', async () => {
-    api.script('/v1/x/trends/list', { status: 503, body: errorBody('upstream_busy', { retry: 'yes' }) });
-    await ok.x.trends.list({}, { idempotencyKey: '' });
-    expect(String(api.requests[0]!.headers['idempotency-key'])).toHaveLength(36);
-    expect(api.requests[0]!.headers['idempotency-key']).toBe(api.requests[1]!.headers['idempotency-key']);
-  });
-
-  it('refuses a malformed key without echoing it', () => {
-    const bad = 'okd_abc\ndef';
-    expect(() => new OkData({ apiKey: bad })).toThrow(TypeError);
-    try { new OkData({ apiKey: bad }); } catch (e) { expect(String(e)).not.toContain('okd_abc'); }
-  });
-
-  it('treats a non-JSON gateway error as retryable', async () => {
-    api.script('/v1/weibo/trends/list', { status: 502, raw: '<html>bad gateway</html>' });
-    await ok.weibo.trends.list();
-    expect(api.requests).toHaveLength(2);
+  it('gives up on a slow answer with client_timeout', async () => {
+    api.handle(() => ({ delayMs: 300, body: itemBody({ id: '1' }) }));
+    const e = (await client({ maxRetries: 0, timeoutMs: 50 }).x.posts.get({ id: '1' }).catch((x: unknown) => x)) as OkDataError;
+    expect(e.code).toBe('client_timeout');
+    expect(e.retry).toBe('same_key');
   });
 
   it('does not retry when the caller aborts', async () => {
-    const controller = new AbortController();
-    controller.abort();
-    await expect(ok.weibo.trends.list({}, { signal: controller.signal })).rejects.toThrow();
-    expect(sleeps).toEqual([]);
-  });
-});
-
-describe('paging, generic calls and free routes', () => {
-  it('follows cursors until there are no more pages', async () => {
-    const path = '/v1/tiktok/videos/comments/list';
-    api.script(path,
-      { body: okEnvelope('tiktok.videos.comments.list', { items: [{ id: 'a' }], nextCursor: 'p2' }) },
-      { body: okEnvelope('tiktok.videos.comments.list', { items: [{ id: 'b' }], nextCursor: 'p3' }) },
-      { body: okEnvelope('tiktok.videos.comments.list', { items: [{ id: 'c' }] }) });
-    const ids: unknown[] = [];
-    for await (const page of ok.pages('tiktok.videos.comments.list', { id: 'v1' }, { maxPages: 5 })) ids.push(page.items[0]!.id);
-    expect(ids).toEqual(['a', 'b', 'c']);
-    expect(api.requests.map((r) => r.query.cursor)).toEqual([undefined, 'p2', 'p3']);
-    expect(new Set(api.requests.map((r) => r.headers['idempotency-key'])).size).toBe(3);
+    api.handle(() => ({ delayMs: 300, body: itemBody({ id: '1' }) }));
+    const ctl = new AbortController();
+    setTimeout(() => ctl.abort(), 20);
+    await expect(client().x.posts.get({ id: '1' }, { signal: ctl.signal })).rejects.toThrow(/abort/i);
+    expect(api.seen).toHaveLength(1);
   });
 
-  it('stops at maxPages', async () => {
-    api.script('/v1/x/posts/search', ...[0, 1, 2, 3].map((i) => ({ body: okEnvelope('x.posts.search', { items: [{ id: String(i) }], nextCursor: `c${i}` }) })));
-    let n = 0;
-    for await (const _ of ok.pages('x.posts.search', { query: 'okdata' }, { maxPages: 2 })) n += 1;
-    expect(n).toBe(2);
-    expect(api.requests).toHaveLength(2);
+  it('resends a garbled 200 with the same key (it may have run), and marks the charge unknown if it stays garbled', async () => {
+    api.handle((_req, n) => (n === 0 ? { status: 200, text: '{"code":"ok","data":' } : { body: itemBody({ id: '1' }, { replayed: true, amount: '0' }) }));
+    expect((await client().x.posts.get({ id: '1' })).replayed).toBe(true);
+    expect(new Set(api.seen.map((s) => s.headers['idempotency-key'])).size).toBe(1);
+    api.handle(() => ({ status: 200, text: 'truncated' }));
+    const e = (await client({ maxRetries: 1 }).x.posts.get({ id: '1' }).catch((x: unknown) => x)) as OkDataError;
+    expect([e.code, e.charged, e.retry]).toEqual(['bad_response', null, 'same_key']);
   });
 
-  it('calls any endpoint by id and refuses things that are not ids', async () => {
-    expect((await ok.call('weibo.users.get', { id: '123' })).kind).toBe('item');
-    await expect(ok.call('weibo.nothing.here')).rejects.toMatchObject({ code: 'unknown_endpoint' });
-    expect(last().path).toBe('/v1/weibo/nothing/here');
-    expect(() => ok.call('../../etc/passwd')).toThrow(TypeError);
-  });
-
-  it('reads the free routes and the account', async () => {
-    expect(await ok.status()).toMatchObject({ summary: { available: Object.keys(ENDPOINTS).length } });
-    expect(await ok.catalog()).toMatchObject({ revision: '0.1.0' });
-    expect(await ok.account()).toMatchObject({ balance: '0.9' });
-    expect(last().headers['idempotency-key']).toBeUndefined();
-  });
-
-  it('works out the most a job can cost without floats', () => {
-    expect(maxCost('douyin.videos.search', 3)).toBe('0.06');
-    expect(maxCost('wechat_mp.accounts.search')).toBe('0.58');
-    expect(maxCost('x.posts.get', 7)).toBe('0.007');
-    expect(() => maxCost('nope.nothing')).toThrow(TypeError);
-  });
-});
-
-describe('generated endpoints', () => {
-  const published = JSON.parse(readFileSync(new URL('../../docs/catalog.json', import.meta.url), 'utf8')) as {
-    revision: string;
-    endpoints: Array<{ id: string; path: string; method: string; price: string; maxCharge: string; list: boolean; params: Array<{ name: string; required: boolean; example?: unknown }> }>;
-  };
-
-  it('match the published catalog', () => {
-    expect(CATALOG_REVISION).toBe(published.revision);
-    expect(Object.keys(ENDPOINTS).sort()).toEqual(published.endpoints.map((e) => e.id).sort());
-    for (const e of published.endpoints) {
-      const info = ENDPOINTS[e.id as keyof typeof ENDPOINTS];
-      expect([info.path, info.method, info.price, info.maxCharge, info.list]).toEqual([e.path, e.method, e.price, e.maxCharge, e.list]);
-    }
-  });
-
-  it.each(published.endpoints.map((e) => [e.id, e] as const))('%s has a typed method that hits its path', async (_id, e) => {
-    const parts = e.id.split('.');
-    const action = parts.pop()!;
-    let target: Record<string, unknown> = ok as unknown as Record<string, unknown>;
-    for (const part of parts) target = target[part] as Record<string, unknown>;
-    const args: Record<string, string> = Object.fromEntries(e.params.filter((p) => p.required).map((p) => [p.name, String(p.example ?? 'x')]));
-    if (Object.keys(args).length === 0 && e.params.some((p) => p.name === 'id')) args.id = '1';
-    const result = await (target[action] as (p: object) => Promise<{ kind: string }>)(args);
-    expect(result.kind).toBe(e.list ? 'page' : 'item');
-    expect(last().path).toBe(e.path);
-    expect(last().query).toEqual(args);
+  it('retries a 502 proxy page as bad_response', async () => {
+    api.handle((_req, n) => (n === 0 ? { status: 502, text: 'Bad Gateway' } : { body: itemBody({ id: '1' }) }));
+    const res = await client().x.posts.get({ id: '1' });
+    expect(res.item).toEqual({ id: '1' });
+    expect(api.seen).toHaveLength(2);
   });
 });

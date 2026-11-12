@@ -1,103 +1,112 @@
-# okdata for TypeScript and JavaScript
+# @okdata/sdk
 
-Public data from Douyin, Xiaohongshu (RedNote), WeChat Official Accounts, Bilibili, Weibo, TikTok, X and YouTube,
-for AI agents and scripts. One client, one result shape, pay per call; failed calls are free.
+Social data for AI agents, paid per call: Douyin, Xiaohongshu, WeChat, Bilibili, Weibo, Kuaishou, Zhihu,
+TikTok, X, YouTube, Instagram, Reddit and more, as one API with one envelope and one error format.
+Every endpoint is a typed method generated from the okdata catalog, with its price in its doc comment.
+No runtime dependencies; Node 20.3+ (or any runtime with `fetch` and `AbortSignal.any`).
 
-```bash
-npm install okdata
+```sh
+npm install @okdata/sdk
+export OKDATA_API_KEY=okd_...   # https://okdata.online/console/
 ```
 
-Built on `fetch` with no dependencies. Node 20+, Bun and Deno. Get a key at
-[okdata.online](https://okdata.online/signup/?src=npm-okdata) and put it in `OKDATA_API_KEY`. Run it on a server:
-a key in a browser bundle is a key anyone can read.
+## First call
 
-## Use it
+The Playground's TypeScript tab shows the raw `fetch`; with the SDK the same call is:
 
 ```ts
-import { OkData } from 'okdata';
+import { OkData } from '@okdata/sdk';
 
-const ok = new OkData(); // reads OKDATA_API_KEY; new OkData({ apiKey: 'okd_...' }) also works
-
-// Lists come back as a page: items, nextCursor, hasMore, cost
-const page = await ok.xiaohongshu.notes.search({ query: '露营 装备', sort: 'popular' });
-for (const note of page.items) console.log(note.metrics.likes, note.title, note.url);
-console.log(page.cost);       // '0.02' (USD, a decimal string)
-console.log(page.nextCursor); // pass back as cursor for the next page (a new call)
-
-// Single objects come back as an item
-const { item: video } = await ok.youtube.videos.get({ url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
-const { item: transcript } = await ok.youtube.videos.transcript.get({ id: 'dQw4w9WgXcQ', lang: 'en' });
-console.log(transcript.text.slice(0, 200));
+const ok = new OkData(); // reads OKDATA_API_KEY; new OkData({ apiKey: 'okd_...' }) works too
+const page = await ok.douyin.videos.search({ query: '露营装备', sort: 'latest', maxPrice: '0.05' });
+for (const row of page.items) console.log(row.id, row.metrics.likes, row.text.slice(0, 60));
+console.log('cost: $' + page.cost);
 ```
 
-Every endpoint is a method named after its id: `douyin.videos.comments.list` is
-`ok.douyin.videos.comments.list({ id })`. Parameters and results are typed, enums are unions, and endpoints that
-read one object take `{ id }` or `{ url }`, never both. Hover a method to see its price.
+Parameters are flat and named as in the API (`query`, `id`, `url`, `cursor`, ...), typed from the
+catalog: required ones are required, enums are unions, "id or url" is exactly one of the two. Every
+method also takes `view` (`compact` | `standard` | `full`, same price), `fields` (`['id', 'text']` or
+`'id,text'`) and `maxPrice` (sent as `X-Max-Price`: a call that could cost more is refused before it
+runs, never charged). The second argument takes `{ idempotencyKey, signal, timeoutMs }`. Any endpoint
+also works by id, typed: `ok.call('weibo.trends.list', {})`; ids newer than your SDK version work too.
 
-Any endpoint, including ones newer than your SDK version, also works by id:
+What comes back: a `Page` (list endpoints: `items`, `nextCursor`, `hasMore`), an `Item` (one object:
+`item`) or a `Batch` (`ids: [...]` on endpoints that take a list: `items`, `missing`). Each has
+`cost`, `balanceAfter`, `requestId`, `resultStatus`, `replayed`, `warnings`, `meta` and the `raw`
+envelope. Objects are typed (`Post`, `Account`, `Comment`, ...); fields outside `view=compact` are
+optional.
+
+## Paging within a budget
 
 ```ts
-const result = await ok.call('weibo.trends.list');
-```
-
-## Spend on purpose
-
-```ts
-import { maxCost } from 'okdata';
-
-console.log(maxCost('douyin.videos.search', 5)); // '0.1': say this before a big job
-
-for await (const page of ok.pages('tiktok.videos.comments.list', { id: '7305085486984858894' }, { maxPages: 5 })) {
-  // each page is its own call and its own charge; stops early when there are no more
+for await (const page of ok.pages('douyin.videos.comments.list', { id: '7301234567890123456' }, { maxPages: 5, maxSpend: '0.01' })) {
+  console.log(page.items.length, page.cost);
 }
+
+const items = ok.items('x.posts.search', { query: 'claude code' }, { maxItems: 200, maxSpend: '0.05' });
+for await (const post of items) console.log(post.text);
+console.log(items.spent, items.stopReason); // '0.03', 'max_items' | 'max_spend' | 'end' | 'balance' | 'max_pages'
 ```
 
-`view: 'compact'` drops null fields and `fields: ['id', 'text', 'metrics.likes']` keeps only what you list, which
-keeps results small when an agent reads them (treat such results as `Partial<...>`).
+Each page is a separate, separately charged call. Before each page the pager adds what that page could
+cost at most (the endpoint's `maxCharge`) and stops if the total would pass `maxSpend`; each call also
+carries `X-Max-Price` set to what is left, so the server refuses (free) anything dearer.
 
-## Errors and retries
+## Retries and idempotency
 
-Errors throw `OkDataError` with `code`, `status`, `charged`, `retry`, `retryAfterSeconds` and `requestId`:
+Every paid call gets an `Idempotency-Key`, reused by its retries, so a retry is never charged twice.
+Retries follow the error body: `retry` `yes` / `same_key` are retried (after `retry_after_seconds` when
+given; a wait longer than `maxRetryDelayMs` throws instead), `once` gets one more try, `no` and
+`after_fix` are never retried. Defaults: `maxRetries: 2`, `timeoutMs: 65000` per attempt.
+
+## Errors
 
 ```ts
-import { OkDataError } from 'okdata';
+import { OkDataError } from '@okdata/sdk';
 
 try {
-  await ok.douyin.videos.get({ id: '0' });
+  await ok.x.posts.get({ id: '1850000000000000000' });
 } catch (err) {
-  if (err instanceof OkDataError) console.log(err.code, err.charged, err.retry); // not_found false no
+  if (!(err instanceof OkDataError)) throw err;
+  err.code; err.charged; err.retry; err.requestId; // branch on code, never on message
+  err.message; err.messageZh; err.problems; err.param; err.reason; err.retryAfterSeconds;
 }
 ```
 
-The client retries `rate_limited`, `upstream_busy`, `upstream_failed`, `internal_error`, `timeout` and network
-failures (2 retries by default, exponential backoff, and exactly the wait the server asks for on a 429). Every paid
-call carries an `Idempotency-Key`, made for you unless you pass `{ idempotencyKey }`, and retries reuse it, so a
-retry is never charged twice: a call that went through before a timeout comes back as a free replay
-(`result.replayed`). If the first attempt is still running, the client waits for it; if it gives up first, the error
-has `charged: null`.
+`charged` is `false` for almost every error, `true` for a `not_found` the endpoint charges (`amount`
+says how much) and `null` when it is not known yet (a lost answer, `settlement_unknown`): look it up
+with `ok.calls.get(err.requestId)` or `ok.calls.byKey(err.idempotencyKey)`. A lost connection throws
+`OkDataConnectionError` (`connection_error` or `client_timeout`, `charged: null`). The codes are in
+`ERROR_CODES` and at https://okdata.online/docs/errors/.
 
-`OkDataConnectionError` means no answer came back; `charged` is `null` because it is not known. Look the call up
-with `ok.getCall(requestId)` or send it again with the same `idempotencyKey`.
+## Free routes
+
+`ok.catalog()`, `ok.status()` (no key needed), `ok.account()` (balance, key limits, rate tier),
+`ok.usage({ groupBy: ['day', 'capability'] })`, `ok.calls.get(requestId)`,
+`ok.calls.result(requestId, { view: 'full' })` (a result kept 24 h, read again for free) and
+`ok.calls.byKey(idempotencyKey)`. `ok.request(method, path, init)` reaches any other route.
 
 ## Options
 
-| Option | Default | |
-|---|---|---|
-| `apiKey` | `process.env.OKDATA_API_KEY` | keys start with `okd_`; never commit one |
-| `baseUrl` | `OKDATA_BASE_URL` or `https://api.okdata.online` | |
-| `timeoutMs` | `60000` | per attempt; some WeChat endpoints are slow |
-| `maxRetries` | `2` | `0` turns retries off |
-| `maxRetryDelayMs` | `8000` | a server wait longer than this throws instead of sleeping |
-| `fetch` | `globalThis.fetch` | pass your own for proxies |
+`new OkData({ apiKey, baseUrl, timeoutMs, maxRetries, retryBaseMs, maxRetryDelayMs, source, endUser, userAgent, fetch })`.
+`baseUrl` defaults to `OKDATA_BASE_URL`, then `https://api.okdata.online`. `source` and `endUser` are
+sent as `X-Source` and `X-End-User` for your usage figures; every call carries `X-Entry: sdk`. Keep keys
+on a server: a key in a browser bundle is a key anyone can read.
 
-Per call: `{ idempotencyKey, signal, timeoutMs }` as the second argument. Also: `ok.account()` (balance),
-`ok.status()` and `ok.catalog()` (free, no key), `ENDPOINTS` (every endpoint's path, price and page size).
+## Development
 
-## Links
+This directory is exported from the okdata monorepo. `src/generated/` (the typed methods, models and
+the error table) is generated there from the endpoint catalog and committed here, so the package builds
+on its own; please do not edit it by hand. Issues and pull requests on the hand-written files are welcome.
 
-- Every endpoint, with parameters, fields and prices: <https://okdata.online/apis/>
-- Errors: <https://github.com/okdataapi/okdata/blob/main/docs/errors.md>
-- MCP server for agents: `https://api.okdata.online/mcp`
-- Source and issues: <https://github.com/okdataapi/okdata>
+In the repository root (one npm workspace for `typescript/` and `cli/`):
 
-MIT licence. okdata is not affiliated with the platforms it reads.
+```sh
+npm install
+npm run typecheck -w typescript
+npm test -w typescript          # unit tests against a local mock server: no key, no network
+npm run build -w typescript     # dist/
+OKDATA_LIVE_KEY=okd_... npm test -w typescript   # adds a live smoke test of the free routes only
+```
+
+MIT licensed.

@@ -1,0 +1,51 @@
+{
+  "name": "okdata",
+  "version": "0.1.0",
+  "description": "okdata command line: find and call social-data endpoints (Douyin, Xiaohongshu, WeChat, TikTok, X, YouTube and more), check your balance, log in from the terminal and set up the okdata MCP server in Claude Code, Cursor or Codex.",
+  "type": "module",
+  "bin": {
+    "okdata": "./dist/bin.js"
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "engines": {
+    "node": ">=20.3"
+  },
+  "scripts": {
+    "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "prepublishOnly": "npm run typecheck && npm run test && npm run build"
+  },
+  "keywords": [
+    "okdata",
+    "cli",
+    "mcp",
+    "social media api",
+    "ai agents",
+    "douyin",
+    "xiaohongshu",
+    "tiktok",
+    "twitter",
+    "youtube",
+    "claude code",
+    "cursor",
+    "codex"
+  ],
+  "homepage": "https://okdata.online/docs/cli/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okdataapi/okdata.git",
+    "directory": "cli"
+  },
+  "bugs": "https://github.com/okdataapi/okdata/issues",
+  "license": "MIT",
+  "author": "okdata <hello@okdata.online>",
+  "dependencies": {
+    "@okdata/sdk": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8"
+  }
+}

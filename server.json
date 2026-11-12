@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "online.okdata/mcp",
   "title": "okdata",
-  "description": "Social data for agents: Douyin, Xiaohongshu, WeChat, Bilibili, Weibo, TikTok, X, YouTube. Per call.",
-  "version": "0.1.0",
+  "description": "Social data for AI agents: Douyin, Xiaohongshu, WeChat, TikTok, X, YouTube, more. Pay per call.",
+  "version": "1.0.0",
   "websiteUrl": "https://okdata.online/mcp/",
   "repository": {
     "url": "https://github.com/okdataapi/okdata",
@@ -13,7 +13,9 @@
     {
       "src": "https://okdata.online/logo-512.png",
       "mimeType": "image/png",
-      "sizes": ["512x512"]
+      "sizes": [
+        "512x512"
+      ]
     }
   ],
   "remotes": [
@@ -23,15 +25,16 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Your okdata API key as \"Bearer okd_...\". find and describe work without it; call needs it.",
+          "description": "Your okdata API key as a bearer token (make one at https://okdata.online/console/). find, describe and account status work without it.",
+          "value": "Bearer {okdata_api_key}",
           "isRequired": false,
           "isSecret": true,
-          "value": "Bearer {okdata_api_key}",
           "variables": {
             "okdata_api_key": {
-              "description": "okdata API key, starts with okd_ (get one at okdata.online)",
+              "description": "okdata API key, starts with okd_",
               "isRequired": true,
-              "isSecret": true
+              "isSecret": true,
+              "placeholder": "okd_..."
             }
           }
         }

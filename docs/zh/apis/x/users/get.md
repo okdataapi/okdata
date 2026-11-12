@@ -1,27 +1,29 @@
 # X 账号信息 API
 
-> 账号的粉丝、关注、发帖数、简介和认证。
+> 按用户名或数字 ID 取一个账号，或一次按 ID 取最多 100 个：粉丝、关注、发帖数、简介和认证。没找到的 ID 列在 data.missing 里，不收费。
 
 网页版：https://okdata.online/zh/apis/x/users/get/
 
 - **接口**：`GET /v1/x/users/get`
 - **ID**：`x.users.get`
-- **价格**：$0.001/次
+- **价格**：$0.0004/条 · 每次最多 $0.04
 - **返回**：一个 Account 对象（`data.item`）
-- **状态**：公测
+- **状态**：预览
 - **适合**：找博主、竞品监控
 
 ## 价格
 
-每次调用 $0.001，返回一个结果。查 1,000 次共 $1.00。失败的调用不扣费。
+按返回条数计费：每条 $0.0004，每次至少按 1 条、最多按 $0.04（100 条）收费。1,000 个账号共 $0.40。空页按 1 条计费；失败的调用不扣费。
 
 ## 参数
 
 | 参数名 | 类型 | 必填 | 默认值 | 说明 |
 |---|---|---|---|---|
-| `username` | string | 是 |  | 用户名，带不带 @ 都行。（例：`openai`） |
+| `id` | string | 否 |  | 账号的数字 ID。id、username、ids 三选一。（例：`4398626122`） |
+| `username` | string | 否 |  | 用户名，带不带 @ 都行。id、username、ids 三选一。（例：`openai`） |
+| `ids` | string[] | 否 |  | 最多 100 个账号数字 ID（POST 的 JSON 里给数组，GET 里用逗号分隔）。id、username、ids 三选一。（例：`4398626122,11348282`） |
 | `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |
-| `fields` | string | 否 |  | 只保留这些字段，逗号分隔，用来省 token。 |
+| `fields` | string[] | 否 |  | 只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。 |
 
 cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs/requests/)。
 
@@ -51,7 +53,7 @@ cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs
 ```bash
 curl -G "https://api.okdata.online/v1/x/users/get" \
   -H "Authorization: Bearer $OKDATA_API_KEY" \
-  --data-urlencode 'username=openai'
+  --data-urlencode 'id=4398626122'
 ```
 
 ### Python
@@ -63,7 +65,7 @@ import requests
 resp = requests.get(
     "https://api.okdata.online/v1/x/users/get",
     headers={"Authorization": f"Bearer {os.environ['OKDATA_API_KEY']}"},
-    params={"username": "openai"},
+    params={"id": "4398626122"},
     timeout=60,
 )
 body = resp.json()
@@ -79,7 +81,7 @@ print("cost: $" + body["meta"]["billing"]["amount"])
 
 ```ts
 const url = new URL('https://api.okdata.online/v1/x/users/get');
-url.searchParams.set('username', "openai");
+url.searchParams.set('id', "4398626122");
 
 const res = await fetch(url, {
   headers: {
@@ -100,10 +102,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "x.users.get",
-    "params": {
-      "username": "openai"
-    }
+    "capability": "x.users.get",
+    "id": "4398626122"
   }
 }
 ```
@@ -137,9 +137,9 @@ console.log('cost: $' + body.meta.billing.amount);
   "meta": {
     "capability": "x.users.get",
     "billing": {
-      "amount": "0.001",
+      "amount": "0.0004",
       "currency": "USD",
-      "balance_after": "9.999"
+      "balance_after": "9.9996"
     },
     "unavailable": {},
     "cached": false,
@@ -151,13 +151,13 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## 错误
 
-所有错误同一种结构，都不扣费；只有超时的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
+所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。错误不扣费；只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
 
 ## 常见问题
 
 ### X 账号信息接口多少钱？
 
-每次调用 $0.001，返回一个结果。查 1,000 次共 $1.00。失败的调用不扣费。
+按返回条数计费：每条 $0.0004，每次至少按 1 条、最多按 $0.04（100 条）收费。1,000 个账号共 $0.40。空页按 1 条计费；失败的调用不扣费。
 
 ### 需要X（推特）账号、Cookie 或扫码登录吗？
 
@@ -173,7 +173,22 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## X（推特）的其他接口
 
-- [X 帖子详情](https://okdata.online/zh/apis/x/posts/get/)：$0.001/次
-- [X 帖子搜索](https://okdata.online/zh/apis/x/posts/search/)：$0.006/次 · 每页约 20 条帖子
-- [X 账号帖子列表](https://okdata.online/zh/apis/x/users/posts/list/)：$0.006/次 · 每页约 20 条帖子
+- [X 帖子详情](https://okdata.online/zh/apis/x/posts/get/)：$0.0003/次
+- [X 帖子搜索](https://okdata.online/zh/apis/x/posts/search/)：$0.002/次 · 每页约 20 条帖子
+- [X 账号帖子列表](https://okdata.online/zh/apis/x/users/posts/list/)：$0.002/次 · 每页约 20 条帖子
 - [X 趋势](https://okdata.online/zh/apis/x/trends/list/)：$0.009/次 · 每页约 30 条榜单
+- [X 帖子回复](https://okdata.online/zh/apis/x/posts/replies/list/)：$0.002/次 · 每页约 35 条帖子
+- [X 帖子引用](https://okdata.online/zh/apis/x/posts/quotes/list/)：$0.0003/条 · 每次最多 $0.006
+- [X 帖子转推用户](https://okdata.online/zh/apis/x/posts/retweeters/list/)：$0.002/次 · 每页约 100 个账号
+- [X 长文](https://okdata.online/zh/apis/x/posts/article/get/)：$0.002/次
+- [X 对话串](https://okdata.online/zh/apis/x/threads/posts/list/)：$0.0003/条 · 每次最多 $0.015
+- [X 账号搜索](https://okdata.online/zh/apis/x/users/search/)：$0.0004/条 · 每次最多 $0.008
+- [X 账号粉丝](https://okdata.online/zh/apis/x/users/followers/list/)：$0.0001/条 · 每次最多 $0.02
+- [X 账号关注](https://okdata.online/zh/apis/x/users/following/list/)：$0.0001/条 · 每次最多 $0.02
+- [X 账号被提及](https://okdata.online/zh/apis/x/users/mentions/list/)：$0.0003/条 · 每次最多 $0.006
+- [X 列表帖子](https://okdata.online/zh/apis/x/lists/posts/list/)：$0.002/次 · 每页约 100 条帖子
+- [X 列表成员](https://okdata.online/zh/apis/x/lists/members/list/)：$0.0004/条 · 每次最多 $0.008
+- [X 列表关注者](https://okdata.online/zh/apis/x/lists/followers/list/)：$0.0004/条 · 每次最多 $0.008
+- [X 社群资料](https://okdata.online/zh/apis/x/communities/get/)：$0.0004/次
+- [X 社群帖子](https://okdata.online/zh/apis/x/communities/posts/list/)：$0.0003/条 · 每次最多 $0.006
+- [X 社群成员](https://okdata.online/zh/apis/x/communities/members/list/)：$0.0004/条 · 每次最多 $0.008

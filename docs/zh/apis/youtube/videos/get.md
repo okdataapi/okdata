@@ -6,14 +6,14 @@
 
 - **接口**：`GET /v1/youtube/videos/get`
 - **ID**：`youtube.videos.get`
-- **价格**：$0.004/次
+- **价格**：$0.002/次
 - **返回**：一个 Post 对象（`data.item`）
-- **状态**：公测
+- **状态**：预览
 - **适合**：竞品监控
 
 ## 价格
 
-每次调用 $0.004，返回一个结果。查 1,000 次共 $4.00。失败的调用不扣费。
+每次调用 $0.002，返回一个结果。查 1,000 次共 $2.00。失败的调用不扣费。
 
 ## 参数
 
@@ -22,7 +22,7 @@
 | `id` | string | 否 |  | 视频 ID。id 和 url 二选一。（例：`dQw4w9WgXcQ`） |
 | `url` | string | 否 |  | 分享链接或网页地址，会从中解析出 ID。（例：`https://www.youtube.com/watch?v=dQw4w9WgXcQ`） |
 | `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |
-| `fields` | string | 否 |  | 只保留这些字段，逗号分隔，用来省 token。 |
+| `fields` | string[] | 否 |  | 只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。 |
 
 id 和 url 给一个就行。 
 cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs/requests/)。
@@ -39,7 +39,7 @@ cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs
 | `title` | string \| null | 标题（视频、笔记、文章才有）。 |
 | `text` | string | 文案、正文或简介，纯文本；文章为 Markdown。 |
 | `lang` | string \| null | 语言代码，平台给出或检测得到。 |
-| `published_at` | string | 发布时间，ISO 8601，UTC。 |
+| `published_at` | string \| null | 发布时间，ISO 8601，UTC；只有平台不给时间时为 null（wechat_mp.articles.metrics、wechat_channels.videos.metrics），并列在 meta.unavailable 里。 |
 | `author` | AccountRef | 发布者。 |
 | `metrics` | Metrics | 抓取时的数据；平台不公开的为 null。 |
 | `images` | string[] \| null | 图文内容的图片地址。 |
@@ -102,10 +102,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "youtube.videos.get",
-    "params": {
-      "id": "dQw4w9WgXcQ"
-    }
+    "capability": "youtube.videos.get",
+    "id": "dQw4w9WgXcQ"
   }
 }
 ```
@@ -155,9 +153,9 @@ console.log('cost: $' + body.meta.billing.amount);
   "meta": {
     "capability": "youtube.videos.get",
     "billing": {
-      "amount": "0.004",
+      "amount": "0.002",
       "currency": "USD",
-      "balance_after": "9.996"
+      "balance_after": "9.998"
     },
     "unavailable": {
       "metrics.shares": "platform",
@@ -173,13 +171,13 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## 错误
 
-所有错误同一种结构，都不扣费；只有超时的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
+所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。错误不扣费；只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
 
 ## 常见问题
 
 ### YouTube 视频详情接口多少钱？
 
-每次调用 $0.004，返回一个结果。查 1,000 次共 $4.00。失败的调用不扣费。
+每次调用 $0.002，返回一个结果。查 1,000 次共 $2.00。失败的调用不扣费。
 
 ### 可以直接传分享链接吗？
 
@@ -200,5 +198,8 @@ console.log('cost: $' + body.meta.billing.amount);
 ## YouTube的其他接口
 
 - [YouTube 视频搜索](https://okdata.online/zh/apis/youtube/videos/search/)：$0.004/次 · 每页约 20 条视频
-- [YouTube 视频评论](https://okdata.online/zh/apis/youtube/videos/comments/list/)：$0.004/次 · 每页约 20 条评论
+- [YouTube 视频评论](https://okdata.online/zh/apis/youtube/videos/comments/list/)：$0.002/次 · 每页约 20 条评论
 - [YouTube 视频字幕](https://okdata.online/zh/apis/youtube/videos/transcript/get/)：$0.004/次
+- [YouTube 评论回复](https://okdata.online/zh/apis/youtube/comments/replies/list/)：$0.002/次 · 每页约 10 条评论
+- [YouTube 频道帖子](https://okdata.online/zh/apis/youtube/channels/posts/list/)：$0.002/次 · 每页约 10 条帖子
+- [YouTube 帖子详情](https://okdata.online/zh/apis/youtube/posts/get/)：$0.002/次

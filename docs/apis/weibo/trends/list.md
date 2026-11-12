@@ -8,7 +8,7 @@ Canonical page: https://okdata.online/apis/weibo/trends/list/
 - **ID**: `weibo.trends.list`
 - **Price**: $0.002 per call · about 50 board entries per page
 - **Returns**: a page of about 50 board entries (`data.items`, Trend objects)
-- **Status**: beta
+- **Status**: preview
 - **Good for**: Trend research
 
 ## Price
@@ -21,7 +21,7 @@ One call costs $0.002 and returns one page of about 50 board entries. Collecting
 |---|---|---|---|---|
 | `cursor` | string | no |  | Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. |
 | `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
-| `fields` | string | no |  | Comma-separated fields to keep, to save tokens. |
+| `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |
 
 cursor, view and fields work as described in [Requests](https://okdata.online/docs/requests/).
 
@@ -91,8 +91,7 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "weibo.trends.list",
-    "params": {}
+    "capability": "weibo.trends.list"
   }
 }
 ```
@@ -139,7 +138,7 @@ Or ask an agent that has the MCP server connected:
 
 ## Errors
 
-Errors share one shape and are never charged, except a timeout, whose charge is unknown until looked up. The full table: https://okdata.online/docs/errors/
+Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. They are not charged; only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
 
 ## Questions
 
@@ -167,3 +166,11 @@ The field is null, and meta.unavailable names it with the reason: platform (the 
 
 - [Weibo post search](https://okdata.online/apis/weibo/posts/search/): $0.002 per call · about 10 posts per page
 - [Weibo account profile](https://okdata.online/apis/weibo/users/get/): $0.002 per call
+- [Weibo post detail](https://okdata.online/apis/weibo/posts/get/): $0.002 per call
+- [Weibo post comments](https://okdata.online/apis/weibo/posts/comments/list/): $0.002 per call · about 20 comments per page
+- [Weibo comment replies](https://okdata.online/apis/weibo/comments/replies/list/): $0.002 per call · about 20 comments per page
+- [Weibo post likers](https://okdata.online/apis/weibo/posts/likers/list/): $0.002 per call · about 50 accounts per page
+- [Weibo account posts](https://okdata.online/apis/weibo/users/posts/list/): $0.002 per call · about 20 posts per page
+- [Weibo account followers](https://okdata.online/apis/weibo/users/followers/list/): $0.002 per call · about 20 accounts per page
+- [Weibo account search](https://okdata.online/apis/weibo/users/search/): $0.002 per call · about 20 accounts per page
+- [Weibo hot search (backup)](https://okdata.online/apis/weibo/backup/trends/list/): $0.0025 per call · about 50 board entries per page

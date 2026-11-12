@@ -8,7 +8,7 @@ Canonical page: https://okdata.online/apis/bilibili/videos/search/
 - **ID**: `bilibili.videos.search`
 - **Price**: $0.002 per call · about 20 videos per page
 - **Returns**: a page of about 20 videos (`data.items`, Post objects)
-- **Status**: beta
+- **Status**: preview
 - **Good for**: Content research
 
 ## Price
@@ -23,7 +23,7 @@ One call costs $0.002 and returns one page of about 20 videos. Collecting 1,000 
 | `sort` | string: relevance / latest / most_viewed | no | `relevance` | Result order. |
 | `cursor` | string | no |  | Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. |
 | `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
-| `fields` | string | no |  | Comma-separated fields to keep, to save tokens. |
+| `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |
 
 cursor, view and fields work as described in [Requests](https://okdata.online/docs/requests/).
 
@@ -39,7 +39,7 @@ Each item is a [Post](https://okdata.online/docs/objects/post/).
 | `title` | string \| null | Title, where the platform has one (videos, notes, articles). |
 | `text` | string | Caption, body or description as plain text; articles come as Markdown. |
 | `lang` | string \| null | Language code, as reported or detected. |
-| `published_at` | string | When it was published, ISO 8601 in UTC. |
+| `published_at` | string \| null | When it was published, ISO 8601 in UTC; null only where the platform gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics), then listed in meta.unavailable. |
 | `author` | AccountRef | Who posted it. |
 | `metrics` | Metrics | Counts at fetch time; a count the platform hides is null. |
 | `images` | string[] \| null | Image URLs for image posts and notes. |
@@ -103,10 +103,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "bilibili.videos.search",
-    "params": {
-      "query": "Claude Code 教程"
-    }
+    "capability": "bilibili.videos.search",
+    "query": "Claude Code 教程"
   }
 }
 ```
@@ -179,7 +177,7 @@ Or ask an agent that has the MCP server connected:
 
 ## Errors
 
-Errors share one shape and are never charged, except a timeout, whose charge is unknown until looked up. The full table: https://okdata.online/docs/errors/
+Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. They are not charged; only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
 
 ## Questions
 
@@ -207,4 +205,9 @@ The field is null, and meta.unavailable names it with the reason: platform (the 
 
 - [Bilibili video detail](https://okdata.online/apis/bilibili/videos/get/): $0.002 per call
 - [Bilibili video comments](https://okdata.online/apis/bilibili/videos/comments/list/): $0.002 per call · about 20 comments per page
-- [Bilibili popular board](https://okdata.online/apis/bilibili/trends/list/): $0.002 per call · about 50 board entries per page
+- [Bilibili hot searches](https://okdata.online/apis/bilibili/trends/list/): $0.002 per call · about 50 board entries per page
+- [Bilibili account profile](https://okdata.online/apis/bilibili/users/get/): $0.002 per call
+- [Bilibili account videos](https://okdata.online/apis/bilibili/users/videos/list/): $0.002 per call · about 30 videos per page
+- [Bilibili comment replies](https://okdata.online/apis/bilibili/comments/replies/list/): $0.002 per call · about 20 comments per page
+- [Bilibili popular videos](https://okdata.online/apis/bilibili/videos/trending/): $0.002 per call · about 20 videos per page
+- [Bilibili account videos (backup)](https://okdata.online/apis/bilibili/backup/users/videos/list/): $0.0025 per call · about 20 videos per page

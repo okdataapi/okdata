@@ -17,6 +17,10 @@ The same shape on every platform. A field a platform does not have is null, and 
 
 - [Douyin hot search board](https://okdata.online/apis/douyin/trends/list/) (`douyin.trends.list`): $0.002 per call · about 50 board entries per page
 - [Xiaohongshu hot topics](https://okdata.online/apis/xiaohongshu/trends/list/) (`xiaohongshu.trends.list`): $0.02 per call · about 20 board entries per page
-- [Bilibili popular board](https://okdata.online/apis/bilibili/trends/list/) (`bilibili.trends.list`): $0.002 per call · about 50 board entries per page
+- [Bilibili hot searches](https://okdata.online/apis/bilibili/trends/list/) (`bilibili.trends.list`): $0.002 per call · about 50 board entries per page
 - [Weibo hot search](https://okdata.online/apis/weibo/trends/list/) (`weibo.trends.list`): $0.002 per call · about 50 board entries per page
 - [X trending topics](https://okdata.online/apis/x/trends/list/) (`x.trends.list`): $0.009 per call · about 30 board entries per page
+- [Reddit trending searches](https://okdata.online/apis/reddit/trends/list/) (`reddit.trends.list`): $0.002 per call · about 6 board entries per page
+- [Kuaishou hot list](https://okdata.online/apis/kuaishou/trends/list/) (`kuaishou.trends.list`): $0.002 per call · about 51 board entries per page
+- [Douyin index: live hot topics](https://okdata.online/apis/douyin/index/trends/list/) (`douyin.index.trends.list`): $0.002 per call · about 30 board entries per page
+- [Weibo hot search (backup)](https://okdata.online/apis/weibo/backup/trends/list/) (`weibo.backup.trends.list`): $0.0025 per call · about 50 board entries per page

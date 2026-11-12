@@ -1,6 +1,6 @@
 # 公众号搜索 API
 
-> 按名称或关键词找公众号，返回原始 ID（gh_…）。按返回的账号数计费。
+> 按名称或关键词找公众号，返回原始 ID（gh_…）。按返回的账号数计费；余额不够一整页时，第一页按余额能付的条数返回。
 
 网页版：https://okdata.online/zh/apis/wechat_mp/accounts/search/
 
@@ -8,7 +8,7 @@
 - **ID**：`wechat_mp.accounts.search`
 - **价格**：$0.058/条 · 每次最多 $0.58
 - **返回**：一页约 10 个账号（`data.items`，Account 对象）
-- **状态**：公测
+- **状态**：预览
 - **适合**：竞品监控
 
 ## 价格
@@ -22,7 +22,7 @@
 | `query` | string | 是 |  | 关键词，和在平台搜索框里输入的一样。（例：`36氪`） |
 | `cursor` | string | 否 |  | 上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。 |
 | `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |
-| `fields` | string | 否 |  | 只保留这些字段，逗号分隔，用来省 token。 |
+| `fields` | string[] | 否 |  | 只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。 |
 
 cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs/requests/)。
 
@@ -102,10 +102,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "wechat_mp.accounts.search",
-    "params": {
-      "query": "36氪"
-    }
+    "capability": "wechat_mp.accounts.search",
+    "query": "36氪"
   }
 }
 ```
@@ -159,7 +157,7 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## 错误
 
-所有错误同一种结构，都不扣费；只有超时的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
+所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。错误不扣费；只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
 
 ## 常见问题
 
@@ -185,5 +183,10 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## 微信公众号的其他接口
 
-- [公众号历史文章](https://okdata.online/zh/apis/wechat_mp/accounts/articles/list/)：$0.04/次 · 每页约 10 篇文章
+- [公众号历史文章](https://okdata.online/zh/apis/wechat_mp/accounts/articles/list/)：$0.02/次 · 每页约 10 篇文章
 - [公众号文章详情](https://okdata.online/zh/apis/wechat_mp/articles/get/)：$0.02/次
+- [公众号资料](https://okdata.online/zh/apis/wechat_mp/accounts/get/)：$0.02/次
+- [公众号文章评论](https://okdata.online/zh/apis/wechat_mp/articles/comments/list/)：$0.02/次 · 每页约 20 条评论
+- [公众号文章互动数据](https://okdata.online/zh/apis/wechat_mp/articles/metrics/)：$0.02/次
+- [公众号评论回复](https://okdata.online/zh/apis/wechat_mp/comments/replies/list/)：$0.02/次 · 每页约 3 条评论
+- [公众号主体信息](https://okdata.online/zh/apis/wechat_mp/accounts/owner/get/)：$0.15/次

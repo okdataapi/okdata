@@ -8,7 +8,7 @@ Canonical page: https://okdata.online/apis/wechat_mp/articles/get/
 - **ID**: `wechat_mp.articles.get`
 - **Price**: $0.02 per call
 - **Returns**: one Post object (`data.item`)
-- **Status**: beta
+- **Status**: preview
 - **Good for**: Content research
 
 ## Price
@@ -21,7 +21,7 @@ One call costs $0.02 and returns one post. 1,000 lookups cost $20.00. Failed cal
 |---|---|---|---|---|
 | `url` | string | yes |  | A share link or page URL; the ID is read from it. (e.g. `https://mp.weixin.qq.com/s/xxxxxxxx`) |
 | `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
-| `fields` | string | no |  | Comma-separated fields to keep, to save tokens. |
+| `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |
 
 cursor, view and fields work as described in [Requests](https://okdata.online/docs/requests/).
 
@@ -37,7 +37,7 @@ Each item is a [Post](https://okdata.online/docs/objects/post/).
 | `title` | string \| null | Title, where the platform has one (videos, notes, articles). |
 | `text` | string | Caption, body or description as plain text; articles come as Markdown. |
 | `lang` | string \| null | Language code, as reported or detected. |
-| `published_at` | string | When it was published, ISO 8601 in UTC. |
+| `published_at` | string \| null | When it was published, ISO 8601 in UTC; null only where the platform gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics), then listed in meta.unavailable. |
 | `author` | AccountRef | Who posted it. |
 | `metrics` | Metrics | Counts at fetch time; a count the platform hides is null. |
 | `images` | string[] \| null | Image URLs for image posts and notes. |
@@ -100,10 +100,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "wechat_mp.articles.get",
-    "params": {
-      "url": "https://mp.weixin.qq.com/s/xxxxxxxx"
-    }
+    "capability": "wechat_mp.articles.get",
+    "url": "https://mp.weixin.qq.com/s/xxxxxxxx"
   }
 }
 ```
@@ -170,7 +168,7 @@ Or ask an agent that has the MCP server connected:
 
 ## Errors
 
-Errors share one shape and are never charged, except a timeout, whose charge is unknown until looked up. The full table: https://okdata.online/docs/errors/
+Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. They are not charged; only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
 
 ## Questions
 
@@ -197,4 +195,9 @@ The field is null, and meta.unavailable names it with the reason: platform (the 
 ## More WeChat Official Accounts endpoints
 
 - [Official Account search](https://okdata.online/apis/wechat_mp/accounts/search/): $0.058 per account · at most $0.58 per call
-- [Official Account article history](https://okdata.online/apis/wechat_mp/accounts/articles/list/): $0.04 per call · about 10 articles per page
+- [Official Account article history](https://okdata.online/apis/wechat_mp/accounts/articles/list/): $0.02 per call · about 10 articles per page
+- [Official Account profile](https://okdata.online/apis/wechat_mp/accounts/get/): $0.02 per call
+- [Official Account article comments](https://okdata.online/apis/wechat_mp/articles/comments/list/): $0.02 per call · about 20 comments per page
+- [Official Account article stats](https://okdata.online/apis/wechat_mp/articles/metrics/): $0.02 per call
+- [Official Account comment replies](https://okdata.online/apis/wechat_mp/comments/replies/list/): $0.02 per call · about 3 comments per page
+- [Official Account owner](https://okdata.online/apis/wechat_mp/accounts/owner/get/): $0.15 per call

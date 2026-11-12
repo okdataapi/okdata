@@ -6,14 +6,14 @@ Canonical page: https://okdata.online/apis/x/posts/get/
 
 - **Endpoint**: `GET /v1/x/posts/get`
 - **ID**: `x.posts.get`
-- **Price**: $0.001 per call
+- **Price**: $0.0003 per call
 - **Returns**: one Post object (`data.item`)
-- **Status**: beta
+- **Status**: preview
 - **Good for**: Competitor monitoring, Content research
 
 ## Price
 
-One call costs $0.001 and returns one post. 1,000 lookups cost $1.00. Failed calls are not charged.
+One call costs $0.0003 and returns one post. 1,000 lookups cost $0.30. Failed calls are not charged.
 
 ## Parameters
 
@@ -22,7 +22,7 @@ One call costs $0.001 and returns one post. 1,000 lookups cost $1.00. Failed cal
 | `id` | string | no |  | The post ID. Give id or url. (e.g. `1850000000000000000`) |
 | `url` | string | no |  | A share link or page URL; the ID is read from it. (e.g. `https://x.com/user/status/1850000000000000000`) |
 | `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
-| `fields` | string | no |  | Comma-separated fields to keep, to save tokens. |
+| `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |
 
 Give id or url; one of the two is enough. 
 cursor, view and fields work as described in [Requests](https://okdata.online/docs/requests/).
@@ -39,7 +39,7 @@ Each item is a [Post](https://okdata.online/docs/objects/post/).
 | `title` | string \| null | Title, where the platform has one (videos, notes, articles). |
 | `text` | string | Caption, body or description as plain text; articles come as Markdown. |
 | `lang` | string \| null | Language code, as reported or detected. |
-| `published_at` | string | When it was published, ISO 8601 in UTC. |
+| `published_at` | string \| null | When it was published, ISO 8601 in UTC; null only where the platform gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics), then listed in meta.unavailable. |
 | `author` | AccountRef | Who posted it. |
 | `metrics` | Metrics | Counts at fetch time; a count the platform hides is null. |
 | `images` | string[] \| null | Image URLs for image posts and notes. |
@@ -102,10 +102,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "x.posts.get",
-    "params": {
-      "id": "1850000000000000000"
-    }
+    "capability": "x.posts.get",
+    "id": "1850000000000000000"
   }
 }
 ```
@@ -153,9 +151,9 @@ Or ask an agent that has the MCP server connected:
   "meta": {
     "capability": "x.posts.get",
     "billing": {
-      "amount": "0.001",
+      "amount": "0.0003",
       "currency": "USD",
-      "balance_after": "9.999"
+      "balance_after": "9.9997"
     },
     "unavailable": {
       "metrics.shares": "platform"
@@ -169,13 +167,13 @@ Or ask an agent that has the MCP server connected:
 
 ## Errors
 
-Errors share one shape and are never charged, except a timeout, whose charge is unknown until looked up. The full table: https://okdata.online/docs/errors/
+Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. They are not charged; only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
 
 ## Questions
 
 ### How much does the X post detail API cost?
 
-One call costs $0.001 and returns one post. 1,000 lookups cost $1.00. Failed calls are not charged.
+One call costs $0.0003 and returns one post. 1,000 lookups cost $0.30. Failed calls are not charged.
 
 ### Can I pass a share link instead of an ID?
 
@@ -195,7 +193,22 @@ The field is null, and meta.unavailable names it with the reason: platform (the 
 
 ## More X (Twitter) endpoints
 
-- [X post search](https://okdata.online/apis/x/posts/search/): $0.006 per call · about 20 posts per page
-- [X account profile](https://okdata.online/apis/x/users/get/): $0.001 per call
-- [X account posts](https://okdata.online/apis/x/users/posts/list/): $0.006 per call · about 20 posts per page
+- [X post search](https://okdata.online/apis/x/posts/search/): $0.002 per call · about 20 posts per page
+- [X account profile](https://okdata.online/apis/x/users/get/): $0.0004 per account · at most $0.04 per call
+- [X account posts](https://okdata.online/apis/x/users/posts/list/): $0.002 per call · about 20 posts per page
 - [X trending topics](https://okdata.online/apis/x/trends/list/): $0.009 per call · about 30 board entries per page
+- [X post replies](https://okdata.online/apis/x/posts/replies/list/): $0.002 per call · about 35 posts per page
+- [X post quotes](https://okdata.online/apis/x/posts/quotes/list/): $0.0003 per post · at most $0.006 per call
+- [X post retweeters](https://okdata.online/apis/x/posts/retweeters/list/): $0.002 per call · about 100 accounts per page
+- [X article](https://okdata.online/apis/x/posts/article/get/): $0.002 per call
+- [X thread](https://okdata.online/apis/x/threads/posts/list/): $0.0003 per post · at most $0.015 per call
+- [X account search](https://okdata.online/apis/x/users/search/): $0.0004 per account · at most $0.008 per call
+- [X account followers](https://okdata.online/apis/x/users/followers/list/): $0.0001 per account · at most $0.02 per call
+- [X account following](https://okdata.online/apis/x/users/following/list/): $0.0001 per account · at most $0.02 per call
+- [X account mentions](https://okdata.online/apis/x/users/mentions/list/): $0.0003 per post · at most $0.006 per call
+- [X list posts](https://okdata.online/apis/x/lists/posts/list/): $0.002 per call · about 100 posts per page
+- [X list members](https://okdata.online/apis/x/lists/members/list/): $0.0004 per account · at most $0.008 per call
+- [X list followers](https://okdata.online/apis/x/lists/followers/list/): $0.0004 per account · at most $0.008 per call
+- [X community profile](https://okdata.online/apis/x/communities/get/): $0.0004 per call
+- [X community posts](https://okdata.online/apis/x/communities/posts/list/): $0.0003 per post · at most $0.006 per call
+- [X community members](https://okdata.online/apis/x/communities/members/list/): $0.0004 per account · at most $0.008 per call

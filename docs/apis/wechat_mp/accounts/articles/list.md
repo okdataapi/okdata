@@ -1,28 +1,29 @@
 # Official Account article history API
 
-> An Official Account's published articles, newest first, without a QR login.
+> An Official Account's published articles, newest first, without a QR login: the articles tab of its page by default, or its videos or pictures tab.
 
 Canonical page: https://okdata.online/apis/wechat_mp/accounts/articles/list/
 
 - **Endpoint**: `GET /v1/wechat_mp/accounts/articles/list`
 - **ID**: `wechat_mp.accounts.articles.list`
-- **Price**: $0.04 per call · about 10 articles per page
+- **Price**: $0.02 per call · about 10 articles per page
 - **Returns**: a page of about 10 articles (`data.items`, Post objects)
-- **Status**: beta
+- **Status**: preview
 - **Good for**: Competitor monitoring, Content research
 
 ## Price
 
-One call costs $0.04 and returns one page of about 10 articles. Collecting 1,000 articles takes about 100 calls, $4.00 in total. Each page is a separate call; failed calls are not charged.
+One call costs $0.02 and returns one page of about 10 articles. Collecting 1,000 articles takes about 100 calls, $2.00 in total. Each page is a separate call; failed calls are not charged.
 
 ## Parameters
 
 | Name | Type | Required | Default | Description |
 |---|---|---|---|---|
 | `id` | string | yes |  | The account original ID (gh_…) from accounts.search, or its WeChat ID. (e.g. `gh_363b924965e9`) |
+| `tab` | string: articles / videos / images | no | `articles` | Which tab of the account's page: articles (the default), videos or pictures. |
 | `cursor` | string | no |  | Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. |
 | `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
-| `fields` | string | no |  | Comma-separated fields to keep, to save tokens. |
+| `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |
 
 cursor, view and fields work as described in [Requests](https://okdata.online/docs/requests/).
 
@@ -38,7 +39,7 @@ Each item is a [Post](https://okdata.online/docs/objects/post/).
 | `title` | string \| null | Title, where the platform has one (videos, notes, articles). |
 | `text` | string | Caption, body or description as plain text; articles come as Markdown. |
 | `lang` | string \| null | Language code, as reported or detected. |
-| `published_at` | string | When it was published, ISO 8601 in UTC. |
+| `published_at` | string \| null | When it was published, ISO 8601 in UTC; null only where the platform gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics), then listed in meta.unavailable. |
 | `author` | AccountRef | Who posted it. |
 | `metrics` | Metrics | Counts at fetch time; a count the platform hides is null. |
 | `images` | string[] \| null | Image URLs for image posts and notes. |
@@ -102,10 +103,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "wechat_mp.accounts.articles.list",
-    "params": {
-      "id": "gh_363b924965e9"
-    }
+    "capability": "wechat_mp.accounts.articles.list",
+    "id": "gh_363b924965e9"
   }
 }
 ```
@@ -159,9 +158,9 @@ Or ask an agent that has the MCP server connected:
   "meta": {
     "capability": "wechat_mp.accounts.articles.list",
     "billing": {
-      "amount": "0.04",
+      "amount": "0.02",
       "currency": "USD",
-      "balance_after": "9.96"
+      "balance_after": "9.98"
     },
     "unavailable": {
       "metrics.comments": "platform",
@@ -178,17 +177,17 @@ Or ask an agent that has the MCP server connected:
 
 ## Errors
 
-Errors share one shape and are never charged, except a timeout, whose charge is unknown until looked up. The full table: https://okdata.online/docs/errors/
+Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. They are not charged; only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
 
 ## Questions
 
 ### How much does the Official Account article history API cost?
 
-One call costs $0.04 and returns one page of about 10 articles. Collecting 1,000 articles takes about 100 calls, $4.00 in total. Each page is a separate call; failed calls are not charged.
+One call costs $0.02 and returns one page of about 10 articles. Collecting 1,000 articles takes about 100 calls, $2.00 in total. Each page is a separate call; failed calls are not charged.
 
 ### How do I get the next page?
 
-Pass page.next_cursor from the response back as the cursor parameter. When page.has_more is false there is nothing left. Every page is its own call at $0.04.
+Pass page.next_cursor from the response back as the cursor parameter. When page.has_more is false there is nothing left. Every page is its own call at $0.02.
 
 ### Do I need a WeChat Official Accounts account, cookies or a QR login?
 
@@ -206,3 +205,8 @@ The field is null, and meta.unavailable names it with the reason: platform (the 
 
 - [Official Account search](https://okdata.online/apis/wechat_mp/accounts/search/): $0.058 per account · at most $0.58 per call
 - [Official Account article detail](https://okdata.online/apis/wechat_mp/articles/get/): $0.02 per call
+- [Official Account profile](https://okdata.online/apis/wechat_mp/accounts/get/): $0.02 per call
+- [Official Account article comments](https://okdata.online/apis/wechat_mp/articles/comments/list/): $0.02 per call · about 20 comments per page
+- [Official Account article stats](https://okdata.online/apis/wechat_mp/articles/metrics/): $0.02 per call
+- [Official Account comment replies](https://okdata.online/apis/wechat_mp/comments/replies/list/): $0.02 per call · about 3 comments per page
+- [Official Account owner](https://okdata.online/apis/wechat_mp/accounts/owner/get/): $0.15 per call

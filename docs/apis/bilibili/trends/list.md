@@ -1,6 +1,6 @@
-# Bilibili popular board API
+# Bilibili hot searches API
 
-> The current popular videos board.
+> Bilibili's hot search terms right now, up to 50, with rank and heat.
 
 Canonical page: https://okdata.online/apis/bilibili/trends/list/
 
@@ -8,7 +8,7 @@ Canonical page: https://okdata.online/apis/bilibili/trends/list/
 - **ID**: `bilibili.trends.list`
 - **Price**: $0.002 per call · about 50 board entries per page
 - **Returns**: a page of about 50 board entries (`data.items`, Trend objects)
-- **Status**: beta
+- **Status**: preview
 - **Good for**: Trend research
 
 ## Price
@@ -19,9 +19,9 @@ One call costs $0.002 and returns one page of about 50 board entries. Collecting
 
 | Name | Type | Required | Default | Description |
 |---|---|---|---|---|
-| `cursor` | string | no |  | Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. |
+| `board` | string: hot_search | no | `hot_search` | Which list: hot searches is the only one. |
 | `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
-| `fields` | string | no |  | Comma-separated fields to keep, to save tokens. |
+| `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |
 
 cursor, view and fields work as described in [Requests](https://okdata.online/docs/requests/).
 
@@ -91,15 +91,14 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "bilibili.trends.list",
-    "params": {}
+    "capability": "bilibili.trends.list"
   }
 }
 ```
 
 Or ask an agent that has the MCP server connected:
 
-> Use Bilibili popular board and show me the top ten right now.
+> Use Bilibili hot searches and show me the top ten right now.
 
 ## Response example
 
@@ -139,11 +138,11 @@ Or ask an agent that has the MCP server connected:
 
 ## Errors
 
-Errors share one shape and are never charged, except a timeout, whose charge is unknown until looked up. The full table: https://okdata.online/docs/errors/
+Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. They are not charged; only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
 
 ## Questions
 
-### How much does the Bilibili popular board API cost?
+### How much does the Bilibili hot searches API cost?
 
 One call costs $0.002 and returns one page of about 50 board entries. Collecting 1,000 board entries takes about 20 calls, $0.04 in total. Each page is a separate call; failed calls are not charged.
 
@@ -168,3 +167,8 @@ The field is null, and meta.unavailable names it with the reason: platform (the 
 - [Bilibili video search](https://okdata.online/apis/bilibili/videos/search/): $0.002 per call · about 20 videos per page
 - [Bilibili video detail](https://okdata.online/apis/bilibili/videos/get/): $0.002 per call
 - [Bilibili video comments](https://okdata.online/apis/bilibili/videos/comments/list/): $0.002 per call · about 20 comments per page
+- [Bilibili account profile](https://okdata.online/apis/bilibili/users/get/): $0.002 per call
+- [Bilibili account videos](https://okdata.online/apis/bilibili/users/videos/list/): $0.002 per call · about 30 videos per page
+- [Bilibili comment replies](https://okdata.online/apis/bilibili/comments/replies/list/): $0.002 per call · about 20 comments per page
+- [Bilibili popular videos](https://okdata.online/apis/bilibili/videos/trending/): $0.002 per call · about 20 videos per page
+- [Bilibili account videos (backup)](https://okdata.online/apis/bilibili/backup/users/videos/list/): $0.0025 per call · about 20 videos per page

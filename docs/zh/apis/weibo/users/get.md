@@ -8,7 +8,7 @@
 - **ID**：`weibo.users.get`
 - **价格**：$0.002/次
 - **返回**：一个 Account 对象（`data.item`）
-- **状态**：公测
+- **状态**：预览
 - **适合**：竞品监控、找博主
 
 ## 价格
@@ -21,7 +21,7 @@
 |---|---|---|---|---|
 | `id` | string | 是 |  | 账号 ID（平台自己的 sec_uid 或 user id）。（例：`1234567890`） |
 | `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |
-| `fields` | string | 否 |  | 只保留这些字段，逗号分隔，用来省 token。 |
+| `fields` | string[] | 否 |  | 只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。 |
 
 cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs/requests/)。
 
@@ -100,10 +100,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "weibo.users.get",
-    "params": {
-      "id": "1234567890"
-    }
+    "capability": "weibo.users.get",
+    "id": "1234567890"
   }
 }
 ```
@@ -151,7 +149,7 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## 错误
 
-所有错误同一种结构，都不扣费；只有超时的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
+所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。错误不扣费；只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
 
 ## 常见问题
 
@@ -175,3 +173,11 @@ console.log('cost: $' + body.meta.billing.amount);
 
 - [微博搜索](https://okdata.online/zh/apis/weibo/posts/search/)：$0.002/次 · 每页约 10 条帖子
 - [微博热搜](https://okdata.online/zh/apis/weibo/trends/list/)：$0.002/次 · 每页约 50 条榜单
+- [微博详情](https://okdata.online/zh/apis/weibo/posts/get/)：$0.002/次
+- [微博评论](https://okdata.online/zh/apis/weibo/posts/comments/list/)：$0.002/次 · 每页约 20 条评论
+- [微博评论回复](https://okdata.online/zh/apis/weibo/comments/replies/list/)：$0.002/次 · 每页约 20 条评论
+- [微博点赞用户](https://okdata.online/zh/apis/weibo/posts/likers/list/)：$0.002/次 · 每页约 50 个账号
+- [微博用户微博](https://okdata.online/zh/apis/weibo/users/posts/list/)：$0.002/次 · 每页约 20 条帖子
+- [微博用户粉丝列表](https://okdata.online/zh/apis/weibo/users/followers/list/)：$0.002/次 · 每页约 20 个账号
+- [微博用户搜索](https://okdata.online/zh/apis/weibo/users/search/)：$0.002/次 · 每页约 20 个账号
+- [微博热搜榜（备用版）](https://okdata.online/zh/apis/weibo/backup/trends/list/)：$0.0025/次 · 每页约 50 条榜单

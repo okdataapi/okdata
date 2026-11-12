@@ -1,100 +1,122 @@
 # okdata for Python
 
-Public data from Douyin, Xiaohongshu (RedNote), WeChat Official Accounts, Bilibili, Weibo, TikTok, X and YouTube,
-for AI agents and scripts. One client, one result shape, pay per call; failed calls are free.
+Social data for AI agents, paid per call: Douyin, Xiaohongshu, WeChat, Bilibili, Weibo, Kuaishou, Zhihu,
+TikTok, X, YouTube, Instagram, Reddit and more, as one API with one envelope and one error format.
+Every endpoint is a typed method generated from the okdata catalog, with its price in its docstring.
 
-```bash
-pip install okdata
+```sh
+pip install okdata          # Python 3.9+, one dependency (httpx)
+export OKDATA_API_KEY=okd_...   # https://okdata.online/console/
 ```
 
-Python 3.10+, one dependency (`httpx`). Get a key at [okdata.online](https://okdata.online/signup/?src=pypi-okdata)
-and put it in `OKDATA_API_KEY`.
+## First call
 
-## Use it
+The Playground's Python tab shows the raw HTTP request; with the SDK the same call is:
 
 ```python
 from okdata import OkData
 
-ok = OkData()  # reads OKDATA_API_KEY; OkData("okd_...") also works
-
-# Lists come back as a Page: items, next_cursor, has_more, cost
-page = ok.xiaohongshu.notes.search(query="露营 装备", sort="popular")
-for note in page.items:
-    print(note["metrics"]["likes"], note["title"], note["url"])
-print(page.cost)          # Decimal('0.02'): what this call was charged
-print(page.next_cursor)   # pass back as cursor= for the next page (a new call)
-
-# Single objects come back as an Item
-video = ok.youtube.videos.get(url="https://www.youtube.com/watch?v=dQw4w9WgXcQ").item
-transcript = ok.youtube.videos.transcript.get(id="dQw4w9WgXcQ", lang="en").item
-print(transcript["text"][:200])
+ok = OkData()  # reads OKDATA_API_KEY; OkData("okd_...") works too
+page = ok.douyin.videos.search(query="露营装备", sort="latest", max_price="0.05")
+for row in page.items:
+    print(row["id"], row["metrics"]["likes"], row["text"][:60])
+print("cost: $" + page.cost)
 ```
 
-Every endpoint is a method named after its id: `douyin.videos.comments.list` is
-`ok.douyin.videos.comments.list(id=...)`. Parameters are keyword-only and typed, enums are `Literal`s, and each
-method's docstring has the price. Endpoints that take `id` or `url` want exactly one of them.
+Parameters are flat and named as in the API (`query`, `id`, `url`, `cursor`, ...). Every method also
+takes `view` (`compact` | `standard` | `full`, same price), `fields` (`["id", "text"]` or `"id,text"`),
+`max_price` (sent as `X-Max-Price`: a call that could cost more is refused before it runs, never
+charged), `idempotency_key` and `timeout`. Any endpoint also works by id:
+`ok.call("weibo.trends.list")`, including ids newer than your SDK version.
 
-Any endpoint, including ones newer than your SDK version, also works by id:
+What comes back: `Page` (list endpoints: `items`, `next_cursor`, `has_more`), `Item` (one object:
+`item`) or `Batch` (`ids=[...]` on endpoints that take a list: `items`, `missing`). Each has `cost`,
+`balance_after`, `request_id`, `result_status`, `replayed`, `warnings`, `meta` and the `raw` envelope.
+Items are plain dicts, typed as `TypedDict`s (`Post`, `Account`, `Comment`, ...).
+
+## Paging within a budget
 
 ```python
-result = ok.call("weibo.trends.list")
+for page in ok.pages("douyin.videos.comments.list", id="7301234567890123456", max_pages=5, max_spend="0.01"):
+    ...
+
+items = ok.items("x.posts.search", query="claude code", max_items=200, max_spend="0.05")
+rows = list(items)
+print(items.spent, items.stop_reason)   # "0.03", "max_items" | "max_spend" | "end" | "balance" | "max_pages"
 ```
 
-## Spend on purpose
+Each page is a separate, separately charged call. Before each page the pager adds what that page could
+cost at most (the endpoint's `max_charge`) and stops if the total would pass `max_spend`; each call also
+carries `X-Max-Price` set to what is left, so the server refuses (free) anything dearer.
 
-```python
-from okdata import max_cost
+## Retries and idempotency
 
-print(max_cost("douyin.videos.search", pages=5))   # Decimal('0.10'): say this before a big job
+Every paid call gets an `Idempotency-Key`, reused by its retries, so a retry is never charged twice.
+Retries follow the error body: `retry` `yes` / `same_key` are retried (after `retry_after_seconds` when
+given; a wait longer than `max_retry_delay` raises instead), `once` gets one more try, `no` and
+`after_fix` are never retried. Defaults: `max_retries=2`, `timeout=65` seconds per attempt.
 
-for page in ok.iter_pages("tiktok.videos.comments.list", {"id": "7305085486984858894"}, max_pages=5):
-    ...  # each page is its own call and its own charge; stops early when there are no more
-```
-
-`view="compact"` drops null fields and `fields=["id", "text", "metrics.likes"]` keeps only what you list, which
-keeps results small when an agent reads them.
-
-## Errors and retries
-
-Errors raise `OkDataError` with `code`, `status`, `charged`, `retry`, `retry_after_seconds` and `request_id`:
+## Errors
 
 ```python
 from okdata import OkDataError
 
 try:
-    ok.douyin.videos.get(id="0")
+    ok.x.posts.get(id="1850000000000000000")
 except OkDataError as err:
-    print(err.code, err.charged, err.retry)   # not_found False no
+    err.code, err.charged, err.retry, err.request_id   # branch on code, never on message
+    err.message, err.message_zh, err.problems, err.param, err.reason, err.retry_after_seconds
 ```
 
-The client retries `rate_limited`, `upstream_busy`, `upstream_failed`, `internal_error`, `timeout` and network
-failures (2 retries by default, exponential backoff, and exactly the wait the server asks for on a 429). Every paid
-call carries an `Idempotency-Key`, made for you unless you pass `idempotency_key=`, and retries reuse it, so a retry
-is never charged twice: a call that went through before a timeout comes back as a free replay (`result.replayed`).
-If the first attempt is still running, the client waits for it; if it gives up first, the error has `charged=None`.
+`charged` is `False` for almost every error, `True` for a `not_found` the endpoint charges (`amount`
+says how much) and `None` when it is not known yet (a lost answer, `settlement_unknown`): look it up
+with `ok.calls.get(err.request_id)` or `ok.calls.by_key(err.idempotency_key)`. A lost connection raises
+`OkDataConnectionError` (`connection_error` or `client_timeout`, `charged=None`). The codes are in
+`okdata.ERROR_CODES` and at https://okdata.online/docs/errors/.
 
-`OkDataConnectionError` means no answer came back; `charged` is `None` because it is not known. Look the call up
-with `ok.get_call(request_id)` or send it again with the same `idempotency_key`.
+## Async
+
+```python
+import asyncio
+from okdata import AsyncOkData
+
+async def main():
+    async with AsyncOkData() as ok:
+        page = await ok.weibo.trends.list()
+        async for row in ok.items("douyin.videos.search", query="露营装备", max_spend="0.1"):
+            print(row["id"])
+
+asyncio.run(main())
+```
+
+## Free routes
+
+`ok.catalog()`, `ok.status()` (no key needed), `ok.account()` (balance, key limits, rate tier),
+`ok.usage(group_by=["day", "capability"])`, `ok.calls.get(request_id)`, `ok.calls.result(request_id,
+view="full")` (a result kept 24 h, read again for free) and `ok.calls.by_key(idempotency_key)`.
 
 ## Options
 
-| Argument | Default | |
-|---|---|---|
-| `api_key` | `$OKDATA_API_KEY` | keys start with `okd_`; never put one in code you commit |
-| `base_url` | `$OKDATA_BASE_URL` or `https://api.okdata.online` | |
-| `timeout` | `60.0` | seconds per attempt; some WeChat endpoints are slow |
-| `max_retries` | `2` | `0` turns retries off |
-| `max_retry_delay` | `8.0` | a server wait longer than this raises instead of sleeping |
-| `http_client` | a new `httpx.Client` | pass your own for proxies or custom transports |
+`OkData(api_key=None, *, base_url=None, timeout=65.0, max_retries=2, retry_base_delay=0.5,
+max_retry_delay=20.0, source=None, end_user=None, user_agent=None, http_client=None)`. `base_url`
+defaults to `OKDATA_BASE_URL`, then `https://api.okdata.online`. `source` and `end_user` are sent as
+`X-Source` and `X-End-User` for your usage figures; every call carries `X-Entry: sdk`.
 
-Also: `ok.account()` (balance), `ok.status()` and `ok.catalog()` (free, no key), `okdata.ENDPOINTS` (every
-endpoint's path, price and page size).
+## Development
 
-## Links
+This directory is exported from the okdata monorepo. `src/okdata/_generated/` (the typed methods,
+models and the error table) is generated there from the endpoint catalog and committed here; please do
+not edit it by hand.
 
-- Every endpoint, with parameters, fields and prices: <https://okdata.online/apis/>
-- Errors: <https://github.com/okdataapi/okdata/blob/main/docs/errors.md>
-- MCP server for agents: `https://api.okdata.online/mcp`
-- Source and issues: <https://github.com/okdataapi/okdata>
+```sh
+python3 -m venv .venv && . .venv/bin/activate
+pip install -e '.[dev]'
+pytest                      # against a local mock server: no key, no network
+mypy                        # --strict; settings in pyproject.toml
+OKDATA_LIVE_KEY=okd_... pytest     # adds a live smoke test of the free routes
+```
 
-MIT licence. okdata is not affiliated with the platforms it reads.
+With uv: `uv run --extra dev pytest` and `uv run --extra dev mypy`. Build a wheel with `uv build` (or
+`python -m build`). The PyPI name and the import name are both `okdata`.
+
+MIT licensed.

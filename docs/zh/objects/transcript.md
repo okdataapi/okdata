@@ -24,3 +24,6 @@
 ## 返回 Transcript 的接口
 
 - [YouTube 视频字幕](https://okdata.online/zh/apis/youtube/videos/transcript/get/) (`youtube.videos.transcript.get`): $0.004/次
+- [Instagram 视频字幕](https://okdata.online/zh/apis/instagram/posts/transcript/get/) (`instagram.posts.transcript.get`): $0.004/次
+- [Reddit 视频字幕](https://okdata.online/zh/apis/reddit/posts/transcript/get/) (`reddit.posts.transcript.get`): $0.004/次
+- [TikTok 视频字幕](https://okdata.online/zh/apis/tiktok/videos/transcript/get/) (`tiktok.videos.transcript.get`): $0.002/次

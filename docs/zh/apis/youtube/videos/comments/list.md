@@ -6,14 +6,14 @@
 
 - **接口**：`GET /v1/youtube/videos/comments/list`
 - **ID**：`youtube.videos.comments.list`
-- **价格**：$0.004/次 · 每页约 20 条评论
+- **价格**：$0.002/次 · 每页约 20 条评论
 - **返回**：一页约 20 条评论（`data.items`，Comment 对象）
-- **状态**：公测
+- **状态**：预览
 - **适合**：口碑分析
 
 ## 价格
 
-每次调用 $0.004，返回一页，约 20 条评论。抓 1,000 条评论大约要 50 次调用，合计 $0.20。每翻一页是一次单独的调用；失败的调用不扣费。
+每次调用 $0.002，返回一页，约 20 条评论。抓 1,000 条评论大约要 50 次调用，合计 $0.10。每翻一页是一次单独的调用；失败的调用不扣费。
 
 ## 参数
 
@@ -23,7 +23,7 @@
 | `sort` | string: top / latest | 否 | `top` | 排序方式。 |
 | `cursor` | string | 否 |  | 上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。 |
 | `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |
-| `fields` | string | 否 |  | 只保留这些字段，逗号分隔，用来省 token。 |
+| `fields` | string[] | 否 |  | 只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。 |
 
 cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs/requests/)。
 
@@ -42,6 +42,7 @@ cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs
 | `likes` | integer \| null | 评论点赞数。 |
 | `replies` | integer \| null | 回复数。 |
 | `ip_location` | string \| null | 平台显示的 IP 属地（有的话）。 |
+| `ext` | object | 平台特有字段，只在 view=full 时返回。 |
 
 ## 请求示例
 
@@ -100,10 +101,8 @@ console.log('cost: $' + body.meta.billing.amount);
 {
   "name": "call",
   "arguments": {
-    "endpoint": "youtube.videos.comments.list",
-    "params": {
-      "id": "dQw4w9WgXcQ"
-    }
+    "capability": "youtube.videos.comments.list",
+    "id": "dQw4w9WgXcQ"
   }
 }
 ```
@@ -148,9 +147,9 @@ console.log('cost: $' + body.meta.billing.amount);
   "meta": {
     "capability": "youtube.videos.comments.list",
     "billing": {
-      "amount": "0.004",
+      "amount": "0.002",
       "currency": "USD",
-      "balance_after": "9.996"
+      "balance_after": "9.998"
     },
     "unavailable": {},
     "cached": false,
@@ -162,17 +161,17 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## 错误
 
-所有错误同一种结构，都不扣费；只有超时的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
+所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。错误不扣费；只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
 
 ## 常见问题
 
 ### YouTube 视频评论接口多少钱？
 
-每次调用 $0.004，返回一页，约 20 条评论。抓 1,000 条评论大约要 50 次调用，合计 $0.20。每翻一页是一次单独的调用；失败的调用不扣费。
+每次调用 $0.002，返回一页，约 20 条评论。抓 1,000 条评论大约要 50 次调用，合计 $0.10。每翻一页是一次单独的调用；失败的调用不扣费。
 
 ### 怎么翻页？
 
-把返回里的 page.next_cursor 原样作为 cursor 参数传回去。page.has_more 为 false 时就没有下一页了。每一页都是一次 $0.004 的调用。
+把返回里的 page.next_cursor 原样作为 cursor 参数传回去。page.has_more 为 false 时就没有下一页了。每一页都是一次 $0.002 的调用。
 
 ### 需要YouTube账号、Cookie 或扫码登录吗？
 
@@ -189,5 +188,8 @@ console.log('cost: $' + body.meta.billing.amount);
 ## YouTube的其他接口
 
 - [YouTube 视频搜索](https://okdata.online/zh/apis/youtube/videos/search/)：$0.004/次 · 每页约 20 条视频
-- [YouTube 视频详情](https://okdata.online/zh/apis/youtube/videos/get/)：$0.004/次
+- [YouTube 视频详情](https://okdata.online/zh/apis/youtube/videos/get/)：$0.002/次
 - [YouTube 视频字幕](https://okdata.online/zh/apis/youtube/videos/transcript/get/)：$0.004/次
+- [YouTube 评论回复](https://okdata.online/zh/apis/youtube/comments/replies/list/)：$0.002/次 · 每页约 10 条评论
+- [YouTube 频道帖子](https://okdata.online/zh/apis/youtube/channels/posts/list/)：$0.002/次 · 每页约 10 条帖子
+- [YouTube 帖子详情](https://okdata.online/zh/apis/youtube/posts/get/)：$0.002/次
