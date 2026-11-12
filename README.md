@@ -9,7 +9,7 @@
 [okdata](https://okdata.online) reads public data from Douyin, Xiaohongshu (RedNote), WeChat (Official Accounts,
 Channels and Search), Kuaishou, Bilibili, Weibo, Zhihu, TikTok, X, YouTube, Instagram, Reddit, Telegram and the
 Meta and Google ad libraries: posts, accounts, comments, hot lists, transcripts, creators and ads.
-196 endpoints on 17 platforms, one key, one response shape. You pay per call or per item returned, from $0.0001,
+200+ endpoints on 17 platforms, one key, one response shape. You pay per call or per item returned, from $0.0001,
 and a call that fails costs nothing. No platform accounts, cookies or QR logins on your side.
 
 This repository holds the source of the two SDKs and the command line, and the documents agents read (one
@@ -197,7 +197,7 @@ Questions and bugs: open an issue. MIT licence. okdata is not affiliated with an
 
 [okdata](https://okdata.online/zh/) 是给 AI 智能体和代码用的社媒数据接口：抖音、小红书、微信（公众号、视频号、搜一搜）、
 快手、B站、微博、知乎、TikTok、X、YouTube、Instagram、Reddit、Telegram，以及 Meta 和 Google 的广告库，
-能查公开的内容、账号、评论、热榜、字幕、达人和广告。17 个平台、196 个接口，一个 key，同一种返回结构。
+能查公开的内容、账号、评论、热榜、字幕、达人和广告。17 个平台、200 多个接口，一个 key，同一种返回结构。
 按次或按返回条数付费，最低 $0.0001，调用失败不扣钱。你这边不需要平台账号、Cookie，也不用扫码。
 
 这个仓库放的是两个 SDK 和命令行工具的源码，以及给智能体读的文档（每个接口一页中英文 Markdown、`llms.txt`、
