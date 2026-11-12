@@ -39,7 +39,7 @@ Each item is a [Post](https://okdata.online/docs/objects/post/).
 | `title` | string \| null | Title, where the platform has one (videos, notes, articles). |
 | `text` | string | Caption, body or description as plain text; articles come as Markdown. |
 | `lang` | string \| null | Language code, as reported or detected. |
-| `published_at` | string \| null | When it was published, ISO 8601 in UTC; null only where the platform gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics), then listed in meta.unavailable. |
+| `published_at` | string \| null | When it was published, ISO 8601 in UTC; null only where the source gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics, youtube.channels.videos.list with type=short), then listed in meta.unavailable. |
 | `author` | AccountRef | Who posted it. |
 | `metrics` | Metrics | Counts at fetch time; a count the platform hides is null. |
 | `images` | string[] \| null | Image URLs for image posts and notes. |
@@ -210,3 +210,6 @@ The field is null, and meta.unavailable names it with the reason: platform (the 
 - [YouTube video transcript](https://okdata.online/apis/youtube/videos/transcript/get/): $0.004 per call
 - [YouTube comment replies](https://okdata.online/apis/youtube/comments/replies/list/): $0.002 per call · about 10 comments per page
 - [YouTube post detail](https://okdata.online/apis/youtube/posts/get/): $0.002 per call
+- [YouTube channel profile](https://okdata.online/apis/youtube/channels/get/): $0.002 per call
+- [YouTube channel search](https://okdata.online/apis/youtube/channels/search/): $0.004 per call · about 20 accounts per page
+- [YouTube channel videos](https://okdata.online/apis/youtube/channels/videos/list/): $0.002 per call · about 30 videos per page

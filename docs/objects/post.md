@@ -14,7 +14,7 @@ The same shape on every platform. A field a platform does not have is null, and 
 | `title` | string \| null | Title, where the platform has one (videos, notes, articles). |
 | `text` | string | Caption, body or description as plain text; articles come as Markdown. |
 | `lang` | string \| null | Language code, as reported or detected. |
-| `published_at` | string \| null | When it was published, ISO 8601 in UTC; null only where the platform gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics), then listed in meta.unavailable. |
+| `published_at` | string \| null | When it was published, ISO 8601 in UTC; null only where the source gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics, youtube.channels.videos.list with type=short), then listed in meta.unavailable. |
 | `author` | AccountRef | Who posted it. |
 | `metrics` | Metrics | Counts at fetch time; a count the platform hides is null. |
 | `images` | string[] \| null | Image URLs for image posts and notes. |
@@ -76,6 +76,14 @@ The same shape on every platform. A field a platform does not have is null, and 
 - [Kuaishou account videos](https://okdata.online/apis/kuaishou/users/videos/list/) (`kuaishou.users.videos.list`): $0.02 per call · about 20 videos per page
 - [Zhihu search](https://okdata.online/apis/zhihu/posts/search/) (`zhihu.posts.search`): $0.002 per call · about 20 posts per page
 - [Zhihu question answers](https://okdata.online/apis/zhihu/questions/answers/list/) (`zhihu.questions.answers.list`): $0.002 per call · about 20 posts per page
+- [Zhihu question detail](https://okdata.online/apis/zhihu/questions/get/) (`zhihu.questions.get`): $0.002 per call
+- [Zhihu answer detail](https://okdata.online/apis/zhihu/answers/get/) (`zhihu.answers.get`): $0.002 per call
+- [Zhihu article detail](https://okdata.online/apis/zhihu/articles/get/) (`zhihu.articles.get`): $0.002 per call
+- [Zhihu column articles](https://okdata.online/apis/zhihu/columns/articles/list/) (`zhihu.columns.articles.list`): $0.002 per call · about 20 articles per page
+- [Zhihu pin detail](https://okdata.online/apis/zhihu/pins/get/) (`zhihu.pins.get`): $0.002 per call
+- [Zhihu user answers](https://okdata.online/apis/zhihu/users/answers/list/) (`zhihu.users.answers.list`): $0.002 per call · about 20 posts per page
+- [Zhihu user articles](https://okdata.online/apis/zhihu/users/articles/list/) (`zhihu.users.articles.list`): $0.002 per call · about 20 articles per page
+- [Zhihu user pins](https://okdata.online/apis/zhihu/users/pins/list/) (`zhihu.users.pins.list`): $0.002 per call · about 20 posts per page
 - [WeChat Channels video search](https://okdata.online/apis/wechat_channels/videos/search/) (`wechat_channels.videos.search`): $0.02 per call · about 10 videos per page
 - [WeChat Channels account videos](https://okdata.online/apis/wechat_channels/users/videos/list/) (`wechat_channels.users.videos.list`): $0.02 per call · about 15 videos per page
 - [WeChat Channels video detail](https://okdata.online/apis/wechat_channels/videos/get/) (`wechat_channels.videos.get`): $0.02 per call
@@ -106,7 +114,9 @@ The same shape on every platform. A field a platform does not have is null, and 
 - [Telegram message detail](https://okdata.online/apis/telegram/messages/get/) (`telegram.messages.get`): $0.002 per call
 - [YouTube channel posts](https://okdata.online/apis/youtube/channels/posts/list/) (`youtube.channels.posts.list`): $0.002 per call · about 10 posts per page
 - [YouTube post detail](https://okdata.online/apis/youtube/posts/get/) (`youtube.posts.get`): $0.002 per call
+- [YouTube channel videos](https://okdata.online/apis/youtube/channels/videos/list/) (`youtube.channels.videos.list`): $0.002 per call · about 30 videos per page
 - [TikTok account videos](https://okdata.online/apis/tiktok/users/videos/list/) (`tiktok.users.videos.list`): $0.002 per call · about 10 videos per page
+- [TikTok hashtag videos](https://okdata.online/apis/tiktok/hashtags/videos/list/) (`tiktok.hashtags.videos.list`): $0.002 per call · about 20 videos per page
 - [X post replies](https://okdata.online/apis/x/posts/replies/list/) (`x.posts.replies.list`): $0.002 per call · about 35 posts per page
 - [X post quotes](https://okdata.online/apis/x/posts/quotes/list/) (`x.posts.quotes.list`): $0.0003 per post · at most $0.006 per call
 - [X article](https://okdata.online/apis/x/posts/article/get/) (`x.posts.article.get`): $0.002 per call

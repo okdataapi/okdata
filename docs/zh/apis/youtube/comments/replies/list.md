@@ -192,3 +192,6 @@ console.log('cost: $' + body.meta.billing.amount);
 - [YouTube 视频字幕](https://okdata.online/zh/apis/youtube/videos/transcript/get/)：$0.004/次
 - [YouTube 频道帖子](https://okdata.online/zh/apis/youtube/channels/posts/list/)：$0.002/次 · 每页约 10 条帖子
 - [YouTube 帖子详情](https://okdata.online/zh/apis/youtube/posts/get/)：$0.002/次
+- [YouTube 频道资料](https://okdata.online/zh/apis/youtube/channels/get/)：$0.002/次
+- [YouTube 频道搜索](https://okdata.online/zh/apis/youtube/channels/search/)：$0.004/次 · 每页约 20 个账号
+- [YouTube 频道视频](https://okdata.online/zh/apis/youtube/channels/videos/list/)：$0.002/次 · 每页约 30 条视频

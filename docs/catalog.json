@@ -1,8 +1,8 @@
 {
-  "revision": "93bd2077ee161657",
-  "priceBook": "f4f90b4727f4840a",
+  "revision": "d54bb626c60b95fd",
+  "priceBook": "1b273c48fea9634e",
   "prices": {
-    "version": "f4f90b4727f4840a",
+    "version": "1b273c48fea9634e",
     "effectiveAt": null,
     "currency": "USD"
   },
@@ -8572,6 +8572,1331 @@
         "content-research"
       ],
       "path": "/v1/zhihu/questions/answers/list"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "Zhihu question detail",
+        "zh": "知乎问题详情"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "zhihu question info",
+          "zhihu question stats"
+        ],
+        "zh": [
+          "知乎问题信息",
+          "知乎问题浏览量",
+          "知乎问题关注数"
+        ]
+      },
+      "category": "social",
+      "role": "posts.get",
+      "oneOf": [
+        [
+          "id",
+          "url"
+        ]
+      ],
+      "cursorTtlSeconds": null,
+      "snapshotSeconds": null,
+      "paused": true,
+      "id": "zhihu.questions.get",
+      "platform": "zhihu",
+      "object": "post",
+      "list": false,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Zhihu question detail",
+        "zh": "知乎问题详情"
+      },
+      "summary": {
+        "en": "One question by ID or link: its title, the details added under it, when it was asked, and how many views it has, with its answer and follower counts under ext.",
+        "zh": "按问题 ID 或链接取一个问题：标题、问题下的补充说明、提问时间和浏览数，ext 里还有回答数和关注数。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "example": "55043447",
+          "description": {
+            "en": "The question ID (digits): the number after zhihu.com/question/. Give id or url.",
+            "zh": "问题 ID（一串数字）：zhihu.com/question/ 后面的数字。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "example": "https://www.zhihu.com/question/55043447",
+          "description": {
+            "en": "The question link (an answer link under it works too): zhihu.com/question/….",
+            "zh": "问题链接（问题下某条回答的链接也行）：zhihu.com/question/…。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "content-research",
+        "word-of-mouth"
+      ],
+      "path": "/v1/zhihu/questions/get"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "Zhihu answer detail",
+        "zh": "知乎回答详情"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "zhihu answer text",
+          "read a zhihu answer"
+        ],
+        "zh": [
+          "知乎回答全文",
+          "知乎单条回答"
+        ]
+      },
+      "category": "social",
+      "role": "posts.get",
+      "oneOf": [
+        [
+          "id",
+          "url"
+        ]
+      ],
+      "cursorTtlSeconds": null,
+      "snapshotSeconds": null,
+      "paused": true,
+      "id": "zhihu.answers.get",
+      "platform": "zhihu",
+      "object": "post",
+      "list": false,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Zhihu answer detail",
+        "zh": "知乎回答详情"
+      },
+      "summary": {
+        "en": "One answer by ID or link: the question it answers (as title), the full text, its author and when it was posted.",
+        "zh": "按回答 ID 或链接取一条回答：所答的问题（作标题）、全文、作者和发布时间。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "example": "2430879961",
+          "description": {
+            "en": "The answer ID (digits): the number after /answer/ in its link. Give id or url.",
+            "zh": "回答 ID（一串数字）：链接里 /answer/ 后面的数字。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "example": "https://www.zhihu.com/answer/2430879961",
+          "description": {
+            "en": "The answer link: zhihu.com/answer/… or zhihu.com/question/…/answer/….",
+            "zh": "回答链接：zhihu.com/answer/… 或 zhihu.com/question/…/answer/…。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "content-research",
+        "word-of-mouth"
+      ],
+      "path": "/v1/zhihu/answers/get"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0.002",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "Zhihu answer comments",
+        "zh": "知乎回答评论"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "zhihu comments",
+          "comments under a zhihu answer"
+        ],
+        "zh": [
+          "知乎评论区",
+          "知乎回答下的评论"
+        ]
+      },
+      "category": "social",
+      "role": "posts.comments.list",
+      "oneOf": [],
+      "cursorTtlSeconds": 86400,
+      "snapshotSeconds": null,
+      "paused": true,
+      "id": "zhihu.answers.comments.list",
+      "platform": "zhihu",
+      "object": "comment",
+      "list": true,
+      "pageSize": 10,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Zhihu answer comments",
+        "zh": "知乎回答评论"
+      },
+      "summary": {
+        "en": "The top-level comments on an answer, by the answer's ID, a page at a time in Zhihu's default order: text, commenter, likes, reply count, time posted and IP location.",
+        "zh": "按回答 ID 取回答下的一级评论，一页一页取，按知乎默认顺序：内容、评论者、点赞、回复数、发布时间和 IP 属地。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "example": "2509154330",
+          "description": {
+            "en": "The answer ID (digits): the number after /answer/ in its link.",
+            "zh": "回答 ID（一串数字）：链接里 /answer/ 后面的数字。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "word-of-mouth"
+      ],
+      "path": "/v1/zhihu/answers/comments/list"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0.002",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "Zhihu comment replies",
+        "zh": "知乎评论回复"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "zhihu sub comments",
+          "zhihu reply thread"
+        ],
+        "zh": [
+          "知乎楼中楼",
+          "知乎二级评论",
+          "知乎子评论"
+        ]
+      },
+      "category": "social",
+      "role": "comments.replies.list",
+      "oneOf": [],
+      "cursorTtlSeconds": 86400,
+      "snapshotSeconds": null,
+      "paused": true,
+      "id": "zhihu.comments.replies.list",
+      "platform": "zhihu",
+      "object": "comment",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Zhihu comment replies",
+        "zh": "知乎评论回复"
+      },
+      "summary": {
+        "en": "The replies under a top-level comment, by the comment's ID, 20 a page: text, replier, likes, IP location and which comment each one answers.",
+        "zh": "按一级评论 ID 取它下面的回复，每页 20 条：内容、回复者、点赞、IP 属地，以及每条回的是哪一条。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "example": "10114474814",
+          "description": {
+            "en": "The top-level comment ID (digits), from zhihu.answers.comments.list.",
+            "zh": "一级评论 ID（一串数字），来自 zhihu.answers.comments.list。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "word-of-mouth"
+      ],
+      "path": "/v1/zhihu/comments/replies/list"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "Zhihu article detail",
+        "zh": "知乎文章详情"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "zhihu column article",
+          "zhuanlan article"
+        ],
+        "zh": [
+          "知乎专栏文章",
+          "知乎文章全文"
+        ]
+      },
+      "category": "social",
+      "role": "posts.get",
+      "oneOf": [
+        [
+          "id",
+          "url"
+        ]
+      ],
+      "cursorTtlSeconds": null,
+      "snapshotSeconds": null,
+      "paused": true,
+      "id": "zhihu.articles.get",
+      "platform": "zhihu",
+      "object": "post",
+      "list": false,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Zhihu article detail",
+        "zh": "知乎文章详情"
+      },
+      "summary": {
+        "en": "One column article by ID or link: title, full text, author, upvotes, comment count and the topics it is filed under (as hashtags).",
+        "zh": "按文章 ID 或链接取一篇专栏文章：标题、全文、作者、赞同数、评论数和所属话题（放在 hashtags 里）。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "example": "521711978",
+          "description": {
+            "en": "The article ID (digits): the number after zhuanlan.zhihu.com/p/. Give id or url.",
+            "zh": "文章 ID（一串数字）：zhuanlan.zhihu.com/p/ 后面的数字。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "example": "https://zhuanlan.zhihu.com/p/521711978",
+          "description": {
+            "en": "The article link: zhuanlan.zhihu.com/p/….",
+            "zh": "文章链接：zhuanlan.zhihu.com/p/…。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "content-research",
+        "competitor-monitoring"
+      ],
+      "path": "/v1/zhihu/articles/get"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0.002",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "Zhihu column articles",
+        "zh": "知乎专栏文章列表"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "zhihu column posts",
+          "zhuanlan column articles"
+        ],
+        "zh": [
+          "知乎专栏文章",
+          "专栏全部文章"
+        ]
+      },
+      "category": "social",
+      "role": null,
+      "oneOf": [],
+      "cursorTtlSeconds": 86400,
+      "snapshotSeconds": null,
+      "paused": true,
+      "id": "zhihu.columns.articles.list",
+      "platform": "zhihu",
+      "object": "post",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Zhihu column articles",
+        "zh": "知乎专栏文章列表"
+      },
+      "summary": {
+        "en": "The articles in a column, by the column's ID, 20 a page: title, text, author, time published, upvotes and comment count.",
+        "zh": "按专栏 ID 取专栏里的文章，每页 20 篇：标题、正文、作者、发布时间、赞同数和评论数。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "example": "intelligentunit",
+          "description": {
+            "en": "The column ID: what follows zhuanlan.zhihu.com/ in the column's link (a word, or c_ and digits).",
+            "zh": "专栏 ID：专栏链接里 zhuanlan.zhihu.com/ 后面那一段（一个词，或 c_ 加数字）。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "content-research",
+        "competitor-monitoring"
+      ],
+      "path": "/v1/zhihu/columns/articles/list"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "Zhihu pin detail",
+        "zh": "知乎想法详情"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "zhihu thought",
+          "zhihu short post"
+        ],
+        "zh": [
+          "知乎想法",
+          "知乎动态详情"
+        ]
+      },
+      "category": "social",
+      "role": "posts.get",
+      "oneOf": [
+        [
+          "id",
+          "url"
+        ]
+      ],
+      "cursorTtlSeconds": null,
+      "snapshotSeconds": null,
+      "paused": true,
+      "id": "zhihu.pins.get",
+      "platform": "zhihu",
+      "object": "post",
+      "list": false,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Zhihu pin detail",
+        "zh": "知乎想法详情"
+      },
+      "summary": {
+        "en": "One pin (a short post, 想法) by ID or link: text, pictures, author, likes, comments, saves, reposts and time posted.",
+        "zh": "按 ID 或链接取一条想法（知乎的短动态）：正文、图片、作者、点赞、评论、收藏、转发和发布时间。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "example": "2042267446984402904",
+          "description": {
+            "en": "The pin ID (digits): the number after zhihu.com/pin/. Give id or url.",
+            "zh": "想法 ID（一串数字）：zhihu.com/pin/ 后面的数字。id 和 url 二选一。"
+          }
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "example": "https://www.zhihu.com/pin/2042267446984402904",
+          "description": {
+            "en": "The pin link: zhihu.com/pin/….",
+            "zh": "想法链接：zhihu.com/pin/…。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "content-research",
+        "competitor-monitoring"
+      ],
+      "path": "/v1/zhihu/pins/get"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "Zhihu user profile",
+        "zh": "知乎用户资料"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "zhihu profile",
+          "zhihu account info"
+        ],
+        "zh": [
+          "知乎主页",
+          "知乎账号信息",
+          "知乎个人资料"
+        ]
+      },
+      "category": "social",
+      "role": "accounts.get",
+      "oneOf": [],
+      "cursorTtlSeconds": null,
+      "snapshotSeconds": null,
+      "paused": true,
+      "id": "zhihu.users.get",
+      "platform": "zhihu",
+      "object": "account",
+      "list": false,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Zhihu user profile",
+        "zh": "知乎用户资料"
+      },
+      "summary": {
+        "en": "A person's profile by the handle in their link: name, headline and follower count, with answer and article counts, whether it is an organisation and IP location under ext.",
+        "zh": "按主页链接里的用户名取一个人的资料：名字、一句话介绍和粉丝数，ext 里还有回答数、文章数、是否机构号和 IP 属地。"
+      },
+      "params": [
+        {
+          "name": "username",
+          "type": "string",
+          "required": true,
+          "example": "zhihuadmin",
+          "description": {
+            "en": "The handle in the profile's link (url_token): what follows zhihu.com/people/.",
+            "zh": "主页链接里的用户名（url_token）：zhihu.com/people/ 后面那一段。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "creator-discovery",
+        "competitor-monitoring"
+      ],
+      "path": "/v1/zhihu/users/get"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0.002",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "Zhihu user search",
+        "zh": "知乎用户搜索"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "find zhihu users",
+          "zhihu people search"
+        ],
+        "zh": [
+          "知乎搜人",
+          "知乎找答主",
+          "知乎账号搜索"
+        ]
+      },
+      "category": "social",
+      "role": "accounts.search",
+      "oneOf": [],
+      "cursorTtlSeconds": 86400,
+      "snapshotSeconds": null,
+      "paused": true,
+      "id": "zhihu.users.search",
+      "platform": "zhihu",
+      "object": "account",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Zhihu user search",
+        "zh": "知乎用户搜索"
+      },
+      "summary": {
+        "en": "People and organisations matching keywords, 20 a page: name and follower count, with answer and article counts, upvotes received and whether it is an organisation under ext. The headline is in the profile (zhihu.users.get).",
+        "zh": "按关键词找知乎用户和机构号，每页 20 个：名字和粉丝数，ext 里还有回答数、文章数、获赞数和是否机构号。一句话介绍要在资料（zhihu.users.get）里看。"
+      },
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "required": true,
+          "example": "人民日报",
+          "description": {
+            "en": "Keywords, as a person would type them into the platform search box.",
+            "zh": "关键词，和在平台搜索框里输入的一样。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "creator-discovery",
+        "competitor-monitoring"
+      ],
+      "path": "/v1/zhihu/users/search"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0.002",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "Zhihu user followers",
+        "zh": "知乎用户粉丝列表"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "zhihu fans",
+          "who follows a zhihu user"
+        ],
+        "zh": [
+          "知乎粉丝",
+          "知乎关注者列表"
+        ]
+      },
+      "category": "social",
+      "role": "accounts.followers.list",
+      "oneOf": [],
+      "cursorTtlSeconds": 86400,
+      "snapshotSeconds": null,
+      "paused": true,
+      "id": "zhihu.users.followers.list",
+      "platform": "zhihu",
+      "object": "account",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Zhihu user followers",
+        "zh": "知乎用户粉丝列表"
+      },
+      "summary": {
+        "en": "The people following an account, by its handle, 20 a page: name, handle, headline, avatar, follower count, and (under ext) answer and article counts and whether it is an organisation.",
+        "zh": "按用户名取关注这个账号的人，每页 20 个：名字、用户名、一句话介绍、头像、粉丝数，ext 里还有回答数、文章数和是否机构号。"
+      },
+      "params": [
+        {
+          "name": "username",
+          "type": "string",
+          "required": true,
+          "example": "zhihuadmin",
+          "description": {
+            "en": "The handle in the profile's link (url_token): what follows zhihu.com/people/.",
+            "zh": "主页链接里的用户名（url_token）：zhihu.com/people/ 后面那一段。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "creator-discovery",
+        "competitor-monitoring"
+      ],
+      "path": "/v1/zhihu/users/followers/list"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0.002",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "Zhihu user answers",
+        "zh": "知乎用户回答"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "answers by a zhihu user",
+          "zhihu answer history"
+        ],
+        "zh": [
+          "知乎答主的回答",
+          "知乎用户回答列表"
+        ]
+      },
+      "category": "social",
+      "role": "accounts.posts.list",
+      "oneOf": [],
+      "cursorTtlSeconds": 86400,
+      "snapshotSeconds": null,
+      "paused": true,
+      "id": "zhihu.users.answers.list",
+      "platform": "zhihu",
+      "object": "post",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Zhihu user answers",
+        "zh": "知乎用户回答"
+      },
+      "summary": {
+        "en": "The answers a person wrote, by their handle, 20 a page, newest first: the question (as title), the text, upvotes, comments and time posted.",
+        "zh": "按用户名取一个人写的回答，每页 20 条，从新到旧：所答问题（作标题）、正文、赞同、评论和发布时间。"
+      },
+      "params": [
+        {
+          "name": "username",
+          "type": "string",
+          "required": true,
+          "example": "zhihuadmin",
+          "description": {
+            "en": "The handle in the profile's link (url_token): what follows zhihu.com/people/.",
+            "zh": "主页链接里的用户名（url_token）：zhihu.com/people/ 后面那一段。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring",
+        "content-research"
+      ],
+      "path": "/v1/zhihu/users/answers/list"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0.002",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "Zhihu user articles",
+        "zh": "知乎用户文章"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "articles by a zhihu user",
+          "zhihu user posts"
+        ],
+        "zh": [
+          "知乎用户的文章",
+          "知乎作者文章列表"
+        ]
+      },
+      "category": "social",
+      "role": "accounts.posts.list",
+      "oneOf": [],
+      "cursorTtlSeconds": 86400,
+      "snapshotSeconds": null,
+      "paused": true,
+      "id": "zhihu.users.articles.list",
+      "platform": "zhihu",
+      "object": "post",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Zhihu user articles",
+        "zh": "知乎用户文章"
+      },
+      "summary": {
+        "en": "The column articles a person wrote, by their handle, 20 a page, newest first: title, text, upvotes, comments and time published.",
+        "zh": "按用户名取一个人写的专栏文章，每页 20 篇，从新到旧：标题、正文、赞同、评论和发布时间。"
+      },
+      "params": [
+        {
+          "name": "username",
+          "type": "string",
+          "required": true,
+          "example": "zhihuadmin",
+          "description": {
+            "en": "The handle in the profile's link (url_token): what follows zhihu.com/people/.",
+            "zh": "主页链接里的用户名（url_token）：zhihu.com/people/ 后面那一段。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring",
+        "content-research"
+      ],
+      "path": "/v1/zhihu/users/articles/list"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0.002",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "Zhihu user pins",
+        "zh": "知乎用户想法"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "zhihu thoughts by a user",
+          "zhihu user short posts"
+        ],
+        "zh": [
+          "知乎用户想法列表",
+          "知乎动态"
+        ]
+      },
+      "category": "social",
+      "role": "accounts.posts.list",
+      "oneOf": [],
+      "cursorTtlSeconds": 86400,
+      "snapshotSeconds": null,
+      "paused": true,
+      "id": "zhihu.users.pins.list",
+      "platform": "zhihu",
+      "object": "post",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "Zhihu user pins",
+        "zh": "知乎用户想法"
+      },
+      "summary": {
+        "en": "The pins (short posts, 想法) a person posted, by their handle, 20 a page, newest first: text, pictures, likes, comments, saves, reposts and time posted.",
+        "zh": "按用户名取一个人发的想法（知乎的短动态），每页 20 条，从新到旧：正文、图片、点赞、评论、收藏、转发和发布时间。"
+      },
+      "params": [
+        {
+          "name": "username",
+          "type": "string",
+          "required": true,
+          "example": "zhihuadmin",
+          "description": {
+            "en": "The handle in the profile's link (url_token): what follows zhihu.com/people/.",
+            "zh": "主页链接里的用户名（url_token）：zhihu.com/people/ 后面那一段。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring",
+        "content-research"
+      ],
+      "path": "/v1/zhihu/users/pins/list"
     },
     {
       "method": "GET",
@@ -17996,6 +19321,362 @@
       "chargeWhenEmpty": "0",
       "chargeWhenNotFound": "0",
       "short": {
+        "en": "YouTube channel profile",
+        "zh": "YouTube 频道资料"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "youtube channel info",
+          "youtube subscriber count",
+          "youtube channel stats"
+        ],
+        "zh": [
+          "油管频道信息",
+          "YouTube 订阅数",
+          "油管频道资料"
+        ]
+      },
+      "category": "social",
+      "role": "accounts.get",
+      "oneOf": [
+        [
+          "id",
+          "username"
+        ]
+      ],
+      "cursorTtlSeconds": null,
+      "snapshotSeconds": null,
+      "paused": false,
+      "id": "youtube.channels.get",
+      "platform": "youtube",
+      "object": "account",
+      "list": false,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "YouTube channel profile",
+        "zh": "YouTube 频道资料"
+      },
+      "summary": {
+        "en": "A channel by ID or handle: name, description, avatar, verification, subscribers and video count (rounded as YouTube shows them), and under ext its total views, the day it joined, the links in its About section, country and banner. The handle comes back when you ask by handle.",
+        "zh": "按频道 ID 或用户名取一个频道：名称、简介、头像、认证、订阅数和视频数（按 YouTube 显示的取整），ext 里还有总播放量、注册日期、“关于”里列的链接、国家和横幅图。按用户名查时会带回用户名。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "example": "UCLA_DiR1FfKNvjuUpBHmylQ",
+          "description": {
+            "en": "The channel ID, starting with UC. Give id or username.",
+            "zh": "频道 ID，UC 开头。id 和 username 二选一。"
+          }
+        },
+        {
+          "name": "username",
+          "type": "string",
+          "required": false,
+          "example": "NASA",
+          "description": {
+            "en": "The channel's handle, with or without @. Give id or username.",
+            "zh": "频道的用户名（@ 后面那段），带不带 @ 都行。id 和 username 二选一。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "creator-discovery",
+        "competitor-monitoring"
+      ],
+      "path": "/v1/youtube/channels/get"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.004",
+      "minimum": null,
+      "chargeWhenEmpty": "0.004",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "YouTube channel search",
+        "zh": "YouTube 频道搜索"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "find youtube channels",
+          "youtube creator search",
+          "youtube youtuber search"
+        ],
+        "zh": [
+          "油管搜频道",
+          "YouTube 找博主",
+          "油管频道搜索"
+        ]
+      },
+      "category": "social",
+      "role": "accounts.search",
+      "oneOf": [],
+      "cursorTtlSeconds": 86400,
+      "snapshotSeconds": null,
+      "paused": false,
+      "id": "youtube.channels.search",
+      "platform": "youtube",
+      "object": "account",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.004",
+      "title": {
+        "en": "YouTube channel search",
+        "zh": "YouTube 频道搜索"
+      },
+      "summary": {
+        "en": "Find channels by keywords, 20 a page in YouTube's order: channel ID, name, the start of the description, avatar and subscribers (rounded as YouTube shows them). No handle or badge here; youtube.channels.get gives the badge.",
+        "zh": "按关键词找频道，每页 20 个，按 YouTube 的顺序：频道 ID、名称、简介开头、头像和订阅数（按 YouTube 显示的取整）。这里没有用户名和认证标识，认证标识可用 youtube.channels.get 查。"
+      },
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "required": true,
+          "example": "nasa",
+          "description": {
+            "en": "Keywords, as a person would type them into the platform search box.",
+            "zh": "关键词，和在平台搜索框里输入的一样。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "creator-discovery",
+        "competitor-monitoring"
+      ],
+      "path": "/v1/youtube/channels/search"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0.002",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "YouTube channel videos",
+        "zh": "YouTube 频道视频"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "youtube channel uploads",
+          "youtube shorts of a channel",
+          "list youtube videos"
+        ],
+        "zh": [
+          "油管频道视频",
+          "YouTube 频道 Shorts",
+          "油管上传列表"
+        ]
+      },
+      "category": "social",
+      "role": "accounts.posts.list",
+      "oneOf": [
+        [
+          "id",
+          "username"
+        ]
+      ],
+      "cursorTtlSeconds": 86400,
+      "snapshotSeconds": null,
+      "paused": false,
+      "id": "youtube.channels.videos.list",
+      "platform": "youtube",
+      "object": "post",
+      "list": true,
+      "pageSize": 30,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "YouTube channel videos",
+        "zh": "YouTube 频道视频"
+      },
+      "summary": {
+        "en": "A channel's videos or its Shorts, newest first, about 30 a page, by channel ID or handle: title, views, cover and, for videos, length and roughly when it was published (YouTube says \"3 weeks ago\"). A channel ID nobody has reads like a channel without such videos: an empty page.",
+        "zh": "按频道 ID 或用户名取频道的视频或 Shorts，从新到旧，每页约 30 条：标题、播放数、封面，普通视频还有时长和大约的发布时间（YouTube 只说“3 周前”）。不存在的频道 ID 和没有这类视频的频道一样，返回空结果。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "example": "UCLA_DiR1FfKNvjuUpBHmylQ",
+          "description": {
+            "en": "The channel ID, starting with UC. Give id or username.",
+            "zh": "频道 ID，UC 开头。id 和 username 二选一。"
+          }
+        },
+        {
+          "name": "username",
+          "type": "string",
+          "required": false,
+          "example": "NASA",
+          "description": {
+            "en": "The channel's handle, with or without @. Give id or username.",
+            "zh": "频道的用户名（@ 后面那段），带不带 @ 都行。id 和 username 二选一。"
+          }
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "video",
+            "short"
+          ],
+          "default": "video",
+          "description": {
+            "en": "Regular videos (the default) or Shorts.",
+            "zh": "普通视频（默认）或 Shorts。"
+          }
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "latest"
+          ],
+          "default": "latest",
+          "description": {
+            "en": "Newest first; the only order this source has (no most-viewed order).",
+            "zh": "从新到旧；这个数据源只有这一种顺序（没有按播放数排）。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "competitor-monitoring",
+        "content-research"
+      ],
+      "path": "/v1/youtube/channels/videos/list"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0",
+      "chargeWhenNotFound": "0",
+      "short": {
         "en": "TikTok video transcript",
         "zh": "TikTok 视频字幕"
       },
@@ -18623,6 +20304,227 @@
         "competitor-monitoring"
       ],
       "path": "/v1/tiktok/shop/sellers/products/list"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0.002",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "TikTok account followers",
+        "zh": "TikTok 账号粉丝列表"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "tiktok fans list",
+          "who follows a tiktok account",
+          "tiktok audience"
+        ],
+        "zh": [
+          "TikTok 粉丝",
+          "TikTok 粉丝画像",
+          "TikTok 关注者"
+        ]
+      },
+      "category": "social",
+      "role": "accounts.followers.list",
+      "oneOf": [
+        [
+          "id",
+          "username"
+        ]
+      ],
+      "cursorTtlSeconds": 86400,
+      "snapshotSeconds": null,
+      "paused": false,
+      "id": "tiktok.users.followers.list",
+      "platform": "tiktok",
+      "object": "account",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "TikTok account followers",
+        "zh": "TikTok 账号粉丝列表"
+      },
+      "summary": {
+        "en": "The accounts following a TikTok account, newest followers first, 20 a page, by handle or account ID: handle, name, bio, avatar, followers, following, video count, likes received, and (under ext) the follower's country or region and language.",
+        "zh": "按用户名或账号 ID 取关注某个 TikTok 账号的人，最新关注的在前，每页 20 个：用户名、名称、简介、头像、粉丝数、关注数、作品数、获赞数，ext 里还有粉丝的国家或地区和语言。"
+      },
+      "params": [
+        {
+          "name": "username",
+          "type": "string",
+          "required": false,
+          "example": "nasa",
+          "description": {
+            "en": "The TikTok handle, with or without @. Give username or id.",
+            "zh": "TikTok 用户名，带不带 @ 都行。username 和 id 二选一。"
+          }
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "example": "7664638705177150477",
+          "description": {
+            "en": "The account ID instead of the handle: the digits in id from tiktok.users.get, or its ext.sec_uid (MS4w…). Saves the handle lookup. Give username or id.",
+            "zh": "不用用户名时的账号 ID：tiktok.users.get 返回的 id（一串数字），或它的 ext.sec_uid（MS4w 开头）。可省去按用户名查 ID 的那一步。username 和 id 二选一。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "creator-discovery",
+        "competitor-monitoring"
+      ],
+      "path": "/v1/tiktok/users/followers/list"
+    },
+    {
+      "method": "GET",
+      "post": false,
+      "batchMax": null,
+      "status": "preview",
+      "maxCharge": "0.002",
+      "minimum": null,
+      "chargeWhenEmpty": "0.002",
+      "chargeWhenNotFound": "0",
+      "short": {
+        "en": "TikTok hashtag videos",
+        "zh": "TikTok 话题作品"
+      },
+      "group": null,
+      "aliases": {
+        "en": [
+          "tiktok hashtag feed",
+          "tiktok challenge videos",
+          "tiktok tag posts"
+        ],
+        "zh": [
+          "TikTok 标签视频",
+          "TikTok 挑战赛视频",
+          "TikTok 话题下的视频"
+        ]
+      },
+      "category": "social",
+      "role": "topics.posts.list",
+      "oneOf": [],
+      "cursorTtlSeconds": 86400,
+      "snapshotSeconds": null,
+      "paused": false,
+      "id": "tiktok.hashtags.videos.list",
+      "platform": "tiktok",
+      "object": "post",
+      "list": true,
+      "pageSize": 20,
+      "unit": "call",
+      "price": "0.002",
+      "title": {
+        "en": "TikTok hashtag videos",
+        "zh": "TikTok 话题作品"
+      },
+      "summary": {
+        "en": "The videos under a hashtag, by its name, about 20 a page in TikTok's order: caption, author, plays, likes, comments, shares, saves, hashtags and time posted, with length, cover and music under ext.",
+        "zh": "按话题名取话题下的视频，每页约 20 条，按 TikTok 给的顺序：文案、作者、播放、点赞、评论、分享、收藏、话题标签和发布时间，ext 里还有时长、封面和音乐。"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "example": "nasa",
+          "description": {
+            "en": "The hashtag name, with or without #.",
+            "zh": "话题名，带不带 # 都行。"
+          }
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": {
+            "en": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "zh": "上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。"
+          }
+        },
+        {
+          "name": "view",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "compact",
+            "standard",
+            "full"
+          ],
+          "default": "standard",
+          "description": {
+            "en": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "zh": "返回多少字段。full 会在 ext 里带上平台特有字段。"
+          }
+        },
+        {
+          "name": "fields",
+          "type": "string[]",
+          "required": false,
+          "example": [
+            "id",
+            "text",
+            "metrics.likes"
+          ],
+          "description": {
+            "en": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "zh": "只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。"
+          }
+        }
+      ],
+      "jobs": [
+        "trend-research",
+        "content-research"
+      ],
+      "path": "/v1/tiktok/hashtags/videos/list"
     },
     {
       "method": "GET",

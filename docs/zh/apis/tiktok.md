@@ -4,7 +4,7 @@
 
 网页版：https://okdata.online/zh/apis/tiktok/
 
-15 个接口，每次 $0.002 到 $0.004。地区：海外。不需要TikTok账号或 Cookie。
+17 个接口，每次 $0.002 到 $0.004。地区：海外。不需要TikTok账号或 Cookie。
 
 | 接口 | ID | 返回 | 价格 |
 |---|---|---|---|
@@ -23,14 +23,16 @@
 | [TikTok 账号作品](https://okdata.online/zh/apis/tiktok/users/videos/list/) | `tiktok.users.videos.list` | Post[] | $0.002/次 · 每页约 10 条视频 |
 | [TikTok 创意中心热门广告详情](https://okdata.online/zh/apis/tiktok/creative_center/ads/get/) | `tiktok.creative_center.ads.get` | Ad | $0.002/次 |
 | [TikTok Shop 店铺商品](https://okdata.online/zh/apis/tiktok/shop/sellers/products/list/) | `tiktok.shop.sellers.products.list` | Product[] | $0.002/次 · 每页约 20 个商品 |
+| [TikTok 账号粉丝列表](https://okdata.online/zh/apis/tiktok/users/followers/list/) | `tiktok.users.followers.list` | Account[] | $0.002/次 · 每页约 20 个账号 |
+| [TikTok 话题作品](https://okdata.online/zh/apis/tiktok/hashtags/videos/list/) | `tiktok.hashtags.videos.list` | Post[] | $0.002/次 · 每页约 20 条视频 |
 
 ## 适合做什么
 
-- 内容调研: `tiktok.videos.search`, `tiktok.creative_center.ads.search`, `tiktok.videos.transcript.get`, `tiktok.users.videos.list`, `tiktok.creative_center.ads.get`
-- 热点研究: `tiktok.videos.search`
-- 竞品监控: `tiktok.videos.get`, `tiktok.users.get`, `tiktok.ads.search`, `tiktok.shop.products.search`, `tiktok.shop.products.get`, `tiktok.users.search`, `tiktok.users.videos.list`, `tiktok.shop.sellers.products.list`
+- 内容调研: `tiktok.videos.search`, `tiktok.creative_center.ads.search`, `tiktok.videos.transcript.get`, `tiktok.users.videos.list`, `tiktok.creative_center.ads.get`, `tiktok.hashtags.videos.list`
+- 热点研究: `tiktok.videos.search`, `tiktok.hashtags.videos.list`
+- 竞品监控: `tiktok.videos.get`, `tiktok.users.get`, `tiktok.ads.search`, `tiktok.shop.products.search`, `tiktok.shop.products.get`, `tiktok.users.search`, `tiktok.users.videos.list`, `tiktok.shop.sellers.products.list`, `tiktok.users.followers.list`
 - 口碑分析: `tiktok.videos.comments.list`, `tiktok.shop.products.reviews.list`, `tiktok.comments.replies.list`
-- 找博主: `tiktok.users.get`, `tiktok.users.search`
+- 找博主: `tiktok.users.get`, `tiktok.users.search`, `tiktok.users.followers.list`
 - 广告情报: `tiktok.ads.search`, `tiktok.creative_center.ads.search`, `tiktok.creative_center.ads.get`
 - 选品定价: `tiktok.shop.products.search`, `tiktok.shop.products.get`, `tiktok.shop.products.reviews.list`, `tiktok.shop.sellers.products.list`
 - 视频转文字: `tiktok.videos.transcript.get`

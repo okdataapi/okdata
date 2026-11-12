@@ -2,14 +2,14 @@
   "openapi": "3.1.0",
   "info": {
     "title": "okdata API",
-    "version": "93bd2077ee161657",
+    "version": "d54bb626c60b95fd",
     "x-price-book": {
-      "version": "f4f90b4727f4840a",
+      "version": "1b273c48fea9634e",
       "effective_at": null,
       "currency": "USD"
     },
     "summary": "Public social data from 17 platforms, paid per call.",
-    "description": "196 endpoints on Douyin, Xiaohongshu (RedNote), WeChat Official Accounts, Bilibili, Weibo, TikTok, X (Twitter), YouTube, Meta Ad Library, Google Ads Transparency, Instagram, Reddit, Kuaishou, Zhihu, WeChat Channels, WeChat Search, Telegram. One envelope, one error format, prices in US dollars per call or per item. Failed calls are never charged. Price book f4f90b4727f4840a.",
+    "description": "214 endpoints on Douyin, Xiaohongshu (RedNote), WeChat Official Accounts, Bilibili, Weibo, TikTok, X (Twitter), YouTube, Meta Ad Library, Google Ads Transparency, Instagram, Reddit, Kuaishou, Zhihu, WeChat Channels, WeChat Search, Telegram. One envelope, one error format, prices in US dollars per call or per item. Failed calls are never charged. Price book 1b273c48fea9634e.",
     "contact": {
       "name": "okdata",
       "url": "https://okdata.online"
@@ -17476,6 +17476,2785 @@
         "x-post": false,
         "x-batch-max": null,
         "x-cursor-ttl-seconds": null,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/zhihu/questions/get": {
+      "get": {
+        "operationId": "zhihu_questions_get",
+        "summary": "Zhihu question detail",
+        "description": "One question by ID or link: its title, the details added under it, when it was asked, and how many views it has, with its answer and follower counts under ext. Give id or url.\n\nPrice: $0.002 per call. 1,000 calls cost $2.00. Failed calls are not charged.",
+        "tags": [
+          "zhihu"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "description": "The question ID (digits): the number after zhihu.com/question/. Give id or url.",
+            "schema": {
+              "type": "string",
+              "description": "The question ID (digits): the number after zhihu.com/question/. Give id or url.",
+              "examples": [
+                "55043447"
+              ]
+            }
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "required": false,
+            "description": "The question link (an answer link under it works too): zhihu.com/question/….",
+            "schema": {
+              "type": "string",
+              "description": "The question link (an answer link under it works too): zhihu.com/question/….",
+              "examples": [
+                "https://www.zhihu.com/question/55043447"
+              ]
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "One post object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "item": {
+                      "id": "3283784039",
+                      "url": "https://www.zhihu.com/question/568657112/answer/3283784039",
+                      "type": "text",
+                      "title": "预算 3000 元左右，有哪些不错的露营装备推荐？",
+                      "text": "先说结论：帐篷和睡袋别省，其他都可以慢慢换。",
+                      "lang": "zh",
+                      "published_at": "2026-11-02T09:30:00Z",
+                      "author": {
+                        "id": "b32409944256dfd62a963434fcda6aa9",
+                        "username": "qingzhuang-tubu",
+                        "name": "轻装徒步",
+                        "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                        "followers": 15700,
+                        "verified": true
+                      },
+                      "metrics": {
+                        "views": null,
+                        "likes": 48200,
+                        "comments": 1312,
+                        "shares": null,
+                        "favorites": 9650,
+                        "reposts": null
+                      },
+                      "images": null,
+                      "hashtags": null
+                    }
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "zhihu.questions.get",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {
+                      "metrics.views": "platform",
+                      "metrics.shares": "platform",
+                      "metrics.reposts": "platform"
+                    },
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/zhihu/questions/get/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "Zhihu question detail",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "zhihu question info",
+            "zhihu question stats"
+          ],
+          "zh": [
+            "知乎问题信息",
+            "知乎问题浏览量",
+            "知乎问题关注数"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "posts.get",
+        "x-one-of": [
+          [
+            "id",
+            "url"
+          ]
+        ],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": null,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/zhihu/answers/get": {
+      "get": {
+        "operationId": "zhihu_answers_get",
+        "summary": "Zhihu answer detail",
+        "description": "One answer by ID or link: the question it answers (as title), the full text, its author and when it was posted. Give id or url.\n\nPrice: $0.002 per call. 1,000 calls cost $2.00. Failed calls are not charged.",
+        "tags": [
+          "zhihu"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "description": "The answer ID (digits): the number after /answer/ in its link. Give id or url.",
+            "schema": {
+              "type": "string",
+              "description": "The answer ID (digits): the number after /answer/ in its link. Give id or url.",
+              "examples": [
+                "2430879961"
+              ]
+            }
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "required": false,
+            "description": "The answer link: zhihu.com/answer/… or zhihu.com/question/…/answer/….",
+            "schema": {
+              "type": "string",
+              "description": "The answer link: zhihu.com/answer/… or zhihu.com/question/…/answer/….",
+              "examples": [
+                "https://www.zhihu.com/answer/2430879961"
+              ]
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "One post object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "item": {
+                      "id": "3283784039",
+                      "url": "https://www.zhihu.com/question/568657112/answer/3283784039",
+                      "type": "text",
+                      "title": "预算 3000 元左右，有哪些不错的露营装备推荐？",
+                      "text": "先说结论：帐篷和睡袋别省，其他都可以慢慢换。",
+                      "lang": "zh",
+                      "published_at": "2026-11-02T09:30:00Z",
+                      "author": {
+                        "id": "b32409944256dfd62a963434fcda6aa9",
+                        "username": "qingzhuang-tubu",
+                        "name": "轻装徒步",
+                        "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                        "followers": 15700,
+                        "verified": true
+                      },
+                      "metrics": {
+                        "views": null,
+                        "likes": 48200,
+                        "comments": 1312,
+                        "shares": null,
+                        "favorites": 9650,
+                        "reposts": null
+                      },
+                      "images": null,
+                      "hashtags": null
+                    }
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "zhihu.answers.get",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {
+                      "metrics.views": "platform",
+                      "metrics.shares": "platform",
+                      "metrics.reposts": "platform"
+                    },
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/zhihu/answers/get/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "Zhihu answer detail",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "zhihu answer text",
+            "read a zhihu answer"
+          ],
+          "zh": [
+            "知乎回答全文",
+            "知乎单条回答"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "posts.get",
+        "x-one-of": [
+          [
+            "id",
+            "url"
+          ]
+        ],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": null,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/zhihu/answers/comments/list": {
+      "get": {
+        "operationId": "zhihu_answers_comments_list",
+        "summary": "Zhihu answer comments",
+        "description": "The top-level comments on an answer, by the answer's ID, a page at a time in Zhihu's default order: text, commenter, likes, reply count, time posted and IP location.\n\nPrice: $0.002 per call. 1,000 items take about 100 calls: $0.20. Failed calls are not charged.",
+        "tags": [
+          "zhihu"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "The answer ID (digits): the number after /answer/ in its link.",
+            "schema": {
+              "type": "string",
+              "description": "The answer ID (digits): the number after /answer/ in its link.",
+              "examples": [
+                "2509154330"
+              ]
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "schema": {
+              "type": "string",
+              "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call."
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of comment objects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentListResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "items": [
+                      {
+                        "id": "7302000000000000001",
+                        "post_id": "7301234567890123456",
+                        "parent_id": null,
+                        "text": "这个帐篷收起来好小，求链接",
+                        "published_at": "2026-11-02T11:04:00Z",
+                        "author": {
+                          "id": "b32409944256dfd62a963434fcda6aa9",
+                          "username": "qingzhuang-tubu",
+                          "name": "轻装徒步",
+                          "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                          "followers": 15700,
+                          "verified": true
+                        },
+                        "likes": 214,
+                        "replies": 9,
+                        "ip_location": "浙江"
+                      }
+                    ]
+                  },
+                  "page": {
+                    "next_cursor": "c1.k3Fq9xYbT0aP2mWnR8sVdA",
+                    "cursor_expires_at": "2026-11-12T08:00:00.000Z",
+                    "has_more": true,
+                    "returned": 1
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "zhihu.answers.comments.list",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {},
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/zhihu/answers/comments/list/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0.002",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "Zhihu answer comments",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "zhihu comments",
+            "comments under a zhihu answer"
+          ],
+          "zh": [
+            "知乎评论区",
+            "知乎回答下的评论"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "posts.comments.list",
+        "x-one-of": [],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": 86400,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/zhihu/comments/replies/list": {
+      "get": {
+        "operationId": "zhihu_comments_replies_list",
+        "summary": "Zhihu comment replies",
+        "description": "The replies under a top-level comment, by the comment's ID, 20 a page: text, replier, likes, IP location and which comment each one answers.\n\nPrice: $0.002 per call. 1,000 items take about 50 calls: $0.10. Failed calls are not charged.",
+        "tags": [
+          "zhihu"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "The top-level comment ID (digits), from zhihu.answers.comments.list.",
+            "schema": {
+              "type": "string",
+              "description": "The top-level comment ID (digits), from zhihu.answers.comments.list.",
+              "examples": [
+                "10114474814"
+              ]
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "schema": {
+              "type": "string",
+              "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call."
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of comment objects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentListResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "items": [
+                      {
+                        "id": "7302000000000000001",
+                        "post_id": "7301234567890123456",
+                        "parent_id": null,
+                        "text": "这个帐篷收起来好小，求链接",
+                        "published_at": "2026-11-02T11:04:00Z",
+                        "author": {
+                          "id": "b32409944256dfd62a963434fcda6aa9",
+                          "username": "qingzhuang-tubu",
+                          "name": "轻装徒步",
+                          "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                          "followers": 15700,
+                          "verified": true
+                        },
+                        "likes": 214,
+                        "replies": 9,
+                        "ip_location": "浙江"
+                      }
+                    ]
+                  },
+                  "page": {
+                    "next_cursor": "c1.k3Fq9xYbT0aP2mWnR8sVdA",
+                    "cursor_expires_at": "2026-11-12T08:00:00.000Z",
+                    "has_more": true,
+                    "returned": 1
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "zhihu.comments.replies.list",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {},
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/zhihu/comments/replies/list/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0.002",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "Zhihu comment replies",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "zhihu sub comments",
+            "zhihu reply thread"
+          ],
+          "zh": [
+            "知乎楼中楼",
+            "知乎二级评论",
+            "知乎子评论"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "comments.replies.list",
+        "x-one-of": [],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": 86400,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/zhihu/articles/get": {
+      "get": {
+        "operationId": "zhihu_articles_get",
+        "summary": "Zhihu article detail",
+        "description": "One column article by ID or link: title, full text, author, upvotes, comment count and the topics it is filed under (as hashtags). Give id or url.\n\nPrice: $0.002 per call. 1,000 calls cost $2.00. Failed calls are not charged.",
+        "tags": [
+          "zhihu"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "description": "The article ID (digits): the number after zhuanlan.zhihu.com/p/. Give id or url.",
+            "schema": {
+              "type": "string",
+              "description": "The article ID (digits): the number after zhuanlan.zhihu.com/p/. Give id or url.",
+              "examples": [
+                "521711978"
+              ]
+            }
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "required": false,
+            "description": "The article link: zhuanlan.zhihu.com/p/….",
+            "schema": {
+              "type": "string",
+              "description": "The article link: zhuanlan.zhihu.com/p/….",
+              "examples": [
+                "https://zhuanlan.zhihu.com/p/521711978"
+              ]
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "One post object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "item": {
+                      "id": "3283784039",
+                      "url": "https://www.zhihu.com/question/568657112/answer/3283784039",
+                      "type": "text",
+                      "title": "预算 3000 元左右，有哪些不错的露营装备推荐？",
+                      "text": "先说结论：帐篷和睡袋别省，其他都可以慢慢换。",
+                      "lang": "zh",
+                      "published_at": "2026-11-02T09:30:00Z",
+                      "author": {
+                        "id": "b32409944256dfd62a963434fcda6aa9",
+                        "username": "qingzhuang-tubu",
+                        "name": "轻装徒步",
+                        "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                        "followers": 15700,
+                        "verified": true
+                      },
+                      "metrics": {
+                        "views": null,
+                        "likes": 48200,
+                        "comments": 1312,
+                        "shares": null,
+                        "favorites": 9650,
+                        "reposts": null
+                      },
+                      "images": null,
+                      "hashtags": null
+                    }
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "zhihu.articles.get",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {
+                      "metrics.views": "platform",
+                      "metrics.shares": "platform",
+                      "metrics.reposts": "platform"
+                    },
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/zhihu/articles/get/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "Zhihu article detail",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "zhihu column article",
+            "zhuanlan article"
+          ],
+          "zh": [
+            "知乎专栏文章",
+            "知乎文章全文"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "posts.get",
+        "x-one-of": [
+          [
+            "id",
+            "url"
+          ]
+        ],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": null,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/zhihu/columns/articles/list": {
+      "get": {
+        "operationId": "zhihu_columns_articles_list",
+        "summary": "Zhihu column articles",
+        "description": "The articles in a column, by the column's ID, 20 a page: title, text, author, time published, upvotes and comment count.\n\nPrice: $0.002 per call. 1,000 items take about 50 calls: $0.10. Failed calls are not charged.",
+        "tags": [
+          "zhihu"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "The column ID: what follows zhuanlan.zhihu.com/ in the column's link (a word, or c_ and digits).",
+            "schema": {
+              "type": "string",
+              "description": "The column ID: what follows zhuanlan.zhihu.com/ in the column's link (a word, or c_ and digits).",
+              "examples": [
+                "intelligentunit"
+              ]
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "schema": {
+              "type": "string",
+              "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call."
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of post objects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostListResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "items": [
+                      {
+                        "id": "3283784039",
+                        "url": "https://www.zhihu.com/question/568657112/answer/3283784039",
+                        "type": "text",
+                        "title": "预算 3000 元左右，有哪些不错的露营装备推荐？",
+                        "text": "先说结论：帐篷和睡袋别省，其他都可以慢慢换。",
+                        "lang": "zh",
+                        "published_at": "2026-11-02T09:30:00Z",
+                        "author": {
+                          "id": "b32409944256dfd62a963434fcda6aa9",
+                          "username": "qingzhuang-tubu",
+                          "name": "轻装徒步",
+                          "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                          "followers": 15700,
+                          "verified": true
+                        },
+                        "metrics": {
+                          "views": null,
+                          "likes": 48200,
+                          "comments": 1312,
+                          "shares": null,
+                          "favorites": 9650,
+                          "reposts": null
+                        },
+                        "images": null,
+                        "hashtags": null
+                      }
+                    ]
+                  },
+                  "page": {
+                    "next_cursor": "c1.k3Fq9xYbT0aP2mWnR8sVdA",
+                    "cursor_expires_at": "2026-11-12T08:00:00.000Z",
+                    "has_more": true,
+                    "returned": 1
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "zhihu.columns.articles.list",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {
+                      "metrics.views": "platform",
+                      "metrics.shares": "platform",
+                      "metrics.reposts": "platform"
+                    },
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/zhihu/columns/articles/list/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0.002",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "Zhihu column articles",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "zhihu column posts",
+            "zhuanlan column articles"
+          ],
+          "zh": [
+            "知乎专栏文章",
+            "专栏全部文章"
+          ]
+        },
+        "x-category": "social",
+        "x-role": null,
+        "x-one-of": [],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": 86400,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/zhihu/pins/get": {
+      "get": {
+        "operationId": "zhihu_pins_get",
+        "summary": "Zhihu pin detail",
+        "description": "One pin (a short post, 想法) by ID or link: text, pictures, author, likes, comments, saves, reposts and time posted. Give id or url.\n\nPrice: $0.002 per call. 1,000 calls cost $2.00. Failed calls are not charged.",
+        "tags": [
+          "zhihu"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "description": "The pin ID (digits): the number after zhihu.com/pin/. Give id or url.",
+            "schema": {
+              "type": "string",
+              "description": "The pin ID (digits): the number after zhihu.com/pin/. Give id or url.",
+              "examples": [
+                "2042267446984402904"
+              ]
+            }
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "required": false,
+            "description": "The pin link: zhihu.com/pin/….",
+            "schema": {
+              "type": "string",
+              "description": "The pin link: zhihu.com/pin/….",
+              "examples": [
+                "https://www.zhihu.com/pin/2042267446984402904"
+              ]
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "One post object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "item": {
+                      "id": "3283784039",
+                      "url": "https://www.zhihu.com/question/568657112/answer/3283784039",
+                      "type": "text",
+                      "title": "预算 3000 元左右，有哪些不错的露营装备推荐？",
+                      "text": "先说结论：帐篷和睡袋别省，其他都可以慢慢换。",
+                      "lang": "zh",
+                      "published_at": "2026-11-02T09:30:00Z",
+                      "author": {
+                        "id": "b32409944256dfd62a963434fcda6aa9",
+                        "username": "qingzhuang-tubu",
+                        "name": "轻装徒步",
+                        "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                        "followers": 15700,
+                        "verified": true
+                      },
+                      "metrics": {
+                        "views": null,
+                        "likes": 48200,
+                        "comments": 1312,
+                        "shares": null,
+                        "favorites": 9650,
+                        "reposts": null
+                      },
+                      "images": null,
+                      "hashtags": null
+                    }
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "zhihu.pins.get",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {
+                      "metrics.views": "platform",
+                      "metrics.shares": "platform",
+                      "metrics.reposts": "platform"
+                    },
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/zhihu/pins/get/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "Zhihu pin detail",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "zhihu thought",
+            "zhihu short post"
+          ],
+          "zh": [
+            "知乎想法",
+            "知乎动态详情"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "posts.get",
+        "x-one-of": [
+          [
+            "id",
+            "url"
+          ]
+        ],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": null,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/zhihu/users/get": {
+      "get": {
+        "operationId": "zhihu_users_get",
+        "summary": "Zhihu user profile",
+        "description": "A person's profile by the handle in their link: name, headline and follower count, with answer and article counts, whether it is an organisation and IP location under ext.\n\nPrice: $0.002 per call. 1,000 calls cost $2.00. Failed calls are not charged.",
+        "tags": [
+          "zhihu"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "description": "The handle in the profile's link (url_token): what follows zhihu.com/people/.",
+            "schema": {
+              "type": "string",
+              "description": "The handle in the profile's link (url_token): what follows zhihu.com/people/.",
+              "examples": [
+                "zhihuadmin"
+              ]
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "One account object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "item": {
+                      "id": "b32409944256dfd62a963434fcda6aa9",
+                      "url": "https://www.zhihu.com/people/qingzhuang-tubu",
+                      "username": "qingzhuang-tubu",
+                      "name": "轻装徒步",
+                      "bio": "轻装，走远路。",
+                      "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                      "verified": true,
+                      "followers": 182300,
+                      "following": 312,
+                      "posts": 486,
+                      "likes": 2310000
+                    }
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "zhihu.users.get",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {},
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/zhihu/users/get/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "Zhihu user profile",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "zhihu profile",
+            "zhihu account info"
+          ],
+          "zh": [
+            "知乎主页",
+            "知乎账号信息",
+            "知乎个人资料"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "accounts.get",
+        "x-one-of": [],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": null,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/zhihu/users/search": {
+      "get": {
+        "operationId": "zhihu_users_search",
+        "summary": "Zhihu user search",
+        "description": "People and organisations matching keywords, 20 a page: name and follower count, with answer and article counts, upvotes received and whether it is an organisation under ext. The headline is in the profile (zhihu.users.get).\n\nPrice: $0.002 per call. 1,000 items take about 50 calls: $0.10. Failed calls are not charged.",
+        "tags": [
+          "zhihu"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "description": "Keywords, as a person would type them into the platform search box.",
+            "schema": {
+              "type": "string",
+              "description": "Keywords, as a person would type them into the platform search box.",
+              "examples": [
+                "人民日报"
+              ]
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "schema": {
+              "type": "string",
+              "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call."
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of account objects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountListResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "items": [
+                      {
+                        "id": "b32409944256dfd62a963434fcda6aa9",
+                        "url": "https://www.zhihu.com/people/qingzhuang-tubu",
+                        "username": "qingzhuang-tubu",
+                        "name": "轻装徒步",
+                        "bio": "轻装，走远路。",
+                        "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                        "verified": true,
+                        "followers": 182300,
+                        "following": 312,
+                        "posts": 486,
+                        "likes": 2310000
+                      }
+                    ]
+                  },
+                  "page": {
+                    "next_cursor": "c1.k3Fq9xYbT0aP2mWnR8sVdA",
+                    "cursor_expires_at": "2026-11-12T08:00:00.000Z",
+                    "has_more": true,
+                    "returned": 1
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "zhihu.users.search",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {},
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/zhihu/users/search/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0.002",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "Zhihu user search",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "find zhihu users",
+            "zhihu people search"
+          ],
+          "zh": [
+            "知乎搜人",
+            "知乎找答主",
+            "知乎账号搜索"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "accounts.search",
+        "x-one-of": [],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": 86400,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/zhihu/users/followers/list": {
+      "get": {
+        "operationId": "zhihu_users_followers_list",
+        "summary": "Zhihu user followers",
+        "description": "The people following an account, by its handle, 20 a page: name, handle, headline, avatar, follower count, and (under ext) answer and article counts and whether it is an organisation.\n\nPrice: $0.002 per call. 1,000 items take about 50 calls: $0.10. Failed calls are not charged.",
+        "tags": [
+          "zhihu"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "description": "The handle in the profile's link (url_token): what follows zhihu.com/people/.",
+            "schema": {
+              "type": "string",
+              "description": "The handle in the profile's link (url_token): what follows zhihu.com/people/.",
+              "examples": [
+                "zhihuadmin"
+              ]
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "schema": {
+              "type": "string",
+              "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call."
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of account objects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountListResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "items": [
+                      {
+                        "id": "b32409944256dfd62a963434fcda6aa9",
+                        "url": "https://www.zhihu.com/people/qingzhuang-tubu",
+                        "username": "qingzhuang-tubu",
+                        "name": "轻装徒步",
+                        "bio": "轻装，走远路。",
+                        "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                        "verified": true,
+                        "followers": 182300,
+                        "following": 312,
+                        "posts": 486,
+                        "likes": 2310000
+                      }
+                    ]
+                  },
+                  "page": {
+                    "next_cursor": "c1.k3Fq9xYbT0aP2mWnR8sVdA",
+                    "cursor_expires_at": "2026-11-12T08:00:00.000Z",
+                    "has_more": true,
+                    "returned": 1
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "zhihu.users.followers.list",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {},
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/zhihu/users/followers/list/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0.002",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "Zhihu user followers",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "zhihu fans",
+            "who follows a zhihu user"
+          ],
+          "zh": [
+            "知乎粉丝",
+            "知乎关注者列表"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "accounts.followers.list",
+        "x-one-of": [],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": 86400,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/zhihu/users/answers/list": {
+      "get": {
+        "operationId": "zhihu_users_answers_list",
+        "summary": "Zhihu user answers",
+        "description": "The answers a person wrote, by their handle, 20 a page, newest first: the question (as title), the text, upvotes, comments and time posted.\n\nPrice: $0.002 per call. 1,000 items take about 50 calls: $0.10. Failed calls are not charged.",
+        "tags": [
+          "zhihu"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "description": "The handle in the profile's link (url_token): what follows zhihu.com/people/.",
+            "schema": {
+              "type": "string",
+              "description": "The handle in the profile's link (url_token): what follows zhihu.com/people/.",
+              "examples": [
+                "zhihuadmin"
+              ]
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "schema": {
+              "type": "string",
+              "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call."
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of post objects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostListResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "items": [
+                      {
+                        "id": "3283784039",
+                        "url": "https://www.zhihu.com/question/568657112/answer/3283784039",
+                        "type": "text",
+                        "title": "预算 3000 元左右，有哪些不错的露营装备推荐？",
+                        "text": "先说结论：帐篷和睡袋别省，其他都可以慢慢换。",
+                        "lang": "zh",
+                        "published_at": "2026-11-02T09:30:00Z",
+                        "author": {
+                          "id": "b32409944256dfd62a963434fcda6aa9",
+                          "username": "qingzhuang-tubu",
+                          "name": "轻装徒步",
+                          "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                          "followers": 15700,
+                          "verified": true
+                        },
+                        "metrics": {
+                          "views": null,
+                          "likes": 48200,
+                          "comments": 1312,
+                          "shares": null,
+                          "favorites": 9650,
+                          "reposts": null
+                        },
+                        "images": null,
+                        "hashtags": null
+                      }
+                    ]
+                  },
+                  "page": {
+                    "next_cursor": "c1.k3Fq9xYbT0aP2mWnR8sVdA",
+                    "cursor_expires_at": "2026-11-12T08:00:00.000Z",
+                    "has_more": true,
+                    "returned": 1
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "zhihu.users.answers.list",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {
+                      "metrics.views": "platform",
+                      "metrics.shares": "platform",
+                      "metrics.reposts": "platform"
+                    },
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/zhihu/users/answers/list/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0.002",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "Zhihu user answers",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "answers by a zhihu user",
+            "zhihu answer history"
+          ],
+          "zh": [
+            "知乎答主的回答",
+            "知乎用户回答列表"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "accounts.posts.list",
+        "x-one-of": [],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": 86400,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/zhihu/users/articles/list": {
+      "get": {
+        "operationId": "zhihu_users_articles_list",
+        "summary": "Zhihu user articles",
+        "description": "The column articles a person wrote, by their handle, 20 a page, newest first: title, text, upvotes, comments and time published.\n\nPrice: $0.002 per call. 1,000 items take about 50 calls: $0.10. Failed calls are not charged.",
+        "tags": [
+          "zhihu"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "description": "The handle in the profile's link (url_token): what follows zhihu.com/people/.",
+            "schema": {
+              "type": "string",
+              "description": "The handle in the profile's link (url_token): what follows zhihu.com/people/.",
+              "examples": [
+                "zhihuadmin"
+              ]
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "schema": {
+              "type": "string",
+              "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call."
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of post objects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostListResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "items": [
+                      {
+                        "id": "3283784039",
+                        "url": "https://www.zhihu.com/question/568657112/answer/3283784039",
+                        "type": "text",
+                        "title": "预算 3000 元左右，有哪些不错的露营装备推荐？",
+                        "text": "先说结论：帐篷和睡袋别省，其他都可以慢慢换。",
+                        "lang": "zh",
+                        "published_at": "2026-11-02T09:30:00Z",
+                        "author": {
+                          "id": "b32409944256dfd62a963434fcda6aa9",
+                          "username": "qingzhuang-tubu",
+                          "name": "轻装徒步",
+                          "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                          "followers": 15700,
+                          "verified": true
+                        },
+                        "metrics": {
+                          "views": null,
+                          "likes": 48200,
+                          "comments": 1312,
+                          "shares": null,
+                          "favorites": 9650,
+                          "reposts": null
+                        },
+                        "images": null,
+                        "hashtags": null
+                      }
+                    ]
+                  },
+                  "page": {
+                    "next_cursor": "c1.k3Fq9xYbT0aP2mWnR8sVdA",
+                    "cursor_expires_at": "2026-11-12T08:00:00.000Z",
+                    "has_more": true,
+                    "returned": 1
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "zhihu.users.articles.list",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {
+                      "metrics.views": "platform",
+                      "metrics.shares": "platform",
+                      "metrics.reposts": "platform"
+                    },
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/zhihu/users/articles/list/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0.002",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "Zhihu user articles",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "articles by a zhihu user",
+            "zhihu user posts"
+          ],
+          "zh": [
+            "知乎用户的文章",
+            "知乎作者文章列表"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "accounts.posts.list",
+        "x-one-of": [],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": 86400,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/zhihu/users/pins/list": {
+      "get": {
+        "operationId": "zhihu_users_pins_list",
+        "summary": "Zhihu user pins",
+        "description": "The pins (short posts, 想法) a person posted, by their handle, 20 a page, newest first: text, pictures, likes, comments, saves, reposts and time posted.\n\nPrice: $0.002 per call. 1,000 items take about 50 calls: $0.10. Failed calls are not charged.",
+        "tags": [
+          "zhihu"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "description": "The handle in the profile's link (url_token): what follows zhihu.com/people/.",
+            "schema": {
+              "type": "string",
+              "description": "The handle in the profile's link (url_token): what follows zhihu.com/people/.",
+              "examples": [
+                "zhihuadmin"
+              ]
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "schema": {
+              "type": "string",
+              "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call."
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of post objects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostListResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "items": [
+                      {
+                        "id": "3283784039",
+                        "url": "https://www.zhihu.com/question/568657112/answer/3283784039",
+                        "type": "text",
+                        "title": "预算 3000 元左右，有哪些不错的露营装备推荐？",
+                        "text": "先说结论：帐篷和睡袋别省，其他都可以慢慢换。",
+                        "lang": "zh",
+                        "published_at": "2026-11-02T09:30:00Z",
+                        "author": {
+                          "id": "b32409944256dfd62a963434fcda6aa9",
+                          "username": "qingzhuang-tubu",
+                          "name": "轻装徒步",
+                          "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                          "followers": 15700,
+                          "verified": true
+                        },
+                        "metrics": {
+                          "views": null,
+                          "likes": 48200,
+                          "comments": 1312,
+                          "shares": null,
+                          "favorites": 9650,
+                          "reposts": null
+                        },
+                        "images": null,
+                        "hashtags": null
+                      }
+                    ]
+                  },
+                  "page": {
+                    "next_cursor": "c1.k3Fq9xYbT0aP2mWnR8sVdA",
+                    "cursor_expires_at": "2026-11-12T08:00:00.000Z",
+                    "has_more": true,
+                    "returned": 1
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "zhihu.users.pins.list",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {
+                      "metrics.views": "platform",
+                      "metrics.shares": "platform",
+                      "metrics.reposts": "platform"
+                    },
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/zhihu/users/pins/list/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0.002",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "Zhihu user pins",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "zhihu thoughts by a user",
+            "zhihu user short posts"
+          ],
+          "zh": [
+            "知乎用户想法列表",
+            "知乎动态"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "accounts.posts.list",
+        "x-one-of": [],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": 86400,
         "x-snapshot-seconds": null
       }
     },
@@ -37403,6 +40182,688 @@
         "x-snapshot-seconds": null
       }
     },
+    "/v1/youtube/channels/get": {
+      "get": {
+        "operationId": "youtube_channels_get",
+        "summary": "YouTube channel profile",
+        "description": "A channel by ID or handle: name, description, avatar, verification, subscribers and video count (rounded as YouTube shows them), and under ext its total views, the day it joined, the links in its About section, country and banner. The handle comes back when you ask by handle. Give id or username.\n\nPrice: $0.002 per call. 1,000 calls cost $2.00. Failed calls are not charged.",
+        "tags": [
+          "youtube"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "description": "The channel ID, starting with UC. Give id or username.",
+            "schema": {
+              "type": "string",
+              "description": "The channel ID, starting with UC. Give id or username.",
+              "examples": [
+                "UCLA_DiR1FfKNvjuUpBHmylQ"
+              ]
+            }
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "description": "The channel's handle, with or without @. Give id or username.",
+            "schema": {
+              "type": "string",
+              "description": "The channel's handle, with or without @. Give id or username.",
+              "examples": [
+                "NASA"
+              ]
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "One account object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "item": {
+                      "id": "UCa1b2c3d4e5f6g7h8i9j0kL",
+                      "url": "https://www.youtube.com/@trailkit",
+                      "username": "@trailkit",
+                      "name": "Trail Kit",
+                      "bio": "Light packs, long walks.",
+                      "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                      "verified": true,
+                      "followers": 182300,
+                      "following": 312,
+                      "posts": 486,
+                      "likes": null
+                    }
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "youtube.channels.get",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {},
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/youtube/channels/get/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "YouTube channel profile",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "youtube channel info",
+            "youtube subscriber count",
+            "youtube channel stats"
+          ],
+          "zh": [
+            "油管频道信息",
+            "YouTube 订阅数",
+            "油管频道资料"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "accounts.get",
+        "x-one-of": [
+          [
+            "id",
+            "username"
+          ]
+        ],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": null,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/youtube/channels/search": {
+      "get": {
+        "operationId": "youtube_channels_search",
+        "summary": "YouTube channel search",
+        "description": "Find channels by keywords, 20 a page in YouTube's order: channel ID, name, the start of the description, avatar and subscribers (rounded as YouTube shows them). No handle or badge here; youtube.channels.get gives the badge.\n\nPrice: $0.004 per call. 1,000 items take about 50 calls: $0.20. Failed calls are not charged.",
+        "tags": [
+          "youtube"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "description": "Keywords, as a person would type them into the platform search box.",
+            "schema": {
+              "type": "string",
+              "description": "Keywords, as a person would type them into the platform search box.",
+              "examples": [
+                "nasa"
+              ]
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "schema": {
+              "type": "string",
+              "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call."
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of account objects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountListResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "items": [
+                      {
+                        "id": "UCa1b2c3d4e5f6g7h8i9j0kL",
+                        "url": "https://www.youtube.com/@trailkit",
+                        "username": "@trailkit",
+                        "name": "Trail Kit",
+                        "bio": "Light packs, long walks.",
+                        "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                        "verified": true,
+                        "followers": 182300,
+                        "following": 312,
+                        "posts": 486,
+                        "likes": null
+                      }
+                    ]
+                  },
+                  "page": {
+                    "next_cursor": "c1.k3Fq9xYbT0aP2mWnR8sVdA",
+                    "cursor_expires_at": "2026-11-12T08:00:00.000Z",
+                    "has_more": true,
+                    "returned": 1
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "youtube.channels.search",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.004",
+                      "currency": "USD",
+                      "balance_after": "9.996"
+                    },
+                    "unavailable": {},
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/youtube/channels/search/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.004",
+          "max_per_call": "0.004",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0.004",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "YouTube channel search",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "find youtube channels",
+            "youtube creator search",
+            "youtube youtuber search"
+          ],
+          "zh": [
+            "油管搜频道",
+            "YouTube 找博主",
+            "油管频道搜索"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "accounts.search",
+        "x-one-of": [],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": 86400,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/youtube/channels/videos/list": {
+      "get": {
+        "operationId": "youtube_channels_videos_list",
+        "summary": "YouTube channel videos",
+        "description": "A channel's videos or its Shorts, newest first, about 30 a page, by channel ID or handle: title, views, cover and, for videos, length and roughly when it was published (YouTube says \"3 weeks ago\"). A channel ID nobody has reads like a channel without such videos: an empty page. Give id or username.\n\nPrice: $0.002 per call. 1,000 items take about 34 calls: $0.068. Failed calls are not charged.",
+        "tags": [
+          "youtube"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "description": "The channel ID, starting with UC. Give id or username.",
+            "schema": {
+              "type": "string",
+              "description": "The channel ID, starting with UC. Give id or username.",
+              "examples": [
+                "UCLA_DiR1FfKNvjuUpBHmylQ"
+              ]
+            }
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "description": "The channel's handle, with or without @. Give id or username.",
+            "schema": {
+              "type": "string",
+              "description": "The channel's handle, with or without @. Give id or username.",
+              "examples": [
+                "NASA"
+              ]
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "Regular videos (the default) or Shorts.",
+            "schema": {
+              "type": "string",
+              "description": "Regular videos (the default) or Shorts.",
+              "enum": [
+                "video",
+                "short"
+              ],
+              "default": "video"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "description": "Newest first; the only order this source has (no most-viewed order).",
+            "schema": {
+              "type": "string",
+              "description": "Newest first; the only order this source has (no most-viewed order).",
+              "enum": [
+                "latest"
+              ],
+              "default": "latest"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "schema": {
+              "type": "string",
+              "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call."
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of post objects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostListResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "items": [
+                      {
+                        "id": "Zx3kP9vQm2A",
+                        "url": "https://www.youtube.com/watch?v=Zx3kP9vQm2A",
+                        "type": "video",
+                        "title": "Two nights, one backpack: my full camping kit",
+                        "text": "What I packed, what I would leave at home, and what it all weighs.",
+                        "lang": "en",
+                        "published_at": "2026-11-02T09:30:00Z",
+                        "author": {
+                          "id": "UCa1b2c3d4e5f6g7h8i9j0kL",
+                          "username": "@trailkit",
+                          "name": "Trail Kit",
+                          "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                          "followers": 412000,
+                          "verified": true
+                        },
+                        "metrics": {
+                          "views": 1250000,
+                          "likes": 48200,
+                          "comments": 1312,
+                          "shares": null,
+                          "favorites": null,
+                          "reposts": null
+                        },
+                        "images": null,
+                        "hashtags": [
+                          "camping"
+                        ]
+                      }
+                    ]
+                  },
+                  "page": {
+                    "next_cursor": "c1.k3Fq9xYbT0aP2mWnR8sVdA",
+                    "cursor_expires_at": "2026-11-12T08:00:00.000Z",
+                    "has_more": true,
+                    "returned": 1
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "youtube.channels.videos.list",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {
+                      "metrics.shares": "platform",
+                      "metrics.favorites": "platform",
+                      "metrics.reposts": "platform"
+                    },
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/youtube/channels/videos/list/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0.002",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "YouTube channel videos",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "youtube channel uploads",
+            "youtube shorts of a channel",
+            "list youtube videos"
+          ],
+          "zh": [
+            "油管频道视频",
+            "YouTube 频道 Shorts",
+            "油管上传列表"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "accounts.posts.list",
+        "x-one-of": [
+          [
+            "id",
+            "username"
+          ]
+        ],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": 86400,
+        "x-snapshot-seconds": null
+      }
+    },
     "/v1/tiktok/videos/transcript/get": {
       "get": {
         "operationId": "tiktok_videos_transcript_get",
@@ -38682,6 +42143,453 @@
         },
         "x-category": "commerce",
         "x-role": "shops.products.list",
+        "x-one-of": [],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": 86400,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/tiktok/users/followers/list": {
+      "get": {
+        "operationId": "tiktok_users_followers_list",
+        "summary": "TikTok account followers",
+        "description": "The accounts following a TikTok account, newest followers first, 20 a page, by handle or account ID: handle, name, bio, avatar, followers, following, video count, likes received, and (under ext) the follower's country or region and language. Give id or username.\n\nPrice: $0.002 per call. 1,000 items take about 50 calls: $0.10. Failed calls are not charged.",
+        "tags": [
+          "tiktok"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "description": "The TikTok handle, with or without @. Give username or id.",
+            "schema": {
+              "type": "string",
+              "description": "The TikTok handle, with or without @. Give username or id.",
+              "examples": [
+                "nasa"
+              ]
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "description": "The account ID instead of the handle: the digits in id from tiktok.users.get, or its ext.sec_uid (MS4w…). Saves the handle lookup. Give username or id.",
+            "schema": {
+              "type": "string",
+              "description": "The account ID instead of the handle: the digits in id from tiktok.users.get, or its ext.sec_uid (MS4w…). Saves the handle lookup. Give username or id.",
+              "examples": [
+                "7664638705177150477"
+              ]
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "schema": {
+              "type": "string",
+              "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call."
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of account objects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountListResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "items": [
+                      {
+                        "id": "6812345678901234567",
+                        "url": "https://www.tiktok.com/@trailkit",
+                        "username": "trailkit",
+                        "name": "Trail Kit",
+                        "bio": "Light packs, long walks.",
+                        "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                        "verified": true,
+                        "followers": 182300,
+                        "following": 312,
+                        "posts": 486,
+                        "likes": 2310000
+                      }
+                    ]
+                  },
+                  "page": {
+                    "next_cursor": "c1.k3Fq9xYbT0aP2mWnR8sVdA",
+                    "cursor_expires_at": "2026-11-12T08:00:00.000Z",
+                    "has_more": true,
+                    "returned": 1
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "tiktok.users.followers.list",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {},
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/tiktok/users/followers/list/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0.002",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "TikTok account followers",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "tiktok fans list",
+            "who follows a tiktok account",
+            "tiktok audience"
+          ],
+          "zh": [
+            "TikTok 粉丝",
+            "TikTok 粉丝画像",
+            "TikTok 关注者"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "accounts.followers.list",
+        "x-one-of": [
+          [
+            "id",
+            "username"
+          ]
+        ],
+        "x-post": false,
+        "x-batch-max": null,
+        "x-cursor-ttl-seconds": 86400,
+        "x-snapshot-seconds": null
+      }
+    },
+    "/v1/tiktok/hashtags/videos/list": {
+      "get": {
+        "operationId": "tiktok_hashtags_videos_list",
+        "summary": "TikTok hashtag videos",
+        "description": "The videos under a hashtag, by its name, about 20 a page in TikTok's order: caption, author, plays, likes, comments, shares, saves, hashtags and time posted, with length, cover and music under ext.\n\nPrice: $0.002 per call. 1,000 items take about 50 calls: $0.10. Failed calls are not charged.",
+        "tags": [
+          "tiktok"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "The hashtag name, with or without #.",
+            "schema": {
+              "type": "string",
+              "description": "The hashtag name, with or without #.",
+              "examples": [
+                "nasa"
+              ]
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.",
+            "schema": {
+              "type": "string",
+              "description": "Opaque cursor from page.next_cursor of the previous call. Each page is a separate call."
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+            "schema": {
+              "type": "string",
+              "description": "How much of each object comes back. full adds platform-specific fields under ext.",
+              "enum": [
+                "compact",
+                "standard",
+                "full"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated.",
+              "examples": [
+                [
+                  "id",
+                  "text",
+                  "metrics.likes"
+                ]
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "$ref": "#/components/parameters/XMaxPrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of post objects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostListResponse"
+                },
+                "example": {
+                  "code": "ok",
+                  "request_id": "0f6c2a8e-4b1d-4e0a-9a51-3c7d2b9e1f20",
+                  "data": {
+                    "items": [
+                      {
+                        "id": "7305085486984858894",
+                        "url": "https://www.tiktok.com/@trailkit/video/7305085486984858894",
+                        "type": "video",
+                        "title": null,
+                        "text": "Everything I packed for two nights in the hills #camping #gear",
+                        "lang": "en",
+                        "published_at": "2026-11-02T09:30:00Z",
+                        "author": {
+                          "id": "6812345678901234567",
+                          "username": "trailkit",
+                          "name": "Trail Kit",
+                          "avatar_url": "https://cdn.example.com/avatar/trailkit.jpg",
+                          "followers": 182300,
+                          "verified": true
+                        },
+                        "metrics": {
+                          "views": 1250000,
+                          "likes": 48200,
+                          "comments": 1312,
+                          "shares": 2210,
+                          "favorites": 9650,
+                          "reposts": null
+                        },
+                        "images": null,
+                        "hashtags": [
+                          "camping",
+                          "gear"
+                        ]
+                      }
+                    ]
+                  },
+                  "page": {
+                    "next_cursor": "c1.k3Fq9xYbT0aP2mWnR8sVdA",
+                    "cursor_expires_at": "2026-11-12T08:00:00.000Z",
+                    "has_more": true,
+                    "returned": 1
+                  },
+                  "warnings": [],
+                  "meta": {
+                    "capability": "tiktok.hashtags.videos.list",
+                    "result_status": "complete",
+                    "billing": {
+                      "amount": "0.002",
+                      "currency": "USD",
+                      "balance_after": "9.998"
+                    },
+                    "unavailable": {
+                      "metrics.reposts": "platform"
+                    },
+                    "cached": false,
+                    "replayed": false,
+                    "fetched_at": "2026-11-11T08:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/E400"
+          },
+          "401": {
+            "$ref": "#/components/responses/E401"
+          },
+          "402": {
+            "$ref": "#/components/responses/E402"
+          },
+          "403": {
+            "$ref": "#/components/responses/E403"
+          },
+          "404": {
+            "$ref": "#/components/responses/E404"
+          },
+          "409": {
+            "$ref": "#/components/responses/E409"
+          },
+          "410": {
+            "$ref": "#/components/responses/E410"
+          },
+          "429": {
+            "$ref": "#/components/responses/E429"
+          },
+          "500": {
+            "$ref": "#/components/responses/E500"
+          },
+          "502": {
+            "$ref": "#/components/responses/E502"
+          },
+          "503": {
+            "$ref": "#/components/responses/E503"
+          },
+          "504": {
+            "$ref": "#/components/responses/E504"
+          }
+        },
+        "externalDocs": {
+          "url": "https://okdata.online/apis/tiktok/hashtags/videos/list/"
+        },
+        "x-price": {
+          "unit": "call",
+          "amount": "0.002",
+          "max_per_call": "0.002",
+          "currency": "USD"
+        },
+        "x-charges": {
+          "minimum": null,
+          "when_empty": "0.002",
+          "when_not_found": "0"
+        },
+        "x-status": "preview",
+        "x-short": "TikTok hashtag videos",
+        "x-group": null,
+        "x-aliases": {
+          "en": [
+            "tiktok hashtag feed",
+            "tiktok challenge videos",
+            "tiktok tag posts"
+          ],
+          "zh": [
+            "TikTok 标签视频",
+            "TikTok 挑战赛视频",
+            "TikTok 话题下的视频"
+          ]
+        },
+        "x-category": "social",
+        "x-role": "topics.posts.list",
         "x-one-of": [],
         "x-post": false,
         "x-batch-max": null,
@@ -42755,20 +46663,398 @@
     "/v1/catalog/status": {
       "get": {
         "operationId": "catalog_status",
-        "summary": "Endpoint status",
+        "summary": "Service status",
         "tags": [
           "catalog"
         ],
         "security": [],
-        "description": "Which endpoints are up right now. Free, no key needed.",
+        "description": "What is up right now per endpoint and per platform, the incidents on record, and the share of calls served over the last 30 days. Free, no key needed, any origin.",
         "responses": {
           "200": {
-            "description": "Status per endpoint.",
+            "description": "Status. When call history cannot be read, the answer still has the paused states, with a warning and no incidents or availability.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true
+                  "required": [
+                    "code",
+                    "request_id",
+                    "data",
+                    "warnings"
+                  ],
+                  "properties": {
+                    "code": {
+                      "const": "ok"
+                    },
+                    "request_id": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "revision",
+                        "checked_at",
+                        "summary",
+                        "endpoints",
+                        "live",
+                        "platforms",
+                        "incidents",
+                        "availability"
+                      ],
+                      "properties": {
+                        "revision": {
+                          "type": "string",
+                          "description": "The catalog revision this answer is about."
+                        },
+                        "checked_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "summary": {
+                          "type": "object",
+                          "required": [
+                            "available",
+                            "paused",
+                            "degraded"
+                          ],
+                          "description": "available + paused = every endpoint; degraded counts the available ones that are degraded.",
+                          "properties": {
+                            "available": {
+                              "type": "integer"
+                            },
+                            "paused": {
+                              "type": "integer"
+                            },
+                            "degraded": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "endpoints": {
+                          "type": "array",
+                          "description": "Every endpoint: status is available (takes calls, degraded included) or paused (answers capability_paused).",
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "path",
+                              "status"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "path": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string",
+                                "enum": [
+                                  "available",
+                                  "paused"
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        "live": {
+                          "type": "object",
+                          "required": [
+                            "as_of",
+                            "status"
+                          ],
+                          "properties": {
+                            "as_of": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "status": {
+                              "type": "object",
+                              "additionalProperties": {
+                                "type": "string",
+                                "enum": [
+                                  "available",
+                                  "degraded",
+                                  "paused"
+                                ]
+                              },
+                              "description": "Per endpoint. degraded: still takes calls, but in the last 60 minutes at least 5 calls finished and at least half of them were not served (upstream_failed, upstream_busy, timeout, cursor_unavailable, internal_error). paused wins."
+                            }
+                          }
+                        },
+                        "platforms": {
+                          "type": "object",
+                          "description": "By platform: available when every endpoint it has opened is available, paused when all are paused, degraded in between. Endpoints listed as coming soon count as paused without moving the status.",
+                          "additionalProperties": {
+                            "type": "object",
+                            "required": [
+                              "status",
+                              "capabilities",
+                              "available",
+                              "degraded",
+                              "paused"
+                            ],
+                            "properties": {
+                              "status": {
+                                "type": "string",
+                                "enum": [
+                                  "available",
+                                  "degraded",
+                                  "paused"
+                                ]
+                              },
+                              "capabilities": {
+                                "type": "integer"
+                              },
+                              "available": {
+                                "type": "integer"
+                              },
+                              "degraded": {
+                                "type": "integer"
+                              },
+                              "paused": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        },
+                        "incidents": {
+                          "type": "array",
+                          "description": "Written by a person, newest first: open ones and those resolved in the last 30 days.",
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "title",
+                              "body",
+                              "billing_note",
+                              "started_at",
+                              "resolved_at",
+                              "updated_at",
+                              "affected"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "object",
+                                "description": "What happened, in a line.",
+                                "required": [
+                                  "en",
+                                  "zh"
+                                ],
+                                "additionalProperties": false,
+                                "properties": {
+                                  "en": {
+                                    "type": "string"
+                                  },
+                                  "zh": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "body": {
+                                "type": "object",
+                                "description": "More detail; may be empty.",
+                                "required": [
+                                  "en",
+                                  "zh"
+                                ],
+                                "additionalProperties": false,
+                                "properties": {
+                                  "en": {
+                                    "type": "string"
+                                  },
+                                  "zh": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "billing_note": {
+                                "type": "object",
+                                "description": "Whether callers were charged while it lasted; may be empty.",
+                                "required": [
+                                  "en",
+                                  "zh"
+                                ],
+                                "additionalProperties": false,
+                                "properties": {
+                                  "en": {
+                                    "type": "string"
+                                  },
+                                  "zh": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "started_at": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "resolved_at": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "format": "date-time",
+                                "description": "null while it is open."
+                              },
+                              "updated_at": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "affected": {
+                                "type": "object",
+                                "required": [
+                                  "capabilities",
+                                  "platforms"
+                                ],
+                                "description": "What it is about, as its writer named it; either list may be empty.",
+                                "properties": {
+                                  "capabilities": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "platforms": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "availability": {
+                          "type": [
+                            "object",
+                            "null"
+                          ],
+                          "description": "The share of calls that were served (0 to 1, cut to 6 decimals) over the last 30 UTC days, today so far included, or since the first call on record when that is later (`days` of them, the first `since`). A call counts once it finished; insufficient_balance and capability_paused do not count. Days add up by calls; a day with no calls adds nothing (null in daily). Endpoints and platforms without calls in the window are left out. null when nothing counts yet.",
+                          "required": [
+                            "days",
+                            "since",
+                            "service",
+                            "platforms",
+                            "capabilities",
+                            "daily"
+                          ],
+                          "properties": {
+                            "days": {
+                              "type": "integer"
+                            },
+                            "since": {
+                              "type": "string",
+                              "format": "date"
+                            },
+                            "service": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 1
+                            },
+                            "platforms": {
+                              "type": "object",
+                              "additionalProperties": {
+                                "type": "number",
+                                "minimum": 0,
+                                "maximum": 1
+                              }
+                            },
+                            "capabilities": {
+                              "type": "object",
+                              "additionalProperties": {
+                                "type": "number",
+                                "minimum": 0,
+                                "maximum": 1
+                              }
+                            },
+                            "daily": {
+                              "type": "array",
+                              "description": "One entry per day from since to today.",
+                              "items": {
+                                "type": "object",
+                                "required": [
+                                  "day",
+                                  "service",
+                                  "platforms"
+                                ],
+                                "properties": {
+                                  "day": {
+                                    "type": "string",
+                                    "format": "date"
+                                  },
+                                  "service": {
+                                    "type": [
+                                      "number",
+                                      "null"
+                                    ],
+                                    "minimum": 0,
+                                    "maximum": 1
+                                  },
+                                  "platforms": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "warnings": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/catalog/status/incidents.atom": {
+      "get": {
+        "operationId": "catalog_status_incidents_feed",
+        "summary": "Incidents feed",
+        "tags": [
+          "catalog"
+        ],
+        "security": [],
+        "description": "The incidents of /v1/catalog/status as an Atom feed. Free, no key needed.",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en",
+                "zh"
+              ],
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Atom 1.0.",
+            "content": {
+              "application/atom+xml": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -43141,7 +47427,7 @@
               "null"
             ],
             "format": "date-time",
-            "description": "When it was published, ISO 8601 in UTC; null only where the platform gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics), then listed in meta.unavailable.",
+            "description": "When it was published, ISO 8601 in UTC; null only where the source gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics, youtube.channels.videos.list with type=short), then listed in meta.unavailable.",
             "x-view": "compact"
           },
           "author": {
@@ -48212,6 +52498,47 @@
           "suggestion": {
             "type": "string",
             "description": "An endpoint path close to the one asked for."
+          },
+          "alternative": {
+            "type": "object",
+            "description": "On capability_paused and upstream failures, when the endpoint has a backup on the same platform that takes calls: the backup to send the request to, with a new Idempotency-Key, at its own price. Check its parameters (a few differ); a cursor does not carry over.",
+            "required": [
+              "capability",
+              "path",
+              "per",
+              "price",
+              "note",
+              "note_zh"
+            ],
+            "properties": {
+              "capability": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              },
+              "per": {
+                "type": "string",
+                "enum": [
+                  "call",
+                  "item"
+                ]
+              },
+              "price": {
+                "type": "string",
+                "description": "US dollars, as a decimal string."
+              },
+              "minimum": {
+                "type": "string",
+                "description": "unit=item: the least one call costs."
+              },
+              "note": {
+                "type": "string"
+              },
+              "note_zh": {
+                "type": "string"
+              }
+            }
           },
           "top_up_url": {
             "type": "string",

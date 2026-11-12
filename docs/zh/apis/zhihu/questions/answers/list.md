@@ -39,7 +39,7 @@ cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs
 | `title` | string \| null | 标题（视频、笔记、文章才有）。 |
 | `text` | string | 文案、正文或简介，纯文本；文章为 Markdown。 |
 | `lang` | string \| null | 语言代码，平台给出或检测得到。 |
-| `published_at` | string \| null | 发布时间，ISO 8601，UTC；只有平台不给时间时为 null（wechat_mp.articles.metrics、wechat_channels.videos.metrics），并列在 meta.unavailable 里。 |
+| `published_at` | string \| null | 发布时间，ISO 8601，UTC；只有数据源不给时间时为 null（wechat_mp.articles.metrics、wechat_channels.videos.metrics、youtube.channels.videos.list 取 Shorts 时），并列在 meta.unavailable 里。 |
 | `author` | AccountRef | 发布者。 |
 | `metrics` | Metrics | 抓取时的数据；平台不公开的为 null。 |
 | `images` | string[] \| null | 图文内容的图片地址。 |
@@ -203,3 +203,16 @@ console.log('cost: $' + body.meta.billing.amount);
 ## 知乎的其他接口
 
 - [知乎内容搜索](https://okdata.online/zh/apis/zhihu/posts/search/)：$0.002/次 · 每页约 20 条帖子
+- [知乎问题详情](https://okdata.online/zh/apis/zhihu/questions/get/)：$0.002/次
+- [知乎回答详情](https://okdata.online/zh/apis/zhihu/answers/get/)：$0.002/次
+- [知乎回答评论](https://okdata.online/zh/apis/zhihu/answers/comments/list/)：$0.002/次 · 每页约 10 条评论
+- [知乎评论回复](https://okdata.online/zh/apis/zhihu/comments/replies/list/)：$0.002/次 · 每页约 20 条评论
+- [知乎文章详情](https://okdata.online/zh/apis/zhihu/articles/get/)：$0.002/次
+- [知乎专栏文章列表](https://okdata.online/zh/apis/zhihu/columns/articles/list/)：$0.002/次 · 每页约 20 篇文章
+- [知乎想法详情](https://okdata.online/zh/apis/zhihu/pins/get/)：$0.002/次
+- [知乎用户资料](https://okdata.online/zh/apis/zhihu/users/get/)：$0.002/次
+- [知乎用户搜索](https://okdata.online/zh/apis/zhihu/users/search/)：$0.002/次 · 每页约 20 个账号
+- [知乎用户粉丝列表](https://okdata.online/zh/apis/zhihu/users/followers/list/)：$0.002/次 · 每页约 20 个账号
+- [知乎用户回答](https://okdata.online/zh/apis/zhihu/users/answers/list/)：$0.002/次 · 每页约 20 条帖子
+- [知乎用户文章](https://okdata.online/zh/apis/zhihu/users/articles/list/)：$0.002/次 · 每页约 20 篇文章
+- [知乎用户想法](https://okdata.online/zh/apis/zhihu/users/pins/list/)：$0.002/次 · 每页约 20 条帖子

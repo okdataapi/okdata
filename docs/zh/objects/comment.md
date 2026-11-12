@@ -42,6 +42,8 @@
 - [Reddit 帖子评论](https://okdata.online/zh/apis/reddit/posts/comments/list/) (`reddit.posts.comments.list`): $0.002/次 · 每页约 10 条评论
 - [快手作品评论](https://okdata.online/zh/apis/kuaishou/videos/comments/list/) (`kuaishou.videos.comments.list`): $0.002/次 · 每页约 10 条评论
 - [快手评论回复](https://okdata.online/zh/apis/kuaishou/comments/replies/list/) (`kuaishou.comments.replies.list`): $0.002/次 · 每页约 20 条评论
+- [知乎回答评论](https://okdata.online/zh/apis/zhihu/answers/comments/list/) (`zhihu.answers.comments.list`): $0.002/次 · 每页约 10 条评论
+- [知乎评论回复](https://okdata.online/zh/apis/zhihu/comments/replies/list/) (`zhihu.comments.replies.list`): $0.002/次 · 每页约 20 条评论
 - [视频号作品评论](https://okdata.online/zh/apis/wechat_channels/videos/comments/list/) (`wechat_channels.videos.comments.list`): $0.015/次 · 每页约 25 条评论
 - [视频号评论回复](https://okdata.online/zh/apis/wechat_channels/comments/replies/list/) (`wechat_channels.comments.replies.list`): $0.015/次 · 每页约 20 条评论
 - [抖音评论回复](https://okdata.online/zh/apis/douyin/comments/replies/list/) (`douyin.comments.replies.list`): $0.002/次 · 每页约 20 条评论

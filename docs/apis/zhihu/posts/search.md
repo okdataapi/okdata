@@ -40,7 +40,7 @@ Each item is a [Post](https://okdata.online/docs/objects/post/).
 | `title` | string \| null | Title, where the platform has one (videos, notes, articles). |
 | `text` | string | Caption, body or description as plain text; articles come as Markdown. |
 | `lang` | string \| null | Language code, as reported or detected. |
-| `published_at` | string \| null | When it was published, ISO 8601 in UTC; null only where the platform gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics), then listed in meta.unavailable. |
+| `published_at` | string \| null | When it was published, ISO 8601 in UTC; null only where the source gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics, youtube.channels.videos.list with type=short), then listed in meta.unavailable. |
 | `author` | AccountRef | Who posted it. |
 | `metrics` | Metrics | Counts at fetch time; a count the platform hides is null. |
 | `images` | string[] \| null | Image URLs for image posts and notes. |
@@ -204,3 +204,16 @@ The field is null, and meta.unavailable names it with the reason: platform (the 
 ## More Zhihu endpoints
 
 - [Zhihu question answers](https://okdata.online/apis/zhihu/questions/answers/list/): $0.002 per call · about 20 posts per page
+- [Zhihu question detail](https://okdata.online/apis/zhihu/questions/get/): $0.002 per call
+- [Zhihu answer detail](https://okdata.online/apis/zhihu/answers/get/): $0.002 per call
+- [Zhihu answer comments](https://okdata.online/apis/zhihu/answers/comments/list/): $0.002 per call · about 10 comments per page
+- [Zhihu comment replies](https://okdata.online/apis/zhihu/comments/replies/list/): $0.002 per call · about 20 comments per page
+- [Zhihu article detail](https://okdata.online/apis/zhihu/articles/get/): $0.002 per call
+- [Zhihu column articles](https://okdata.online/apis/zhihu/columns/articles/list/): $0.002 per call · about 20 articles per page
+- [Zhihu pin detail](https://okdata.online/apis/zhihu/pins/get/): $0.002 per call
+- [Zhihu user profile](https://okdata.online/apis/zhihu/users/get/): $0.002 per call
+- [Zhihu user search](https://okdata.online/apis/zhihu/users/search/): $0.002 per call · about 20 accounts per page
+- [Zhihu user followers](https://okdata.online/apis/zhihu/users/followers/list/): $0.002 per call · about 20 accounts per page
+- [Zhihu user answers](https://okdata.online/apis/zhihu/users/answers/list/): $0.002 per call · about 20 posts per page
+- [Zhihu user articles](https://okdata.online/apis/zhihu/users/articles/list/): $0.002 per call · about 20 articles per page
+- [Zhihu user pins](https://okdata.online/apis/zhihu/users/pins/list/): $0.002 per call · about 20 posts per page

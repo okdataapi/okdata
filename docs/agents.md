@@ -1,6 +1,6 @@
 # Connect okdata in this agent
 
-> You are an AI agent and a person wants you to use okdata: public data from 17 social and content platforms, 196 endpoints behind one key, paid per call from $0.0001. Work through the four steps in order. If one fails, stop and tell the person which step and why.
+> You are an AI agent and a person wants you to use okdata: public data from 17 social and content platforms, 214 endpoints behind one key, paid per call from $0.0001. Work through the four steps in order. If one fails, stop and tell the person which step and why.
 
 中文版在本文件后半部分，也可单独读：https://okdata.online/zh/agents.md
 
@@ -95,13 +95,13 @@ The server has 5 tools:
 - No key needed: [catalog](https://api.okdata.online/v1/catalog) and [status](https://api.okdata.online/v1/catalog/status)
 - [Agent skills](https://okdata.online/.well-known/agent-skills/index.json), [MCP server card](https://okdata.online/.well-known/mcp/server-card.json), [API catalog](https://okdata.online/.well-known/api-catalog), [AI catalog](https://okdata.online/.well-known/ai-catalog.json)
 
-Generated from catalog 93bd2077ee161657, price book f4f90b4727f4840a.
+Generated from catalog d54bb626c60b95fd, price book 1b273c48fea9634e.
 
 ---
 
 ## 在这个 agent 里接入 okdata
 
-> 你是一个 AI agent，有人想让你用上 okdata：17 个社媒和内容平台的公开数据，一把 Key 调 196 个接口，按次付费，最低 $0.0001。按顺序做完下面四步；哪一步不成，就停下来告诉对方是哪一步、为什么。
+> 你是一个 AI agent，有人想让你用上 okdata：17 个社媒和内容平台的公开数据，一把 Key 调 214 个接口，按次付费，最低 $0.0001。按顺序做完下面四步；哪一步不成，就停下来告诉对方是哪一步、为什么。
 
 ### 1. 保存 Key
 
@@ -194,4 +194,4 @@ bearer_token_env_var = "OKDATA_API_KEY"
 - 不需要 Key：[接口目录](https://api.okdata.online/v1/catalog)和[服务状态](https://api.okdata.online/v1/catalog/status)
 - [Agent Skills](https://okdata.online/.well-known/agent-skills/index.json)、[MCP 服务卡片](https://okdata.online/.well-known/mcp/server-card.json)、[API 目录](https://okdata.online/.well-known/api-catalog)、[AI 目录](https://okdata.online/.well-known/ai-catalog.json)
 
-根据接口目录 93bd2077ee161657、价目表 f4f90b4727f4840a 生成。
+根据接口目录 d54bb626c60b95fd、价目表 1b273c48fea9634e 生成。

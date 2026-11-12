@@ -1,8 +1,8 @@
 # okdata：全部接口
 
-> 全部 196 个接口，一行一个：名称（链接到完整说明的 Markdown）、请求、价格和返回内容。调用、计费和错误处理所有接口都一样，见 https://okdata.online/zh/llms.txt
+> 全部 214 个接口，一行一个：名称（链接到完整说明的 Markdown）、请求、价格和返回内容。调用、计费和错误处理所有接口都一样，见 https://okdata.online/zh/llms.txt
 
-接口目录 93bd2077ee161657，价目表 f4f90b4727f4840a。 English: https://okdata.online/llms-full.txt
+接口目录 d54bb626c60b95fd，价目表 1b273c48fea9634e。 English: https://okdata.online/llms-full.txt
 
 ## 抖音
 
@@ -132,6 +132,8 @@
 - [TikTok 账号作品](https://okdata.online/zh/apis/tiktok/users/videos/list.md) `GET /v1/tiktok/users/videos/list` $0.002/次 · 每页约 10 条视频。按用户名取账号发布的视频，每页 10 条，按最新或最热排：文案、播放、点赞、评论、分享、收藏和发布时间。置顶的视频会标出来（ext.is_pinned）。
 - [TikTok 创意中心热门广告详情](https://okdata.online/zh/apis/tiktok/creative_center/ads/get.md) `GET /v1/tiktok/creative_center/ads/get` $0.002/次。按 ID 取 TikTok 创意中心的一条热门广告：广告视频和封面、文案、品牌、落地页，ext 里还有点赞、评论、分享、时长、投放目标、行业和投放国家。这是精选展示，没有投放日期。
 - [TikTok Shop 店铺商品](https://okdata.online/zh/apis/tiktok/shop/sellers/products/list.md) `GET /v1/tiktok/shop/sellers/products/list` $0.002/次 · 每页约 20 个商品。按店铺 ID 取一家 TikTok Shop 美国站店铺在售的商品，一页一页取（每页多少由 TikTok 决定，通常 10 到 20 个）：标题、现价和原价、评分、评价数、已售件数和图片。
+- [TikTok 账号粉丝列表](https://okdata.online/zh/apis/tiktok/users/followers/list.md) `GET /v1/tiktok/users/followers/list` $0.002/次 · 每页约 20 个账号。按用户名或账号 ID 取关注某个 TikTok 账号的人，最新关注的在前，每页 20 个：用户名、名称、简介、头像、粉丝数、关注数、作品数、获赞数，ext 里还有粉丝的国家或地区和语言。
+- [TikTok 话题作品](https://okdata.online/zh/apis/tiktok/hashtags/videos/list.md) `GET /v1/tiktok/hashtags/videos/list` $0.002/次 · 每页约 20 条视频。按话题名取话题下的视频，每页约 20 条，按 TikTok 给的顺序：文案、作者、播放、点赞、评论、分享、收藏、话题标签和发布时间，ext 里还有时长、封面和音乐。
 
 ## X（推特）
 
@@ -165,6 +167,9 @@
 - [YouTube 评论回复](https://okdata.online/zh/apis/youtube/comments/replies/list.md) `GET /v1/youtube/comments/replies/list` $0.002/次 · 每页约 10 条评论。用评论的回复标识取这条评论下的回复，每次约 10 条：内容、回复者（用户名、头像、认证）、点赞，以及大约的发布时间（YouTube 只说“6 年前”）。post_id 和 parent_id 从回复标识里读出。
 - [YouTube 频道帖子](https://okdata.online/zh/apis/youtube/channels/posts/list.md) `GET /v1/youtube/channels/posts/list` $0.002/次 · 每页约 10 条帖子。频道“帖子”栏（原“社区”）里的帖子，从新到旧，每页约 10 条，按频道 ID 或用户名取：正文、图片、点赞、帖子分享的视频（ext.video_id，封面在 images 里），以及大约的发布时间（YouTube 只说“4 天前”）。不存在的频道 ID 和没有帖子的频道一样，返回空结果。
 - [YouTube 帖子详情](https://okdata.online/zh/apis/youtube/posts/get.md) `GET /v1/youtube/posts/get` $0.002/次。按 ID 或链接取一条频道帖子（原“社区”帖）：正文、频道、图片、点赞、帖子分享的视频（ext.video_id，封面在 images 里），以及大约的发布时间。
+- [YouTube 频道资料](https://okdata.online/zh/apis/youtube/channels/get.md) `GET /v1/youtube/channels/get` $0.002/次。按频道 ID 或用户名取一个频道：名称、简介、头像、认证、订阅数和视频数（按 YouTube 显示的取整），ext 里还有总播放量、注册日期、“关于”里列的链接、国家和横幅图。按用户名查时会带回用户名。
+- [YouTube 频道搜索](https://okdata.online/zh/apis/youtube/channels/search.md) `GET /v1/youtube/channels/search` $0.004/次 · 每页约 20 个账号。按关键词找频道，每页 20 个，按 YouTube 的顺序：频道 ID、名称、简介开头、头像和订阅数（按 YouTube 显示的取整）。这里没有用户名和认证标识，认证标识可用 youtube.channels.get 查。
+- [YouTube 频道视频](https://okdata.online/zh/apis/youtube/channels/videos/list.md) `GET /v1/youtube/channels/videos/list` $0.002/次 · 每页约 30 条视频。按频道 ID 或用户名取频道的视频或 Shorts，从新到旧，每页约 30 条：标题、播放数、封面，普通视频还有时长和大约的发布时间（YouTube 只说“3 周前”）。不存在的频道 ID 和没有这类视频的频道一样，返回空结果。
 
 ## Meta 广告库
 
@@ -217,6 +222,19 @@
 
 - [知乎内容搜索](https://okdata.online/zh/apis/zhihu/posts/search.md) `GET /v1/zhihu/posts/search` $0.002/次 · 每页约 20 条帖子。按关键词搜回答和文章，可按相关、最新或最多赞同排，可只要回答或只要文章：标题（回答的标题是问题）、全文、作者、赞同、评论和收藏。
 - [知乎问题回答](https://okdata.online/zh/apis/zhihu/questions/answers/list.md) `GET /v1/zhihu/questions/answers/list` $0.002/次 · 每页约 20 条帖子。按问题 ID 或链接取问题下排在最前的 20 条回答（知乎自己的顺序）：标题（即问题）、全文、作者和粉丝数、赞同、评论、收藏和发布时间。只有一页，不翻页。
+- [知乎问题详情](https://okdata.online/zh/apis/zhihu/questions/get.md) `GET /v1/zhihu/questions/get` $0.002/次。即将上线：已列出，暂不能调用。按问题 ID 或链接取一个问题：标题、问题下的补充说明、提问时间和浏览数，ext 里还有回答数和关注数。
+- [知乎回答详情](https://okdata.online/zh/apis/zhihu/answers/get.md) `GET /v1/zhihu/answers/get` $0.002/次。即将上线：已列出，暂不能调用。按回答 ID 或链接取一条回答：所答的问题（作标题）、全文、作者和发布时间。
+- [知乎回答评论](https://okdata.online/zh/apis/zhihu/answers/comments/list.md) `GET /v1/zhihu/answers/comments/list` $0.002/次 · 每页约 10 条评论。即将上线：已列出，暂不能调用。按回答 ID 取回答下的一级评论，一页一页取，按知乎默认顺序：内容、评论者、点赞、回复数、发布时间和 IP 属地。
+- [知乎评论回复](https://okdata.online/zh/apis/zhihu/comments/replies/list.md) `GET /v1/zhihu/comments/replies/list` $0.002/次 · 每页约 20 条评论。即将上线：已列出，暂不能调用。按一级评论 ID 取它下面的回复，每页 20 条：内容、回复者、点赞、IP 属地，以及每条回的是哪一条。
+- [知乎文章详情](https://okdata.online/zh/apis/zhihu/articles/get.md) `GET /v1/zhihu/articles/get` $0.002/次。即将上线：已列出，暂不能调用。按文章 ID 或链接取一篇专栏文章：标题、全文、作者、赞同数、评论数和所属话题（放在 hashtags 里）。
+- [知乎专栏文章列表](https://okdata.online/zh/apis/zhihu/columns/articles/list.md) `GET /v1/zhihu/columns/articles/list` $0.002/次 · 每页约 20 篇文章。即将上线：已列出，暂不能调用。按专栏 ID 取专栏里的文章，每页 20 篇：标题、正文、作者、发布时间、赞同数和评论数。
+- [知乎想法详情](https://okdata.online/zh/apis/zhihu/pins/get.md) `GET /v1/zhihu/pins/get` $0.002/次。即将上线：已列出，暂不能调用。按 ID 或链接取一条想法（知乎的短动态）：正文、图片、作者、点赞、评论、收藏、转发和发布时间。
+- [知乎用户资料](https://okdata.online/zh/apis/zhihu/users/get.md) `GET /v1/zhihu/users/get` $0.002/次。即将上线：已列出，暂不能调用。按主页链接里的用户名取一个人的资料：名字、一句话介绍和粉丝数，ext 里还有回答数、文章数、是否机构号和 IP 属地。
+- [知乎用户搜索](https://okdata.online/zh/apis/zhihu/users/search.md) `GET /v1/zhihu/users/search` $0.002/次 · 每页约 20 个账号。即将上线：已列出，暂不能调用。按关键词找知乎用户和机构号，每页 20 个：名字和粉丝数，ext 里还有回答数、文章数、获赞数和是否机构号。一句话介绍要在资料（zhihu.users.get）里看。
+- [知乎用户粉丝列表](https://okdata.online/zh/apis/zhihu/users/followers/list.md) `GET /v1/zhihu/users/followers/list` $0.002/次 · 每页约 20 个账号。即将上线：已列出，暂不能调用。按用户名取关注这个账号的人，每页 20 个：名字、用户名、一句话介绍、头像、粉丝数，ext 里还有回答数、文章数和是否机构号。
+- [知乎用户回答](https://okdata.online/zh/apis/zhihu/users/answers/list.md) `GET /v1/zhihu/users/answers/list` $0.002/次 · 每页约 20 条帖子。即将上线：已列出，暂不能调用。按用户名取一个人写的回答，每页 20 条，从新到旧：所答问题（作标题）、正文、赞同、评论和发布时间。
+- [知乎用户文章](https://okdata.online/zh/apis/zhihu/users/articles/list.md) `GET /v1/zhihu/users/articles/list` $0.002/次 · 每页约 20 篇文章。即将上线：已列出，暂不能调用。按用户名取一个人写的专栏文章，每页 20 篇，从新到旧：标题、正文、赞同、评论和发布时间。
+- [知乎用户想法](https://okdata.online/zh/apis/zhihu/users/pins/list.md) `GET /v1/zhihu/users/pins/list` $0.002/次 · 每页约 20 条帖子。即将上线：已列出，暂不能调用。按用户名取一个人发的想法（知乎的短动态），每页 20 条，从新到旧：正文、图片、点赞、评论、收藏、转发和发布时间。
 
 ## 微信视频号
 

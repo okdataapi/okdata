@@ -14,7 +14,7 @@
 | `title` | string \| null | 标题（视频、笔记、文章才有）。 |
 | `text` | string | 文案、正文或简介，纯文本；文章为 Markdown。 |
 | `lang` | string \| null | 语言代码，平台给出或检测得到。 |
-| `published_at` | string \| null | 发布时间，ISO 8601，UTC；只有平台不给时间时为 null（wechat_mp.articles.metrics、wechat_channels.videos.metrics），并列在 meta.unavailable 里。 |
+| `published_at` | string \| null | 发布时间，ISO 8601，UTC；只有数据源不给时间时为 null（wechat_mp.articles.metrics、wechat_channels.videos.metrics、youtube.channels.videos.list 取 Shorts 时），并列在 meta.unavailable 里。 |
 | `author` | AccountRef | 发布者。 |
 | `metrics` | Metrics | 抓取时的数据；平台不公开的为 null。 |
 | `images` | string[] \| null | 图文内容的图片地址。 |
@@ -76,6 +76,14 @@
 - [快手账号作品](https://okdata.online/zh/apis/kuaishou/users/videos/list/) (`kuaishou.users.videos.list`): $0.02/次 · 每页约 20 条视频
 - [知乎内容搜索](https://okdata.online/zh/apis/zhihu/posts/search/) (`zhihu.posts.search`): $0.002/次 · 每页约 20 条帖子
 - [知乎问题回答](https://okdata.online/zh/apis/zhihu/questions/answers/list/) (`zhihu.questions.answers.list`): $0.002/次 · 每页约 20 条帖子
+- [知乎问题详情](https://okdata.online/zh/apis/zhihu/questions/get/) (`zhihu.questions.get`): $0.002/次
+- [知乎回答详情](https://okdata.online/zh/apis/zhihu/answers/get/) (`zhihu.answers.get`): $0.002/次
+- [知乎文章详情](https://okdata.online/zh/apis/zhihu/articles/get/) (`zhihu.articles.get`): $0.002/次
+- [知乎专栏文章列表](https://okdata.online/zh/apis/zhihu/columns/articles/list/) (`zhihu.columns.articles.list`): $0.002/次 · 每页约 20 篇文章
+- [知乎想法详情](https://okdata.online/zh/apis/zhihu/pins/get/) (`zhihu.pins.get`): $0.002/次
+- [知乎用户回答](https://okdata.online/zh/apis/zhihu/users/answers/list/) (`zhihu.users.answers.list`): $0.002/次 · 每页约 20 条帖子
+- [知乎用户文章](https://okdata.online/zh/apis/zhihu/users/articles/list/) (`zhihu.users.articles.list`): $0.002/次 · 每页约 20 篇文章
+- [知乎用户想法](https://okdata.online/zh/apis/zhihu/users/pins/list/) (`zhihu.users.pins.list`): $0.002/次 · 每页约 20 条帖子
 - [视频号视频搜索](https://okdata.online/zh/apis/wechat_channels/videos/search/) (`wechat_channels.videos.search`): $0.02/次 · 每页约 10 条视频
 - [视频号账号作品](https://okdata.online/zh/apis/wechat_channels/users/videos/list/) (`wechat_channels.users.videos.list`): $0.02/次 · 每页约 15 条视频
 - [视频号作品详情](https://okdata.online/zh/apis/wechat_channels/videos/get/) (`wechat_channels.videos.get`): $0.02/次
@@ -106,7 +114,9 @@
 - [Telegram 单条消息](https://okdata.online/zh/apis/telegram/messages/get/) (`telegram.messages.get`): $0.002/次
 - [YouTube 频道帖子](https://okdata.online/zh/apis/youtube/channels/posts/list/) (`youtube.channels.posts.list`): $0.002/次 · 每页约 10 条帖子
 - [YouTube 帖子详情](https://okdata.online/zh/apis/youtube/posts/get/) (`youtube.posts.get`): $0.002/次
+- [YouTube 频道视频](https://okdata.online/zh/apis/youtube/channels/videos/list/) (`youtube.channels.videos.list`): $0.002/次 · 每页约 30 条视频
 - [TikTok 账号作品](https://okdata.online/zh/apis/tiktok/users/videos/list/) (`tiktok.users.videos.list`): $0.002/次 · 每页约 10 条视频
+- [TikTok 话题作品](https://okdata.online/zh/apis/tiktok/hashtags/videos/list/) (`tiktok.hashtags.videos.list`): $0.002/次 · 每页约 20 条视频
 - [X 帖子回复](https://okdata.online/zh/apis/x/posts/replies/list/) (`x.posts.replies.list`): $0.002/次 · 每页约 35 条帖子
 - [X 帖子引用](https://okdata.online/zh/apis/x/posts/quotes/list/) (`x.posts.quotes.list`): $0.0003/条 · 每次最多 $0.006
 - [X 长文](https://okdata.online/zh/apis/x/posts/article/get/) (`x.posts.article.get`): $0.002/次

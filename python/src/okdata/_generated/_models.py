@@ -1023,7 +1023,7 @@ class Post(TypedDict, total=False):
     lang: Optional[str]
     """Language code, as reported or detected. (view=standard and up)"""
     published_at: Optional[str]
-    """When it was published, ISO 8601 in UTC; null only where the platform gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics), then listed in meta.unavailable."""
+    """When it was published, ISO 8601 in UTC; null only where the source gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics, youtube.channels.videos.list with type=short), then listed in meta.unavailable."""
     author: AccountRef
     """Who posted it."""
     metrics: Metrics

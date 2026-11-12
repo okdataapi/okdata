@@ -36,6 +36,9 @@
 - [Reddit 用户活跃社区](https://okdata.online/zh/apis/reddit/users/subreddits/list/) (`reddit.users.subreddits.list`): $0.002/次 · 每页约 30 个账号
 - [快手账号信息](https://okdata.online/zh/apis/kuaishou/users/get/) (`kuaishou.users.get`): $0.02/次
 - [快手账号搜索](https://okdata.online/zh/apis/kuaishou/users/search/) (`kuaishou.users.search`): $0.02/次 · 每页约 20 个账号
+- [知乎用户资料](https://okdata.online/zh/apis/zhihu/users/get/) (`zhihu.users.get`): $0.002/次
+- [知乎用户搜索](https://okdata.online/zh/apis/zhihu/users/search/) (`zhihu.users.search`): $0.002/次 · 每页约 20 个账号
+- [知乎用户粉丝列表](https://okdata.online/zh/apis/zhihu/users/followers/list/) (`zhihu.users.followers.list`): $0.002/次 · 每页约 20 个账号
 - [视频号账号搜索](https://okdata.online/zh/apis/wechat_channels/users/search/) (`wechat_channels.users.search`): $0.02/次 · 每页约 1 个账号
 - [视频号账号信息](https://okdata.online/zh/apis/wechat_channels/users/get/) (`wechat_channels.users.get`): $0.02/次
 - [抖音账号搜索](https://okdata.online/zh/apis/douyin/users/search/) (`douyin.users.search`): $0.002/次 · 每页约 30 个账号
@@ -48,7 +51,10 @@
 - [公众号资料](https://okdata.online/zh/apis/wechat_mp/accounts/get/) (`wechat_mp.accounts.get`): $0.02/次
 - [视频号账号信息（备用版）](https://okdata.online/zh/apis/wechat_channels/backup/users/get/) (`wechat_channels.backup.users.get`): $0.03/次
 - [Telegram 频道资料](https://okdata.online/zh/apis/telegram/channels/get/) (`telegram.channels.get`): $0.002/次
+- [YouTube 频道资料](https://okdata.online/zh/apis/youtube/channels/get/) (`youtube.channels.get`): $0.002/次
+- [YouTube 频道搜索](https://okdata.online/zh/apis/youtube/channels/search/) (`youtube.channels.search`): $0.004/次 · 每页约 20 个账号
 - [TikTok 账号搜索](https://okdata.online/zh/apis/tiktok/users/search/) (`tiktok.users.search`): $0.002/次 · 每页约 30 个账号
+- [TikTok 账号粉丝列表](https://okdata.online/zh/apis/tiktok/users/followers/list/) (`tiktok.users.followers.list`): $0.002/次 · 每页约 20 个账号
 - [X 帖子转推用户](https://okdata.online/zh/apis/x/posts/retweeters/list/) (`x.posts.retweeters.list`): $0.002/次 · 每页约 100 个账号
 - [X 账号搜索](https://okdata.online/zh/apis/x/users/search/) (`x.users.search`): $0.0004/条 · 每次最多 $0.008
 - [X 账号粉丝](https://okdata.online/zh/apis/x/users/followers/list/) (`x.users.followers.list`): $0.0001/条 · 每次最多 $0.02

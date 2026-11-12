@@ -42,6 +42,8 @@ The same shape on every platform. A field a platform does not have is null, and 
 - [Reddit post comments](https://okdata.online/apis/reddit/posts/comments/list/) (`reddit.posts.comments.list`): $0.002 per call · about 10 comments per page
 - [Kuaishou video comments](https://okdata.online/apis/kuaishou/videos/comments/list/) (`kuaishou.videos.comments.list`): $0.002 per call · about 10 comments per page
 - [Kuaishou comment replies](https://okdata.online/apis/kuaishou/comments/replies/list/) (`kuaishou.comments.replies.list`): $0.002 per call · about 20 comments per page
+- [Zhihu answer comments](https://okdata.online/apis/zhihu/answers/comments/list/) (`zhihu.answers.comments.list`): $0.002 per call · about 10 comments per page
+- [Zhihu comment replies](https://okdata.online/apis/zhihu/comments/replies/list/) (`zhihu.comments.replies.list`): $0.002 per call · about 20 comments per page
 - [WeChat Channels video comments](https://okdata.online/apis/wechat_channels/videos/comments/list/) (`wechat_channels.videos.comments.list`): $0.015 per call · about 25 comments per page
 - [WeChat Channels comment replies](https://okdata.online/apis/wechat_channels/comments/replies/list/) (`wechat_channels.comments.replies.list`): $0.015 per call · about 20 comments per page
 - [Douyin comment replies](https://okdata.online/apis/douyin/comments/replies/list/) (`douyin.comments.replies.list`): $0.002 per call · about 20 comments per page

@@ -1016,7 +1016,7 @@ export interface Post {
   text: string;
   /** Language code, as reported or detected. (view=standard and up) */
   lang?: string | null;
-  /** When it was published, ISO 8601 in UTC; null only where the platform gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics), then listed in meta.unavailable. */
+  /** When it was published, ISO 8601 in UTC; null only where the source gives no time (wechat_mp.articles.metrics, wechat_channels.videos.metrics, youtube.channels.videos.list with type=short), then listed in meta.unavailable. */
   published_at: string | null;
   /** Who posted it. */
   author: AccountRef;

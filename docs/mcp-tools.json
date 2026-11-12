@@ -2,7 +2,7 @@
   {
     "name": "find",
     "title": "Find a capability",
-    "description": "Find the capability for a need described in plain words, English or Chinese, among 196 on 17 platforms: up to 5, best first, each with what it needs, its price and a ready call. With a platform and no match it lists everything that platform has; never use another platform's capability in its place. Free, no key.",
+    "description": "Find the capability for a need described in plain words, English or Chinese, among 214 on 17 platforms: up to 5, best first, each with what it needs, its price and a ready call. With a platform and no match it lists everything that platform has; never use another platform's capability in its place. Free, no key.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -165,6 +165,19 @@
             "kuaishou.trends.list",
             "zhihu.posts.search",
             "zhihu.questions.answers.list",
+            "zhihu.questions.get",
+            "zhihu.answers.get",
+            "zhihu.answers.comments.list",
+            "zhihu.comments.replies.list",
+            "zhihu.articles.get",
+            "zhihu.columns.articles.list",
+            "zhihu.pins.get",
+            "zhihu.users.get",
+            "zhihu.users.search",
+            "zhihu.users.followers.list",
+            "zhihu.users.answers.list",
+            "zhihu.users.articles.list",
+            "zhihu.users.pins.list",
             "wechat_channels.videos.search",
             "wechat_channels.users.search",
             "wechat_channels.users.get",
@@ -256,12 +269,17 @@
             "youtube.comments.replies.list",
             "youtube.channels.posts.list",
             "youtube.posts.get",
+            "youtube.channels.get",
+            "youtube.channels.search",
+            "youtube.channels.videos.list",
             "tiktok.videos.transcript.get",
             "tiktok.comments.replies.list",
             "tiktok.users.search",
             "tiktok.users.videos.list",
             "tiktok.creative_center.ads.get",
             "tiktok.shop.sellers.products.list",
+            "tiktok.users.followers.list",
+            "tiktok.hashtags.videos.list",
             "x.posts.replies.list",
             "x.posts.quotes.list",
             "x.posts.retweeters.list",
@@ -316,6 +334,10 @@
           "type": "string",
           "description": "One keyword, as typed into the search box."
         },
+        "type": {
+          "type": "string",
+          "description": "Note type."
+        },
         "post_id": {
           "type": "string",
           "description": "The shortcode of the comment's post."
@@ -323,10 +345,6 @@
         "published_within": {
           "type": "string",
           "description": "Only posts from the last day, week, month or year."
-        },
-        "type": {
-          "type": "string",
-          "description": "Note type."
         },
         "until": {
           "type": "string",

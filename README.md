@@ -147,15 +147,15 @@ every endpoint on one page and [docs/prices.json](docs/prices.json) every price 
 | [WeChat Official Accounts](docs/apis/wechat_mp.md) | 8 (1 coming soon) | $0.02–$0.15 | Official Account articles and history, without a QR login. |
 | [Bilibili](docs/apis/bilibili.md) | 9 | $0.002–$0.0025 | Videos, comments and the popular board. |
 | [Weibo](docs/apis/weibo.md) | 11 | $0.002–$0.0025 | Posts, accounts and the hot search list. |
-| [TikTok](docs/apis/tiktok.md) | 15 | $0.002–$0.004 | Videos, accounts and comments worldwide. |
+| [TikTok](docs/apis/tiktok.md) | 17 | $0.002–$0.004 | Videos, accounts and comments worldwide. |
 | [X (Twitter)](docs/apis/x.md) | 20 | $0.0001–$0.009 | Posts, accounts, search and trends. |
-| [YouTube](docs/apis/youtube.md) | 7 | $0.002–$0.004 | Videos, comments and transcripts. |
+| [YouTube](docs/apis/youtube.md) | 10 | $0.002–$0.004 | Videos, comments and transcripts. |
 | [Meta Ad Library](docs/apis/meta.md) | 3 | $0.004 | Ads running on Facebook and Instagram, by keyword or advertiser. |
 | [Google Ads Transparency](docs/apis/google.md) | 2 | $0.004 | Advertisers and their ads on Search, YouTube and Display. |
 | [Instagram](docs/apis/instagram.md) | 8 | $0.002–$0.004 | Profiles, posts and reels, comments, hashtags and what a reel says. |
 | [Reddit](docs/apis/reddit.md) | 11 | $0.002–$0.004 | Posts, comments, communities, people and what is trending. |
 | [Kuaishou](docs/apis/kuaishou.md) | 8 | $0.002–$0.02 | Videos, accounts, comments and the hot list. |
-| [Zhihu](docs/apis/zhihu.md) | 2 | $0.002 | Questions and answers, articles, columns, people and the hot list. |
+| [Zhihu](docs/apis/zhihu.md) | 15 (13 coming soon) | $0.002 | Questions and answers, articles, columns, people and the hot list. |
 | [WeChat Channels](docs/apis/wechat_channels.md) | 15 (1 coming soon) | $0.015–$0.15 | Channels videos, accounts, comments and live replays, without a QR login. |
 | [WeChat Search](docs/apis/wechat.md) | 6 (4 coming soon) | $0.02–$0.15 | WeChat Search across Official Account articles, Channels videos and mini programs. |
 | [Telegram](docs/apis/telegram.md) | 3 | $0.002 | Public channels and their messages. |
@@ -282,15 +282,15 @@ MCP 有五个工具：`find`（用中文或英文找接口）、`describe`（看
 | [微信公众号](docs/zh/apis/wechat_mp.md) | 8 (1 个即将上线) | $0.02–$0.15 | 公众号文章和历史文章，不用扫码。 |
 | [B站](docs/zh/apis/bilibili.md) | 9 | $0.002–$0.0025 | 视频、评论和热门榜。 |
 | [微博](docs/zh/apis/weibo.md) | 11 | $0.002–$0.0025 | 微博、账号和热搜。 |
-| [TikTok](docs/zh/apis/tiktok.md) | 15 | $0.002–$0.004 | 全球的视频、账号和评论。 |
+| [TikTok](docs/zh/apis/tiktok.md) | 17 | $0.002–$0.004 | 全球的视频、账号和评论。 |
 | [X（推特）](docs/zh/apis/x.md) | 20 | $0.0001–$0.009 | 帖子、账号、搜索和趋势。 |
-| [YouTube](docs/zh/apis/youtube.md) | 7 | $0.002–$0.004 | 视频、评论和字幕。 |
+| [YouTube](docs/zh/apis/youtube.md) | 10 | $0.002–$0.004 | 视频、评论和字幕。 |
 | [Meta 广告库](docs/zh/apis/meta.md) | 3 | $0.004 | Facebook 和 Instagram 上在投的广告，按关键词或广告主查。 |
 | [Google 广告透明中心](docs/zh/apis/google.md) | 2 | $0.004 | 广告主和他们在搜索、YouTube、展示广告上的广告。 |
 | [Instagram](docs/zh/apis/instagram.md) | 8 | $0.002–$0.004 | 账号、帖子和 Reels、评论、话题，以及 Reel 里说了什么。 |
 | [Reddit](docs/zh/apis/reddit.md) | 11 | $0.002–$0.004 | 帖子、评论、社区、用户和正在热的内容。 |
 | [快手](docs/zh/apis/kuaishou.md) | 8 | $0.002–$0.02 | 视频、账号、评论和热榜。 |
-| [知乎](docs/zh/apis/zhihu.md) | 2 | $0.002 | 问题和回答、文章、专栏、用户和热榜。 |
+| [知乎](docs/zh/apis/zhihu.md) | 15 (13 个即将上线) | $0.002 | 问题和回答、文章、专栏、用户和热榜。 |
 | [微信视频号](docs/zh/apis/wechat_channels.md) | 15 (1 个即将上线) | $0.015–$0.15 | 视频号的视频、账号、评论和直播回放，不用扫码。 |
 | [微信搜一搜](docs/zh/apis/wechat.md) | 6 (4 个即将上线) | $0.02–$0.15 | 微信搜一搜：公众号文章、视频号视频和小程序。 |
 | [Telegram](docs/zh/apis/telegram.md) | 3 | $0.002 | 公开频道和频道消息。 |

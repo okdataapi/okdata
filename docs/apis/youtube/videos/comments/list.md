@@ -193,3 +193,6 @@ The field is null, and meta.unavailable names it with the reason: platform (the 
 - [YouTube comment replies](https://okdata.online/apis/youtube/comments/replies/list/): $0.002 per call · about 10 comments per page
 - [YouTube channel posts](https://okdata.online/apis/youtube/channels/posts/list/): $0.002 per call · about 10 posts per page
 - [YouTube post detail](https://okdata.online/apis/youtube/posts/get/): $0.002 per call
+- [YouTube channel profile](https://okdata.online/apis/youtube/channels/get/): $0.002 per call
+- [YouTube channel search](https://okdata.online/apis/youtube/channels/search/): $0.004 per call · about 20 accounts per page
+- [YouTube channel videos](https://okdata.online/apis/youtube/channels/videos/list/): $0.002 per call · about 30 videos per page

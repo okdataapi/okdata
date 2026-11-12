@@ -4,7 +4,7 @@
 
 Canonical page: https://okdata.online/apis/tiktok/
 
-15 endpoints, $0.002 to $0.004 per call. Region: Global. No TikTok login or cookies needed.
+17 endpoints, $0.002 to $0.004 per call. Region: Global. No TikTok login or cookies needed.
 
 | Endpoint | ID | Returns | Price |
 |---|---|---|---|
@@ -23,14 +23,16 @@ Canonical page: https://okdata.online/apis/tiktok/
 | [TikTok account videos](https://okdata.online/apis/tiktok/users/videos/list/) | `tiktok.users.videos.list` | Post[] | $0.002 per call · about 10 videos per page |
 | [TikTok Creative Center top ad](https://okdata.online/apis/tiktok/creative_center/ads/get/) | `tiktok.creative_center.ads.get` | Ad | $0.002 per call |
 | [TikTok Shop seller products](https://okdata.online/apis/tiktok/shop/sellers/products/list/) | `tiktok.shop.sellers.products.list` | Product[] | $0.002 per call · about 20 products per page |
+| [TikTok account followers](https://okdata.online/apis/tiktok/users/followers/list/) | `tiktok.users.followers.list` | Account[] | $0.002 per call · about 20 accounts per page |
+| [TikTok hashtag videos](https://okdata.online/apis/tiktok/hashtags/videos/list/) | `tiktok.hashtags.videos.list` | Post[] | $0.002 per call · about 20 videos per page |
 
 ## Good for
 
-- Content research: `tiktok.videos.search`, `tiktok.creative_center.ads.search`, `tiktok.videos.transcript.get`, `tiktok.users.videos.list`, `tiktok.creative_center.ads.get`
-- Trend research: `tiktok.videos.search`
-- Competitor monitoring: `tiktok.videos.get`, `tiktok.users.get`, `tiktok.ads.search`, `tiktok.shop.products.search`, `tiktok.shop.products.get`, `tiktok.users.search`, `tiktok.users.videos.list`, `tiktok.shop.sellers.products.list`
+- Content research: `tiktok.videos.search`, `tiktok.creative_center.ads.search`, `tiktok.videos.transcript.get`, `tiktok.users.videos.list`, `tiktok.creative_center.ads.get`, `tiktok.hashtags.videos.list`
+- Trend research: `tiktok.videos.search`, `tiktok.hashtags.videos.list`
+- Competitor monitoring: `tiktok.videos.get`, `tiktok.users.get`, `tiktok.ads.search`, `tiktok.shop.products.search`, `tiktok.shop.products.get`, `tiktok.users.search`, `tiktok.users.videos.list`, `tiktok.shop.sellers.products.list`, `tiktok.users.followers.list`
 - Word of mouth: `tiktok.videos.comments.list`, `tiktok.shop.products.reviews.list`, `tiktok.comments.replies.list`
-- Creator discovery: `tiktok.users.get`, `tiktok.users.search`
+- Creator discovery: `tiktok.users.get`, `tiktok.users.search`, `tiktok.users.followers.list`
 - Ad intelligence: `tiktok.ads.search`, `tiktok.creative_center.ads.search`, `tiktok.creative_center.ads.get`
 - Product research: `tiktok.shop.products.search`, `tiktok.shop.products.get`, `tiktok.shop.products.reviews.list`, `tiktok.shop.sellers.products.list`
 - Transcripts: `tiktok.videos.transcript.get`

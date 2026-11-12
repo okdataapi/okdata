@@ -36,6 +36,9 @@ The same shape on every platform. A field a platform does not have is null, and 
 - [Reddit user active communities](https://okdata.online/apis/reddit/users/subreddits/list/) (`reddit.users.subreddits.list`): $0.002 per call · about 30 accounts per page
 - [Kuaishou account profile](https://okdata.online/apis/kuaishou/users/get/) (`kuaishou.users.get`): $0.02 per call
 - [Kuaishou account search](https://okdata.online/apis/kuaishou/users/search/) (`kuaishou.users.search`): $0.02 per call · about 20 accounts per page
+- [Zhihu user profile](https://okdata.online/apis/zhihu/users/get/) (`zhihu.users.get`): $0.002 per call
+- [Zhihu user search](https://okdata.online/apis/zhihu/users/search/) (`zhihu.users.search`): $0.002 per call · about 20 accounts per page
+- [Zhihu user followers](https://okdata.online/apis/zhihu/users/followers/list/) (`zhihu.users.followers.list`): $0.002 per call · about 20 accounts per page
 - [WeChat Channels account search](https://okdata.online/apis/wechat_channels/users/search/) (`wechat_channels.users.search`): $0.02 per call · about 1 accounts per page
 - [WeChat Channels account profile](https://okdata.online/apis/wechat_channels/users/get/) (`wechat_channels.users.get`): $0.02 per call
 - [Douyin account search](https://okdata.online/apis/douyin/users/search/) (`douyin.users.search`): $0.002 per call · about 30 accounts per page
@@ -48,7 +51,10 @@ The same shape on every platform. A field a platform does not have is null, and 
 - [Official Account profile](https://okdata.online/apis/wechat_mp/accounts/get/) (`wechat_mp.accounts.get`): $0.02 per call
 - [WeChat Channels account profile (backup)](https://okdata.online/apis/wechat_channels/backup/users/get/) (`wechat_channels.backup.users.get`): $0.03 per call
 - [Telegram channel profile](https://okdata.online/apis/telegram/channels/get/) (`telegram.channels.get`): $0.002 per call
+- [YouTube channel profile](https://okdata.online/apis/youtube/channels/get/) (`youtube.channels.get`): $0.002 per call
+- [YouTube channel search](https://okdata.online/apis/youtube/channels/search/) (`youtube.channels.search`): $0.004 per call · about 20 accounts per page
 - [TikTok account search](https://okdata.online/apis/tiktok/users/search/) (`tiktok.users.search`): $0.002 per call · about 30 accounts per page
+- [TikTok account followers](https://okdata.online/apis/tiktok/users/followers/list/) (`tiktok.users.followers.list`): $0.002 per call · about 20 accounts per page
 - [X post retweeters](https://okdata.online/apis/x/posts/retweeters/list/) (`x.posts.retweeters.list`): $0.002 per call · about 100 accounts per page
 - [X account search](https://okdata.online/apis/x/users/search/) (`x.users.search`): $0.0004 per account · at most $0.008 per call
 - [X account followers](https://okdata.online/apis/x/users/followers/list/) (`x.users.followers.list`): $0.0001 per account · at most $0.02 per call

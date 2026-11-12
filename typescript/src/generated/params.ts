@@ -741,6 +741,108 @@ export type ZhihuQuestionsAnswersListParams = CommonParams & ExactlyOne<{
   url: string;
 }>;
 
+/** Parameters of Zhihu question detail (`zhihu.questions.get`). */
+export type ZhihuQuestionsGetParams = CommonParams & ExactlyOne<{
+  /** The question ID (digits): the number after zhihu.com/question/. Give id or url. Example: `55043447`. */
+  id: string;
+  /** The question link (an answer link under it works too): zhihu.com/question/…. Example: `https://www.zhihu.com/question/55043447`. */
+  url: string;
+}>;
+
+/** Parameters of Zhihu answer detail (`zhihu.answers.get`). */
+export type ZhihuAnswersGetParams = CommonParams & ExactlyOne<{
+  /** The answer ID (digits): the number after /answer/ in its link. Give id or url. Example: `2430879961`. */
+  id: string;
+  /** The answer link: zhihu.com/answer/… or zhihu.com/question/…/answer/…. Example: `https://www.zhihu.com/answer/2430879961`. */
+  url: string;
+}>;
+
+/** Parameters of Zhihu answer comments (`zhihu.answers.comments.list`). */
+export type ZhihuAnswersCommentsListParams = CommonParams & {
+  /** The answer ID (digits): the number after /answer/ in its link. Example: `2509154330`. */
+  id: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Zhihu comment replies (`zhihu.comments.replies.list`). */
+export type ZhihuCommentsRepliesListParams = CommonParams & {
+  /** The top-level comment ID (digits), from zhihu.answers.comments.list. Example: `10114474814`. */
+  id: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Zhihu article detail (`zhihu.articles.get`). */
+export type ZhihuArticlesGetParams = CommonParams & ExactlyOne<{
+  /** The article ID (digits): the number after zhuanlan.zhihu.com/p/. Give id or url. Example: `521711978`. */
+  id: string;
+  /** The article link: zhuanlan.zhihu.com/p/…. Example: `https://zhuanlan.zhihu.com/p/521711978`. */
+  url: string;
+}>;
+
+/** Parameters of Zhihu column articles (`zhihu.columns.articles.list`). */
+export type ZhihuColumnsArticlesListParams = CommonParams & {
+  /** The column ID: what follows zhuanlan.zhihu.com/ in the column's link (a word, or c_ and digits). Example: `intelligentunit`. */
+  id: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Zhihu pin detail (`zhihu.pins.get`). */
+export type ZhihuPinsGetParams = CommonParams & ExactlyOne<{
+  /** The pin ID (digits): the number after zhihu.com/pin/. Give id or url. Example: `2042267446984402904`. */
+  id: string;
+  /** The pin link: zhihu.com/pin/…. Example: `https://www.zhihu.com/pin/2042267446984402904`. */
+  url: string;
+}>;
+
+/** Parameters of Zhihu user profile (`zhihu.users.get`). */
+export type ZhihuUsersGetParams = CommonParams & {
+  /** The handle in the profile's link (url_token): what follows zhihu.com/people/. Example: `zhihuadmin`. */
+  username: string;
+};
+
+/** Parameters of Zhihu user search (`zhihu.users.search`). */
+export type ZhihuUsersSearchParams = CommonParams & {
+  /** Keywords, as a person would type them into the platform search box. Example: `人民日报`. */
+  query: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Zhihu user followers (`zhihu.users.followers.list`). */
+export type ZhihuUsersFollowersListParams = CommonParams & {
+  /** The handle in the profile's link (url_token): what follows zhihu.com/people/. Example: `zhihuadmin`. */
+  username: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Zhihu user answers (`zhihu.users.answers.list`). */
+export type ZhihuUsersAnswersListParams = CommonParams & {
+  /** The handle in the profile's link (url_token): what follows zhihu.com/people/. Example: `zhihuadmin`. */
+  username: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Zhihu user articles (`zhihu.users.articles.list`). */
+export type ZhihuUsersArticlesListParams = CommonParams & {
+  /** The handle in the profile's link (url_token): what follows zhihu.com/people/. Example: `zhihuadmin`. */
+  username: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Zhihu user pins (`zhihu.users.pins.list`). */
+export type ZhihuUsersPinsListParams = CommonParams & {
+  /** The handle in the profile's link (url_token): what follows zhihu.com/people/. Example: `zhihuadmin`. */
+  username: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
 /** Parameters of WeChat Channels video search (`wechat_channels.videos.search`). */
 export type WechatChannelsVideosSearchParams = CommonParams & {
   /** Keywords, as a person would type them into the platform search box. Example: `露营装备推荐`. */
@@ -1475,6 +1577,37 @@ export type YoutubePostsGetParams = CommonParams & ExactlyOne<{
   url: string;
 }>;
 
+/** Parameters of YouTube channel profile (`youtube.channels.get`). */
+export type YoutubeChannelsGetParams = CommonParams & ExactlyOne<{
+  /** The channel ID, starting with UC. Give id or username. Example: `UCLA_DiR1FfKNvjuUpBHmylQ`. */
+  id: string;
+  /** The channel's handle, with or without @. Give id or username. Example: `NASA`. */
+  username: string;
+}>;
+
+/** Parameters of YouTube channel search (`youtube.channels.search`). */
+export type YoutubeChannelsSearchParams = CommonParams & {
+  /** Keywords, as a person would type them into the platform search box. Example: `nasa`. */
+  query: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of YouTube channel videos (`youtube.channels.videos.list`). */
+export type YoutubeChannelsVideosListParams = CommonParams & {
+  /** Regular videos (the default) or Shorts. Default `video`. */
+  type?: 'video' | 'short';
+  /** Newest first; the only order this source has (no most-viewed order). Default `latest`. */
+  sort?: 'latest';
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+} & ExactlyOne<{
+  /** The channel ID, starting with UC. Give id or username. Example: `UCLA_DiR1FfKNvjuUpBHmylQ`. */
+  id: string;
+  /** The channel's handle, with or without @. Give id or username. Example: `NASA`. */
+  username: string;
+}>;
+
 /** Parameters of TikTok video transcript (`tiktok.videos.transcript.get`). */
 export type TiktokVideosTranscriptGetParams = CommonParams & {
   /** The captions' language as a two-letter code (en, es, ja); the video's own captions when left out. Example: `en`. */
@@ -1523,6 +1656,25 @@ export type TiktokCreativeCenterAdsGetParams = CommonParams & {
 /** Parameters of TikTok Shop seller products (`tiktok.shop.sellers.products.list`). */
 export type TiktokShopSellersProductsListParams = CommonParams & {
   /** The seller ID (digits): the last part of the shop's link. Example: `7495128284160625473`. */
+  id: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of TikTok account followers (`tiktok.users.followers.list`). */
+export type TiktokUsersFollowersListParams = CommonParams & {
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+} & ExactlyOne<{
+  /** The account ID instead of the handle: the digits in id from tiktok.users.get, or its ext.sec_uid (MS4w…). Saves the handle lookup. Give username or id. Example: `7664638705177150477`. */
+  id: string;
+  /** The TikTok handle, with or without @. Give username or id. Example: `nasa`. */
+  username: string;
+}>;
+
+/** Parameters of TikTok hashtag videos (`tiktok.hashtags.videos.list`). */
+export type TiktokHashtagsVideosListParams = CommonParams & {
+  /** The hashtag name, with or without #. Example: `nasa`. */
   id: string;
   /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
   cursor?: string;

@@ -201,3 +201,5 @@ console.log('cost: $' + body.meta.billing.amount);
 - [TikTok 账号搜索](https://okdata.online/zh/apis/tiktok/users/search/)：$0.002/次 · 每页约 30 个账号
 - [TikTok 账号作品](https://okdata.online/zh/apis/tiktok/users/videos/list/)：$0.002/次 · 每页约 10 条视频
 - [TikTok Shop 店铺商品](https://okdata.online/zh/apis/tiktok/shop/sellers/products/list/)：$0.002/次 · 每页约 20 个商品
+- [TikTok 账号粉丝列表](https://okdata.online/zh/apis/tiktok/users/followers/list/)：$0.002/次 · 每页约 20 个账号
+- [TikTok 话题作品](https://okdata.online/zh/apis/tiktok/hashtags/videos/list/)：$0.002/次 · 每页约 20 条视频
