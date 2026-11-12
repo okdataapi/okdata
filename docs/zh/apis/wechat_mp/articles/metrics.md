@@ -108,7 +108,7 @@ console.log('cost: $' + body.meta.billing.amount);
 
 或者对接好 MCP 的智能体直接说：
 
-> 用「公众号文章互动数据」找出点赞最多的五条内容，附链接。
+> 用「公众号文章互动数据」查这篇文章现在的阅读、点赞和在看数。
 
 ## 返回示例
 
@@ -136,9 +136,9 @@ console.log('cost: $' + body.meta.billing.amount);
       "metrics": {
         "views": 1250000,
         "likes": 48200,
-        "comments": null,
-        "shares": null,
-        "favorites": null,
+        "comments": 1312,
+        "shares": 2210,
+        "favorites": 9650,
         "reposts": null
       },
       "images": null,
@@ -154,9 +154,6 @@ console.log('cost: $' + body.meta.billing.amount);
       "balance_after": "9.98"
     },
     "unavailable": {
-      "metrics.comments": "platform",
-      "metrics.shares": "platform",
-      "metrics.favorites": "platform",
       "metrics.reposts": "platform"
     },
     "cached": false,

@@ -2950,8 +2950,8 @@
                           "verified": true
                         },
                         "metrics": {
-                          "views": 1250000,
-                          "likes": 48200,
+                          "views": null,
+                          "likes": null,
                           "comments": null,
                           "shares": null,
                           "favorites": null,
@@ -2978,6 +2978,8 @@
                       "balance_after": "9.98"
                     },
                     "unavailable": {
+                      "metrics.views": "capability",
+                      "metrics.likes": "capability",
                       "metrics.comments": "platform",
                       "metrics.shares": "platform",
                       "metrics.favorites": "platform",
@@ -3155,8 +3157,8 @@
                         "verified": true
                       },
                       "metrics": {
-                        "views": 1250000,
-                        "likes": 48200,
+                        "views": null,
+                        "likes": null,
                         "comments": null,
                         "shares": null,
                         "favorites": null,
@@ -3176,6 +3178,8 @@
                       "balance_after": "9.98"
                     },
                     "unavailable": {
+                      "metrics.views": "capability",
+                      "metrics.likes": "capability",
                       "metrics.comments": "platform",
                       "metrics.shares": "platform",
                       "metrics.favorites": "platform",
@@ -22734,11 +22738,11 @@
                         "verified": true
                       },
                       "metrics": {
-                        "views": null,
+                        "views": 1250000,
                         "likes": 48200,
-                        "comments": 1312,
+                        "comments": null,
                         "shares": 2210,
-                        "favorites": 9650,
+                        "favorites": null,
                         "reposts": null
                       },
                       "images": null,
@@ -22758,7 +22762,8 @@
                       "balance_after": "9.998"
                     },
                     "unavailable": {
-                      "metrics.views": "platform",
+                      "metrics.comments": "capability",
+                      "metrics.favorites": "capability",
                       "metrics.reposts": "platform"
                     },
                     "cached": false,
@@ -36651,9 +36656,9 @@
                       "metrics": {
                         "views": 1250000,
                         "likes": 48200,
-                        "comments": null,
-                        "shares": null,
-                        "favorites": null,
+                        "comments": 1312,
+                        "shares": 2210,
+                        "favorites": 9650,
                         "reposts": null
                       },
                       "images": null,
@@ -36670,9 +36675,6 @@
                       "balance_after": "9.98"
                     },
                     "unavailable": {
-                      "metrics.comments": "platform",
-                      "metrics.shares": "platform",
-                      "metrics.favorites": "platform",
                       "metrics.reposts": "platform"
                     },
                     "cached": false,

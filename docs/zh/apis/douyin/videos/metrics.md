@@ -136,11 +136,11 @@ console.log('cost: $' + body.meta.billing.amount);
         "verified": true
       },
       "metrics": {
-        "views": null,
+        "views": 1250000,
         "likes": 48200,
-        "comments": 1312,
+        "comments": null,
         "shares": 2210,
-        "favorites": 9650,
+        "favorites": null,
         "reposts": null
       },
       "images": null,
@@ -159,7 +159,8 @@ console.log('cost: $' + body.meta.billing.amount);
       "balance_after": "9.998"
     },
     "unavailable": {
-      "metrics.views": "platform",
+      "metrics.comments": "capability",
+      "metrics.favorites": "capability",
       "metrics.reposts": "platform"
     },
     "cached": false,

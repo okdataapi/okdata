@@ -73,7 +73,7 @@ if body["code"] != "ok":
     raise RuntimeError(f"{body['code']}: {body['message']} (charged: {body['charged']})")
 
 for row in body["data"]["items"]:
-    print(row["id"], row["metrics"]["likes"], row["text"][:60])
+    print(row["id"], row["published_at"], row["title"])
 print("cost: $" + body["meta"]["billing"]["amount"])
 ```
 
@@ -92,7 +92,7 @@ const body = await res.json();
 if (body.code !== 'ok') throw new Error(`${body.code}: ${body.message}`);
 
 for (const row of body.data.items) {
-  console.log(row.id, row.metrics.likes, row.text.slice(0, 60));
+  console.log(row.id, row.published_at, row.title);
 }
 console.log('cost: $' + body.meta.billing.amount);
 ```
@@ -111,7 +111,7 @@ console.log('cost: $' + body.meta.billing.amount);
 
 或者对接好 MCP 的智能体直接说：
 
-> 用「公众号历史文章」找出点赞最多的五条内容，附链接。
+> 用「公众号历史文章」列出这个号最近一周的文章，头条排前面，附日期和链接。
 
 ## 返回示例
 
@@ -138,8 +138,8 @@ console.log('cost: $' + body.meta.billing.amount);
           "verified": true
         },
         "metrics": {
-          "views": 1250000,
-          "likes": 48200,
+          "views": null,
+          "likes": null,
           "comments": null,
           "shares": null,
           "favorites": null,
@@ -163,6 +163,8 @@ console.log('cost: $' + body.meta.billing.amount);
       "balance_after": "9.98"
     },
     "unavailable": {
+      "metrics.views": "capability",
+      "metrics.likes": "capability",
       "metrics.comments": "platform",
       "metrics.shares": "platform",
       "metrics.favorites": "platform",

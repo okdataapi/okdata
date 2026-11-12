@@ -108,7 +108,7 @@ console.log('cost: $' + body.meta.billing.amount);
 
 Or ask an agent that has the MCP server connected:
 
-> Use Official Account article stats and list the five posts with the most likes, with links.
+> Use Official Account article stats and tell me this article's reads, likes and 在看 right now.
 
 ## Response example
 
@@ -136,9 +136,9 @@ Or ask an agent that has the MCP server connected:
       "metrics": {
         "views": 1250000,
         "likes": 48200,
-        "comments": null,
-        "shares": null,
-        "favorites": null,
+        "comments": 1312,
+        "shares": 2210,
+        "favorites": 9650,
         "reposts": null
       },
       "images": null,
@@ -154,9 +154,6 @@ Or ask an agent that has the MCP server connected:
       "balance_after": "9.98"
     },
     "unavailable": {
-      "metrics.comments": "platform",
-      "metrics.shares": "platform",
-      "metrics.favorites": "platform",
       "metrics.reposts": "platform"
     },
     "cached": false,
