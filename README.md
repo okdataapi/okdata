@@ -1,5 +1,7 @@
 # okdata: social data API for AI agents and code
 
+**小红书数据接口 · 抖音数据 API · 公众号文章接口 · 快手 / B站 / 微博 / 知乎数据采集 · 社媒数据 MCP。**一个 Key 调用抖音、小红书、微信（公众号、视频号、搜一搜）、快手、B站、微博、知乎、TikTok、X、YouTube、Instagram、Reddit 的公开数据：搜内容、读评论、查博主、看热榜、拿字幕和广告。按次计费，失败不扣费，不用平台账号和 Cookie。[中文文档](https://okdata.online/zh/?src=gh-okdata) · [免费注册](https://okdata.online/zh/signup/?src=gh-okdata)
+
 [English](#english) · [中文](#中文)
 
 <a id="english"></a>
