@@ -53,8 +53,10 @@ jobs:
       - if: matrix.python == '3.13'
         run: pip install mypy && python -m mypy
       - if: matrix.python == '3.13'
-        name: build the sdist and wheel, with the generated code in them
+        name: build the sdist and wheel, with the generated code in them and nothing else
         run: |
           pip install build
           python -m build
           python -m zipfile -l dist/*.whl | grep -q 'okdata/_generated/_sync.py'
+          extra=$(tar tzf dist/*.tar.gz | grep -vE '^okdata-[^/]+/((src|tests)/.*|README\.md|LICENSE|pyproject\.toml|PKG-INFO|\.gitignore)?$' || true)
+          if [ -n "$extra" ]; then echo "unexpected files in the sdist:"; echo "$extra"; exit 1; fi
