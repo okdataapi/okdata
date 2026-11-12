@@ -18,9 +18,9 @@ generated from the same catalog the API runs on.
 
 | | Install or connect | Source |
 |---|---|---|
-| TypeScript SDK | `npm install @okdata/sdk` | [`typescript/`](typescript/) |
-| Python SDK | `pip install okdata` | [`python/`](python/) |
-| Command line | `npx okdata` (or `npm install -g okdata`) | [`cli/`](cli/) |
+| TypeScript SDK | `npm install @okdata/sdk` (on npm within days; until then `npm ci && npm run build` in [`typescript/`](typescript/)) | [`typescript/`](typescript/) |
+| Python SDK | `pip install okdata` ([on PyPI](https://pypi.org/project/okdata/)) | [`python/`](python/) |
+| Command line | `npx okdata` (on npm within days; until then build [`cli/`](cli/)) | [`cli/`](cli/) |
 | Remote MCP server | `https://api.okdata.online/mcp` (Streamable HTTP) | hosted |
 | Agent Skills | `npx skills add okdataapi/skills` | [okdataapi/skills](https://github.com/okdataapi/skills) |
 | Plain HTTP | `https://api.okdata.online/v1/...` | [`docs/openapi.json`](docs/openapi.json) |
@@ -205,9 +205,9 @@ OpenAPI 3.1、价目表）。这些都由 API 自己用的同一份接口目录�
 
 | | 安装或接入 | 源码 |
 |---|---|---|
-| TypeScript SDK | `npm install @okdata/sdk` | [`typescript/`](typescript/) |
-| Python SDK | `pip install okdata` | [`python/`](python/) |
-| 命令行 | `npx okdata`（或 `npm install -g okdata`） | [`cli/`](cli/) |
+| TypeScript SDK | `npm install @okdata/sdk`（这几天发布到 npm，之前可在 [`typescript/`](typescript/) 里 `npm ci && npm run build`） | [`typescript/`](typescript/) |
+| Python SDK | `pip install okdata`（[已在 PyPI](https://pypi.org/project/okdata/)） | [`python/`](python/) |
+| 命令行 | `npx okdata`（这几天发布到 npm，之前可自行构建 [`cli/`](cli/)） | [`cli/`](cli/) |
 | 远程 MCP | `https://api.okdata.online/mcp`（Streamable HTTP） | 托管 |
 | Agent Skills | `npx skills add okdataapi/skills` | [okdataapi/skills](https://github.com/okdataapi/skills) |
 
