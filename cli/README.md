@@ -1,8 +1,13 @@
 # okdata command line
 
-Find and call okdata endpoints from a terminal or an agent's shell: Douyin, Xiaohongshu, WeChat,
-Bilibili, Weibo, TikTok, X, YouTube and more, paid per call. Log in with a browser link, check your
-balance, and set up the okdata MCP server in Claude Code, Cursor or Codex.
+**抖音数据 API · 小红书数据接口 · 公众号文章阅读数接口 · 星图 / 蒲公英达人数据 · 社媒数据 MCP。**
+[中文说明](#中文) · [中文文档](https://okdata.online/zh/docs/cli/?src=npm-okdata)
+
+Social data for AI agents, paid per call: TikTok, RedNote (Xiaohongshu), Douyin, WeChat (Official Accounts
+and Channels), X, YouTube, Instagram, Reddit, Bilibili, Weibo, Kuaishou and more. 200+ endpoints on 17
+platforms behind one key. This command finds and calls them from a terminal or an agent's shell, logs in
+with a browser link, checks your balance, and sets up the okdata MCP server in Claude Code, Cursor or Codex.
+A call that fails costs nothing, and you need no platform accounts, cookies or QR logins.
 
 ```sh
 npx okdata login                     # or: npm install -g okdata
@@ -15,6 +20,47 @@ then each parameter as `name=value` (quote values with spaces or Chinese). Lists
 
 No account yet? Sign up at [okdata.online](https://okdata.online/signup/?src=npm-okdata)
 (中文：[注册](https://okdata.online/zh/signup/?src=npm-okdata)); `okdata login` then links this terminal to it.
+
+## What you can read
+
+| Platform | For example | Per call or item |
+|---|---|---|
+| Douyin (抖音) | video search, comments and replies, plays and likes, the hot list, Xingtu (星图) creators with rates and audience | from $0.002 |
+| Xiaohongshu / RedNote (小红书) | note search, notes, comments, creators, PGY (蒲公英) creators, shop products and reviews | from $0.02 |
+| WeChat (微信) | Official Account (公众号) articles with reads and likes, Channels (视频号) videos and comments, WeChat Search | from $0.015 |
+| Weibo (微博) | the hot search list, post search, comments, accounts | from $0.002 |
+| Bilibili (B站) | video search, comments, uploader videos, the popular board | from $0.002 |
+| Kuaishou (快手) | video search, comments, accounts, the hot list | from $0.002 |
+| TikTok | video search, comments, accounts, transcripts, TikTok Shop products, Creative Center ads | from $0.002 |
+| X (Twitter) | post search, replies, quotes, accounts, followers, lists, communities | from $0.0001 |
+| YouTube, Instagram, Reddit, Telegram | search, posts, comments, channels and accounts, transcripts | from $0.002 |
+| Meta and Google ad libraries | ads by keyword or advertiser | from $0.004 |
+
+Every endpoint with its parameters, fields and price: [okdata.online/apis](https://okdata.online/apis/?src=npm-okdata)
+(中文：[接口列表](https://okdata.online/zh/apis/?src=npm-okdata)), or `npx okdata find <words>` (free, no key).
+
+## Use it from Claude, Cursor or Codex (MCP)
+
+`npx okdata setup --client claude-code` (or `cursor`, `codex`; several: `--client claude-code,cursor`) writes
+the okdata MCP server into the client's config; "MCP setup" below has the details. The server is remote, at
+`https://api.okdata.online/mcp` (Streamable HTTP, header `Authorization: Bearer <key>`). Claude Desktop and
+other clients that only start local servers run [`npx -y @okdata/mcp`](https://www.npmjs.com/package/@okdata/mcp)
+instead. The agent looks up an endpoint and its price for free; only the data call is charged. More clients:
+[okdata.online/mcp](https://okdata.online/mcp/?src=npm-okdata).
+
+<a id="中文"></a>
+
+## 中文
+
+okdata 是给 AI 智能体和代码用的社媒数据接口，按次付费。一个 key 就能读抖音、小红书、公众号、视频号、B站、微博、快手，
+以及 TikTok、X、YouTube、Instagram、Reddit 的公开数据：搜视频和笔记、批量拉评论、查星图和蒲公英达人、
+拿公众号文章的阅读数和点赞数、看微博热搜和抖音热榜。这个命令行可以在终端或智能体的 shell 里查接口、发起调用、看余额，
+`npx okdata login` 用浏览器链接登录，`npx okdata setup` 一条命令把 MCP 配进 Claude Code、Cursor、Codex
+（Claude Desktop 用 `npx -y @okdata/mcp`）。调用失败不扣钱，不需要平台账号、Cookie，也不用扫码。
+支付宝、微信、银行卡都能充值。
+
+[中文文档](https://okdata.online/zh/docs/cli/?src=npm-okdata) · [接口和价格](https://okdata.online/zh/apis/?src=npm-okdata) ·
+[MCP 接入](https://okdata.online/zh/mcp/?src=npm-okdata) · [注册](https://okdata.online/zh/signup/?src=npm-okdata)
 
 ## Commands
 

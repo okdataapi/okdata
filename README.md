@@ -22,6 +22,7 @@ generated from the same catalog the API runs on.
 | Python SDK | `pip install okdata` ([on PyPI](https://pypi.org/project/okdata/)) | [`python/`](python/) |
 | Command line | [`npx okdata`](https://www.npmjs.com/package/okdata) | [`cli/`](cli/) |
 | Remote MCP server | `https://api.okdata.online/mcp` (Streamable HTTP) | hosted |
+| Local MCP server (stdio, for Claude Desktop) | [`npx -y @okdata/mcp`](https://www.npmjs.com/package/@okdata/mcp) | [`mcp-typescript/`](mcp-typescript/), Python: [`mcp-python/`](mcp-python/) |
 | Agent Skills | `npx skills add okdataapi/skills` | [okdataapi/skills](https://github.com/okdataapi/skills) |
 | Plain HTTP | `https://api.okdata.online/v1/...` | [`docs/openapi.json`](docs/openapi.json) |
 
@@ -95,6 +96,12 @@ Or add it by hand. Claude Code (the single quotes keep the variable's name, not 
 ```bash
 claude mcp add --transport http --scope user okdata https://api.okdata.online/mcp \
   --header 'Authorization: Bearer ${OKDATA_API_KEY}'
+```
+
+Claude Desktop and other clients that only start local (stdio) servers: run [`@okdata/mcp`](https://www.npmjs.com/package/@okdata/mcp), which passes every request on to the remote server with your key (`claude_desktop_config.json`):
+
+```json
+{ "mcpServers": { "okdata": { "command": "npx", "args": ["-y", "@okdata/mcp"], "env": { "OKDATA_API_KEY": "okd_..." } } } }
 ```
 
 Cursor (`~/.cursor/mcp.json`):
@@ -209,6 +216,7 @@ OpenAPI 3.1、价目表）。这些都由 API 自己用的同一份接口目录�
 | Python SDK | `pip install okdata`（[已在 PyPI](https://pypi.org/project/okdata/)） | [`python/`](python/) |
 | 命令行 | [`npx okdata`](https://www.npmjs.com/package/okdata) | [`cli/`](cli/) |
 | 远程 MCP | `https://api.okdata.online/mcp`（Streamable HTTP） | 托管 |
+| 本地 MCP（stdio，给 Claude Desktop 等） | [`npx -y @okdata/mcp`](https://www.npmjs.com/package/@okdata/mcp) | [`mcp-typescript/`](mcp-typescript/)，Python 版：[`mcp-python/`](mcp-python/) |
 | Agent Skills | `npx skills add okdataapi/skills` | [okdataapi/skills](https://github.com/okdataapi/skills) |
 
 在 [okdata.online](https://okdata.online/zh/signup/?src=gh-okdata) 注册拿 key，或者用命令行 `npx okdata login`

@@ -1,7 +1,7 @@
 {
   "name": "okdata",
-  "version": "0.1.0",
-  "description": "okdata command line: find and call social-data endpoints (Douyin, Xiaohongshu, WeChat, TikTok, X, YouTube and more), check your balance, log in from the terminal and set up the okdata MCP server in Claude Code, Cursor or Codex.",
+  "version": "0.1.1",
+  "description": "Command line for okdata, the social data API and MCP server for AI agents: TikTok, RedNote (Xiaohongshu), Douyin, WeChat, X, YouTube, Bilibili, Weibo and more, paid per call. Find and call endpoints, check your balance, log in from the terminal and set up the okdata MCP server in Claude Code, Cursor or Codex.",
   "type": "module",
   "bin": {
     "okdata": "./dist/bin.js"
@@ -23,17 +23,35 @@
   "keywords": [
     "okdata",
     "cli",
-    "mcp",
+    "command line",
     "social media api",
+    "social data",
     "ai agents",
+    "mcp",
     "douyin",
     "xiaohongshu",
+    "rednote",
+    "wechat",
+    "bilibili",
+    "weibo",
     "tiktok",
     "twitter",
+    "x",
     "youtube",
+    "instagram",
+    "reddit",
+    "kuaishou",
+    "douyin api",
+    "xiaohongshu api",
+    "tiktok api",
+    "xingtu",
+    "wechat official account",
+    "mcp server",
+    "claude",
     "claude code",
     "cursor",
-    "codex"
+    "codex",
+    "social media data"
   ],
   "homepage": "https://okdata.online/",
   "repository": {
@@ -45,7 +63,7 @@
   "license": "MIT",
   "author": "okdata <hello@okdata.online>",
   "dependencies": {
-    "@okdata/sdk": "^0.1.0"
+    "@okdata/sdk": "^0.1.1"
   },
   "devDependencies": {
     "@types/node": "22.20.5",

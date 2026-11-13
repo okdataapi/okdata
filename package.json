@@ -1,12 +1,16 @@
 {
   "name": "okdata-repo",
   "private": true,
-  "description": "One npm workspace for typescript/ (@okdata/sdk) and cli/ (okdata), so the CLI builds and tests against the SDK in this repository.",
-  "workspaces": ["typescript", "cli"],
+  "description": "One npm workspace for typescript/ (@okdata/sdk), cli/ (okdata) and mcp-typescript/ (@okdata/mcp), so the CLI builds and tests against the SDK in this repository.",
+  "workspaces": [
+    "typescript",
+    "cli",
+    "mcp-typescript"
+  ],
   "scripts": {
-    "typecheck": "npm run typecheck -w typescript && npm run typecheck -w cli",
-    "test": "npm test -w typescript && npm test -w cli",
-    "build": "npm run build -w typescript && npm run build -w cli",
+    "typecheck": "npm run typecheck -w typescript && npm run typecheck -w cli && npm run typecheck -w mcp-typescript",
+    "test": "npm test -w typescript && npm test -w cli && npm test -w mcp-typescript",
+    "build": "npm run build -w typescript && npm run build -w cli && npm run build -w mcp-typescript",
     "sync": "node scripts/sync.mjs"
   }
 }

@@ -1,0 +1,67 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "okdata-mcp"
+dynamic = ["version"]
+description = "okdata MCP server over stdio, for Claude Desktop, Cursor and other local MCP clients: the social data API and MCP server for AI agents. TikTok, RedNote (Xiaohongshu), Douyin, WeChat, X, YouTube, Bilibili, Weibo and more, paid per call. Run it with uvx okdata-mcp."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "okdata", email = "hello@okdata.online" }]
+requires-python = ">=3.10"
+dependencies = ["mcp>=2.3,<3", "httpx2>=2.10", "anyio>=4.9"]
+keywords = [
+  "mcp", "mcp server", "model context protocol", "stdio", "okdata", "social media api", "social data", "ai agents",
+  "tiktok", "rednote", "xiaohongshu", "douyin", "wechat", "x", "twitter", "youtube", "instagram", "reddit",
+  "bilibili", "weibo", "kuaishou", "tiktok mcp", "xiaohongshu mcp", "douyin mcp", "claude desktop", "claude code", "cursor",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Internet :: WWW/HTTP",
+  "Typing :: Typed",
+]
+
+[project.scripts]
+okdata-mcp = "okdata_mcp.__main__:main"
+
+[project.urls]
+Homepage = "https://okdata.online/mcp/"
+"中文" = "https://okdata.online/zh/mcp/"
+Documentation = "https://okdata.online/mcp/"
+Endpoints = "https://okdata.online/apis/"
+Pricing = "https://okdata.online/pricing/"
+Source = "https://github.com/okdataapi/okdata/tree/main/mcp-python"
+Issues = "https://github.com/okdataapi/okdata/issues"
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+dev = ["pytest>=7", "mypy>=1.8"]
+
+[tool.hatch.version]
+path = "src/okdata_mcp/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/okdata_mcp"]
+
+[tool.hatch.build.targets.sdist]
+# Anchored ("/tests", not "tests"), so a virtualenv or any other folder in here never ships.
+include = ["/src/okdata_mcp", "/tests", "/README.md", "/LICENSE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.mypy]
+strict = true
+files = ["src/okdata_mcp"]

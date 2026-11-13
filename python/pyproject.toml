@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "okdata"
 dynamic = ["version"]
-description = "Python SDK for okdata: social data from Douyin, Xiaohongshu, WeChat, Bilibili, Weibo, TikTok, X, YouTube and more, for AI agents, paid per call. Typed methods per endpoint, sync and async, safe retries, paging with a spend limit."
+description = "Python SDK for okdata, the social data API and MCP server for AI agents: TikTok, RedNote (Xiaohongshu), Douyin, WeChat, X, YouTube, Bilibili, Weibo and more, paid per call. Typed methods per endpoint, sync and async, safe retries, paging with a spend limit."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
@@ -15,6 +15,8 @@ dependencies = ["httpx>=0.25,<1"]
 keywords = [
   "okdata", "sdk", "social media api", "social data", "ai agents", "mcp", "douyin", "xiaohongshu", "rednote",
   "wechat", "bilibili", "weibo", "tiktok", "twitter", "x", "youtube", "instagram", "reddit",
+  "kuaishou", "douyin api", "xiaohongshu api", "tiktok api", "xingtu", "wechat official account",
+  "mcp server", "claude", "cursor", "social media data",
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -33,6 +35,8 @@ classifiers = [
 
 [project.urls]
 Homepage = "https://okdata.online/"
+"MCP server" = "https://okdata.online/mcp/"
+"中文" = "https://okdata.online/zh/"
 Documentation = "https://okdata.online/docs/sdk/"
 Endpoints = "https://okdata.online/apis/"
 Pricing = "https://okdata.online/pricing/"

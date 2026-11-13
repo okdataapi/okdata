@@ -1,7 +1,7 @@
 {
   "name": "@okdata/sdk",
-  "version": "0.1.0",
-  "description": "TypeScript SDK for okdata: social data from Douyin, Xiaohongshu, WeChat, Bilibili, Weibo, TikTok, X, YouTube and more, for AI agents, paid per call. One typed method per endpoint, safe retries, paging with a spend limit. No runtime dependencies.",
+  "version": "0.1.1",
+  "description": "TypeScript SDK for okdata, the social data API and MCP server for AI agents: TikTok, RedNote (Xiaohongshu), Douyin, WeChat, X, YouTube, Bilibili, Weibo and more, paid per call. One typed method per endpoint, safe retries, paging with a spend limit. No runtime dependencies.",
   "type": "module",
   "exports": {
     ".": {
@@ -45,7 +45,18 @@
     "x",
     "youtube",
     "instagram",
-    "reddit"
+    "reddit",
+    "kuaishou",
+    "douyin api",
+    "xiaohongshu api",
+    "tiktok api",
+    "xingtu",
+    "wechat official account",
+    "mcp server",
+    "claude",
+    "cursor",
+    "social media data",
+    "typescript"
   ],
   "homepage": "https://okdata.online/",
   "repository": {

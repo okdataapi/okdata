@@ -31,7 +31,11 @@ jobs:
       - run: npm test -w cli
       - run: npm run build -w cli
       - run: node cli/dist/bin.js --help
-      - run: npm pack --dry-run -w typescript -w cli
+      # @okdata/mcp, the local stdio bridge to the remote MCP server
+      - run: npm run typecheck -w mcp-typescript
+      - run: npm test -w mcp-typescript
+      - run: npm run build -w mcp-typescript
+      - run: npm pack --dry-run -w typescript -w cli -w mcp-typescript
 
   python:
     name: python ${{ matrix.python }}
@@ -62,3 +66,20 @@ jobs:
           python -m zipfile -l dist/*.whl | grep -q 'okdata/_generated/_sync.py'
           extra=$(tar tzf dist/*.tar.gz | grep -vE '^okdata-[^/]+/((src|tests)/.*|README\.md|LICENSE|pyproject\.toml|PKG-INFO|\.gitignore)?$' || true)
           if [ -n "$extra" ]; then echo "unexpected files in the sdist:"; echo "$extra"; exit 1; fi
+
+  mcp-python:
+    name: mcp-python ${{ matrix.python }}
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        python: ["3.10", "3.13"]
+    defaults:
+      run:
+        working-directory: mcp-python
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install -e '.[test]'
+      - run: python -m pytest
