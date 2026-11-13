@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "online.okdata/mcp",
   "title": "okdata",
-  "description": "Social data for AI agents: Douyin, Xiaohongshu, WeChat, TikTok, X, YouTube, more. Pay per call.",
-  "version": "1.0.0",
+  "description": "Social data for AI agents: TikTok, RedNote, Douyin, WeChat, X, YouTube and more. Pay per call.",
+  "version": "1.1.0",
   "websiteUrl": "https://okdata.online/mcp/",
   "repository": {
     "url": "https://github.com/okdataapi/okdata",
@@ -15,6 +15,25 @@
       "mimeType": "image/png",
       "sizes": [
         "512x512"
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "@okdata/mcp",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "OKDATA_API_KEY",
+          "description": "Your okdata API key (starts with okd_; make one at https://okdata.online/console/). find, describe and account status work without it.",
+          "isRequired": false,
+          "isSecret": true
+        }
       ]
     }
   ],
