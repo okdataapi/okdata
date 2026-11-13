@@ -45,6 +45,8 @@ Each is a few calls laid out as one table, with a SKILL.md an agent can install 
 - [Set it up in an agent](https://okdata.online/agents.md)
 - [Errors](https://okdata.online/docs/errors.md)
 - [MCP](https://okdata.online/mcp.md): the tools and every client
+- [SDKs](https://okdata.online/docs/sdk.md): `pip install okdata`, `npm install @okdata/sdk`
+- [Command line](https://okdata.online/docs/cli.md): `npx okdata`: find, call, log in, set up MCP
 
 ## Endpoints by platform
 

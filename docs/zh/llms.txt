@@ -45,6 +45,8 @@
 - [在智能体里接入](https://okdata.online/zh/agents.md)
 - [错误码](https://okdata.online/zh/docs/errors.md)
 - [MCP](https://okdata.online/zh/mcp.md): 工具和各客户端接法
+- [SDK](https://okdata.online/zh/docs/sdk.md): `pip install okdata`、`npm install @okdata/sdk`
+- [命令行](https://okdata.online/zh/docs/cli.md): `npx okdata`：找接口、调用、登录、配置 MCP
 
 ## 各平台接口
 
