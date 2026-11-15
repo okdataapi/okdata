@@ -1,14 +1,17 @@
 # okdata: social data API for AI agents and code
 
+Public data from TikTok, YouTube, Instagram, X, Reddit, RedNote (Xiaohongshu), Douyin, WeChat and more for AI
+agents and code: 200+ endpoints on 17 platforms, one key, pay per call, no platform accounts or cookies.
+
 **小红书数据接口 · 抖音数据 API · 公众号文章接口 · 快手 / B站 / 微博 / 知乎数据采集 · 社媒数据 MCP。**一个 Key 调用抖音、小红书、微信（公众号、视频号、搜一搜）、快手、B站、微博、知乎、TikTok、X、YouTube、Instagram、Reddit 的公开数据：搜内容、读评论、查博主、看热榜、拿字幕和广告。按次计费，失败不扣费，不用平台账号和 Cookie。[中文文档](https://okdata.online/zh/?src=gh-okdata) · [免费注册](https://okdata.online/zh/signup/?src=gh-okdata)
 
 [English](#english) · [中文](#中文)
 
 <a id="english"></a>
 
-[okdata](https://okdata.online) reads public data from Douyin, Xiaohongshu (RedNote), WeChat (Official Accounts,
-Channels and Search), Kuaishou, Bilibili, Weibo, Zhihu, TikTok, X, YouTube, Instagram, Reddit, Telegram and the
-Meta and Google ad libraries: posts, accounts, comments, hot lists, transcripts, creators and ads.
+[okdata](https://okdata.online) reads public data from TikTok, YouTube, Instagram, X, Reddit, Telegram, the Meta
+and Google ad libraries, Xiaohongshu (RedNote), Douyin, WeChat (Official Accounts, Channels and Search), Kuaishou,
+Bilibili, Weibo and Zhihu: posts, accounts, comments, hot lists, transcripts, creators and ads.
 200+ endpoints on 17 platforms, one key, one response shape. You pay per call or per item returned, from $0.0001,
 and a call that fails costs nothing. No platform accounts, cookies or QR logins on your side.
 
@@ -149,23 +152,23 @@ every endpoint on one page and [docs/prices.json](docs/prices.json) every price 
 <!-- okdata:platforms:en:start -->
 | Platform | Endpoints | Price per call or item | What you get |
 |---|---|---|---|
+| [TikTok](docs/apis/tiktok.md) | 17 | $0.002–$0.004 | Videos, accounts and comments worldwide. |
+| [YouTube](docs/apis/youtube.md) | 10 | $0.002–$0.004 | Videos, comments and transcripts. |
+| [Instagram](docs/apis/instagram.md) | 8 | $0.002–$0.004 | Profiles, posts and reels, comments, hashtags and what a reel says. |
+| [X (Twitter)](docs/apis/x.md) | 20 | $0.0001–$0.009 | Posts, accounts, search and trends. |
+| [Reddit](docs/apis/reddit.md) | 11 | $0.002–$0.004 | Posts, comments, communities, people and what is trending. |
+| [Meta Ad Library](docs/apis/meta.md) | 3 | $0.004 | Ads running on Facebook and Instagram, by keyword or advertiser. |
+| [Google Ads Transparency](docs/apis/google.md) | 2 | $0.004 | Advertisers and their ads on Search, YouTube and Display. |
+| [Telegram](docs/apis/telegram.md) | 3 | $0.002 | Public channels and their messages. |
 | [Douyin](docs/apis/douyin.md) | 38 | $0.002–$0.04 | China’s TikTok: videos, accounts, comments and the hot search board. |
 | [Xiaohongshu (RedNote)](docs/apis/xiaohongshu.md) | 30 | $0.02–$0.04 | Lifestyle notes, creators and what people search for. |
 | [WeChat Official Accounts](docs/apis/wechat_mp.md) | 8 | $0.02–$0.15 | Official Account articles and history, without a QR login. |
 | [Bilibili](docs/apis/bilibili.md) | 9 | $0.002–$0.0025 | Videos, comments and the popular board. |
 | [Weibo](docs/apis/weibo.md) | 11 | $0.002–$0.0025 | Posts, accounts and the hot search list. |
-| [TikTok](docs/apis/tiktok.md) | 17 | $0.002–$0.004 | Videos, accounts and comments worldwide. |
-| [X (Twitter)](docs/apis/x.md) | 20 | $0.0001–$0.009 | Posts, accounts, search and trends. |
-| [YouTube](docs/apis/youtube.md) | 10 | $0.002–$0.004 | Videos, comments and transcripts. |
-| [Meta Ad Library](docs/apis/meta.md) | 3 | $0.004 | Ads running on Facebook and Instagram, by keyword or advertiser. |
-| [Google Ads Transparency](docs/apis/google.md) | 2 | $0.004 | Advertisers and their ads on Search, YouTube and Display. |
-| [Instagram](docs/apis/instagram.md) | 8 | $0.002–$0.004 | Profiles, posts and reels, comments, hashtags and what a reel says. |
-| [Reddit](docs/apis/reddit.md) | 11 | $0.002–$0.004 | Posts, comments, communities, people and what is trending. |
 | [Kuaishou](docs/apis/kuaishou.md) | 8 | $0.002–$0.02 | Videos, accounts, comments and the hot list. |
 | [Zhihu](docs/apis/zhihu.md) | 15 (13 coming soon) | $0.002 | Questions and answers, articles, columns, people and the hot list. |
 | [WeChat Channels](docs/apis/wechat_channels.md) | 15 | $0.015–$0.15 | Channels videos, accounts, comments and live replays, without a QR login. |
 | [WeChat Search](docs/apis/wechat.md) | 6 | $0.02–$0.15 | WeChat Search across Official Account articles, Channels videos and mini programs. |
-| [Telegram](docs/apis/telegram.md) | 3 | $0.002 | Public channels and their messages. |
 <!-- okdata:platforms:en:end -->
 
 ## What is in this repository

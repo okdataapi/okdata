@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "okdata-mcp"
 dynamic = ["version"]
-description = "okdata MCP server over stdio, for Claude Desktop, Cursor and other local MCP clients: the social data API and MCP server for AI agents. TikTok, RedNote (Xiaohongshu), Douyin, WeChat, X, YouTube, Bilibili, Weibo and more, paid per call. Run it with uvx okdata-mcp."
+description = "okdata MCP server over stdio, for Claude Desktop, Cursor and other local MCP clients: the social data API and MCP server for AI agents. TikTok, YouTube, Instagram, X, Reddit, RedNote (Xiaohongshu), Douyin, WeChat and more, paid per call. Run it with uvx okdata-mcp."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]

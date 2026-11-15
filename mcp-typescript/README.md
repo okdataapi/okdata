@@ -1,15 +1,15 @@
 # okdata MCP server for Claude Desktop, Cursor and other local clients
 
-**社媒数据 MCP · 抖音 MCP · 小红书 MCP · 公众号 MCP · 抖音数据 API · 小红书数据接口 · 星图 / 蒲公英达人数据。**
-[中文说明](#中文) · [中文文档](https://okdata.online/zh/mcp/?src=npm-okdata-mcp)
-
-Social data for AI agents, paid per call: TikTok, RedNote (Xiaohongshu), Douyin, WeChat (Official Accounts
-and Channels), X, YouTube, Instagram, Reddit, Bilibili, Weibo, Kuaishou and more. 200+ endpoints on 17
+Social data for AI agents, paid per call: TikTok, YouTube, Instagram, X, Reddit, RedNote
+(Xiaohongshu), Douyin, WeChat (Official Accounts and Channels), Bilibili, Weibo, Kuaishou and more. 200+ endpoints on 17
 platforms behind one key. This package is the okdata MCP server as a local stdio command, for clients that
 only start local servers (Claude Desktop, some IDEs and agent frameworks): it passes every request to the
 hosted server at `https://api.okdata.online/mcp` with your key. The agent looks up an endpoint and its price
 for free; only the data call is charged, and a call that fails costs nothing. You need no platform
 accounts, cookies or QR logins.
+
+**社媒数据 MCP · 抖音 MCP · 小红书 MCP · 公众号 MCP · 抖音数据 API · 小红书数据接口 · 星图 / 蒲公英达人数据。**
+[中文说明](#中文) · [中文文档](https://okdata.online/zh/mcp/?src=npm-okdata-mcp)
 
 ```sh
 npx -y @okdata/mcp      # Node 18+; your MCP client runs this, not you
@@ -69,16 +69,16 @@ Claude Code, Cursor and Codex can also connect to the hosted server directly, wi
 
 | Platform | For example | Per call or item |
 |---|---|---|
-| Douyin (抖音) | video search, comments and replies, plays and likes, the hot list, Xingtu (星图) creators with rates and audience | from $0.002 |
+| TikTok | video search, comments, accounts, transcripts, TikTok Shop products, Creative Center ads | from $0.002 |
+| YouTube, Instagram, Reddit, Telegram | search, posts, comments, channels and accounts, transcripts | from $0.002 |
+| X (Twitter) | post search, replies, quotes, accounts, followers, lists, communities | from $0.0001 |
+| Meta and Google ad libraries | ads by keyword or advertiser | from $0.004 |
 | Xiaohongshu / RedNote (小红书) | note search, notes, comments, creators, PGY (蒲公英) creators, shop products and reviews | from $0.02 |
+| Douyin (抖音) | video search, comments and replies, plays and likes, the hot list, Xingtu (星图) creators with rates and audience | from $0.002 |
 | WeChat (微信) | Official Account (公众号) articles with reads and likes, Channels (视频号) videos and comments, WeChat Search | from $0.015 |
 | Weibo (微博) | the hot search list, post search, comments, accounts | from $0.002 |
 | Bilibili (B站) | video search, comments, uploader videos, the popular board | from $0.002 |
 | Kuaishou (快手) | video search, comments, accounts, the hot list | from $0.002 |
-| TikTok | video search, comments, accounts, transcripts, TikTok Shop products, Creative Center ads | from $0.002 |
-| X (Twitter) | post search, replies, quotes, accounts, followers, lists, communities | from $0.0001 |
-| YouTube, Instagram, Reddit, Telegram | search, posts, comments, channels and accounts, transcripts | from $0.002 |
-| Meta and Google ad libraries | ads by keyword or advertiser | from $0.004 |
 
 Every endpoint with its parameters, fields and price: [okdata.online/apis](https://okdata.online/apis/?src=npm-okdata-mcp)
 (中文：[接口列表](https://okdata.online/zh/apis/?src=npm-okdata-mcp)).

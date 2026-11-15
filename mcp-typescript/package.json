@@ -1,7 +1,7 @@
 {
   "name": "@okdata/mcp",
   "version": "0.1.0",
-  "description": "okdata MCP server over stdio, for Claude Desktop, Cursor and other local MCP clients: the social data API and MCP server for AI agents. TikTok, RedNote (Xiaohongshu), Douyin, WeChat, X, YouTube, Bilibili, Weibo and more, paid per call. Forwards to the hosted server at https://api.okdata.online/mcp.",
+  "description": "okdata MCP server over stdio, for Claude Desktop, Cursor and other local MCP clients: the social data API and MCP server for AI agents. TikTok, YouTube, Instagram, X, Reddit, RedNote (Xiaohongshu), Douyin, WeChat and more, paid per call. Forwards to the hosted server at https://api.okdata.online/mcp.",
   "type": "module",
   "bin": {
     "okdata-mcp": "./dist/bin.js"
