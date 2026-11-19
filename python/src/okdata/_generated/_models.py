@@ -1087,6 +1087,8 @@ class Review(TypedDict, total=False):
     """Stars, 1 to 5."""
     text: str
     """Review text; empty when the buyer left only stars."""
+    translation: Optional[str]
+    """The review in English, as the store translates it; null where the store gives no translation. (view=standard and up)"""
     published_at: Optional[str]
     """When it was posted, ISO 8601 in UTC (a day for platforms that show only the date)."""
     author_name: Optional[str]
@@ -1170,6 +1172,8 @@ class Trend(TypedDict, total=False):
     """The heat score the platform shows; scales differ by platform."""
     url: Optional[str]
     """Link to the topic page, if there is one."""
+    platform: str
+    """The platform whose list the entry is on, e.g. weibo: what tells entries apart on all.trends.list."""
 
 
 class XingtuCampaign(TypedDict, total=False):

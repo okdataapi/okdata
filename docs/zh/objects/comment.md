@@ -55,3 +55,6 @@
 - [公众号评论回复](https://okdata.online/zh/apis/wechat_mp/comments/replies/list/) (`wechat_mp.comments.replies.list`): $0.02/次 · 每页约 3 条评论
 - [YouTube 评论回复](https://okdata.online/zh/apis/youtube/comments/replies/list/) (`youtube.comments.replies.list`): $0.002/次 · 每页约 10 条评论
 - [TikTok 评论回复](https://okdata.online/zh/apis/tiktok/comments/replies/list/) (`tiktok.comments.replies.list`): $0.002/次 · 每页约 20 条评论
+- [头条评论](https://okdata.online/zh/apis/toutiao/posts/comments/list/) (`toutiao.posts.comments.list`): $0.002/次 · 每页约 20 条评论
+- [西瓜视频评论](https://okdata.online/zh/apis/xigua/videos/comments/list/) (`xigua.videos.comments.list`): $0.002/次 · 每页约 20 条评论
+- [Bluesky 帖子回复](https://okdata.online/zh/apis/bluesky/posts/comments/list/) (`bluesky.posts.comments.list`): $0.001/次 · 每页约 200 条评论

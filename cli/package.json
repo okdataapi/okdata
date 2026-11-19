@@ -1,6 +1,6 @@
 {
   "name": "okdata",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Command line for okdata, the social data API and MCP server for AI agents: TikTok, YouTube, Instagram, X, Reddit, RedNote (Xiaohongshu), Douyin, WeChat and more, paid per call. Find and call endpoints, check your balance, log in from the terminal and set up the okdata MCP server in Claude Code, Cursor or Codex.",
   "type": "module",
   "bin": {
@@ -63,7 +63,7 @@
   "license": "MIT",
   "author": "okdata <hello@okdata.online>",
   "dependencies": {
-    "@okdata/sdk": "^0.1.1"
+    "@okdata/sdk": "^0.1.2"
   },
   "devDependencies": {
     "@types/node": "22.20.5",

@@ -1,9 +1,9 @@
 # okdata for Python
 
 Social data for AI agents, paid per call: TikTok, YouTube, Instagram, X, Reddit, RedNote
-(Xiaohongshu), Douyin, WeChat (Official Accounts and Channels), Bilibili, Weibo, Kuaishou and more. 200+ endpoints on 17
+(Xiaohongshu), Douyin, WeChat (Official Accounts and Channels), Bilibili, Weibo, Kuaishou and more. 230+ endpoints on 23
 platforms behind one key, as typed Python methods, plain HTTP, or a remote MCP server for Claude, Cursor
-and Codex. A call that fails costs nothing, and you need no platform accounts, cookies or QR logins.
+and Codex. You need no platform accounts, cookies or QR logins.
 Every endpoint is a typed method generated from the okdata catalog, with its price in its docstring.
 
 **抖音数据 API · 小红书数据接口 · 公众号文章阅读数接口 · 星图 / 蒲公英达人数据 · 社媒数据 MCP。**
@@ -56,7 +56,7 @@ an endpoint and its price for free; only the data call is charged. More clients:
 okdata 是给 AI 智能体和代码用的社媒数据接口，按次付费。一个 key 就能读抖音、小红书、公众号、视频号、B站、微博、快手，
 以及 TikTok、X、YouTube、Instagram、Reddit 的公开数据：搜视频和笔记、批量拉评论、查星图和蒲公英达人、
 拿公众号文章的阅读数和点赞数、看微博热搜和抖音热榜。可以用这个 Python SDK，也可以在 Claude、Cursor、Codex 里
-接 MCP（上面那一条命令），或者直接发 HTTP 请求。调用失败不扣钱，不需要平台账号、Cookie，也不用扫码。
+接 MCP（上面那一条命令），或者直接发 HTTP 请求。不需要平台账号、Cookie，也不用扫码。
 支付宝、微信、银行卡都能充值。
 
 [中文文档](https://okdata.online/zh/docs/sdk/?src=pypi-okdata) · [接口和价格](https://okdata.online/zh/apis/?src=pypi-okdata) ·

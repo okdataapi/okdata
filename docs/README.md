@@ -2,7 +2,7 @@
 
 <!-- Generated from the okdata catalog by scripts/export-public.mjs in the okdata monorepo. Do not edit by hand. -->
 
-214 endpoints on 17 platforms (13 of them listed as coming soon and not callable yet), catalog revision 2128c2e84655fc1f, price book 1b273c48fea9634e. The same pages are at https://okdata.online/apis/. 中文在下面。
+255 endpoints on 29 platforms (5 of them listed as coming soon and not callable yet), catalog revision 328d5a2ee651819d, price book 5835acf0f45c7fc4. The same pages are at https://okdata.online/apis/. 中文在下面。
 
 ## Files for agents and code
 
@@ -271,16 +271,17 @@
 |---|---|---|
 | [Zhihu search](apis/zhihu/posts/search.md) | `zhihu.posts.search` | $0.002 per call · about 20 posts per page |
 | [Zhihu question answers](apis/zhihu/questions/answers/list.md) | `zhihu.questions.answers.list` | $0.002 per call · about 20 posts per page |
-| [Zhihu question detail](apis/zhihu/questions/get.md) (coming soon) | `zhihu.questions.get` | $0.002 per call |
-| [Zhihu answer detail](apis/zhihu/answers/get.md) (coming soon) | `zhihu.answers.get` | $0.002 per call |
-| [Zhihu answer comments](apis/zhihu/answers/comments/list.md) (coming soon) | `zhihu.answers.comments.list` | $0.002 per call · about 10 comments per page |
+| [Zhihu question detail](apis/zhihu/questions/get.md) | `zhihu.questions.get` | $0.002 per call |
+| [Zhihu answer detail](apis/zhihu/answers/get.md) | `zhihu.answers.get` | $0.002 per call |
+| [Zhihu answer comments](apis/zhihu/answers/comments/list.md) | `zhihu.answers.comments.list` | $0.002 per call · about 10 comments per page |
 | [Zhihu comment replies](apis/zhihu/comments/replies/list.md) (coming soon) | `zhihu.comments.replies.list` | $0.002 per call · about 20 comments per page |
-| [Zhihu article detail](apis/zhihu/articles/get.md) (coming soon) | `zhihu.articles.get` | $0.002 per call |
-| [Zhihu column articles](apis/zhihu/columns/articles/list.md) (coming soon) | `zhihu.columns.articles.list` | $0.002 per call · about 20 articles per page |
-| [Zhihu pin detail](apis/zhihu/pins/get.md) (coming soon) | `zhihu.pins.get` | $0.002 per call |
-| [Zhihu user profile](apis/zhihu/users/get.md) (coming soon) | `zhihu.users.get` | $0.002 per call |
-| [Zhihu user search](apis/zhihu/users/search.md) (coming soon) | `zhihu.users.search` | $0.002 per call · about 20 accounts per page |
-| [Zhihu user followers](apis/zhihu/users/followers/list.md) (coming soon) | `zhihu.users.followers.list` | $0.002 per call · about 20 accounts per page |
+| [Zhihu article detail](apis/zhihu/articles/get.md) | `zhihu.articles.get` | $0.002 per call |
+| [Zhihu column articles](apis/zhihu/columns/articles/list.md) | `zhihu.columns.articles.list` | $0.002 per call · about 20 articles per page |
+| [Zhihu pin detail](apis/zhihu/pins/get.md) | `zhihu.pins.get` | $0.002 per call |
+| [Zhihu hot list](apis/zhihu/trends/list.md) | `zhihu.trends.list` | $0.002 per call · about 30 board entries per page |
+| [Zhihu user profile](apis/zhihu/users/get.md) | `zhihu.users.get` | $0.002 per call |
+| [Zhihu user search](apis/zhihu/users/search.md) | `zhihu.users.search` | $0.002 per call · about 20 accounts per page |
+| [Zhihu user followers](apis/zhihu/users/followers/list.md) | `zhihu.users.followers.list` | $0.002 per call · about 20 accounts per page |
 | [Zhihu user answers](apis/zhihu/users/answers/list.md) (coming soon) | `zhihu.users.answers.list` | $0.002 per call · about 20 posts per page |
 | [Zhihu user articles](apis/zhihu/users/articles/list.md) (coming soon) | `zhihu.users.articles.list` | $0.002 per call · about 20 articles per page |
 | [Zhihu user pins](apis/zhihu/users/pins/list.md) (coming soon) | `zhihu.users.pins.list` | $0.002 per call · about 20 posts per page |
@@ -315,6 +316,106 @@
 | [WeChat Search suggestions](apis/wechat/keywords/related.md) | `wechat.keywords.related` | $0.15 per call · about 9 results per page |
 | [WeChat mini program search](apis/wechat/miniprograms/search.md) | `wechat.miniprograms.search` | $0.15 per call · about 25 results per page |
 | [WeChat Search articles and videos (backup)](apis/wechat/backup/posts/search.md) | `wechat.backup.posts.search` | $0.15 per call · about 20 posts per page |
+
+**Amazon**
+
+| Endpoint | ID | Price |
+|---|---|---|
+| [Amazon product search](apis/amazon/products/search.md) | `amazon.products.search` | $0.006 per call · about 48 products per page |
+| [Amazon product details](apis/amazon/products/get.md) | `amazon.products.get` | $0.006 per call |
+| [Amazon product reviews](apis/amazon/products/reviews/list.md) | `amazon.products.reviews.list` | $0.006 per call · about 10 reviews per page |
+| [Amazon Best Sellers](apis/amazon/bestsellers/list.md) | `amazon.bestsellers.list` | $0.006 per call · about 50 products per page |
+
+**AliExpress**
+
+| Endpoint | ID | Price |
+|---|---|---|
+| [AliExpress product search](apis/aliexpress/products/search.md) | `aliexpress.products.search` | $0.002 per call · about 20 products per page |
+| [AliExpress product details](apis/aliexpress/products/get.md) (coming soon) | `aliexpress.products.get` | $0.002 per call |
+| [AliExpress product reviews](apis/aliexpress/products/reviews/list.md) | `aliexpress.products.reviews.list` | $0.002 per call · about 20 reviews per page |
+
+**Taobao & Tmall**
+
+| Endpoint | ID | Price |
+|---|---|---|
+| [Taobao product search](apis/taobao/products/search.md) | `taobao.products.search` | $0.043 per call · about 10 products per page |
+| [Taobao product details](apis/taobao/products/get.md) | `taobao.products.get` | $0.033 per call |
+| [Taobao product reviews](apis/taobao/products/reviews/list.md) | `taobao.products.reviews.list` | $0.043 per call · about 20 reviews per page |
+| [Taobao shop products](apis/taobao/shops/products/list.md) | `taobao.shops.products.list` | $0.043 per call · about 60 products per page |
+
+**1688**
+
+| Endpoint | ID | Price |
+|---|---|---|
+| [1688 product search](apis/alibaba_1688/products/search.md) | `alibaba_1688.products.search` | $0.022 per call · about 20 products per page |
+| [1688 product details](apis/alibaba_1688/products/get.md) | `alibaba_1688.products.get` | $0.022 per call |
+| [1688 product reviews](apis/alibaba_1688/products/reviews/list.md) | `alibaba_1688.products.reviews.list` | $0.022 per call · about 10 reviews per page |
+| [1688 supplier products](apis/alibaba_1688/shops/products/list.md) | `alibaba_1688.shops.products.list` | $0.022 per call · about 20 products per page |
+
+**Xianyu (Goofish)**
+
+| Endpoint | ID | Price |
+|---|---|---|
+| [Xianyu listing search](apis/xianyu/products/search.md) | `xianyu.products.search` | $0.022 per call · about 10 products per page |
+| [Xianyu listing details](apis/xianyu/products/get.md) | `xianyu.products.get` | $0.022 per call |
+
+**Douyin Shop**
+
+| Endpoint | ID | Price |
+|---|---|---|
+| [Douyin Shop product search](apis/douyin_shop/products/search.md) | `douyin_shop.products.search` | $0.054 per call · about 30 products per page |
+| [Douyin Shop product details](apis/douyin_shop/products/get.md) | `douyin_shop.products.get` | $0.039 per call |
+| [Douyin Shop product reviews](apis/douyin_shop/products/reviews/list.md) | `douyin_shop.products.reviews.list` | $0.039 per call · about 20 reviews per page |
+| [Douyin Shop store products](apis/douyin_shop/shops/products/list.md) | `douyin_shop.shops.products.list` | $0.043 per call · about 10 products per page |
+
+**Toutiao**
+
+| Endpoint | ID | Price |
+|---|---|---|
+| [Toutiao article](apis/toutiao/articles/get.md) | `toutiao.articles.get` | $0.002 per call |
+| [Toutiao video](apis/toutiao/videos/get.md) | `toutiao.videos.get` | $0.002 per call |
+| [Toutiao comments](apis/toutiao/posts/comments/list.md) | `toutiao.posts.comments.list` | $0.002 per call · about 20 comments per page |
+| [Toutiao account profile](apis/toutiao/users/get.md) | `toutiao.users.get` | $0.002 per call |
+| [Toutiao hot board](apis/toutiao/trends/list.md) | `toutiao.trends.list` | $0.002 per call · about 50 board entries per page |
+
+**Xigua Video**
+
+| Endpoint | ID | Price |
+|---|---|---|
+| [Xigua Video search](apis/xigua/videos/search.md) | `xigua.videos.search` | $0.002 per call · about 10 videos per page |
+| [Xigua Video detail](apis/xigua/videos/get.md) | `xigua.videos.get` | $0.004 per call |
+| [Xigua Video comments](apis/xigua/videos/comments/list.md) | `xigua.videos.comments.list` | $0.002 per call · about 20 comments per page |
+| [Xigua Video creator profile](apis/xigua/users/get.md) | `xigua.users.get` | $0.002 per call |
+| [Xigua Video creator videos](apis/xigua/users/videos/list.md) | `xigua.users.videos.list` | $0.002 per call · about 30 videos per page |
+
+**Baidu**
+
+| Endpoint | ID | Price |
+|---|---|---|
+| [Baidu hot search](apis/baidu/trends/list.md) | `baidu.trends.list` | $0.002 per call · about 50 board entries per page |
+
+**Bluesky**
+
+| Endpoint | ID | Price |
+|---|---|---|
+| [Bluesky profile](apis/bluesky/users/get.md) | `bluesky.users.get` | $0.001 per call |
+| [Bluesky account search](apis/bluesky/users/search.md) | `bluesky.users.search` | $0.001 per call · about 25 accounts per page |
+| [Bluesky account posts](apis/bluesky/users/posts/list.md) | `bluesky.users.posts.list` | $0.001 per call · about 30 posts per page |
+| [Bluesky post](apis/bluesky/posts/get.md) | `bluesky.posts.get` | $0.001 per call |
+| [Bluesky post replies](apis/bluesky/posts/comments/list.md) | `bluesky.posts.comments.list` | $0.001 per call · about 200 comments per page |
+
+**App Store**
+
+| Endpoint | ID | Price |
+|---|---|---|
+| [App Store app details](apis/app_store/apps/get.md) | `app_store.apps.get` | $0.001 per call |
+| [App Store reviews](apis/app_store/apps/reviews/list.md) | `app_store.apps.reviews.list` | $0.001 per call · about 50 reviews per page |
+
+**All platforms**
+
+| Endpoint | ID | Price |
+|---|---|---|
+| [All hot lists in one call](apis/all/trends/list.md) | `all.trends.list` | $0.03 per call · about 400 board entries per page |
 
 ## 中文文档
 
@@ -569,16 +670,17 @@
 |---|---|---|
 | [知乎内容搜索](zh/apis/zhihu/posts/search.md) | `zhihu.posts.search` | $0.002/次 · 每页约 20 条帖子 |
 | [知乎问题回答](zh/apis/zhihu/questions/answers/list.md) | `zhihu.questions.answers.list` | $0.002/次 · 每页约 20 条帖子 |
-| [知乎问题详情](zh/apis/zhihu/questions/get.md)（即将上线） | `zhihu.questions.get` | $0.002/次 |
-| [知乎回答详情](zh/apis/zhihu/answers/get.md)（即将上线） | `zhihu.answers.get` | $0.002/次 |
-| [知乎回答评论](zh/apis/zhihu/answers/comments/list.md)（即将上线） | `zhihu.answers.comments.list` | $0.002/次 · 每页约 10 条评论 |
+| [知乎问题详情](zh/apis/zhihu/questions/get.md) | `zhihu.questions.get` | $0.002/次 |
+| [知乎回答详情](zh/apis/zhihu/answers/get.md) | `zhihu.answers.get` | $0.002/次 |
+| [知乎回答评论](zh/apis/zhihu/answers/comments/list.md) | `zhihu.answers.comments.list` | $0.002/次 · 每页约 10 条评论 |
 | [知乎评论回复](zh/apis/zhihu/comments/replies/list.md)（即将上线） | `zhihu.comments.replies.list` | $0.002/次 · 每页约 20 条评论 |
-| [知乎文章详情](zh/apis/zhihu/articles/get.md)（即将上线） | `zhihu.articles.get` | $0.002/次 |
-| [知乎专栏文章列表](zh/apis/zhihu/columns/articles/list.md)（即将上线） | `zhihu.columns.articles.list` | $0.002/次 · 每页约 20 篇文章 |
-| [知乎想法详情](zh/apis/zhihu/pins/get.md)（即将上线） | `zhihu.pins.get` | $0.002/次 |
-| [知乎用户资料](zh/apis/zhihu/users/get.md)（即将上线） | `zhihu.users.get` | $0.002/次 |
-| [知乎用户搜索](zh/apis/zhihu/users/search.md)（即将上线） | `zhihu.users.search` | $0.002/次 · 每页约 20 个账号 |
-| [知乎用户粉丝列表](zh/apis/zhihu/users/followers/list.md)（即将上线） | `zhihu.users.followers.list` | $0.002/次 · 每页约 20 个账号 |
+| [知乎文章详情](zh/apis/zhihu/articles/get.md) | `zhihu.articles.get` | $0.002/次 |
+| [知乎专栏文章列表](zh/apis/zhihu/columns/articles/list.md) | `zhihu.columns.articles.list` | $0.002/次 · 每页约 20 篇文章 |
+| [知乎想法详情](zh/apis/zhihu/pins/get.md) | `zhihu.pins.get` | $0.002/次 |
+| [知乎热榜](zh/apis/zhihu/trends/list.md) | `zhihu.trends.list` | $0.002/次 · 每页约 30 条榜单 |
+| [知乎用户资料](zh/apis/zhihu/users/get.md) | `zhihu.users.get` | $0.002/次 |
+| [知乎用户搜索](zh/apis/zhihu/users/search.md) | `zhihu.users.search` | $0.002/次 · 每页约 20 个账号 |
+| [知乎用户粉丝列表](zh/apis/zhihu/users/followers/list.md) | `zhihu.users.followers.list` | $0.002/次 · 每页约 20 个账号 |
 | [知乎用户回答](zh/apis/zhihu/users/answers/list.md)（即将上线） | `zhihu.users.answers.list` | $0.002/次 · 每页约 20 条帖子 |
 | [知乎用户文章](zh/apis/zhihu/users/articles/list.md)（即将上线） | `zhihu.users.articles.list` | $0.002/次 · 每页约 20 篇文章 |
 | [知乎用户想法](zh/apis/zhihu/users/pins/list.md)（即将上线） | `zhihu.users.pins.list` | $0.002/次 · 每页约 20 条帖子 |
@@ -621,3 +723,103 @@
 | [Telegram 频道资料](zh/apis/telegram/channels/get.md) | `telegram.channels.get` | $0.002/次 |
 | [Telegram 频道消息](zh/apis/telegram/channels/messages/list.md) | `telegram.channels.messages.list` | $0.002/次 · 每页约 20 条帖子 |
 | [Telegram 单条消息](zh/apis/telegram/messages/get.md) | `telegram.messages.get` | $0.002/次 |
+
+**亚马逊**
+
+| 接口 | ID | 价格 |
+|---|---|---|
+| [亚马逊商品搜索](zh/apis/amazon/products/search.md) | `amazon.products.search` | $0.006/次 · 每页约 48 个商品 |
+| [亚马逊商品详情](zh/apis/amazon/products/get.md) | `amazon.products.get` | $0.006/次 |
+| [亚马逊商品评论](zh/apis/amazon/products/reviews/list.md) | `amazon.products.reviews.list` | $0.006/次 · 每页约 10 条评价 |
+| [亚马逊畅销榜](zh/apis/amazon/bestsellers/list.md) | `amazon.bestsellers.list` | $0.006/次 · 每页约 50 个商品 |
+
+**速卖通**
+
+| 接口 | ID | 价格 |
+|---|---|---|
+| [速卖通商品搜索](zh/apis/aliexpress/products/search.md) | `aliexpress.products.search` | $0.002/次 · 每页约 20 个商品 |
+| [速卖通商品详情](zh/apis/aliexpress/products/get.md)（即将上线） | `aliexpress.products.get` | $0.002/次 |
+| [速卖通商品评价](zh/apis/aliexpress/products/reviews/list.md) | `aliexpress.products.reviews.list` | $0.002/次 · 每页约 20 条评价 |
+
+**淘宝天猫**
+
+| 接口 | ID | 价格 |
+|---|---|---|
+| [淘宝商品搜索](zh/apis/taobao/products/search.md) | `taobao.products.search` | $0.043/次 · 每页约 10 个商品 |
+| [淘宝商品详情](zh/apis/taobao/products/get.md) | `taobao.products.get` | $0.033/次 |
+| [淘宝商品评价](zh/apis/taobao/products/reviews/list.md) | `taobao.products.reviews.list` | $0.043/次 · 每页约 20 条评价 |
+| [淘宝店铺商品](zh/apis/taobao/shops/products/list.md) | `taobao.shops.products.list` | $0.043/次 · 每页约 60 个商品 |
+
+**1688**
+
+| 接口 | ID | 价格 |
+|---|---|---|
+| [1688 商品搜索](zh/apis/alibaba_1688/products/search.md) | `alibaba_1688.products.search` | $0.022/次 · 每页约 20 个商品 |
+| [1688 商品详情](zh/apis/alibaba_1688/products/get.md) | `alibaba_1688.products.get` | $0.022/次 |
+| [1688 商品评价](zh/apis/alibaba_1688/products/reviews/list.md) | `alibaba_1688.products.reviews.list` | $0.022/次 · 每页约 10 条评价 |
+| [1688 店铺商品](zh/apis/alibaba_1688/shops/products/list.md) | `alibaba_1688.shops.products.list` | $0.022/次 · 每页约 20 个商品 |
+
+**闲鱼**
+
+| 接口 | ID | 价格 |
+|---|---|---|
+| [闲鱼商品搜索](zh/apis/xianyu/products/search.md) | `xianyu.products.search` | $0.022/次 · 每页约 10 个商品 |
+| [闲鱼商品详情](zh/apis/xianyu/products/get.md) | `xianyu.products.get` | $0.022/次 |
+
+**抖音电商**
+
+| 接口 | ID | 价格 |
+|---|---|---|
+| [抖音电商商品搜索](zh/apis/douyin_shop/products/search.md) | `douyin_shop.products.search` | $0.054/次 · 每页约 30 个商品 |
+| [抖音电商商品详情](zh/apis/douyin_shop/products/get.md) | `douyin_shop.products.get` | $0.039/次 |
+| [抖音电商商品评价](zh/apis/douyin_shop/products/reviews/list.md) | `douyin_shop.products.reviews.list` | $0.039/次 · 每页约 20 条评价 |
+| [抖音电商店铺商品](zh/apis/douyin_shop/shops/products/list.md) | `douyin_shop.shops.products.list` | $0.043/次 · 每页约 10 个商品 |
+
+**今日头条**
+
+| 接口 | ID | 价格 |
+|---|---|---|
+| [头条文章详情](zh/apis/toutiao/articles/get.md) | `toutiao.articles.get` | $0.002/次 |
+| [头条视频详情](zh/apis/toutiao/videos/get.md) | `toutiao.videos.get` | $0.002/次 |
+| [头条评论](zh/apis/toutiao/posts/comments/list.md) | `toutiao.posts.comments.list` | $0.002/次 · 每页约 20 条评论 |
+| [头条号资料](zh/apis/toutiao/users/get.md) | `toutiao.users.get` | $0.002/次 |
+| [头条热榜](zh/apis/toutiao/trends/list.md) | `toutiao.trends.list` | $0.002/次 · 每页约 50 条榜单 |
+
+**西瓜视频**
+
+| 接口 | ID | 价格 |
+|---|---|---|
+| [西瓜视频搜索](zh/apis/xigua/videos/search.md) | `xigua.videos.search` | $0.002/次 · 每页约 10 条视频 |
+| [西瓜视频详情](zh/apis/xigua/videos/get.md) | `xigua.videos.get` | $0.004/次 |
+| [西瓜视频评论](zh/apis/xigua/videos/comments/list.md) | `xigua.videos.comments.list` | $0.002/次 · 每页约 20 条评论 |
+| [西瓜视频创作者资料](zh/apis/xigua/users/get.md) | `xigua.users.get` | $0.002/次 |
+| [西瓜视频创作者作品](zh/apis/xigua/users/videos/list.md) | `xigua.users.videos.list` | $0.002/次 · 每页约 30 条视频 |
+
+**百度**
+
+| 接口 | ID | 价格 |
+|---|---|---|
+| [百度热搜](zh/apis/baidu/trends/list.md) | `baidu.trends.list` | $0.002/次 · 每页约 50 条榜单 |
+
+**Bluesky**
+
+| 接口 | ID | 价格 |
+|---|---|---|
+| [Bluesky 账号资料](zh/apis/bluesky/users/get.md) | `bluesky.users.get` | $0.001/次 |
+| [Bluesky 找账号](zh/apis/bluesky/users/search.md) | `bluesky.users.search` | $0.001/次 · 每页约 25 个账号 |
+| [Bluesky 账号发帖](zh/apis/bluesky/users/posts/list.md) | `bluesky.users.posts.list` | $0.001/次 · 每页约 30 条帖子 |
+| [Bluesky 帖子详情](zh/apis/bluesky/posts/get.md) | `bluesky.posts.get` | $0.001/次 |
+| [Bluesky 帖子回复](zh/apis/bluesky/posts/comments/list.md) | `bluesky.posts.comments.list` | $0.001/次 · 每页约 200 条评论 |
+
+**苹果应用商店**
+
+| 接口 | ID | 价格 |
+|---|---|---|
+| [App Store 应用详情](zh/apis/app_store/apps/get.md) | `app_store.apps.get` | $0.001/次 |
+| [App Store 用户评论](zh/apis/app_store/apps/reviews/list.md) | `app_store.apps.reviews.list` | $0.001/次 · 每页约 50 条评价 |
+
+**全网**
+
+| 接口 | ID | 价格 |
+|---|---|---|
+| [全网热榜](zh/apis/all/trends/list.md) | `all.trends.list` | $0.03/次 · 每页约 400 条榜单 |

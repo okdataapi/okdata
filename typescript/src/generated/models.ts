@@ -1081,6 +1081,8 @@ export interface Review {
   rating: number | null;
   /** Review text; empty when the buyer left only stars. */
   text: string;
+  /** The review in English, as the store translates it; null where the store gives no translation. (view=standard and up) */
+  translation?: string | null;
   /** When it was posted, ISO 8601 in UTC (a day for platforms that show only the date). */
   published_at: string | null;
   /** Reviewer name as the shop shows it, often masked. */
@@ -1164,6 +1166,8 @@ export interface Trend {
   heat: number | null;
   /** Link to the topic page, if there is one. */
   url: string | null;
+  /** The platform whose list the entry is on, e.g. weibo: what tells entries apart on all.trends.list. */
+  platform: string;
 }
 
 export interface XingtuCampaign {

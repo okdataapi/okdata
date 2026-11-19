@@ -62,3 +62,7 @@
 - [X 列表成员](https://okdata.online/zh/apis/x/lists/members/list/) (`x.lists.members.list`): $0.0004/条 · 每次最多 $0.008
 - [X 列表关注者](https://okdata.online/zh/apis/x/lists/followers/list/) (`x.lists.followers.list`): $0.0004/条 · 每次最多 $0.008
 - [X 社群成员](https://okdata.online/zh/apis/x/communities/members/list/) (`x.communities.members.list`): $0.0004/条 · 每次最多 $0.008
+- [头条号资料](https://okdata.online/zh/apis/toutiao/users/get/) (`toutiao.users.get`): $0.002/次
+- [西瓜视频创作者资料](https://okdata.online/zh/apis/xigua/users/get/) (`xigua.users.get`): $0.002/次
+- [Bluesky 账号资料](https://okdata.online/zh/apis/bluesky/users/get/) (`bluesky.users.get`): $0.001/次
+- [Bluesky 找账号](https://okdata.online/zh/apis/bluesky/users/search/) (`bluesky.users.search`): $0.001/次 · 每页约 25 个账号

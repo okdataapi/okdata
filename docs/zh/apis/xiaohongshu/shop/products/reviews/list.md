@@ -13,7 +13,7 @@
 
 ## 价格
 
-每次调用 $0.02，返回一页，约 12 条评价。抓 1,000 条评价大约要 84 次调用，合计 $1.68。每翻一页是一次单独的调用；失败的调用不扣费。
+每次调用 $0.02，返回一页，约 12 条评价。抓 1,000 条评价大约要 84 次调用，合计 $1.68。每翻一页是一次单独的调用。请求到了数据源的调用，返回为空、查不到或出错也照常计费；还没请求数据源就被拦下的不扣费。
 
 ## 参数
 
@@ -22,7 +22,7 @@
 | `id` | string | 是 |  | 商品 ID（24 位十六进制），来自商城商品搜索。（例：`6441fb9a6cd6140001acf7b4`） |
 | `sort` | string: relevance / latest | 否 | `relevance` | 排序方式。 |
 | `cursor` | string | 否 |  | 上一次返回的 page.next_cursor，原样传回。每翻一页都是一次单独的调用。 |
-| `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |
+| `view` | string: brief / compact / standard / full | 否 | `standard` | 返回多少字段。brief：只给 ID、标题、正文前 100 字、链接、时间和主要数字，适合先扫一遍列表，再按 ID 取详情；compact 去掉空字段、长正文截到 500 字；full 会在 ext 里带上平台特有字段。 |
 | `fields` | string[] | 否 |  | 只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。 |
 
 cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs/requests/)。
@@ -37,6 +37,7 @@ cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs
 | `product_id` | string | 被评价商品的 ID。 |
 | `rating` | number \| null | 星级，1 到 5。 |
 | `text` | string | 评价内容；只打星没写字时为空字符串。 |
+| `translation` | string \| null | 商城给出的英文译文；商城没给译文时为 null。 |
 | `published_at` | string \| null | 发布时间，ISO 8601，UTC（平台只显示日期的为当天）。 |
 | `author_name` | string \| null | 商城显示的评价人昵称，常为打码。 |
 | `variant` | string \| null | 购买的款式规格。 |
@@ -124,6 +125,7 @@ console.log('cost: $' + body.meta.billing.amount);
         "product_id": "6441fb9a6cd6140001acf7b4",
         "rating": 5,
         "text": "做工扎实，研磨均匀，出门露营带着很方便。",
+        "translation": "Great grinder, the espresso comes out much better.",
         "published_at": "2024-11-21T00:00:00Z",
         "author_name": "甜**",
         "variant": "颜色分类：棕橘色",
@@ -157,13 +159,13 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## 错误
 
-所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。错误不扣费；只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
+所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。请求到了数据源的调用出错（查不到、数据源失败或超时）时，按这个接口的价格计一次费，charged 为 true，并给出 amount；参数错误这类还没请求数据源的错误不扣费。只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
 
 ## 常见问题
 
 ### 小红书商城商品评价接口多少钱？
 
-每次调用 $0.02，返回一页，约 12 条评价。抓 1,000 条评价大约要 84 次调用，合计 $1.68。每翻一页是一次单独的调用；失败的调用不扣费。
+每次调用 $0.02，返回一页，约 12 条评价。抓 1,000 条评价大约要 84 次调用，合计 $1.68。每翻一页是一次单独的调用。请求到了数据源的调用，返回为空、查不到或出错也照常计费；还没请求数据源就被拦下的不扣费。
 
 ### 怎么翻页？
 
@@ -175,7 +177,7 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ### 调用失败会扣费吗？
 
-不会。所有错误都会返回 charged: false；只有超时返回 charged: null，表示结果还没确定。带同一个 Idempotency-Key 重发，绝不会重复扣费。
+请求到了数据源就会扣一次：返回为空、查不到、数据源出错或超时，都按一次调用计费（按条计价的按 1 条），错误里 charged 为 true，并给出 amount。参数错误、余额不足这类还没请求数据源就被拦下的不扣费。
 
 ### 小红书不展示某个字段怎么办？
 

@@ -797,6 +797,9 @@ export type ZhihuPinsGetParams = CommonParams & ExactlyOne<{
   url: string;
 }>;
 
+/** Parameters of Zhihu hot list (`zhihu.trends.list`). */
+export type ZhihuTrendsListParams = CommonParams;
+
 /** Parameters of Zhihu user profile (`zhihu.users.get`). */
 export type ZhihuUsersGetParams = CommonParams & {
   /** The handle in the profile's link (url_token): what follows zhihu.com/people/. Example: `zhihuadmin`. */
@@ -1831,4 +1834,372 @@ export type BilibiliBackupUsersVideosListParams = CommonParams & {
   id: string;
   /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
   cursor?: string;
+};
+
+/** Parameters of Amazon product search (`amazon.products.search`). */
+export type AmazonProductsSearchParams = CommonParams & {
+  /** Keywords, as a person would type them into the platform search box. Example: `portable espresso maker`. */
+  query: string;
+  /** The Amazon store, by country: US (amazon.com, the default), GB (amazon.co.uk), DE, JP and others. Prices come in that store's currency. Default `US`. */
+  country?: 'US' | 'GB' | 'DE' | 'FR' | 'IT' | 'ES' | 'NL' | 'BE' | 'PL' | 'SE' | 'CA' | 'MX' | 'BR' | 'AU' | 'JP' | 'IN' | 'SG' | 'AE' | 'SA' | 'TR' | 'EG' | 'CN';
+  /** Amazon's order: relevance (the default), most reviewed, newest, or by price. best_sellers keeps the search words: the matching products, the most bought last month first (Amazon's own Best Sellers sort drops the words; for a category's Best Sellers list use amazon.bestsellers.list). Default `relevance`. */
+  sort?: 'relevance' | 'best_sellers' | 'reviews' | 'newest' | 'lowest_price' | 'highest_price';
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Amazon product details (`amazon.products.get`). */
+export type AmazonProductsGetParams = CommonParams & {
+  /** The ASIN: the 10-character product ID after /dp/ in an Amazon link. Example: `B0GTS6KPPB`. */
+  id: string;
+  /** The Amazon store, by country: US (amazon.com, the default), GB (amazon.co.uk), DE, JP and others. Prices come in that store's currency. Default `US`. */
+  country?: 'US' | 'GB' | 'DE' | 'FR' | 'IT' | 'ES' | 'NL' | 'BE' | 'PL' | 'SE' | 'CA' | 'MX' | 'BR' | 'AU' | 'JP' | 'IN' | 'SG' | 'AE' | 'SA' | 'TR' | 'EG' | 'CN';
+};
+
+/** Parameters of Amazon product reviews (`amazon.products.reviews.list`). */
+export type AmazonProductsReviewsListParams = CommonParams & {
+  /** The ASIN: the 10-character product ID after /dp/ in an Amazon link. Example: `B0GTS6KPPB`. */
+  id: string;
+  /** The Amazon store, by country: US (amazon.com, the default), GB (amazon.co.uk), DE, JP and others. Prices come in that store's currency. Default `US`. */
+  country?: 'US' | 'GB' | 'DE' | 'FR' | 'IT' | 'ES' | 'NL' | 'BE' | 'PL' | 'SE' | 'CA' | 'MX' | 'BR' | 'AU' | 'JP' | 'IN' | 'SG' | 'AE' | 'SA' | 'TR' | 'EG' | 'CN';
+  /** Most helpful first (the default) or newest first. Amazon now shows signed-out visitors one fixed set: the up to 10 reviews on the product page, and it ignores the order asked for (checked 2026-11-18: top and recent gave the same 10), so one call gets all there is and a second order adds nothing. There is no next page and no star filter; for critical reviews, keep ratings of 3 or less from that set. Default `top`. */
+  sort?: 'top' | 'recent';
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Amazon Best Sellers (`amazon.bestsellers.list`). */
+export type AmazonBestsellersListParams = CommonParams & {
+  /** The category as it appears in the Best Sellers link: kitchen, electronics, beauty, sporting-goods, pet-supplies… Example: `kitchen`. */
+  category: string;
+  /** Which list: Best Sellers (the default), New Releases, Movers & Shakers, Most Wished For or Gift Ideas. Default `best_sellers`. */
+  list?: 'best_sellers' | 'new_releases' | 'movers_and_shakers' | 'most_wished_for' | 'gift_ideas';
+  /** The Amazon store, by country: US (amazon.com, the default), GB (amazon.co.uk), DE, JP and others. Prices come in that store's currency. Default `US`. */
+  country?: 'US' | 'GB' | 'DE' | 'FR' | 'IT' | 'ES' | 'NL' | 'BE' | 'PL' | 'SE' | 'CA' | 'MX' | 'BR' | 'AU' | 'JP' | 'IN' | 'SG' | 'AE' | 'SA' | 'TR' | 'EG' | 'CN';
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of AliExpress product search (`aliexpress.products.search`). */
+export type AliexpressProductsSearchParams = CommonParams & {
+  /** Keywords, as a person would type them into the platform search box. Example: `portable espresso maker`. */
+  query: string;
+  /** AliExpress's order (the default), best selling, or price low to high or high to low. Default `default`. */
+  sort?: 'default' | 'sales' | 'price_asc' | 'price_desc';
+  /** Ship-to country as an ISO code; prices and availability follow it. Prices are in US dollars. Default `US`. Example: `US`. */
+  country?: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of AliExpress product details (`aliexpress.products.get`). */
+export type AliexpressProductsGetParams = CommonParams & {
+  /** The AliExpress item ID: the number in /item/<id>.html. Example: `3256805498946261`. */
+  id: string;
+  /** Ship-to country as an ISO code; prices and availability follow it. Prices are in US dollars. Default `US`. Example: `US`. */
+  country?: string;
+};
+
+/** Parameters of AliExpress product reviews (`aliexpress.products.reviews.list`). */
+export type AliexpressProductsReviewsListParams = CommonParams & {
+  /** The AliExpress item ID: the number in /item/<id>.html. Example: `3256805498946261`. */
+  id: string;
+  /** Every review (the default) or only those with photos. Default `all`. */
+  filter?: 'all' | 'with_images';
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Taobao product search (`taobao.products.search`). */
+export type TaobaoProductsSearchParams = CommonParams & {
+  /** Keywords, as a person would type them into the platform search box. Example: `咖啡磨豆机`. */
+  query: string;
+  /** By sales (the default), Taobao's overall order, or by price. Default `sales`. */
+  sort?: 'sales' | 'default' | 'price_asc' | 'price_desc';
+  /** Only Tmall shops. Default `false`. */
+  tmall_only?: boolean;
+  /** Lowest price in yuan, inclusive. Example: `50`. */
+  price_min?: string;
+  /** Highest price in yuan, inclusive. Example: `300`. */
+  price_max?: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Taobao product details (`taobao.products.get`). */
+export type TaobaoProductsGetParams = CommonParams & {
+  /** The Taobao or Tmall item ID: the id= number in an item.taobao.com or detail.tmall.com link. Example: `708174321498`. */
+  id: string;
+};
+
+/** Parameters of Taobao product reviews (`taobao.products.reviews.list`). */
+export type TaobaoProductsReviewsListParams = CommonParams & {
+  /** The Taobao or Tmall item ID: the id= number in an item.taobao.com or detail.tmall.com link. Example: `708174321498`. */
+  id: string;
+  /** Newest first (the default) or Taobao's overall order. Default `recent`. */
+  sort?: 'recent' | 'default';
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Taobao shop products (`taobao.shops.products.list`). */
+export type TaobaoShopsProductsListParams = CommonParams & {
+  /** The seller ID (also called user ID): shop.id in a product's details or in search results. Example: `4219453987`. */
+  id: string;
+  /** The shop ID: ext.shop_id in a product's details, or the number in a shop<id>.taobao.com link. Example: `425752538`. */
+  shop_id: string;
+  /** Best sellers first (the default), newest, seller credit, or by price. Default `sales`. */
+  sort?: 'sales' | 'newest' | 'credit' | 'price_asc' | 'price_desc';
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of 1688 product search (`alibaba_1688.products.search`). */
+export type Alibaba1688ProductsSearchParams = CommonParams & {
+  /** Keywords, as a person would type them into the platform search box. Example: `咖啡磨豆机`. */
+  query: string;
+  /** 1688's order (the default), best selling, or by price. Default `default`. */
+  sort?: 'default' | 'sales' | 'price_asc' | 'price_desc';
+  /** Lowest price in yuan, inclusive. Example: `50`. */
+  price_min?: string;
+  /** Highest price in yuan, inclusive. Example: `300`. */
+  price_max?: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of 1688 product details (`alibaba_1688.products.get`). */
+export type Alibaba1688ProductsGetParams = CommonParams & {
+  /** The 1688 offer ID: the number in detail.1688.com/offer/<id>.html. Example: `1083411694147`. */
+  id: string;
+};
+
+/** Parameters of 1688 product reviews (`alibaba_1688.products.reviews.list`). */
+export type Alibaba1688ProductsReviewsListParams = CommonParams & {
+  /** The 1688 offer ID: the number in detail.1688.com/offer/<id>.html. Example: `1083411694147`. */
+  id: string;
+  /** 1688's order (the default) or newest first. Default `default`. */
+  sort?: 'default' | 'recent';
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of 1688 supplier products (`alibaba_1688.shops.products.list`). */
+export type Alibaba1688ShopsProductsListParams = CommonParams & {
+  /** The supplier's member ID, starting b2b-: the shop.id in search results or product details. Example: `b2b-2222843280068b7e78`. */
+  id: string;
+  /** The supplier's order (the default), best selling, by price, or by listing date. Default `default`. */
+  sort?: 'default' | 'sales' | 'price_asc' | 'price_desc' | 'newest' | 'oldest';
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Xianyu listing search (`xianyu.products.search`). */
+export type XianyuProductsSearchParams = CommonParams & {
+  /** Keywords, as a person would type them into the platform search box. Example: `咖啡机`. */
+  query: string;
+  /** Xianyu's order (the default), newest listings, by price, or by seller credit. Default `default`. */
+  sort?: 'default' | 'newest' | 'price_asc' | 'price_desc' | 'credit';
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Xianyu listing details (`xianyu.products.get`). */
+export type XianyuProductsGetParams = CommonParams & {
+  /** The Xianyu (Goofish) item ID: the itemId= number in a goofish.com link. Example: `1094089094175`. */
+  id: string;
+};
+
+/** Parameters of Douyin Shop product search (`douyin_shop.products.search`). */
+export type DouyinShopProductsSearchParams = CommonParams & {
+  /** Keywords, as a person would type them into the platform search box. Example: `咖啡机`. */
+  query: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Douyin Shop product details (`douyin_shop.products.get`). */
+export type DouyinShopProductsGetParams = CommonParams & {
+  /** The Douyin Shop product ID: the id= number in a haohuo.jinritemai.com link. Example: `3750620912119054828`. */
+  id: string;
+};
+
+/** Parameters of Douyin Shop product reviews (`douyin_shop.products.reviews.list`). */
+export type DouyinShopProductsReviewsListParams = CommonParams & {
+  /** The Douyin Shop product ID: the id= number in a haohuo.jinritemai.com link. Example: `3750620912119054828`. */
+  id: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Douyin Shop store products (`douyin_shop.shops.products.list`). */
+export type DouyinShopShopsProductsListParams = CommonParams & {
+  /** The shop ID: the shop.id in search results or product details. Example: `284912688`. */
+  id: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Toutiao article (`toutiao.articles.get`). */
+export type ToutiaoArticlesGetParams = CommonParams & ExactlyOne<{
+  /** The article ID: the digits after /article/ in its toutiao.com link. Give id or url. Example: `7450114952884503059`. */
+  id: string;
+  /** Its toutiao.com link (/article/…, /group/… or m.toutiao.com); the ID is read from it. Short m.toutiao.com/is/ share links are not read: open one and copy the full link. Example: `https://www.toutiao.com/article/7450114952884503059/`. */
+  url: string;
+}>;
+
+/** Parameters of Toutiao video (`toutiao.videos.get`). */
+export type ToutiaoVideosGetParams = CommonParams & ExactlyOne<{
+  /** The video ID: the digits after /video/ in its toutiao.com link. Give id or url. Example: `7709330516603961894`. */
+  id: string;
+  /** Its toutiao.com link (/video/…, /group/… or m.toutiao.com); the ID is read from it. Short m.toutiao.com/is/ share links are not read: open one and copy the full link. Example: `https://www.toutiao.com/video/7709330516603961894/`. */
+  url: string;
+}>;
+
+/** Parameters of Toutiao comments (`toutiao.posts.comments.list`). */
+export type ToutiaoPostsCommentsListParams = CommonParams & {
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+} & ExactlyOne<{
+  /** The article or video ID: the digits after /article/ or /video/ in its toutiao.com link. Give id or url. Example: `7450114952884503059`. */
+  id: string;
+  /** The article's or video's toutiao.com link; the ID is read from it. Short m.toutiao.com/is/ share links are not read. Example: `https://www.toutiao.com/article/7450114952884503059/`. */
+  url: string;
+}>;
+
+/** Parameters of Toutiao account profile (`toutiao.users.get`). */
+export type ToutiaoUsersGetParams = CommonParams & ExactlyOne<{
+  /** The user ID: digits, from toutiao.com/c/user/<id>/ or a post's author.id. Give id or url. Example: `51050126444`. */
+  id: string;
+  /** The profile link, toutiao.com/c/user/<id>/ or the toutiao.com/c/user/token/… form. A token link is looked up the first time (a little slower); its user ID is remembered after that. Example: `https://www.toutiao.com/c/user/token/MS4wLjABAAAA3KU9ifwN12G41E6PJRpZgIfzVrXWQ4WPF66ns54c0uw/`. */
+  url: string;
+}>;
+
+/** Parameters of Xigua Video search (`xigua.videos.search`). */
+export type XiguaVideosSearchParams = CommonParams & {
+  /** Keywords, as a person would type them into the platform search box. Example: `露营装备`. */
+  query: string;
+};
+
+/** Parameters of Xigua Video detail (`xigua.videos.get`). */
+export type XiguaVideosGetParams = CommonParams & ExactlyOne<{
+  /** The video ID: the digits in its ixigua.com link (the same ID as on Toutiao). Give id or url. Example: `7709330516603961894`. */
+  id: string;
+  /** Its ixigua.com link (or the same video's toutiao.com/video/ link); the ID is read from it. Short v.ixigua.com share links are not read. Example: `https://www.ixigua.com/7709330516603961894`. */
+  url: string;
+}>;
+
+/** Parameters of Xigua Video comments (`xigua.videos.comments.list`). */
+export type XiguaVideosCommentsListParams = CommonParams & {
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+} & ExactlyOne<{
+  /** The video ID: the digits in its ixigua.com link (the same ID as on Toutiao). Give id or url. Example: `7709330516603961894`. */
+  id: string;
+  /** Its ixigua.com link (or the same video's toutiao.com/video/ link); the ID is read from it. Short v.ixigua.com share links are not read. Example: `https://www.ixigua.com/7709330516603961894`. */
+  url: string;
+}>;
+
+/** Parameters of Xigua Video creator profile (`xigua.users.get`). */
+export type XiguaUsersGetParams = CommonParams & ExactlyOne<{
+  /** The creator's user ID: digits, from ixigua.com/home/<id>/ or a video's author.id (the same ID as on Toutiao). Give id or url. Example: `51050126444`. */
+  id: string;
+  /** The creator's ixigua.com/home/… profile link; the ID is read from it. Example: `https://www.ixigua.com/home/51050126444/`. */
+  url: string;
+}>;
+
+/** Parameters of Xigua Video creator videos (`xigua.users.videos.list`). */
+export type XiguaUsersVideosListParams = CommonParams & {
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+} & ExactlyOne<{
+  /** The creator's user ID: digits, from ixigua.com/home/<id>/ or a video's author.id (the same ID as on Toutiao). Give id or url. Example: `51050126444`. */
+  id: string;
+  /** The creator's ixigua.com/home/… profile link; the ID is read from it. Example: `https://www.ixigua.com/home/51050126444/`. */
+  url: string;
+}>;
+
+/** Parameters of Toutiao hot board (`toutiao.trends.list`). */
+export type ToutiaoTrendsListParams = CommonParams;
+
+/** Parameters of Baidu hot search (`baidu.trends.list`). */
+export type BaiduTrendsListParams = CommonParams;
+
+/** Parameters of Bluesky profile (`bluesky.users.get`). */
+export type BlueskyUsersGetParams = CommonParams & ExactlyOne<{
+  /** The account's handle (bsky.app, name.bsky.social, with or without @) or its DID (did:plc:…); a bare name is read as name.bsky.social. Give id or url. Example: `bsky.app`. */
+  id: string;
+  /** The bsky.app profile link; the handle or DID is read from it. Example: `https://bsky.app/profile/bsky.app`. */
+  url: string;
+}>;
+
+/** Parameters of Bluesky account search (`bluesky.users.search`). */
+export type BlueskyUsersSearchParams = CommonParams & {
+  /** Keywords, as a person would type them into the platform search box. Example: `nasa`. */
+  query: string;
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+};
+
+/** Parameters of Bluesky account posts (`bluesky.users.posts.list`). */
+export type BlueskyUsersPostsListParams = CommonParams & {
+  /** Which profile tab: posts (the default; the account's posts and reposts, no replies), replies (its replies too), or media (only posts with pictures or video). Default `posts`. */
+  tab?: 'posts' | 'replies' | 'media';
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+} & ExactlyOne<{
+  /** The account's handle (bsky.app, name.bsky.social, with or without @) or its DID (did:plc:…); a bare name is read as name.bsky.social. Give id or url. Example: `bsky.app`. */
+  id: string;
+  /** The bsky.app profile link; the handle or DID is read from it. Example: `https://bsky.app/profile/bsky.app`. */
+  url: string;
+}>;
+
+/** Parameters of Bluesky post (`bluesky.posts.get`). */
+export type BlueskyPostsGetParams = CommonParams & ExactlyOne<{
+  /** The post's at:// URI, as the id of any Bluesky post in our answers (at://<DID>/app.bsky.feed.post/<key>). Give id or url. Example: `at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.post/3n22yg6lg2k2f`. */
+  id: string;
+  /** The bsky.app post link (/profile/<handle>/post/<key>). Example: `https://bsky.app/profile/bsky.app/post/3n22yg6lg2k2f`. */
+  url: string;
+}>;
+
+/** Parameters of Bluesky post replies (`bluesky.posts.comments.list`). */
+export type BlueskyPostsCommentsListParams = CommonParams & ExactlyOne<{
+  /** The post's at:// URI, as the id of any Bluesky post in our answers (at://<DID>/app.bsky.feed.post/<key>). Give id or url. Example: `at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.post/3n22yg6lg2k2f`. */
+  id: string;
+  /** The bsky.app post link (/profile/<handle>/post/<key>). Example: `https://bsky.app/profile/bsky.app/post/3n22yg6lg2k2f`. */
+  url: string;
+}>;
+
+/** Parameters of App Store app details (`app_store.apps.get`). */
+export type AppStoreAppsGetParams = CommonParams & {
+  /** The store, by two-letter country code (US, GB, JP, CN…): price, ratings and reviews are that store's. Default: the country in url, else US. Example: `US`. */
+  country?: string;
+} & ExactlyOne<{
+  /** The app's App Store ID: the digits after id in its apps.apple.com link. Give id or url. Example: `6448311069`. */
+  id: string;
+  /** The app's apps.apple.com link; the ID is read from it, and so is the store's country unless country is given. Example: `https://apps.apple.com/us/app/chatgpt/id6448311069`. */
+  url: string;
+}>;
+
+/** Parameters of App Store reviews (`app_store.apps.reviews.list`). */
+export type AppStoreAppsReviewsListParams = CommonParams & {
+  /** The store, by two-letter country code (US, GB, JP, CN…): price, ratings and reviews are that store's. Default: the country in url, else US. Example: `US`. */
+  country?: string;
+  /** Newest first (the default) or most helpful first. Default `recent`. */
+  sort?: 'recent' | 'helpful';
+  /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
+  cursor?: string;
+} & ExactlyOne<{
+  /** The app's App Store ID: the digits after id in its apps.apple.com link. Give id or url. Example: `6448311069`. */
+  id: string;
+  /** The app's apps.apple.com link; the ID is read from it, and so is the store's country unless country is given. Example: `https://apps.apple.com/us/app/chatgpt/id6448311069`. */
+  url: string;
+}>;
+
+/** Parameters of All hot lists in one call (`all.trends.list`). */
+export type AllTrendsListParams = CommonParams & {
+  /** Comma-separated platforms to include, any of weibo, zhihu, baidu, toutiao, douyin, bilibili, xiaohongshu, kuaishou; all of them when left out. Example: `weibo,zhihu,douyin`. */
+  platforms?: string;
+  /** Entries per platform, from its top (1 to 50; 10 by default). Default `10`. Example: `10`. */
+  limit?: number;
 };

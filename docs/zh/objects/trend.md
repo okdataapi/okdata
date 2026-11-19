@@ -12,6 +12,7 @@
 | `name` | string | 话题或搜索词。 |
 | `heat` | number \| null | 平台给出的热度值，各平台口径不同。 |
 | `url` | string \| null | 话题页链接（有的话）。 |
+| `platform` | string | 条目来自哪个平台的榜单，比如 weibo；全网热榜（all.trends.list）靠它区分来源。 |
 
 ## 返回 Trend 的接口
 
@@ -22,5 +23,9 @@
 - [X 趋势](https://okdata.online/zh/apis/x/trends/list/) (`x.trends.list`): $0.009/次 · 每页约 30 条榜单
 - [Reddit 趋势搜索](https://okdata.online/zh/apis/reddit/trends/list/) (`reddit.trends.list`): $0.002/次 · 每页约 6 条榜单
 - [快手热榜](https://okdata.online/zh/apis/kuaishou/trends/list/) (`kuaishou.trends.list`): $0.002/次 · 每页约 51 条榜单
+- [知乎热榜](https://okdata.online/zh/apis/zhihu/trends/list/) (`zhihu.trends.list`): $0.002/次 · 每页约 30 条榜单
 - [抖音巨量算数实时热点](https://okdata.online/zh/apis/douyin/index/trends/list/) (`douyin.index.trends.list`): $0.002/次 · 每页约 30 条榜单
 - [微博热搜榜（备用版）](https://okdata.online/zh/apis/weibo/backup/trends/list/) (`weibo.backup.trends.list`): $0.0025/次 · 每页约 50 条榜单
+- [头条热榜](https://okdata.online/zh/apis/toutiao/trends/list/) (`toutiao.trends.list`): $0.002/次 · 每页约 50 条榜单
+- [百度热搜](https://okdata.online/zh/apis/baidu/trends/list/) (`baidu.trends.list`): $0.002/次 · 每页约 50 条榜单
+- [全网热榜](https://okdata.online/zh/apis/all/trends/list/) (`all.trends.list`): $0.03/次 · 每页约 400 条榜单

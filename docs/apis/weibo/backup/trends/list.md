@@ -1,6 +1,6 @@
 # Weibo hot search (backup) API
 
-> The backup of weibo.trends.list, for when it cannot serve: the Weibo hot search list from a separate data path (the app's), at a little more. The 50 ranked topics at their places, with heat; the pinned topic and paid rows are left out.
+> The backup of weibo.trends.list, for when it cannot serve: the Weibo hot search list (the app's), at a little more. The 50 ranked topics at their places, with heat; the pinned topic and paid rows are left out.
 
 Canonical page: https://okdata.online/apis/weibo/backup/trends/list/
 
@@ -13,14 +13,14 @@ Canonical page: https://okdata.online/apis/weibo/backup/trends/list/
 
 ## Price
 
-One call costs $0.0025 and returns one page of about 50 board entries. Collecting 1,000 board entries takes about 20 calls, $0.05 in total. Each page is a separate call; failed calls are not charged.
+One call costs $0.0025 and returns one page of about 50 board entries. Collecting 1,000 board entries takes about 20 calls, $0.05 in total. Each page is a separate call. A call that reached the data source is charged even when it comes back empty, not found or failed; calls stopped before reaching a source are free.
 
 ## Parameters
 
 | Name | Type | Required | Default | Description |
 |---|---|---|---|---|
 | `board` | string: hot_search | no | `hot_search` | Which list: the hot search list is the only one. |
-| `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
+| `view` | string: brief / compact / standard / full | no | `standard` | How much of each object comes back. brief: IDs, title, the first 100 characters of the text, link, time and the main counts, for scanning a list (then get what you need by ID). compact leaves out empty fields and cuts long text at 500 characters. full adds platform-specific fields under ext. |
 | `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |
 
 cursor, view and fields work as described in [Requests](https://okdata.online/docs/requests/).
@@ -35,6 +35,7 @@ Each item is a [Trend](https://okdata.online/docs/objects/trend/).
 | `name` | string | The topic or search term. |
 | `heat` | number \| null | The heat score the platform shows; scales differ by platform. |
 | `url` | string \| null | Link to the topic page, if there is one. |
+| `platform` | string | The platform whose list the entry is on, e.g. weibo: what tells entries apart on all.trends.list. |
 
 ## Request examples
 
@@ -112,7 +113,8 @@ Or ask an agent that has the MCP server connected:
         "rank": 1,
         "name": "#初雪#",
         "heat": 1203423,
-        "url": "https://s.weibo.com/weibo?q=%23%E5%88%9D%E9%9B%AA%23"
+        "url": "https://s.weibo.com/weibo?q=%23%E5%88%9D%E9%9B%AA%23",
+        "platform": "weibo"
       }
     ]
   },
@@ -138,13 +140,13 @@ Or ask an agent that has the MCP server connected:
 
 ## Errors
 
-Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. They are not charged; only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
+Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. An error from a call that reached the data source (not found, a failure or a timeout of the source) is charged once at this endpoint's price, with charged: true and amount; errors before that, such as bad parameters, are not charged. Only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
 
 ## Questions
 
 ### How much does the Weibo hot search (backup) API cost?
 
-One call costs $0.0025 and returns one page of about 50 board entries. Collecting 1,000 board entries takes about 20 calls, $0.05 in total. Each page is a separate call; failed calls are not charged.
+One call costs $0.0025 and returns one page of about 50 board entries. Collecting 1,000 board entries takes about 20 calls, $0.05 in total. Each page is a separate call. A call that reached the data source is charged even when it comes back empty, not found or failed; calls stopped before reaching a source are free.
 
 ### How do I get the next page?
 
@@ -156,7 +158,7 @@ No. You send only your okdata API key. The data is public data from Weibo; nothi
 
 ### Am I charged when a call fails?
 
-No. Every error response says charged: false, except a timeout, which says charged: null until the outcome is known. Resend with the same Idempotency-Key and you are never charged twice.
+Yes, once, when the call reached the data source: an empty answer, a not_found, a failure or a timeout of the source costs one call (one item for per-item endpoints), and the error says charged: true with amount. Calls refused before reaching a source, such as bad parameters or a low balance, cost nothing.
 
 ### What if Weibo does not show a field?
 

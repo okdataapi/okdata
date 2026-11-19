@@ -1,6 +1,6 @@
 # 微博热搜榜（备用版） API
 
-> 微博热搜榜（weibo.trends.list）的备用版，原接口取不到时改调：走另一条数据通道（App 端）取微博热搜，价格略高。50 个上榜话题、名次和热度；不含置顶话题和推广位。
+> 微博热搜榜（weibo.trends.list）的备用版，原接口取不到时改调：取微博热搜（App 端），价格略高。50 个上榜话题、名次和热度；不含置顶话题和推广位。
 
 网页版：https://okdata.online/zh/apis/weibo/backup/trends/list/
 
@@ -13,14 +13,14 @@
 
 ## 价格
 
-每次调用 $0.0025，返回一页，约 50 条榜单。抓 1,000 条榜单大约要 20 次调用，合计 $0.05。每翻一页是一次单独的调用；失败的调用不扣费。
+每次调用 $0.0025，返回一页，约 50 条榜单。抓 1,000 条榜单大约要 20 次调用，合计 $0.05。每翻一页是一次单独的调用。请求到了数据源的调用，返回为空、查不到或出错也照常计费；还没请求数据源就被拦下的不扣费。
 
 ## 参数
 
 | 参数名 | 类型 | 必填 | 默认值 | 说明 |
 |---|---|---|---|---|
 | `board` | string: hot_search | 否 | `hot_search` | 选哪个榜：现在只有热搜榜。 |
-| `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |
+| `view` | string: brief / compact / standard / full | 否 | `standard` | 返回多少字段。brief：只给 ID、标题、正文前 100 字、链接、时间和主要数字，适合先扫一遍列表，再按 ID 取详情；compact 去掉空字段、长正文截到 500 字；full 会在 ext 里带上平台特有字段。 |
 | `fields` | string[] | 否 |  | 只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。 |
 
 cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs/requests/)。
@@ -35,6 +35,7 @@ cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs
 | `name` | string | 话题或搜索词。 |
 | `heat` | number \| null | 平台给出的热度值，各平台口径不同。 |
 | `url` | string \| null | 话题页链接（有的话）。 |
+| `platform` | string | 条目来自哪个平台的榜单，比如 weibo；全网热榜（all.trends.list）靠它区分来源。 |
 
 ## 请求示例
 
@@ -112,7 +113,8 @@ console.log('cost: $' + body.meta.billing.amount);
         "rank": 1,
         "name": "#初雪#",
         "heat": 1203423,
-        "url": "https://s.weibo.com/weibo?q=%23%E5%88%9D%E9%9B%AA%23"
+        "url": "https://s.weibo.com/weibo?q=%23%E5%88%9D%E9%9B%AA%23",
+        "platform": "weibo"
       }
     ]
   },
@@ -138,13 +140,13 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## 错误
 
-所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。错误不扣费；只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
+所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。请求到了数据源的调用出错（查不到、数据源失败或超时）时，按这个接口的价格计一次费，charged 为 true，并给出 amount；参数错误这类还没请求数据源的错误不扣费。只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
 
 ## 常见问题
 
 ### 微博热搜榜（备用版）接口多少钱？
 
-每次调用 $0.0025，返回一页，约 50 条榜单。抓 1,000 条榜单大约要 20 次调用，合计 $0.05。每翻一页是一次单独的调用；失败的调用不扣费。
+每次调用 $0.0025，返回一页，约 50 条榜单。抓 1,000 条榜单大约要 20 次调用，合计 $0.05。每翻一页是一次单独的调用。请求到了数据源的调用，返回为空、查不到或出错也照常计费；还没请求数据源就被拦下的不扣费。
 
 ### 怎么翻页？
 
@@ -156,7 +158,7 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ### 调用失败会扣费吗？
 
-不会。所有错误都会返回 charged: false；只有超时返回 charged: null，表示结果还没确定。带同一个 Idempotency-Key 重发，绝不会重复扣费。
+请求到了数据源就会扣一次：返回为空、查不到、数据源出错或超时，都按一次调用计费（按条计价的按 1 条），错误里 charged 为 true，并给出 amount。参数错误、余额不足这类还没请求数据源就被拦下的不扣费。
 
 ### 微博不展示某个字段怎么办？
 

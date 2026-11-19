@@ -13,7 +13,7 @@ Canonical page: https://okdata.online/apis/x/posts/retweeters/list/
 
 ## Price
 
-One call costs $0.002 and returns one page of about 100 accounts. Collecting 1,000 accounts takes about 10 calls, $0.02 in total. Each page is a separate call; failed calls are not charged.
+One call costs $0.002 and returns one page of about 100 accounts. Collecting 1,000 accounts takes about 10 calls, $0.02 in total. Each page is a separate call. A call that reached the data source is charged even when it comes back empty, not found or failed; calls stopped before reaching a source are free.
 
 ## Parameters
 
@@ -21,7 +21,7 @@ One call costs $0.002 and returns one page of about 100 accounts. Collecting 1,0
 |---|---|---|---|---|
 | `id` | string | yes |  | The post ID (the digits after /status/ in its link). (e.g. `2120216592395174382`) |
 | `cursor` | string | no |  | Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. |
-| `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
+| `view` | string: brief / compact / standard / full | no | `standard` | How much of each object comes back. brief: IDs, title, the first 100 characters of the text, link, time and the main counts, for scanning a list (then get what you need by ID). compact leaves out empty fields and cuts long text at 500 characters. full adds platform-specific fields under ext. |
 | `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |
 
 cursor, view and fields work as described in [Requests](https://okdata.online/docs/requests/).
@@ -157,13 +157,13 @@ Or ask an agent that has the MCP server connected:
 
 ## Errors
 
-Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. They are not charged; only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
+Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. An error from a call that reached the data source (not found, a failure or a timeout of the source) is charged once at this endpoint's price, with charged: true and amount; errors before that, such as bad parameters, are not charged. Only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
 
 ## Questions
 
 ### How much does the X post retweeters API cost?
 
-One call costs $0.002 and returns one page of about 100 accounts. Collecting 1,000 accounts takes about 10 calls, $0.02 in total. Each page is a separate call; failed calls are not charged.
+One call costs $0.002 and returns one page of about 100 accounts. Collecting 1,000 accounts takes about 10 calls, $0.02 in total. Each page is a separate call. A call that reached the data source is charged even when it comes back empty, not found or failed; calls stopped before reaching a source are free.
 
 ### How do I get the next page?
 
@@ -175,7 +175,7 @@ No. You send only your okdata API key. The data is public data from X (Twitter);
 
 ### Am I charged when a call fails?
 
-No. Every error response says charged: false, except a timeout, which says charged: null until the outcome is known. Resend with the same Idempotency-Key and you are never charged twice.
+Yes, once, when the call reached the data source: an empty answer, a not_found, a failure or a timeout of the source costs one call (one item for per-item endpoints), and the error says charged: true with amount. Calls refused before reaching a source, such as bad parameters or a low balance, cost nothing.
 
 ### What if X (Twitter) does not show a field?
 

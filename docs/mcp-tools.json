@@ -2,7 +2,7 @@
   {
     "name": "find",
     "title": "Find a capability",
-    "description": "Find the capability for a need described in plain words, English or Chinese, among 214 on 17 platforms: up to 5, best first, each with what it needs, its price and a ready call. With a platform and no match it lists everything that platform has; never use another platform's capability in its place. Free, no key.",
+    "description": "Find the capability for a need described in plain words, English or Chinese, among 255 on 29 platforms: up to 5, best first, each with what it needs, its price and a ready call. With a platform and no match it lists everything that platform has; never use another platform's capability in its place. Free, no key.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -14,7 +14,7 @@
         "platform": {
           "type": "string",
           "maxLength": 40,
-          "description": "A platform ID or name (douyin, xiaohongshu, wechat_mp, bilibili, weibo, tiktok, x, youtube, meta, google, instagram, reddit, kuaishou, zhihu, wechat_channels, wechat, telegram). Alone, it lists everything the platform has."
+          "description": "A platform ID or name (douyin, xiaohongshu, wechat_mp, bilibili, weibo, tiktok, x, youtube, meta, google, instagram, reddit, kuaishou, zhihu, wechat_channels, wechat, telegram, amazon, aliexpress, taobao, alibaba_1688, xianyu, douyin_shop, toutiao, xigua, baidu, bluesky, app_store, all). Alone, it lists everything the platform has."
         },
         "category": {
           "type": "string",
@@ -78,7 +78,7 @@
   {
     "name": "call",
     "title": "Call a capability",
-    "description": "One page from one capability, charged per call or per item returned; failed calls are free. Give the capability and only the parameters describe lists for it. The first lines of the answer give the items, the charge, the balance, the result ID and how to go on: cursor for the next page (a new charged call), read_more for the rest of an answer cut at about 20 KB (free). Then one JSON item per line. Needs an API key.",
+    "description": "One page from one capability, charged per call or per item returned, also when an answer that reached the data source is empty, not found or failed. Give the capability and only the parameters describe lists for it. The first lines of the answer give the items, the charge, the balance, the result ID and how to go on: cursor for the next page (a new charged call), read_more for the rest of an answer cut at about 20 KB (free). Then one JSON item per line. Needs an API key.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -172,6 +172,7 @@
             "zhihu.articles.get",
             "zhihu.columns.articles.list",
             "zhihu.pins.get",
+            "zhihu.trends.list",
             "zhihu.users.get",
             "zhihu.users.search",
             "zhihu.users.followers.list",
@@ -298,7 +299,47 @@
             "douyin.backup.users.videos.list",
             "douyin.backup.videos.search",
             "weibo.backup.trends.list",
-            "bilibili.backup.users.videos.list"
+            "bilibili.backup.users.videos.list",
+            "amazon.products.search",
+            "amazon.products.get",
+            "amazon.products.reviews.list",
+            "amazon.bestsellers.list",
+            "aliexpress.products.search",
+            "aliexpress.products.get",
+            "aliexpress.products.reviews.list",
+            "taobao.products.search",
+            "taobao.products.get",
+            "taobao.products.reviews.list",
+            "taobao.shops.products.list",
+            "alibaba_1688.products.search",
+            "alibaba_1688.products.get",
+            "alibaba_1688.products.reviews.list",
+            "alibaba_1688.shops.products.list",
+            "xianyu.products.search",
+            "xianyu.products.get",
+            "douyin_shop.products.search",
+            "douyin_shop.products.get",
+            "douyin_shop.products.reviews.list",
+            "douyin_shop.shops.products.list",
+            "toutiao.articles.get",
+            "toutiao.videos.get",
+            "toutiao.posts.comments.list",
+            "toutiao.users.get",
+            "xigua.videos.search",
+            "xigua.videos.get",
+            "xigua.videos.comments.list",
+            "xigua.users.get",
+            "xigua.users.videos.list",
+            "toutiao.trends.list",
+            "baidu.trends.list",
+            "bluesky.users.get",
+            "bluesky.users.search",
+            "bluesky.users.posts.list",
+            "bluesky.posts.get",
+            "bluesky.posts.comments.list",
+            "app_store.apps.get",
+            "app_store.apps.reviews.list",
+            "all.trends.list"
           ],
           "description": "The capability ID, from find or this list."
         },
@@ -310,13 +351,13 @@
           "type": "string",
           "description": "page.next_cursor of the previous call, for the next page (a new, charged call)."
         },
-        "query": {
-          "type": "string",
-          "description": "Keywords, as typed into the platform's search box."
-        },
         "url": {
           "type": "string",
           "description": "A share link or page address, in place of id."
+        },
+        "query": {
+          "type": "string",
+          "description": "Keywords, as typed into the platform's search box."
         },
         "sort": {
           "type": "string",
@@ -358,13 +399,13 @@
           "type": "string",
           "description": "From this date (YYYY-MM-DD)."
         },
-        "board": {
-          "type": "string",
-          "description": "Which list: hot searches is the only one."
-        },
         "tab": {
           "type": "string",
           "description": "Which tab of the account's page: articles (the default), videos or pictures."
+        },
+        "board": {
+          "type": "string",
+          "description": "Which list: hot searches is the only one."
         },
         "ids": {
           "type": "array",
@@ -376,6 +417,14 @@
         "brand": {
           "type": "string",
           "description": "The brand name, spelled the way the Douyin index lists it."
+        },
+        "category": {
+          "type": "string",
+          "description": "Only notes of this content category, as written in the creator detail’s categories. A category that does not exist finds nothing."
+        },
+        "filter": {
+          "type": "string",
+          "description": "Only verified accounts, or only those live now."
         },
         "followers_max": {
           "type": "integer",
@@ -397,6 +446,14 @@
           "type": "string",
           "description": "Only image or only video ads; all by default."
         },
+        "price_max": {
+          "type": "string",
+          "description": "Highest price in yuan, inclusive."
+        },
+        "price_min": {
+          "type": "string",
+          "description": "Lowest price in yuan, inclusive."
+        },
         "search_by": {
           "type": "string",
           "description": "Match the words against what creators post (the default) or against their names."
@@ -408,10 +465,6 @@
         "advertiser": {
           "type": "string",
           "description": "The advertiser's name. Give query or advertiser. (one capability takes it)"
-        },
-        "category": {
-          "type": "string",
-          "description": "Only notes of this content category, as written in the creator detail’s categories. A category that does not exist finds nothing. (one capability takes it)"
         },
         "domain": {
           "type": "string",
@@ -429,10 +482,6 @@
           "type": "string",
           "description": "Only notes with this content feature tag, as written in the creator detail’s ext.feature_tags. A tag that does not exist finds nothing. (one capability takes it)"
         },
-        "filter": {
-          "type": "string",
-          "description": "Only verified accounts, or only those live now. (one capability takes it)"
-        },
         "format": {
           "type": "string",
           "description": "Only text, image or video ads; all by default. (one capability takes it)"
@@ -444,9 +493,29 @@
           },
           "description": "One to five keywords, each without a comma. Give keyword or keywords. (one capability takes it)"
         },
+        "limit": {
+          "type": "integer",
+          "description": "Entries per platform, from its top (1 to 50; 10 by default). (one capability takes it)"
+        },
+        "list": {
+          "type": "string",
+          "description": "Which list: Best Sellers (the default), New Releases, Movers & Shakers, Most Wished For or Gift Ideas. (one capability takes it)"
+        },
         "name": {
           "type": "string",
           "description": "The advertiser's name as on its Facebook page. Give id or name. (one capability takes it)"
+        },
+        "platforms": {
+          "type": "string",
+          "description": "Comma-separated platforms to include, any of weibo, zhihu, baidu, toutiao, douyin, bilibili, xiaohongshu, kuaishou; all of them when left out. (one capability takes it)"
+        },
+        "shop_id": {
+          "type": "string",
+          "description": "The shop ID: ext.shop_id in a product's details, or the number in a shop<id>.taobao.com link. (one capability takes it)"
+        },
+        "tmall_only": {
+          "type": "boolean",
+          "description": "Only Tmall shops. (one capability takes it)"
         },
         "traffic": {
           "type": "string",
@@ -455,11 +524,12 @@
         "view": {
           "type": "string",
           "enum": [
+            "brief",
             "compact",
             "standard",
             "full"
           ],
-          "description": "How much of each object: compact leaves out empty fields, standard keeps them, full adds platform extras under ext. compact when left out."
+          "description": "How much of each object: brief keeps only IDs, title, the first 100 characters of text, link, time and the main counts (scan a list with brief, then get the items worth reading by ID); compact leaves out empty fields and cuts long text at 500 characters; standard keeps every field; full adds platform extras under ext. compact when left out."
         },
         "fields": {
           "type": "array",
@@ -517,11 +587,12 @@
         "view": {
           "type": "string",
           "enum": [
+            "brief",
             "compact",
             "standard",
             "full"
           ],
-          "description": "How much of each object: compact leaves out empty fields, standard keeps them, full adds platform extras under ext. The call's own view when left out."
+          "description": "How much of each object: brief keeps only IDs, title, the first 100 characters of text, link, time and the main counts (scan a list with brief, then get the items worth reading by ID); compact leaves out empty fields and cuts long text at 500 characters; standard keeps every field; full adds platform extras under ext. The call's own view when left out."
         },
         "fields": {
           "type": "array",

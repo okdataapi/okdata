@@ -127,3 +127,10 @@
 - [抖音用户视频（备用版）](https://okdata.online/zh/apis/douyin/backup/users/videos/list/) (`douyin.backup.users.videos.list`): $0.0025/次 · 每页约 20 条视频
 - [抖音视频搜索（备用版）](https://okdata.online/zh/apis/douyin/backup/videos/search/) (`douyin.backup.videos.search`): $0.03/次 · 每页约 8 条视频
 - [B站用户投稿（备用版）](https://okdata.online/zh/apis/bilibili/backup/users/videos/list/) (`bilibili.backup.users.videos.list`): $0.0025/次 · 每页约 20 条视频
+- [头条文章详情](https://okdata.online/zh/apis/toutiao/articles/get/) (`toutiao.articles.get`): $0.002/次
+- [头条视频详情](https://okdata.online/zh/apis/toutiao/videos/get/) (`toutiao.videos.get`): $0.002/次
+- [西瓜视频搜索](https://okdata.online/zh/apis/xigua/videos/search/) (`xigua.videos.search`): $0.002/次 · 每页约 10 条视频
+- [西瓜视频详情](https://okdata.online/zh/apis/xigua/videos/get/) (`xigua.videos.get`): $0.004/次
+- [西瓜视频创作者作品](https://okdata.online/zh/apis/xigua/users/videos/list/) (`xigua.users.videos.list`): $0.002/次 · 每页约 30 条视频
+- [Bluesky 账号发帖](https://okdata.online/zh/apis/bluesky/users/posts/list/) (`bluesky.users.posts.list`): $0.001/次 · 每页约 30 条帖子
+- [Bluesky 帖子详情](https://okdata.online/zh/apis/bluesky/posts/get/) (`bluesky.posts.get`): $0.001/次

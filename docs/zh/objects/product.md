@@ -36,3 +36,20 @@
 - [小红书商城商品搜索](https://okdata.online/zh/apis/xiaohongshu/shop/products/search/) (`xiaohongshu.shop.products.search`): $0.02/次 · 每页约 20 个商品
 - [小红书商城商品详情](https://okdata.online/zh/apis/xiaohongshu/shop/products/get/) (`xiaohongshu.shop.products.get`): $0.02/次
 - [TikTok Shop 店铺商品](https://okdata.online/zh/apis/tiktok/shop/sellers/products/list/) (`tiktok.shop.sellers.products.list`): $0.002/次 · 每页约 20 个商品
+- [亚马逊商品搜索](https://okdata.online/zh/apis/amazon/products/search/) (`amazon.products.search`): $0.006/次 · 每页约 48 个商品
+- [亚马逊商品详情](https://okdata.online/zh/apis/amazon/products/get/) (`amazon.products.get`): $0.006/次
+- [亚马逊畅销榜](https://okdata.online/zh/apis/amazon/bestsellers/list/) (`amazon.bestsellers.list`): $0.006/次 · 每页约 50 个商品
+- [速卖通商品搜索](https://okdata.online/zh/apis/aliexpress/products/search/) (`aliexpress.products.search`): $0.002/次 · 每页约 20 个商品
+- [速卖通商品详情](https://okdata.online/zh/apis/aliexpress/products/get/) (`aliexpress.products.get`): $0.002/次
+- [淘宝商品搜索](https://okdata.online/zh/apis/taobao/products/search/) (`taobao.products.search`): $0.043/次 · 每页约 10 个商品
+- [淘宝商品详情](https://okdata.online/zh/apis/taobao/products/get/) (`taobao.products.get`): $0.033/次
+- [淘宝店铺商品](https://okdata.online/zh/apis/taobao/shops/products/list/) (`taobao.shops.products.list`): $0.043/次 · 每页约 60 个商品
+- [1688 商品搜索](https://okdata.online/zh/apis/alibaba_1688/products/search/) (`alibaba_1688.products.search`): $0.022/次 · 每页约 20 个商品
+- [1688 商品详情](https://okdata.online/zh/apis/alibaba_1688/products/get/) (`alibaba_1688.products.get`): $0.022/次
+- [1688 店铺商品](https://okdata.online/zh/apis/alibaba_1688/shops/products/list/) (`alibaba_1688.shops.products.list`): $0.022/次 · 每页约 20 个商品
+- [闲鱼商品搜索](https://okdata.online/zh/apis/xianyu/products/search/) (`xianyu.products.search`): $0.022/次 · 每页约 10 个商品
+- [闲鱼商品详情](https://okdata.online/zh/apis/xianyu/products/get/) (`xianyu.products.get`): $0.022/次
+- [抖音电商商品搜索](https://okdata.online/zh/apis/douyin_shop/products/search/) (`douyin_shop.products.search`): $0.054/次 · 每页约 30 个商品
+- [抖音电商商品详情](https://okdata.online/zh/apis/douyin_shop/products/get/) (`douyin_shop.products.get`): $0.039/次
+- [抖音电商店铺商品](https://okdata.online/zh/apis/douyin_shop/shops/products/list/) (`douyin_shop.shops.products.list`): $0.043/次 · 每页约 10 个商品
+- [App Store 应用详情](https://okdata.online/zh/apis/app_store/apps/get/) (`app_store.apps.get`): $0.001/次

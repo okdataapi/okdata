@@ -62,3 +62,7 @@ The same shape on every platform. A field a platform does not have is null, and 
 - [X list members](https://okdata.online/apis/x/lists/members/list/) (`x.lists.members.list`): $0.0004 per account · at most $0.008 per call
 - [X list followers](https://okdata.online/apis/x/lists/followers/list/) (`x.lists.followers.list`): $0.0004 per account · at most $0.008 per call
 - [X community members](https://okdata.online/apis/x/communities/members/list/) (`x.communities.members.list`): $0.0004 per account · at most $0.008 per call
+- [Toutiao account profile](https://okdata.online/apis/toutiao/users/get/) (`toutiao.users.get`): $0.002 per call
+- [Xigua Video creator profile](https://okdata.online/apis/xigua/users/get/) (`xigua.users.get`): $0.002 per call
+- [Bluesky profile](https://okdata.online/apis/bluesky/users/get/) (`bluesky.users.get`): $0.001 per call
+- [Bluesky account search](https://okdata.online/apis/bluesky/users/search/) (`bluesky.users.search`): $0.001 per call · about 25 accounts per page

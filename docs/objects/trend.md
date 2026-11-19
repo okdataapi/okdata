@@ -12,6 +12,7 @@ The same shape on every platform. A field a platform does not have is null, and 
 | `name` | string | The topic or search term. |
 | `heat` | number \| null | The heat score the platform shows; scales differ by platform. |
 | `url` | string \| null | Link to the topic page, if there is one. |
+| `platform` | string | The platform whose list the entry is on, e.g. weibo: what tells entries apart on all.trends.list. |
 
 ## Endpoints that return a Trend
 
@@ -22,5 +23,9 @@ The same shape on every platform. A field a platform does not have is null, and 
 - [X trending topics](https://okdata.online/apis/x/trends/list/) (`x.trends.list`): $0.009 per call · about 30 board entries per page
 - [Reddit trending searches](https://okdata.online/apis/reddit/trends/list/) (`reddit.trends.list`): $0.002 per call · about 6 board entries per page
 - [Kuaishou hot list](https://okdata.online/apis/kuaishou/trends/list/) (`kuaishou.trends.list`): $0.002 per call · about 51 board entries per page
+- [Zhihu hot list](https://okdata.online/apis/zhihu/trends/list/) (`zhihu.trends.list`): $0.002 per call · about 30 board entries per page
 - [Douyin index: live hot topics](https://okdata.online/apis/douyin/index/trends/list/) (`douyin.index.trends.list`): $0.002 per call · about 30 board entries per page
 - [Weibo hot search (backup)](https://okdata.online/apis/weibo/backup/trends/list/) (`weibo.backup.trends.list`): $0.0025 per call · about 50 board entries per page
+- [Toutiao hot board](https://okdata.online/apis/toutiao/trends/list/) (`toutiao.trends.list`): $0.002 per call · about 50 board entries per page
+- [Baidu hot search](https://okdata.online/apis/baidu/trends/list/) (`baidu.trends.list`): $0.002 per call · about 50 board entries per page
+- [All hot lists in one call](https://okdata.online/apis/all/trends/list/) (`all.trends.list`): $0.03 per call · about 400 board entries per page

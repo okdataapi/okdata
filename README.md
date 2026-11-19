@@ -168,9 +168,21 @@ every endpoint on one page and [docs/prices.json](docs/prices.json) every price 
 | [Bilibili](docs/apis/bilibili.md) | 9 | $0.002–$0.0025 | Videos, comments and the popular board. |
 | [Weibo](docs/apis/weibo.md) | 11 | $0.002–$0.0025 | Posts, accounts and the hot search list. |
 | [Kuaishou](docs/apis/kuaishou.md) | 8 | $0.002–$0.02 | Videos, accounts, comments and the hot list. |
-| [Zhihu](docs/apis/zhihu.md) | 15 (13 coming soon) | $0.002 | Questions and answers, articles, columns, people and the hot list. |
+| [Zhihu](docs/apis/zhihu.md) | 16 (4 coming soon) | $0.002 | Questions and answers, articles, columns, people and the hot list. |
 | [WeChat Channels](docs/apis/wechat_channels.md) | 15 | $0.015–$0.15 | Channels videos, accounts, comments and live replays, without a QR login. |
 | [WeChat Search](docs/apis/wechat.md) | 6 | $0.02–$0.15 | WeChat Search across Official Account articles, Channels videos and mini programs. |
+| [Amazon](docs/apis/amazon.md) | 4 | $0.006 | Product search, details, reviews and Best Sellers lists, in 22 Amazon stores. |
+| [AliExpress](docs/apis/aliexpress.md) | 3 (1 coming soon) | $0.002 | Product search and buyer reviews, priced in US dollars. |
+| [Taobao & Tmall](docs/apis/taobao.md) | 4 | $0.033–$0.043 | Product search, details with SKUs, buyer reviews and a shop's products. |
+| [1688](docs/apis/alibaba_1688.md) | 4 | $0.022 | China's wholesale marketplace: offers, tiered prices, suppliers and buyer reviews. |
+| [Xianyu (Goofish)](docs/apis/xianyu.md) | 2 | $0.022 | Second-hand listings: search, asking prices and sellers. |
+| [Douyin Shop](docs/apis/douyin_shop.md) | 4 | $0.039–$0.054 | Affiliate-marketplace products with commission rates, sales, reviews and shops. |
+| [Toutiao](docs/apis/toutiao.md) | 5 | $0.002 | China’s news-feed app: full article text, videos, comments and creator accounts. |
+| [Xigua Video](docs/apis/xigua.md) | 5 | $0.002–$0.004 | Longer videos from China: search, video stats, comments, creators and their uploads. |
+| [Baidu](docs/apis/baidu.md) | 1 | $0.002 | Baidu’s hot search: what China is searching for right now, with heat. |
+| [Bluesky](docs/apis/bluesky.md) | 5 | $0.001 | The open social network: profiles, what an account posts, the replies under a post, and account search. |
+| [App Store](docs/apis/app_store.md) | 2 | $0.001 | Any iPhone, iPad or Mac app in any country's store: price, ratings, version and developer, and its latest written reviews. |
+| [All platforms](docs/apis/all.md) | 1 | $0.03 | Hot lists from several platforms in one call: Weibo, Zhihu, Baidu, Toutiao, Douyin, Bilibili, Xiaohongshu and Kuaishou. |
 <!-- okdata:platforms:en:end -->
 
 ## What is in this repository
@@ -303,10 +315,22 @@ MCP 有五个工具：`find`（用中文或英文找接口）、`describe`（看
 | [Instagram](docs/zh/apis/instagram.md) | 8 | $0.002–$0.004 | 账号、帖子和 Reels、评论、话题，以及 Reel 里说了什么。 |
 | [Reddit](docs/zh/apis/reddit.md) | 11 | $0.002–$0.004 | 帖子、评论、社区、用户和正在热的内容。 |
 | [快手](docs/zh/apis/kuaishou.md) | 8 | $0.002–$0.02 | 视频、账号、评论和热榜。 |
-| [知乎](docs/zh/apis/zhihu.md) | 15 (13 个即将上线) | $0.002 | 问题和回答、文章、专栏、用户和热榜。 |
+| [知乎](docs/zh/apis/zhihu.md) | 16 (4 个即将上线) | $0.002 | 问题和回答、文章、专栏、用户和热榜。 |
 | [微信视频号](docs/zh/apis/wechat_channels.md) | 15 | $0.015–$0.15 | 视频号的视频、账号、评论和直播回放，不用扫码。 |
 | [微信搜一搜](docs/zh/apis/wechat.md) | 6 | $0.02–$0.15 | 微信搜一搜：公众号文章、视频号视频和小程序。 |
 | [Telegram](docs/zh/apis/telegram.md) | 3 | $0.002 | 公开频道和频道消息。 |
+| [亚马逊](docs/zh/apis/amazon.md) | 4 | $0.006 | 22 个国家站点的商品搜索、详情、评论和畅销榜。 |
+| [速卖通](docs/zh/apis/aliexpress.md) | 3 (1 个即将上线) | $0.002 | 商品搜索和买家评价，价格以美元计。 |
+| [淘宝天猫](docs/zh/apis/taobao.md) | 4 | $0.033–$0.043 | 商品搜索、带 SKU 的详情、买家评价和店铺商品。 |
+| [1688](docs/zh/apis/alibaba_1688.md) | 4 | $0.022 | 批发货源：商品、阶梯价、供应商和采购商评价。 |
+| [闲鱼](docs/zh/apis/xianyu.md) | 2 | $0.022 | 二手商品：搜索、标价和卖家。 |
+| [抖音电商](docs/zh/apis/douyin_shop.md) | 4 | $0.039–$0.054 | 精选联盟商品和佣金比例、销量、评价和店铺。 |
+| [今日头条](docs/zh/apis/toutiao.md) | 5 | $0.002 | 头条文章全文、视频、评论和头条号资料。 |
+| [西瓜视频](docs/zh/apis/xigua.md) | 5 | $0.002–$0.004 | 西瓜视频的搜索、视频数据、评论、创作者资料和作品列表。 |
+| [百度](docs/zh/apis/baidu.md) | 1 | $0.002 | 百度热搜：全国网民当下在搜什么，带热度。 |
+| [Bluesky](docs/zh/apis/bluesky.md) | 5 | $0.001 | Bluesky 上的公开账号、发帖和帖子下的回复，也能按关键词找人。 |
+| [苹果应用商店](docs/zh/apis/app_store.md) | 2 | $0.001 | 各国家/地区 App Store 里的应用：价格、评分、版本、开发者，还有用户最新写下的评论。 |
+| [全网](docs/zh/apis/all.md) | 1 | $0.03 | 一次拿到多个平台的热榜：微博、知乎、百度、头条、抖音、B站、小红书、快手。 |
 <!-- okdata:platforms:zh:end -->
 
 `typescript/`、`python/`、`cli/` 和 `docs/` 都从私有的 okdata 主仓库导出，npm 和 PyPI 的包也从那里发布；

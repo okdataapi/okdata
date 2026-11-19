@@ -3,11 +3,11 @@
 <!-- mcp-name: online.okdata/mcp -->
 
 Social data for AI agents, paid per call: TikTok, YouTube, Instagram, X, Reddit, RedNote
-(Xiaohongshu), Douyin, WeChat (Official Accounts and Channels), Bilibili, Weibo, Kuaishou and more. 200+ endpoints on 17
+(Xiaohongshu), Douyin, WeChat (Official Accounts and Channels), Bilibili, Weibo, Kuaishou and more. 230+ endpoints on 23
 platforms behind one key. This package is the okdata MCP server as a local stdio command, for clients that
 only start local servers (Claude Desktop, some IDEs and agent frameworks): it passes every request to the
 hosted server at `https://api.okdata.online/mcp` with your key. The agent looks up an endpoint and its price
-for free; only the data call is charged, and a call that fails costs nothing. You need no platform
+for free; only the data call is charged. You need no platform
 accounts, cookies or QR logins.
 
 **社媒数据 MCP · 抖音 MCP · 小红书 MCP · 公众号 MCP · 抖音数据 API · 小红书数据接口 · 星图 / 蒲公英达人数据。**
@@ -92,7 +92,7 @@ Every endpoint with its parameters, fields and price: [okdata.online/apis](https
 |---|---|---|
 | `find` | free, no key | The endpoint for a need in plain words, English or 中文, with its price and a ready call. |
 | `describe` | free, no key | Parameters, fields, price and an example of up to 5 endpoints. |
-| `call` | charged | One page of data from one endpoint, at the price `describe` showed. Failed calls are free. |
+| `call` | charged | One page of data from one endpoint, at the price `describe` showed, also when the source finds nothing or fails. |
 | `read_more` | free | The rest of an answer cut at about 20 KB, or the same result in another view, for 24 hours. |
 | `account` | free | The balance, a call's receipt, usage by day or endpoint; `status` (no key) says which endpoints are up. |
 
@@ -137,7 +137,7 @@ okdata 是给 AI 智能体用的社媒数据接口，按次付费。一个 key �
 ```
 
 然后彻底退出 Claude Desktop 再打开。需要先装好 [uv](https://docs.astral.sh/uv/)（Python 3.10 或更新）。
-查接口、看价格免费，不带 key 也能用；只有 `call` 按接口单价收费，失败不扣钱。不需要平台账号、Cookie，也不用扫码。
+查接口、看价格免费，不带 key 也能用；只有 `call` 按接口单价收费。不需要平台账号、Cookie，也不用扫码。
 支付宝、微信、银行卡都能充值。用 Node.js 的话：`npx -y @okdata/mcp`。
 
 [MCP 接入说明](https://okdata.online/zh/mcp/?src=pypi-okdata-mcp) · [接口和价格](https://okdata.online/zh/apis/?src=pypi-okdata-mcp) ·

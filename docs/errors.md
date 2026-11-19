@@ -33,7 +33,7 @@ Canonical page: https://okdata.online/docs/errors/
 | `account_suspended` | 403 | no | no | The account this key belongs to is suspended, so none of its keys work. | Write to hello@okdata.online. |
 | `key_scope_denied` | 403 | no | no | This key may not call this endpoint (its scope leaves it out). | Use a key whose scope includes it, or widen the scope in the console. |
 | `unknown_endpoint` | 404 | no | no | No endpoint lives at that path. When the path is close to one that does, moved_to (or suggestion) names it. | Use moved_to when given; otherwise check the id against the catalog (the path is the id with dots turned into slashes under /v1). |
-| `not_found` | 404 | no | no | The post, account or page does not exist or is not public. Endpoints whose charge_when_not_found is above 0 charge this answer (the source billed us for it): the body then says charged: true and amount. | Final answer; retrying will not change it. |
+| `not_found` | 404 | no | no | The post, account or page does not exist or is not public. When the data source billed the lookup, or the endpoint's charge_when_not_found is above 0, this answer is charged: the body then says charged: true and amount. | Final answer; retrying will not change it. |
 | `result_not_found` | 404 | no | no | No kept result for this request ID on this account (it failed, or was never made). | Check the request ID; only successful calls keep a result. |
 | `idempotency_conflict` | 409 | no | after a fix | This Idempotency-Key was used in the last 24 h for a different request. | Use a new key for a new request. |
 | `call_in_progress` | 409 | no | with the same Idempotency-Key | A call with this Idempotency-Key is still running. | Retry in a moment with the same key; you get its result, charged once. |
@@ -44,11 +44,11 @@ Canonical page: https://okdata.online/docs/errors/
 | `uncharged_cost_limit` | 429 | no | yes | Too many uncharged calls (nothing found) today. | Check the ids you send; it opens again at the next UTC day. |
 | `settlement_unknown` | 500 | unknown until looked up | with the same Idempotency-Key | The data came back, but the charge could not be confirmed. | Resend with the same Idempotency-Key to get the result without paying again, or look it up at /v1/calls/{request_id}. |
 | `internal_error` | 500 | no | yes | Something went wrong on our side; nothing was charged. | Retry with backoff. |
-| `upstream_failed` | 502 | no | yes | Every data source for this endpoint failed on this request. | Retry with backoff; check the status page if it persists. |
+| `upstream_failed` | 502 | no | yes | Every data source for this endpoint failed on this request. If a source billed the attempt, it is charged once at the endpoint's price (charged: true and amount); otherwise nothing is charged. | Retry with backoff; check the status page if it persists. |
 | `cursor_unavailable` | 502 | no | yes | Only the source that served the previous page can continue it, and it is not available right now. | Retry later with the same cursor, or start the listing again without one. |
-| `upstream_busy` | 503 | no | yes | Every data source for this endpoint is saturated. | Retry with backoff. |
+| `upstream_busy` | 503 | no | yes | Every data source for this endpoint is saturated. If a source billed the attempt, it is charged once at the endpoint's price (charged: true and amount); otherwise nothing is charged. | Retry with backoff. |
 | `capability_paused` | 503 | no | yes | This endpoint is paused right now; nothing ran. | Check /v1/catalog/status and retry once it is back. |
-| `timeout` | 504 | no | yes | The data did not come back in time. The hold was released, so nothing was charged. | Retry; an Idempotency-Key keeps a retry from ever being charged twice. |
+| `timeout` | 504 | no | yes | The data did not come back in time. If the request had reached a data source that bills it, it is charged once at the endpoint's price (charged: true and amount); otherwise the hold is released. | Retry with backoff. |
 
 ## Retrying safely
 

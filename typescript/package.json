@@ -1,6 +1,6 @@
 {
   "name": "@okdata/sdk",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "TypeScript SDK for okdata, the social data API and MCP server for AI agents: TikTok, YouTube, Instagram, X, Reddit, RedNote (Xiaohongshu), Douyin, WeChat and more, paid per call. One typed method per endpoint, safe retries, paging with a spend limit. No runtime dependencies.",
   "type": "module",
   "exports": {

@@ -1,8 +1,8 @@
 # okdata：全部接口
 
-> 全部 214 个接口，一行一个：名称（链接到完整说明的 Markdown）、请求、价格和返回内容。调用、计费和错误处理所有接口都一样，见 https://okdata.online/zh/llms.txt
+> 全部 255 个接口，一行一个：名称（链接到完整说明的 Markdown）、请求、价格和返回内容。调用、计费和错误处理所有接口都一样，见 https://okdata.online/zh/llms.txt
 
-接口目录 2128c2e84655fc1f，价目表 1b273c48fea9634e。 English: https://okdata.online/llms-full.txt
+接口目录 328d5a2ee651819d，价目表 5835acf0f45c7fc4。 English: https://okdata.online/llms-full.txt
 
 ## 抖音
 
@@ -42,8 +42,8 @@
 - [抖音星图达人转化能力](https://okdata.online/zh/apis/douyin/xingtu/creators/conversion/get.md) `GET /v1/douyin/xingtu/creators/conversion/get` $0.004/次。按星图达人 ID 取这位抖音达人带货视频的转化数据：相关视频数和播放中位数、推荐商品数，以及销售额、千次播放成交额、商品价格、点击成本、组件点击次数和点击率所在的区间。区间是星图给的文字，不是精确值；很多达人（包括带货多的）没有区间，完全没有带货数据的达人返回“不存在”。
 - [抖音星图营销活动日历](https://okdata.online/zh/apis/douyin/xingtu/campaigns/list.md) `GET /v1/douyin/xingtu/campaigns/list` $0.004/次 · 每页约 40 条结果。取星图营销日历上和一段时间有交集的活动：平台大事件、电商节点、情绪节点、创意营销和行业活动，每个带名称、介绍、类型、阶段、招商期和活动期。一次给全。
 - [抖音星图视频数据报告](https://okdata.online/zh/apis/douyin/xingtu/videos/get.md) `GET /v1/douyin/xingtu/videos/get` $0.004/次。按视频 ID 或链接取星图对一条抖音视频的数据报告：播放、点赞、评论、分享和收藏，加上完播率、互动率、时长、作者粉丝数和作者的星图达人 ID（可接着查达人数据）。只有星图收录的视频才有，多是星图达人的视频。
-- [抖音用户视频（备用版）](https://okdata.online/zh/apis/douyin/backup/users/videos/list.md) `GET /v1/douyin/backup/users/videos/list` $0.0025/次 · 每页约 20 条视频。抖音用户视频（douyin.users.videos.list）的备用版，原接口取不到时改调：账号发布的视频，从新到旧，每页 20 条，走另一条数据通道，价格略高。文案、作者、点赞、评论、分享、收藏和发布时间。账号不存在时和没有视频一样，返回空结果，不报 404。
-- [抖音视频搜索（备用版）](https://okdata.online/zh/apis/douyin/backup/videos/search.md) `GET /v1/douyin/backup/videos/search` $0.03/次 · 每页约 8 条视频。抖音视频搜索（douyin.videos.search）的备用版，原接口取不到时改调：走另一条数据通道按关键词搜视频，可按综合、最新或最多点赞排，可只要最近一天、一周或半年内的。文案、作者、点赞、评论、分享、收藏和发布时间。
+- [抖音用户视频（备用版）](https://okdata.online/zh/apis/douyin/backup/users/videos/list.md) `GET /v1/douyin/backup/users/videos/list` $0.0025/次 · 每页约 20 条视频。抖音用户视频（douyin.users.videos.list）的备用版，原接口取不到时改调：账号发布的视频，从新到旧，每页 20 条，价格略高。文案、作者、点赞、评论、分享、收藏和发布时间。账号不存在时和没有视频一样，返回空结果，不报 404。
+- [抖音视频搜索（备用版）](https://okdata.online/zh/apis/douyin/backup/videos/search.md) `GET /v1/douyin/backup/videos/search` $0.03/次 · 每页约 8 条视频。抖音视频搜索（douyin.videos.search）的备用版，原接口取不到时改调：按关键词搜视频，可按综合、最新或最多点赞排，可只要最近一天、一周或半年内的。文案、作者、点赞、评论、分享、收藏和发布时间。
 
 ## 小红书
 
@@ -113,7 +113,7 @@
 - [微博用户微博](https://okdata.online/zh/apis/weibo/users/posts/list.md) `GET /v1/weibo/users/posts/list` $0.002/次 · 每页约 20 条帖子。按用户 ID 取账号主页上的微博（原创和转发），从新到旧：正文（长微博在这里是截短的，ext.text_truncated 标明）、点赞、评论、转发、视频播放数、图片和话题。
 - [微博用户粉丝列表](https://okdata.online/zh/apis/weibo/users/followers/list.md) `GET /v1/weibo/users/followers/list` $0.002/次 · 每页约 20 个账号。关注这个用户的账号，每页 20 个：昵称、简介、头像、认证和认证类型、粉丝、关注、微博数、注册时间，以及资料里填的性别和地区。微博只给前几页。
 - [微博用户搜索](https://okdata.online/zh/apis/weibo/users/search.md) `GET /v1/weibo/users/search` $0.002/次 · 每页约 20 个账号。按关键词搜微博账号：用户 ID、昵称、头像和主页链接。
-- [微博热搜榜（备用版）](https://okdata.online/zh/apis/weibo/backup/trends/list.md) `GET /v1/weibo/backup/trends/list` $0.0025/次 · 每页约 50 条榜单。微博热搜榜（weibo.trends.list）的备用版，原接口取不到时改调：走另一条数据通道（App 端）取微博热搜，价格略高。50 个上榜话题、名次和热度；不含置顶话题和推广位。
+- [微博热搜榜（备用版）](https://okdata.online/zh/apis/weibo/backup/trends/list.md) `GET /v1/weibo/backup/trends/list` $0.0025/次 · 每页约 50 条榜单。微博热搜榜（weibo.trends.list）的备用版，原接口取不到时改调：取微博热搜（App 端），价格略高。50 个上榜话题、名次和热度；不含置顶话题和推广位。
 
 ## TikTok
 
@@ -126,7 +126,7 @@
 - [TikTok Shop 商品搜索](https://okdata.online/zh/apis/tiktok/shop/products/search.md) `GET /v1/tiktok/shop/products/search` $0.004/次 · 每页约 20 个商品。按关键词搜 TikTok Shop 商品：标题、现价和原价、销量、评分、评价数、图片和店铺。
 - [TikTok Shop 商品详情](https://okdata.online/zh/apis/tiktok/shop/products/get.md) `GET /v1/tiktok/shop/products/get` $0.002/次。按 ID 或链接取一个 TikTok Shop 商品：标题、价格和折扣、销量、评分、评价数、全部图片，以及店铺和店铺评分、粉丝数。
 - [TikTok Shop 商品评价](https://okdata.online/zh/apis/tiktok/shop/products/reviews/list.md) `GET /v1/tiktok/shop/products/reviews/list` $0.002/次 · 每页约 20 条评价。TikTok Shop 商品的买家评价：星级、内容、购买的款式、晒图，以及是否为已验证购买。
-- [TikTok 视频字幕](https://okdata.online/zh/apis/tiktok/videos/transcript/get.md) `GET /v1/tiktok/videos/transcript/get` $0.002/次。按视频 ID 或链接取 TikTok 视频里说的话：全文和带时间的分段，来自视频的字幕（TikTok 自己的，多为自动生成）。lang 指定字幕语言；视频没有这种语言的字幕时按找不到处理，不收费。
+- [TikTok 视频字幕](https://okdata.online/zh/apis/tiktok/videos/transcript/get.md) `GET /v1/tiktok/videos/transcript/get` $0.002/次。按视频 ID 或链接取 TikTok 视频里说的话：全文和带时间的分段，来自视频的字幕（TikTok 自己的，多为自动生成）。lang 指定字幕语言；视频没有这种语言的字幕时按找不到处理，和其他查询一样计费。
 - [TikTok 评论回复](https://okdata.online/zh/apis/tiktok/comments/replies/list.md) `GET /v1/tiktok/comments/replies/list` $0.002/次 · 每页约 20 条评论。按评论 ID 和所在视频 ID 取这条评论下的回复，每页 20 条：内容、回复者、点赞、发布时间，以及每条回的是哪一条。评论不存在时和没有回复一样，返回空结果，不报 404。
 - [TikTok 账号搜索](https://okdata.online/zh/apis/tiktok/users/search.md) `GET /v1/tiktok/users/search` $0.002/次 · 每页约 30 个账号。按关键词找 TikTok 账号，每页 30 个：用户名、名称、头像、粉丝数、关注数、作品数和获赞数。
 - [TikTok 账号作品](https://okdata.online/zh/apis/tiktok/users/videos/list.md) `GET /v1/tiktok/users/videos/list` $0.002/次 · 每页约 10 条视频。按用户名取账号发布的视频，每页 10 条，按最新或最热排：文案、播放、点赞、评论、分享、收藏和发布时间。置顶的视频会标出来（ext.is_pinned）。
@@ -139,10 +139,10 @@
 
 - [X 帖子详情](https://okdata.online/zh/apis/x/posts/get.md) `GET /v1/x/posts/get` $0.0003/次。按 ID 或链接取一条帖子：正文、媒体、浏览、点赞、转发和回复。
 - [X 帖子搜索](https://okdata.online/zh/apis/x/posts/search.md) `GET /v1/x/posts/search` $0.002/次 · 每页约 20 条帖子。按查询词搜帖子（支持 X 的搜索语法），可按最新或热门。
-- [X 账号信息](https://okdata.online/zh/apis/x/users/get.md) `GET /v1/x/users/get` $0.0004/条 · 每次最多 $0.04。按用户名或数字 ID 取一个账号，或一次按 ID 取最多 100 个：粉丝、关注、发帖数、简介和认证。没找到的 ID 列在 data.missing 里，不收费。
+- [X 账号信息](https://okdata.online/zh/apis/x/users/get.md) `GET /v1/x/users/get` $0.0004/条 · 每次最多 $0.04。按用户名或数字 ID 取一个账号，或一次按 ID 取最多 100 个：粉丝、关注、发帖数、简介和认证。没找到的 ID 列在 data.missing 里，不收费；一个都没找到时按 1 个收费。
 - [X 账号帖子列表](https://okdata.online/zh/apis/x/users/posts/list.md) `GET /v1/x/users/posts/list` $0.002/次 · 每页约 20 条帖子。账号发布的帖子，从新到旧。
 - [X 趋势](https://okdata.online/zh/apis/x/trends/list.md) `GET /v1/x/trends/list` $0.009/次 · 每页约 30 条榜单。全球或某个国家的趋势话题。
-- [X 帖子回复](https://okdata.online/zh/apis/x/posts/replies/list.md) `GET /v1/x/posts/replies/list` $0.002/次 · 每页约 35 条帖子。一条帖子下面的回复，按 X 自己的相关度排，每页最多约 60 条。X 的回复本身就是帖子，所以按帖子返回：正文、作者、发布时间、浏览、点赞和它自己的回复数。
+- [X 帖子回复](https://okdata.online/zh/apis/x/posts/replies/list.md) `GET /v1/x/posts/replies/list` $0.002/次 · 每页约 35 条帖子。一条帖子下面的回复，按 X 自己的相关度排，每页约 35 条。X 的回复本身就是帖子，所以按帖子返回：正文、作者、发布时间、浏览、点赞和它自己的回复数。
 - [X 帖子引用](https://okdata.online/zh/apis/x/posts/quotes/list.md) `GET /v1/x/posts/quotes/list` $0.0003/条 · 每次最多 $0.006。引用了某条帖子的帖子，按最新或最热排，每页 20 条：别人加了什么话、是谁、传播得怎样。
 - [X 帖子转推用户](https://okdata.online/zh/apis/x/posts/retweeters/list.md) `GET /v1/x/posts/retweeters/list` $0.002/次 · 每页约 100 个账号。转推了某条帖子的账号，每页约 100 个：用户名、名称、简介和粉丝数。
 - [X 长文](https://okdata.online/zh/apis/x/posts/article/get.md) `GET /v1/x/posts/article/get` $0.002/次。按帖子 ID 取它所附的 X 长文（Article）：标题、全文、作者、发布时间、浏览、点赞和回复。
@@ -205,7 +205,7 @@
 - [Reddit 用户资料](https://okdata.online/zh/apis/reddit/users/get.md) `GET /v1/reddit/users/get` $0.002/次。用户的公开资料：显示名、简介、认证、karma、发帖数和评论数，以及注册时间。
 - [Reddit 用户帖子](https://okdata.online/zh/apis/reddit/users/posts/list.md) `GET /v1/reddit/users/posts/list` $0.002/次 · 每页约 25 条帖子。用户发过的帖子，从新到旧：标题、正文、社区、得分和评论数。
 - [Reddit 用户活跃社区](https://okdata.online/zh/apis/reddit/users/subreddits/list.md) `GET /v1/reddit/users/subreddits/list` $0.002/次 · 每页约 30 个账号。用户活跃的社区，每个当作账号返回：社区名、简介和成员数（在 followers 里）。一次返回全部。
-- [Reddit 视频字幕](https://okdata.online/zh/apis/reddit/posts/transcript/get.md) `GET /v1/reddit/posts/transcript/get` $0.004/次。Reddit 自己托管的视频帖子的字幕，带时间戳。没有字幕的帖子返回 not_found，不收费。
+- [Reddit 视频字幕](https://okdata.online/zh/apis/reddit/posts/transcript/get.md) `GET /v1/reddit/posts/transcript/get` $0.004/次。Reddit 自己托管的视频帖子的字幕，带时间戳。没有字幕的帖子返回 not_found，和其他查询一样计费。
 
 ## 快手
 
@@ -222,16 +222,17 @@
 
 - [知乎内容搜索](https://okdata.online/zh/apis/zhihu/posts/search.md) `GET /v1/zhihu/posts/search` $0.002/次 · 每页约 20 条帖子。按关键词搜回答和文章，可按相关、最新或最多赞同排，可只要回答或只要文章：标题（回答的标题是问题）、全文、作者、赞同、评论和收藏。
 - [知乎问题回答](https://okdata.online/zh/apis/zhihu/questions/answers/list.md) `GET /v1/zhihu/questions/answers/list` $0.002/次 · 每页约 20 条帖子。按问题 ID 或链接取问题下排在最前的 20 条回答（知乎自己的顺序）：标题（即问题）、全文、作者和粉丝数、赞同、评论、收藏和发布时间。只有一页，不翻页。
-- [知乎问题详情](https://okdata.online/zh/apis/zhihu/questions/get.md) `GET /v1/zhihu/questions/get` $0.002/次。即将上线：已列出，暂不能调用。按问题 ID 或链接取一个问题：标题、问题下的补充说明、提问时间和浏览数，ext 里还有回答数和关注数。
-- [知乎回答详情](https://okdata.online/zh/apis/zhihu/answers/get.md) `GET /v1/zhihu/answers/get` $0.002/次。即将上线：已列出，暂不能调用。按回答 ID 或链接取一条回答：所答的问题（作标题）、全文、作者和发布时间。
-- [知乎回答评论](https://okdata.online/zh/apis/zhihu/answers/comments/list.md) `GET /v1/zhihu/answers/comments/list` $0.002/次 · 每页约 10 条评论。即将上线：已列出，暂不能调用。按回答 ID 取回答下的一级评论，一页一页取，按知乎默认顺序：内容、评论者、点赞、回复数、发布时间和 IP 属地。
+- [知乎问题详情](https://okdata.online/zh/apis/zhihu/questions/get.md) `GET /v1/zhihu/questions/get` $0.002/次。按问题 ID 或链接取一个问题：标题、问题下的补充说明、提问时间和浏览数，ext 里还有回答数和关注数。
+- [知乎回答详情](https://okdata.online/zh/apis/zhihu/answers/get.md) `GET /v1/zhihu/answers/get` $0.002/次。按回答 ID 或链接取一条回答：所答的问题（作标题）、全文、作者和发布时间。
+- [知乎回答评论](https://okdata.online/zh/apis/zhihu/answers/comments/list.md) `GET /v1/zhihu/answers/comments/list` $0.002/次 · 每页约 10 条评论。按回答 ID 取回答下的一级评论，一页一页取，按知乎默认顺序：内容、评论者、点赞、回复数、发布时间和 IP 属地。
 - [知乎评论回复](https://okdata.online/zh/apis/zhihu/comments/replies/list.md) `GET /v1/zhihu/comments/replies/list` $0.002/次 · 每页约 20 条评论。即将上线：已列出，暂不能调用。按一级评论 ID 取它下面的回复，每页 20 条：内容、回复者、点赞、IP 属地，以及每条回的是哪一条。
-- [知乎文章详情](https://okdata.online/zh/apis/zhihu/articles/get.md) `GET /v1/zhihu/articles/get` $0.002/次。即将上线：已列出，暂不能调用。按文章 ID 或链接取一篇专栏文章：标题、全文、作者、赞同数、评论数和所属话题（放在 hashtags 里）。
-- [知乎专栏文章列表](https://okdata.online/zh/apis/zhihu/columns/articles/list.md) `GET /v1/zhihu/columns/articles/list` $0.002/次 · 每页约 20 篇文章。即将上线：已列出，暂不能调用。按专栏 ID 取专栏里的文章，每页 20 篇：标题、正文、作者、发布时间、赞同数和评论数。
-- [知乎想法详情](https://okdata.online/zh/apis/zhihu/pins/get.md) `GET /v1/zhihu/pins/get` $0.002/次。即将上线：已列出，暂不能调用。按 ID 或链接取一条想法（知乎的短动态）：正文、图片、作者、点赞、评论、收藏、转发和发布时间。
-- [知乎用户资料](https://okdata.online/zh/apis/zhihu/users/get.md) `GET /v1/zhihu/users/get` $0.002/次。即将上线：已列出，暂不能调用。按主页链接里的用户名取一个人的资料：名字、一句话介绍和粉丝数，ext 里还有回答数、文章数、是否机构号和 IP 属地。
-- [知乎用户搜索](https://okdata.online/zh/apis/zhihu/users/search.md) `GET /v1/zhihu/users/search` $0.002/次 · 每页约 20 个账号。即将上线：已列出，暂不能调用。按关键词找知乎用户和机构号，每页 20 个：名字和粉丝数，ext 里还有回答数、文章数、获赞数和是否机构号。一句话介绍要在资料（zhihu.users.get）里看。
-- [知乎用户粉丝列表](https://okdata.online/zh/apis/zhihu/users/followers/list.md) `GET /v1/zhihu/users/followers/list` $0.002/次 · 每页约 20 个账号。即将上线：已列出，暂不能调用。按用户名取关注这个账号的人，每页 20 个：名字、用户名、一句话介绍、头像、粉丝数，ext 里还有回答数、文章数和是否机构号。
+- [知乎文章详情](https://okdata.online/zh/apis/zhihu/articles/get.md) `GET /v1/zhihu/articles/get` $0.002/次。按文章 ID 或链接取一篇专栏文章：标题、全文、作者、赞同数、评论数和所属话题（放在 hashtags 里）。
+- [知乎专栏文章列表](https://okdata.online/zh/apis/zhihu/columns/articles/list.md) `GET /v1/zhihu/columns/articles/list` $0.002/次 · 每页约 20 篇文章。按专栏 ID 取专栏里的文章，每页 20 篇：标题、正文、作者、发布时间、赞同数和评论数。
+- [知乎想法详情](https://okdata.online/zh/apis/zhihu/pins/get.md) `GET /v1/zhihu/pins/get` $0.002/次。按 ID 或链接取一条想法（知乎的短动态）：正文、图片、作者、点赞、评论、收藏、转发和发布时间。
+- [知乎热榜](https://okdata.online/zh/apis/zhihu/trends/list.md) `GET /v1/zhihu/trends/list` $0.002/次 · 每页约 30 条榜单。知乎热榜：当下大家都在看的问题，带排名和热度。
+- [知乎用户资料](https://okdata.online/zh/apis/zhihu/users/get.md) `GET /v1/zhihu/users/get` $0.002/次。按主页链接里的用户名取一个人的资料：名字、一句话介绍和粉丝数，ext 里还有回答数、文章数、是否机构号和 IP 属地。
+- [知乎用户搜索](https://okdata.online/zh/apis/zhihu/users/search.md) `GET /v1/zhihu/users/search` $0.002/次 · 每页约 20 个账号。按关键词找知乎用户和机构号，每页 20 个：名字和粉丝数，ext 里还有回答数、文章数、获赞数和是否机构号。一句话介绍要在资料（zhihu.users.get）里看。
+- [知乎用户粉丝列表](https://okdata.online/zh/apis/zhihu/users/followers/list.md) `GET /v1/zhihu/users/followers/list` $0.002/次 · 每页约 20 个账号。按用户名取关注这个账号的人，每页 20 个：名字、用户名、一句话介绍、头像、粉丝数，ext 里还有回答数、文章数和是否机构号。
 - [知乎用户回答](https://okdata.online/zh/apis/zhihu/users/answers/list.md) `GET /v1/zhihu/users/answers/list` $0.002/次 · 每页约 20 条帖子。即将上线：已列出，暂不能调用。按用户名取一个人写的回答，每页 20 条，从新到旧：所答问题（作标题）、正文、赞同、评论和发布时间。
 - [知乎用户文章](https://okdata.online/zh/apis/zhihu/users/articles/list.md) `GET /v1/zhihu/users/articles/list` $0.002/次 · 每页约 20 篇文章。即将上线：已列出，暂不能调用。按用户名取一个人写的专栏文章，每页 20 篇，从新到旧：标题、正文、赞同、评论和发布时间。
 - [知乎用户想法](https://okdata.online/zh/apis/zhihu/users/pins/list.md) `GET /v1/zhihu/users/pins/list` $0.002/次 · 每页约 20 条帖子。即将上线：已列出，暂不能调用。按用户名取一个人发的想法（知乎的短动态），每页 20 条，从新到旧：正文、图片、点赞、评论、收藏、转发和发布时间。
@@ -250,9 +251,9 @@
 - [视频号账号合集](https://okdata.online/zh/apis/wechat_channels/users/collections/list.md) `GET /v1/wechat_channels/users/collections/list` $0.02/次 · 每页约 7 条结果。视频号账号公开的全部合集，一次返回：名称、简介、封面、视频数和最近更新时间。合集的 id 传给 wechat_channels.collections.videos.list 取里面的视频。
 - [视频号合集视频](https://okdata.online/zh/apis/wechat_channels/collections/videos/list.md) `GET /v1/wechat_channels/collections/videos/list` $0.02/次 · 每页约 20 条视频。视频号合集里的视频，按合集自己的顺序（从最早的开始），每页 20 条：描述、账号、发布时间、点赞、评论、转发和收藏、时长。url 是视频文件地址（已加密，用同一次返回的 ext.decode_key 解密）。
 - [视频号作品互动数据](https://okdata.online/zh/apis/wechat_channels/videos/metrics.md) `GET /v1/wechat_channels/videos/metrics` $0.015/次。按作品 ID 取视频号作品最近的数字：点赞、评论、转发和收藏，带作品描述和发布账号。数字可能是几小时前的，ext.counted_at 写明取数时间。比取整个作品（wechat_channels.videos.get）便宜。
-- [视频号账号信息（备用版）](https://okdata.online/zh/apis/wechat_channels/backup/users/get.md) `GET /v1/wechat_channels/backup/users/get` $0.03/次。wechat_channels.users.get 的备用版，另一来源：参数和返回相同，不给作品数。
-- [视频号账号作品（备用版）](https://okdata.online/zh/apis/wechat_channels/backup/users/videos/list.md) `GET /v1/wechat_channels/backup/users/videos/list` $0.06/次 · 每页约 15 条视频。wechat_channels.users.videos.list 的备用版，另一来源：参数和返回相同，每页 15 条（正在直播时第一条是直播）。
-- [视频号视频搜索（备用版）](https://okdata.online/zh/apis/wechat_channels/backup/videos/search.md) `GET /v1/wechat_channels/backup/videos/search` $0.15/次 · 每页约 10 条视频。wechat_channels.videos.search 的备用版，另一来源：参数和返回相同，另带评论数和转发数（没有收藏数）。
+- [视频号账号信息（备用版）](https://okdata.online/zh/apis/wechat_channels/backup/users/get.md) `GET /v1/wechat_channels/backup/users/get` $0.03/次。wechat_channels.users.get 的备用版：参数和返回相同，不给作品数。
+- [视频号账号作品（备用版）](https://okdata.online/zh/apis/wechat_channels/backup/users/videos/list.md) `GET /v1/wechat_channels/backup/users/videos/list` $0.06/次 · 每页约 15 条视频。wechat_channels.users.videos.list 的备用版：参数和返回相同，每页 15 条（正在直播时第一条是直播）。
+- [视频号视频搜索（备用版）](https://okdata.online/zh/apis/wechat_channels/backup/videos/search.md) `GET /v1/wechat_channels/backup/videos/search` $0.15/次 · 每页约 10 条视频。wechat_channels.videos.search 的备用版：参数和返回相同，另带评论数和转发数（没有收藏数）。
 
 ## 微信搜一搜
 
@@ -261,10 +262,86 @@
 - [微信指数](https://okdata.online/zh/apis/wechat/index/keywords/history.md) `GET /v1/wechat/index/keywords/history` $0.15/次 · 每页约 1 条结果。关键词最近 30 天的微信指数，一天一个数（points[].composite_index）。微信指数是微信综合搜一搜、文章、朋友圈等算出的热度分，不是搜索次数，不能和抖音、小红书的指数比；日期是中国时间（UTC+8）的自然日。
 - [微信搜一搜推荐词](https://okdata.online/zh/apis/wechat/keywords/related.md) `GET /v1/wechat/keywords/related` $0.15/次 · 每页约 9 条结果。微信搜一搜在搜索框下给一个关键词的联想推荐词，按它列出的顺序，一次约 9 个（不含关键词本身）。只有词和名次，没有指数。
 - [微信小程序搜索](https://okdata.online/zh/apis/wechat/miniprograms/search.md) `GET /v1/wechat/miniprograms/search` $0.15/次 · 每页约 25 条结果。按关键词在微信搜一搜里找小程序，取第一页（约 25 个）：名称、简介、图标、原始 ID 和 AppID（部分品牌小程序不显示）、主体和是否认证、平台显示的最近使用人数（取档位下限，如 10万+ 记为 100000）、是否小游戏。
-- [微信搜一搜综合搜索（备用版）](https://okdata.online/zh/apis/wechat/backup/posts/search.md) `GET /v1/wechat/backup/posts/search` $0.15/次 · 每页约 20 条帖子。wechat.posts.search 的备用版，另一来源：参数和返回相同。
+- [微信搜一搜综合搜索（备用版）](https://okdata.online/zh/apis/wechat/backup/posts/search.md) `GET /v1/wechat/backup/posts/search` $0.15/次 · 每页约 20 条帖子。wechat.posts.search 的备用版：参数和返回相同。
 
 ## Telegram
 
 - [Telegram 频道资料](https://okdata.online/zh/apis/telegram/channels/get.md) `GET /v1/telegram/channels/get` $0.002/次。按用户名取一个公开 Telegram 频道：名称、简介、头像、订阅数（t.me 显示的约数）和认证，ext 里还有频道显示的图片、视频、文件和链接数。
 - [Telegram 频道消息](https://okdata.online/zh/apis/telegram/channels/messages/list.md) `GET /v1/telegram/channels/messages/list` $0.002/次 · 每页约 20 条帖子。公开频道的消息，从新到旧，每页 20 条：正文、发布时间、浏览数（一千以上是 t.me 显示的约数）和图片，含视频封面。每条的 id（用户名/序号，如 telegram/401）可直接传给单条消息接口。
 - [Telegram 单条消息](https://okdata.online/zh/apis/telegram/messages/get.md) `GET /v1/telegram/messages/get` $0.002/次。按“用户名/序号”或 t.me 链接取公开频道的一条消息：正文、发布时间、浏览数和图片，含视频封面。
+
+## 亚马逊
+
+- [亚马逊商品搜索](https://okdata.online/zh/apis/amazon/products/search.md) `GET /v1/amazon/products/search` $0.006/次 · 每页约 48 个商品。按关键词搜亚马逊商品，和买家看到的结果一致：标题、售价和原价、星级、评分数、上月购买量、Prime、Best Seller 和 Amazon's Choice 标记，以及主图。
+- [亚马逊商品详情](https://okdata.online/zh/apis/amazon/products/get.md) `GET /v1/amazon/products/get` $0.006/次。按 ASIN 取一个亚马逊商品：标题、售价和原价、星级和评分数、上月购买量、全部图片、品牌、"关于此商品"要点、类目路径和畅销排名。
+- [亚马逊商品评论](https://okdata.online/zh/apis/amazon/products/reviews/list.md) `GET /v1/amazon/products/reviews/list` $0.006/次 · 每页约 10 条评价。亚马逊商品的买家评论：星级、标题和正文、日期、购买的款式、晒图、"有用"票数，以及是否为已验证购买。
+- [亚马逊畅销榜](https://okdata.online/zh/apis/amazon/bestsellers/list.md) `GET /v1/amazon/bestsellers/list` $0.006/次 · 每页约 50 个商品。亚马逊某个类目的畅销榜，按排名：名次、标题、价格、星级、评分数和图片。也可取新品榜、飙升榜、心愿单榜和礼物榜。
+
+## 速卖通
+
+- [速卖通商品搜索](https://okdata.online/zh/apis/aliexpress/products/search.md) `GET /v1/aliexpress/products/search` $0.002/次 · 每页约 20 个商品。按关键词搜速卖通商品：标题、美元价格、销量、星级和图片，按速卖通默认顺序或按销量、价格排序。
+- [速卖通商品详情](https://okdata.online/zh/apis/aliexpress/products/get.md) `GET /v1/aliexpress/products/get` $0.002/次。即将上线：已列出，暂不能调用。按 ID 取一个速卖通商品：标题、价格、销量、星级、评价数、图片和店铺。
+- [速卖通商品评价](https://okdata.online/zh/apis/aliexpress/products/reviews/list.md) `GET /v1/aliexpress/products/reviews/list` $0.002/次 · 每页约 20 条评价。速卖通商品的买家评价：星级、内容（附英文翻译）、日期、购买的款式、晒图和"有用"票数。
+
+## 淘宝天猫
+
+- [淘宝商品搜索](https://okdata.online/zh/apis/taobao/products/search.md) `GET /v1/taobao/products/search` $0.043/次 · 每页约 10 个商品。按关键词搜淘宝和天猫商品：标题、到手价和原价、近期付款人数、店铺和发货地，可按销量、价格或综合排序，可限价格区间、只看天猫。
+- [淘宝商品详情](https://okdata.online/zh/apis/taobao/products/get.md) `GET /v1/taobao/products/get` $0.033/次。按 ID 取一个淘宝或天猫商品：标题、价格、全部主图和视频、商品属性、各规格（SKU）的价格和库存、发货地，以及店铺。
+- [淘宝商品评价](https://okdata.online/zh/apis/taobao/products/reviews/list.md) `GET /v1/taobao/products/reviews/list` $0.043/次 · 每页约 20 条评价。淘宝或天猫商品的买家评价：内容、日期、购买的规格、晒图和点赞数，按最新或综合排序。
+- [淘宝店铺商品](https://okdata.online/zh/apis/taobao/shops/products/list.md) `GET /v1/taobao/shops/products/list` $0.043/次 · 每页约 60 个商品。列出淘宝或天猫店铺在卖的商品，每页 60 个：标题、到手价和原价、近 30 天付款人数、评价数和图片，可按销量、新品、信用或价格排序。需要卖家 ID 和店铺 ID，两者都在商品详情里。
+
+## 1688
+
+- [1688 商品搜索](https://okdata.online/zh/apis/alibaba_1688/products/search.md) `GET /v1/alibaba_1688/products/search` $0.022/次 · 每页约 20 个商品。按关键词搜 1688 货源：标题、批发价、起批量、销量、回头率和供应商（工厂还是贸易商、所在地），可按销量或价格排序。
+- [1688 商品详情](https://okdata.online/zh/apis/alibaba_1688/products/get.md) `GET /v1/alibaba_1688/products/get` $0.022/次。按 ID 取一个 1688 商品：标题、价格区间和阶梯批发价、起批量、年销量、图片和视频、规格和库存、运费和发货地，以及供应商。
+- [1688 商品评价](https://okdata.online/zh/apis/alibaba_1688/products/reviews/list.md) `GET /v1/alibaba_1688/products/reviews/list` $0.022/次 · 每页约 10 条评价。1688 商品的采购商评价：星级、内容、日期和购买的规格，综合排序或最新在前。
+- [1688 店铺商品](https://okdata.online/zh/apis/alibaba_1688/shops/products/list.md) `GET /v1/alibaba_1688/shops/products/list` $0.022/次 · 每页约 20 个商品。按会员 ID 列出 1688 供应商在卖的商品：标题、批发价和代发价、销量、类目和上架时间，可按销量、价格或时间排序。
+
+## 闲鱼
+
+- [闲鱼商品搜索](https://okdata.online/zh/apis/xianyu/products/search.md) `GET /v1/xianyu/products/search` $0.022/次 · 每页约 10 个商品。按关键词搜闲鱼二手商品：标题、标价和原价、卖家、所在地和想要人数，可按最新发布、价格或卖家信用排序。
+- [闲鱼商品详情](https://okdata.online/zh/apis/xianyu/products/get.md) `GET /v1/xianyu/products/get` $0.022/次。按 ID 取一个闲鱼商品：完整描述、标价和原价、成色、全部图片、浏览/想要/收藏数、运费，以及卖家、所在城市和已卖出件数。
+
+## 抖音电商
+
+- [抖音电商商品搜索](https://okdata.online/zh/apis/douyin_shop/products/search.md) `GET /v1/douyin_shop/products/search` $0.054/次 · 每页约 30 个商品。按关键词搜抖音精选联盟商品：标题、到手价、月销量、店铺和店铺分，以及达人带货的佣金比例。
+- [抖音电商商品详情](https://okdata.online/zh/apis/douyin_shop/products/get.md) `GET /v1/douyin_shop/products/get` $0.039/次。按 ID 取一个抖音电商商品：标题、累计销量、好评率、全部主图和详情图、服务承诺（7 天无理由、运费险等）和店铺。这个接口不含价格，价格在搜索结果里。
+- [抖音电商商品评价](https://okdata.online/zh/apis/douyin_shop/products/reviews/list.md) `GET /v1/douyin_shop/products/reviews/list` $0.039/次 · 每页约 20 条评价。抖音电商商品的买家评价：星级、内容、日期、购买的规格、晒图和点赞数，以及商家回复。
+- [抖音电商店铺商品](https://okdata.online/zh/apis/douyin_shop/shops/products/list.md) `GET /v1/douyin_shop/shops/products/list` $0.043/次 · 每页约 10 个商品。按店铺 ID 列出抖店在卖的商品：标题、价格、月销量、封面图和服务标签。
+
+## 今日头条
+
+- [头条文章详情](https://okdata.online/zh/apis/toutiao/articles/get.md) `GET /v1/toutiao/articles/get` $0.002/次。按 ID 或链接取一篇头条文章，带全文：标题、作者、发布时间、阅读、点赞、评论、转发、收藏和文中图片。ext 里还有发文属地，转载的文章附原文链接。
+- [头条视频详情](https://okdata.online/zh/apis/toutiao/videos/get.md) `GET /v1/toutiao/videos/get` $0.002/次。按 ID 或链接取一个头条视频：标题、作者和粉丝数、发布时间、播放、点赞、评论、转发、收藏、时长和封面。
+- [头条评论](https://okdata.online/zh/apis/toutiao/posts/comments/list.md) `GET /v1/toutiao/posts/comments/list` $0.002/次 · 每页约 20 条评论。头条文章或视频下的一级评论，每页 20 条，按热度排：内容、评论者、点赞、回复数、发布时间和 IP 属地。
+- [头条号资料](https://okdata.online/zh/apis/toutiao/users/get.md) `GET /v1/toutiao/users/get` $0.002/次。按用户 ID 或主页链接取头条号：名称、简介、头像、认证、头条上显示的粉丝数和获赞总数。ext 里分别列出头条和西瓜视频的粉丝数，还有视频数和 IP 属地。
+- [头条热榜](https://okdata.online/zh/apis/toutiao/trends/list.md) `GET /v1/toutiao/trends/list` $0.002/次 · 每页约 50 条榜单。头条热榜：当下阅读最多的 50 个新闻热点，带排名和热度。
+
+## 西瓜视频
+
+- [西瓜视频搜索](https://okdata.online/zh/apis/xigua/videos/search.md) `GET /v1/xigua/videos/search` $0.002/次 · 每页约 10 条视频。按关键词搜西瓜视频，一次最多返回 10 条（没有下一页），按西瓜的默认排序：标题、作者、播放、评论、时长、封面和发布时间。
+- [西瓜视频详情](https://okdata.online/zh/apis/xigua/videos/get.md) `GET /v1/xigua/videos/get` $0.004/次。按 ID 或链接取一个西瓜视频：标题、作者和粉丝数、发布时间、播放、点赞、评论、转发、收藏、时长和封面。
+- [西瓜视频评论](https://okdata.online/zh/apis/xigua/videos/comments/list.md) `GET /v1/xigua/videos/comments/list` $0.002/次 · 每页约 20 条评论。视频下的一级评论，每页 20 条，按热度排：内容、评论者、点赞、回复数、发布时间和 IP 属地。
+- [西瓜视频创作者资料](https://okdata.online/zh/apis/xigua/users/get.md) `GET /v1/xigua/users/get` $0.002/次。按用户 ID 或主页链接取西瓜视频创作者：名称、简介、头像、认证、西瓜上显示的粉丝数、视频数和获赞总数。ext 里分别列出头条和西瓜的粉丝数，还有总转发数和 IP 属地。
+- [西瓜视频创作者作品](https://okdata.online/zh/apis/xigua/users/videos/list.md) `GET /v1/xigua/users/videos/list` $0.002/次 · 每页约 30 条视频。创作者发布的视频，从新到旧，每页约 30 条：标题、播放、点赞、评论、转发、收藏、时长、封面和发布时间。
+
+## 百度
+
+- [百度热搜](https://okdata.online/zh/apis/baidu/trends/list.md) `GET /v1/baidu/trends/list` $0.002/次 · 每页约 50 条榜单。百度热搜榜：全国当下搜得最多的 50 个词，带排名和热度。
+
+## Bluesky
+
+- [Bluesky 账号资料](https://okdata.online/zh/apis/bluesky/users/get.md) `GET /v1/bluesky/users/get` $0.001/次。按用户名、DID 或主页链接取 Bluesky 账号：昵称、用户名、简介、头像、认证标识、粉丝数、关注数和发帖数。ext 里还有注册时间、背景图、置顶帖，以及建过多少列表、自定义 Feed 和新手包。
+- [Bluesky 找账号](https://okdata.online/zh/apis/bluesky/users/search.md) `GET /v1/bluesky/users/search` $0.001/次 · 每页约 25 个账号。按关键词找 Bluesky 账号（匹配昵称、用户名和简介），每页 25 个，按 Bluesky 的排序：用户名、昵称、简介、头像和认证标识。搜索结果不带粉丝数等数字，要看用 bluesky.users.get。
+- [Bluesky 账号发帖](https://okdata.online/zh/apis/bluesky/users/posts/list.md) `GET /v1/bluesky/users/posts/list` $0.001/次 · 每页约 30 条帖子。账号发的帖子，从新到旧，每页 30 条，和主页上的标签页一致：帖子（默认）、帖子和回复、只看媒体。每条带正文、图片或视频、点赞、回复、转发、收藏和发布时间。转发的帖子和主页上一样列出：给出原帖，ext.reposted_at 是转发时间。
+- [Bluesky 帖子详情](https://okdata.online/zh/apis/bluesky/posts/get.md) `GET /v1/bluesky/posts/get` $0.001/次。按 at:// URI 或 bsky.app 链接取一条帖子：正文、语言、图片或视频、话题标签、作者、发布时间，以及点赞、回复、转发、引用和收藏数。ext 里有它回复或引用的帖子，以及链接卡片。
+- [Bluesky 帖子回复](https://okdata.online/zh/apis/bluesky/posts/comments/list.md) `GET /v1/bluesky/posts/comments/list` $0.001/次 · 每页约 200 条评论。帖子下的直接回复，按 Bluesky 的排序一次全部返回（最多约 200 条，没有下一页）：内容、回复者、点赞、回复数和时间。回复本身也是帖子：把它的 id 传进来，就能拿到它下面的回复。
+
+## 苹果应用商店
+
+- [App Store 应用详情](https://okdata.online/zh/apis/app_store/apps/get.md) `GET /v1/app_store/apps/get` $0.001/次。按 App Store ID 或链接取一个 iPhone、iPad 或 Mac 应用，可选国家/地区商店：名称、价格和币种、平均星级和评分人数（在 reviews 里）、开发者和截图。ext 里还有 Bundle ID、当前版本和更新说明、上架和更新日期、分类、年龄分级、安装包大小、支持语言和当前版本的评分。
+- [App Store 用户评论](https://okdata.online/zh/apis/app_store/apps/reviews/list.md) `GET /v1/app_store/apps/reviews/list` $0.001/次 · 每页约 50 条评价。某个国家/地区商店里用户写的应用评论，最新或最有帮助的在前，每页 50 条，最多 10 页（每个国家约 500 条）：星级、标题和正文、评论针对的应用版本（在 variant 里）、评论人昵称、日期和"有用"票数（在 likes 里）。
+
+## 全网
+
+- [全网热榜](https://okdata.online/zh/apis/all/trends/list.md) `GET /v1/all/trends/list` $0.03/次 · 每页约 400 条榜单。一次拿到微博、知乎、百度、头条、抖音、B站、小红书、快手的热榜：排名、词条、热度和链接，每条标明来自哪个平台。可以只要其中几个平台，也可以限制每个平台返回几条。

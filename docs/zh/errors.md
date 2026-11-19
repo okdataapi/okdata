@@ -33,7 +33,7 @@
 | `account_suspended` | 403 | 否 | 不要重试 | 这个 key 所属的账号已停用，账号下的 key 都不能用。 | 发邮件到 hello@okdata.online。 |
 | `key_scope_denied` | 403 | 否 | 不要重试 | 这个 key 的可用范围里没有这个接口。 | 换一个包含这个接口的 key，或在控制台放宽它的范围。 |
 | `unknown_endpoint` | 404 | 否 | 不要重试 | 这个路径下没有接口。路径和某个接口很接近时，moved_to（或 suggestion）会给出正确的路径。 | 有 moved_to 就用它；否则对照目录检查 id（路径是 /v1 加上把点换成斜杠的 id）。 |
-| `not_found` | 404 | 否 | 不要重试 | 内容、账号或页面不存在或不公开。charge_when_not_found 大于 0 的接口会对这个结果计费（数据源也向我们收了钱）：这时返回体里 charged 为 true，并给出 amount。 | 这是最终结果，重试也一样。 |
+| `not_found` | 404 | 否 | 不要重试 | 内容、账号或页面不存在或不公开。数据源对这次查询收了费，或者接口的 charge_when_not_found 大于 0 时，这个结果会计费：返回体里 charged 为 true，并给出 amount。 | 这是最终结果，重试也一样。 |
 | `result_not_found` | 404 | 否 | 不要重试 | 这个账号下没有这个请求号的结果（调用失败了，或从没发生）。 | 核对请求号；只有成功的调用会保留结果。 |
 | `idempotency_conflict` | 409 | 否 | 修正后重试 | 这个 Idempotency-Key 在 24 小时内已用于另一个请求。 | 新请求用新的 key。 |
 | `call_in_progress` | 409 | 否 | 用同一个 Idempotency-Key 重试 | 带这个 Idempotency-Key 的调用还在进行。 | 稍后用同一个 key 重试，拿到它的结果，只扣一次费。 |
@@ -44,11 +44,11 @@
 | `uncharged_cost_limit` | 429 | 否 | 可以重试 | 今天没扣费的调用（查无结果）太多了。 | 检查发送的 id；下一个 UTC 日恢复。 |
 | `settlement_unknown` | 500 | 查询后才知道 | 用同一个 Idempotency-Key 重试 | 数据已返回，但没能确认是否扣费。 | 带同一个 Idempotency-Key 重发，拿到结果且不会再扣费；或在 /v1/calls/{request_id} 查询。 |
 | `internal_error` | 500 | 否 | 可以重试 | 我们这边出错了，这次没有扣费。 | 退避后重试。 |
-| `upstream_failed` | 502 | 否 | 可以重试 | 这个接口的所有数据源这次都失败了。 | 退避后重试；持续失败就看状态页。 |
+| `upstream_failed` | 502 | 否 | 可以重试 | 这个接口的所有数据源这次都失败了。如果数据源对这次请求收了费，就按接口价格计一次费（charged 为 true，并给出 amount）；否则不计费。 | 退避后重试；持续失败就看状态页。 |
 | `cursor_unavailable` | 502 | 否 | 可以重试 | 只有返回上一页的数据源能接着翻，它现在不可用。 | 稍后用同一个 cursor 重试，或者不带 cursor 从头开始。 |
-| `upstream_busy` | 503 | 否 | 可以重试 | 这个接口的所有数据源都在满负荷。 | 退避后重试。 |
+| `upstream_busy` | 503 | 否 | 可以重试 | 这个接口的所有数据源都在满负荷。如果数据源对这次请求收了费，就按接口价格计一次费（charged 为 true，并给出 amount）；否则不计费。 | 退避后重试。 |
 | `capability_paused` | 503 | 否 | 可以重试 | 这个接口暂时停用了，这次没有执行。 | 看 /v1/catalog/status，恢复后再调用。 |
-| `timeout` | 504 | 否 | 可以重试 | 数据没有及时返回。预扣已退回，这次没有扣费。 | 直接重试；带 Idempotency-Key 重试，永远不会重复扣费。 |
+| `timeout` | 504 | 否 | 可以重试 | 数据没有及时返回。如果请求已经到了会收费的数据源，就按接口价格计一次费（charged 为 true，并给出 amount）；否则预扣退回。 | 退避后重试。 |
 
 ## 安全重试
 

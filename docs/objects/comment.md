@@ -55,3 +55,6 @@ The same shape on every platform. A field a platform does not have is null, and 
 - [Official Account comment replies](https://okdata.online/apis/wechat_mp/comments/replies/list/) (`wechat_mp.comments.replies.list`): $0.02 per call · about 3 comments per page
 - [YouTube comment replies](https://okdata.online/apis/youtube/comments/replies/list/) (`youtube.comments.replies.list`): $0.002 per call · about 10 comments per page
 - [TikTok comment replies](https://okdata.online/apis/tiktok/comments/replies/list/) (`tiktok.comments.replies.list`): $0.002 per call · about 20 comments per page
+- [Toutiao comments](https://okdata.online/apis/toutiao/posts/comments/list/) (`toutiao.posts.comments.list`): $0.002 per call · about 20 comments per page
+- [Xigua Video comments](https://okdata.online/apis/xigua/videos/comments/list/) (`xigua.videos.comments.list`): $0.002 per call · about 20 comments per page
+- [Bluesky post replies](https://okdata.online/apis/bluesky/posts/comments/list/) (`bluesky.posts.comments.list`): $0.001 per call · about 200 comments per page

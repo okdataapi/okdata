@@ -1,17 +1,17 @@
 # okdata
 
-> Public social and content data for AI agents and code: 214 endpoints on 17 platforms behind one HTTP API and one MCP server, paid per call from $0.0001. Failed calls are free. No platform accounts, cookies or QR logins.
+> Public social and content data for AI agents and code: 255 endpoints on 29 platforms behind one HTTP API and one MCP server, paid per call from $0.0001. No platform accounts, cookies or QR logins.
 
-Catalog 2128c2e84655fc1f, price book 1b273c48fea9634e. 中文版：https://okdata.online/zh/llms.txt
+Catalog 328d5a2ee651819d, price book 5835acf0f45c7fc4. 中文版：https://okdata.online/zh/llms.txt
 
 ## Call it
 
 - Base URL `https://api.okdata.online`. Send `Authorization: Bearer $OKDATA_API_KEY`; keys start with `okd_` and never go in a URL.
 - The path is the endpoint id with dots as slashes under /v1: `douyin.videos.comments.list` → `GET /v1/douyin/videos/comments/list`. Parameters go in the query string.
 - One call returns one page: `data.items` or `data.item`, `page.next_cursor` (pass it back as `cursor`: opaque, 24 hours, same endpoint and parameters; each page is its own charge) and `meta.billing.amount` in US dollars.
-- Errors carry `code`, `charged`, `retry` and `retry_after_seconds`. Failed calls are not charged, timeouts included; `not_found` is final; only `settlement_unknown` has `charged: null` (resend with the same Idempotency-Key).
+- Errors carry `code`, `charged`, `retry` and `retry_after_seconds`. A call that reached a data source is charged even when it fails, times out or is not found (`charged: true` with `amount`); bad parameters are not; `not_found` is final; only `settlement_unknown` has `charged: null` (resend with the same Idempotency-Key).
 - Send an `Idempotency-Key`: the same key and request within 24 hours return the stored result and are charged once.
-- `view=compact|standard|full` and `fields=id,text,metrics.likes` choose how much comes back.
+- `view=brief|compact|standard|full` and `fields=id,text,metrics.likes` choose how much comes back. `view=brief` (IDs, title, 100 characters of text, link, time, main counts) is for scanning a list; then get what you need by ID.
 - MCP (Streamable HTTP): `https://api.okdata.online/mcp`, tools `find`, `describe`, `call`, `read_more`, `account`. Free and keyless: `find`, `describe`, `account`.
 
 ## Rules for agents
@@ -25,16 +25,17 @@ Catalog 2128c2e84655fc1f, price book 1b273c48fea9634e. 中文版：https://okdat
 
 Each is a few calls laid out as one table, with a SKILL.md an agent can install (index: https://okdata.online/.well-known/agent-skills/index.json).
 
-- [Comments and word of mouth](https://okdata.online/skills/comments.md): What are people praising and complaining about under this post? 11 platforms; e.g. 3 calls ≤ $0.006. Skill `okdata-comments`.
-- [Competitor account monitoring](https://okdata.online/skills/competitors.md): What did competitors post lately, and which post took off? 11 platforms; e.g. 2 calls ≤ $0.004. Skill `okdata-competitors`.
-- [Brand and keyword mentions](https://okdata.online/skills/mentions.md): What are people saying about this brand or keyword on each platform? 12 platforms; e.g. 3 calls ≤ $0.024. Skill `okdata-mentions`.
-- [Trends and topic ideas](https://okdata.online/skills/trends.md): What is trending right now? 7 platforms; e.g. 3 calls ≤ $0.006. Skill `okdata-trends`.
-- [Account check-up](https://okdata.online/skills/account-audit.md): How is this account doing? 11 platforms; e.g. 2 calls ≤ $0.004. Skill `okdata-account-audit`.
-- [Breaking down a hit](https://okdata.online/skills/viral.md): Why did this post take off? 12 platforms; e.g. 2 calls ≤ $0.006. Skill `okdata-viral`.
-- [Finding creators](https://okdata.online/skills/creators.md): Which accounts should we work with in this category? 11 platforms; e.g. 2 calls ≤ $0.006. Skill `okdata-creators`.
+- [Comments and word of mouth](https://okdata.online/skills/comments.md): What are people praising and complaining about under this post? 14 platforms; e.g. 3 calls ≤ $0.006. Skill `okdata-comments`.
+- [Competitor account monitoring](https://okdata.online/skills/competitors.md): What did competitors post lately, and which post took off? 13 platforms; e.g. 2 calls ≤ $0.004. Skill `okdata-competitors`.
+- [Brand and keyword mentions](https://okdata.online/skills/mentions.md): What are people saying about this brand or keyword on each platform? 13 platforms; e.g. 3 calls ≤ $0.024. Skill `okdata-mentions`.
+- [Trends and topic ideas](https://okdata.online/skills/trends.md): What is trending right now? 11 platforms; e.g. 3 calls ≤ $0.006. Skill `okdata-trends`.
+- [Account check-up](https://okdata.online/skills/account-audit.md): How is this account doing? 13 platforms; e.g. 2 calls ≤ $0.004. Skill `okdata-account-audit`.
+- [Breaking down a hit](https://okdata.online/skills/viral.md): Why did this post take off? 16 platforms; e.g. 2 calls ≤ $0.006. Skill `okdata-viral`.
+- [Finding creators](https://okdata.online/skills/creators.md): Which accounts should we work with in this category? 13 platforms; e.g. 2 calls ≤ $0.006. Skill `okdata-creators`.
 - [Videos to text](https://okdata.online/skills/transcripts.md): What does this video say? 4 platforms; e.g. 1 call ≤ $0.004. Skill `okdata-transcripts`.
 - [Ad creatives](https://okdata.online/skills/ads.md): What ads are competitors running? 2 platforms; e.g. 2 calls ≤ $0.008. Skill `okdata-ads`.
-- [Products and reviews](https://okdata.online/skills/products.md): What sells, and what do buyers say about it? 2 platforms; e.g. 4 calls ≤ $0.01. Skill `okdata-products`.
+- [Products and reviews](https://okdata.online/skills/products.md): What sells, and what do buyers say about it? 7 platforms; e.g. 4 calls ≤ $0.01. Skill `okdata-products`.
+- [WeChat article monitoring and export](https://okdata.online/skills/wechat-articles.md): What did these Official Accounts publish this week, and can I have it all as Markdown? 1 platforms; e.g. 35 calls ≤ $0.70. Skill `okdata-wechat-articles`.
 
 ## Look things up (no key needed)
 
@@ -52,23 +53,35 @@ Each is a few calls laid out as one table, with a SKILL.md an agent can install 
 
 Each platform's Markdown lists its endpoints with parameters and prices and links each full contract. Each platform also has a skill named `okdata-<platform>` (`_` as `-`), e.g. https://okdata.online/.well-known/agent-skills/okdata-douyin/SKILL.md.
 
-- [Douyin](https://okdata.online/apis/douyin.md) `douyin` (38): videos.search, videos.get, videos.comments.list, users.get, users.videos.list, trends.list, xingtu.creators.search, xingtu.creators.rates.get, comments.replies.list, hashtags.videos.list, users.search, videos.metrics, videos.related, videos.trending, keywords.related, index.brands.history, index.brands.metrics, index.creators.videos.list, index.creators.audience.get, index.creators.metrics, index.keywords.audience.get, index.keywords.history, index.keywords.related, index.trends.list, index.videos.search, users.history, xingtu.creators.get, xingtu.creators.audience.get, xingtu.creators.metrics, xingtu.creators.videos.list, xingtu.creators.keywords.get, xingtu.creators.scores.get, xingtu.creators.content_mix.get, xingtu.creators.conversion.get, xingtu.campaigns.list, xingtu.videos.get, backup.users.videos.list, backup.videos.search
-- [Xiaohongshu (RedNote)](https://okdata.online/apis/xiaohongshu.md) `xiaohongshu` (30): notes.search, notes.get, notes.comments.list, users.get, users.notes.list, trends.list, pgy.creators.search, pgy.creators.get, shop.products.search, shop.products.reviews.list, images.search, comments.replies.list, topics.notes.list, topics.get, users.search, shop.products.get, keywords.related, videos.get, pgy.keywords.history, pgy.keywords.related, pgy.creators.audience.get, pgy.creators.metrics, pgy.creators.notes.list, pgy.creators.followers.history, pgy.creators.related, pgy.notes.trending, pgy.creators.costs.metrics, pgy.creators.followers.metrics, pgy.creators.costs.history, pgy.notes.get
+- [Douyin](https://okdata.online/apis/douyin.md) `douyin` (38): videos.search, videos.get, videos.comments.list, users.get, users.videos.list, trends.list, xingtu.creators.search, xingtu.creators.rates.get, comments.replies.list, hashtags.videos.list, users.search, videos.metrics, and 26 more
+- [Xiaohongshu (RedNote)](https://okdata.online/apis/xiaohongshu.md) `xiaohongshu` (30): notes.search, notes.get, notes.comments.list, users.get, users.notes.list, trends.list, pgy.creators.search, pgy.creators.get, shop.products.search, shop.products.reviews.list, images.search, comments.replies.list, and 18 more
 - [WeChat Official Accounts](https://okdata.online/apis/wechat_mp.md) `wechat_mp` (8): accounts.search, accounts.articles.list, articles.get, accounts.get, articles.comments.list, articles.metrics, comments.replies.list, accounts.owner.get
 - [Bilibili](https://okdata.online/apis/bilibili.md) `bilibili` (9): videos.search, videos.get, videos.comments.list, trends.list, users.get, users.videos.list, comments.replies.list, videos.trending, backup.users.videos.list
 - [Weibo](https://okdata.online/apis/weibo.md) `weibo` (11): posts.search, trends.list, users.get, posts.get, posts.comments.list, comments.replies.list, posts.likers.list, users.posts.list, users.followers.list, users.search, backup.trends.list
-- [TikTok](https://okdata.online/apis/tiktok.md) `tiktok` (17): videos.search, videos.get, videos.comments.list, users.get, ads.search, creative_center.ads.search, shop.products.search, shop.products.get, shop.products.reviews.list, videos.transcript.get, comments.replies.list, users.search, users.videos.list, creative_center.ads.get, shop.sellers.products.list, users.followers.list, hashtags.videos.list
-- [X (Twitter)](https://okdata.online/apis/x.md) `x` (20): posts.get, posts.search, users.get, users.posts.list, trends.list, posts.replies.list, posts.quotes.list, posts.retweeters.list, posts.article.get, threads.posts.list, users.search, users.followers.list, users.following.list, users.mentions.list, lists.posts.list, lists.members.list, lists.followers.list, communities.get, communities.posts.list, communities.members.list
+- [TikTok](https://okdata.online/apis/tiktok.md) `tiktok` (17): videos.search, videos.get, videos.comments.list, users.get, ads.search, creative_center.ads.search, shop.products.search, shop.products.get, shop.products.reviews.list, videos.transcript.get, comments.replies.list, users.search, and 5 more
+- [X (Twitter)](https://okdata.online/apis/x.md) `x` (20): posts.get, posts.search, users.get, users.posts.list, trends.list, posts.replies.list, posts.quotes.list, posts.retweeters.list, posts.article.get, threads.posts.list, users.search, users.followers.list, and 8 more
 - [YouTube](https://okdata.online/apis/youtube.md) `youtube` (10): videos.search, videos.get, videos.comments.list, videos.transcript.get, comments.replies.list, channels.posts.list, posts.get, channels.get, channels.search, channels.videos.list
 - [Meta Ad Library](https://okdata.online/apis/meta.md) `meta` (3): ads.search, ads.get, advertisers.ads.list
 - [Google Ads Transparency](https://okdata.online/apis/google.md) `google` (2): advertisers.search, advertisers.ads.list
 - [Instagram](https://okdata.online/apis/instagram.md) `instagram` (8): users.get, users.posts.list, posts.get, posts.comments.list, comments.replies.list, hashtags.posts.list, posts.transcript.get, users.search
 - [Reddit](https://okdata.online/apis/reddit.md) `reddit` (11): posts.search, posts.get, posts.comments.list, popular.posts.list, subreddits.posts.list, subreddits.get, trends.list, users.get, users.posts.list, users.subreddits.list, posts.transcript.get
 - [Kuaishou](https://okdata.online/apis/kuaishou.md) `kuaishou` (8): videos.search, videos.get, videos.comments.list, comments.replies.list, users.get, users.search, users.videos.list, trends.list
-- [Zhihu](https://okdata.online/apis/zhihu.md) `zhihu` (15): posts.search, questions.answers.list, questions.get (coming soon), answers.get (coming soon), answers.comments.list (coming soon), comments.replies.list (coming soon), articles.get (coming soon), columns.articles.list (coming soon), pins.get (coming soon), users.get (coming soon), users.search (coming soon), users.followers.list (coming soon), users.answers.list (coming soon), users.articles.list (coming soon), users.pins.list (coming soon)
-- [WeChat Channels](https://okdata.online/apis/wechat_channels.md) `wechat_channels` (15): videos.search, users.search, users.get, users.videos.list, videos.get, videos.comments.list, comments.replies.list, users.live_replays.list, videos.share_link.get, users.collections.list, collections.videos.list, videos.metrics, backup.users.get, backup.users.videos.list, backup.videos.search
+- [Zhihu](https://okdata.online/apis/zhihu.md) `zhihu` (16): posts.search, questions.answers.list, questions.get, answers.get, answers.comments.list, comments.replies.list (coming soon), articles.get, columns.articles.list, pins.get, trends.list, users.get, users.search, and 4 more
+- [WeChat Channels](https://okdata.online/apis/wechat_channels.md) `wechat_channels` (15): videos.search, users.search, users.get, users.videos.list, videos.get, videos.comments.list, comments.replies.list, users.live_replays.list, videos.share_link.get, users.collections.list, collections.videos.list, videos.metrics, and 3 more
 - [WeChat Search](https://okdata.online/apis/wechat.md) `wechat` (6): posts.search, accounts.search, index.keywords.history, keywords.related, miniprograms.search, backup.posts.search
 - [Telegram](https://okdata.online/apis/telegram.md) `telegram` (3): channels.get, channels.messages.list, messages.get
+- [Amazon](https://okdata.online/apis/amazon.md) `amazon` (4): products.search, products.get, products.reviews.list, bestsellers.list
+- [AliExpress](https://okdata.online/apis/aliexpress.md) `aliexpress` (3): products.search, products.get (coming soon), products.reviews.list
+- [Taobao & Tmall](https://okdata.online/apis/taobao.md) `taobao` (4): products.search, products.get, products.reviews.list, shops.products.list
+- [1688](https://okdata.online/apis/alibaba_1688.md) `alibaba_1688` (4): products.search, products.get, products.reviews.list, shops.products.list
+- [Xianyu (Goofish)](https://okdata.online/apis/xianyu.md) `xianyu` (2): products.search, products.get
+- [Douyin Shop](https://okdata.online/apis/douyin_shop.md) `douyin_shop` (4): products.search, products.get, products.reviews.list, shops.products.list
+- [Toutiao](https://okdata.online/apis/toutiao.md) `toutiao` (5): articles.get, videos.get, posts.comments.list, users.get, trends.list
+- [Xigua Video](https://okdata.online/apis/xigua.md) `xigua` (5): videos.search, videos.get, videos.comments.list, users.get, users.videos.list
+- [Baidu](https://okdata.online/apis/baidu.md) `baidu` (1): trends.list
+- [Bluesky](https://okdata.online/apis/bluesky.md) `bluesky` (5): users.get, users.search, users.posts.list, posts.get, posts.comments.list
+- [App Store](https://okdata.online/apis/app_store.md) `app_store` (2): apps.get, apps.reviews.list
+- [All platforms](https://okdata.online/apis/all.md) `all` (1): trends.list
 
 ## Your account
 

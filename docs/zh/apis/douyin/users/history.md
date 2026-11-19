@@ -13,7 +13,7 @@
 
 ## 价格
 
-每次调用 $0.002，返回一个结果。查 1,000 次共 $2.00。失败的调用不扣费。
+每次调用 $0.002，返回一个结果。查 1,000 次共 $2.00。请求到了数据源的查询，查不到或出错也照常计费；还没请求数据源就被拦下的不扣费。
 
 ## 参数
 
@@ -22,7 +22,7 @@
 | `id` | string | 否 |  | 一个抖音账号的数字 ID（uid）。id 和 ids 二选一。不是 MS4w 开头的 sec_uid，也不是抖音号：它在 douyin.users.get（view=full）返回的 ext.uid 里。只有几百粉丝的账号没有指数数据。（例：`104255897823`） |
 | `ids` | string[] | 否 |  | 最多 5 个抖音数字 ID（uid）。id 和 ids 二选一。其中一个不存在时整批失败，逐个查可找出是哪一个。（例：`104255897823,66598046050`） |
 | `window` | string: 7d / 30d | 否 | `7d` | 统计最近多少天：7 天（默认）或 30 天。 |
-| `view` | string: compact / standard / full | 否 | `standard` | 返回多少字段。full 会在 ext 里带上平台特有字段。 |
+| `view` | string: brief / compact / standard / full | 否 | `standard` | 返回多少字段。brief：只给 ID、标题、正文前 100 字、链接、时间和主要数字，适合先扫一遍列表，再按 ID 取详情；compact 去掉空字段、长正文截到 500 字；full 会在 ext 里带上平台特有字段。 |
 | `fields` | string[] | 否 |  | 只保留这些字段，按路径写（如 author.name），用来省 token。放在查询参数里时用逗号分隔。 |
 
 cursor、view、fields 的用法见 [请求说明](https://okdata.online/zh/docs/requests/)。
@@ -161,13 +161,13 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ## 错误
 
-所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。错误不扣费，只有这个接口的 not_found 例外：数据源照样收费，所以收 $0.002（charged 为 true，并给出 amount）；只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
+所有错误同一种结构：code、request_id、message 和 message_zh（每个 code 一句固定的话）、charged、retry、retry_after_seconds、param 和 docs_url，具体问题写在 problems 里。请求到了数据源的调用出错（查不到、数据源失败或超时）时，按这个接口的价格计一次费，charged 为 true，并给出 amount；参数错误这类还没请求数据源的错误不扣费；这个接口的 not_found 至少收 $0.002。只有 settlement_unknown 的扣费结果要查询后才知道。完整列表：https://okdata.online/zh/docs/errors/
 
 ## 常见问题
 
 ### 抖音达人互动与粉丝趋势接口多少钱？
 
-每次调用 $0.002，返回一个结果。查 1,000 次共 $2.00。失败的调用不扣费。
+每次调用 $0.002，返回一个结果。查 1,000 次共 $2.00。请求到了数据源的查询，查不到或出错也照常计费；还没请求数据源就被拦下的不扣费。
 
 ### 需要抖音账号、Cookie 或扫码登录吗？
 
@@ -175,7 +175,7 @@ console.log('cost: $' + body.meta.billing.amount);
 
 ### 调用失败会扣费吗？
 
-不会。所有错误都会返回 charged: false；只有超时返回 charged: null，表示结果还没确定。带同一个 Idempotency-Key 重发，绝不会重复扣费。
+请求到了数据源就会扣一次：返回为空、查不到、数据源出错或超时，都按一次调用计费（按条计价的按 1 条），错误里 charged 为 true，并给出 amount。参数错误、余额不足这类还没请求数据源就被拦下的不扣费。
 
 ### 抖音不展示某个字段怎么办？
 

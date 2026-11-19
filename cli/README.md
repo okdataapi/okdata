@@ -1,10 +1,10 @@
 # okdata command line
 
 Social data for AI agents, paid per call: TikTok, YouTube, Instagram, X, Reddit, RedNote
-(Xiaohongshu), Douyin, WeChat (Official Accounts and Channels), Bilibili, Weibo, Kuaishou and more. 200+ endpoints on 17
+(Xiaohongshu), Douyin, WeChat (Official Accounts and Channels), Bilibili, Weibo, Kuaishou and more. 230+ endpoints on 23
 platforms behind one key. This command finds and calls them from a terminal or an agent's shell, logs in
 with a browser link, checks your balance, and sets up the okdata MCP server in Claude Code, Cursor or Codex.
-A call that fails costs nothing, and you need no platform accounts, cookies or QR logins.
+You need no platform accounts, cookies or QR logins.
 
 **抖音数据 API · 小红书数据接口 · 公众号文章阅读数接口 · 星图 / 蒲公英达人数据 · 社媒数据 MCP。**
 [中文说明](#中文) · [中文文档](https://okdata.online/zh/docs/cli/?src=npm-okdata)
@@ -56,7 +56,7 @@ okdata 是给 AI 智能体和代码用的社媒数据接口，按次付费。一
 以及 TikTok、X、YouTube、Instagram、Reddit 的公开数据：搜视频和笔记、批量拉评论、查星图和蒲公英达人、
 拿公众号文章的阅读数和点赞数、看微博热搜和抖音热榜。这个命令行可以在终端或智能体的 shell 里查接口、发起调用、看余额，
 `npx okdata login` 用浏览器链接登录，`npx okdata setup` 一条命令把 MCP 配进 Claude Code、Cursor、Codex
-（Claude Desktop 用 `npx -y @okdata/mcp`）。调用失败不扣钱，不需要平台账号、Cookie，也不用扫码。
+（Claude Desktop 用 `npx -y @okdata/mcp`）。不需要平台账号、Cookie，也不用扫码。
 支付宝、微信、银行卡都能充值。
 
 [中文文档](https://okdata.online/zh/docs/cli/?src=npm-okdata) · [接口和价格](https://okdata.online/zh/apis/?src=npm-okdata) ·

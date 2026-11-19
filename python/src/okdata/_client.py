@@ -42,7 +42,8 @@ class OkData(SyncEndpoints):
     >>> page.items[0]["text"], page.cost
 
     Every paid call carries an Idempotency-Key, reused by its retries, so a retry is never charged
-    twice. Failed calls are not charged.
+    twice. A call that reaches the data source is charged even when it fails or times out; one
+    refused before that (bad parameters, low balance) is free.
     """
 
     def __init__(

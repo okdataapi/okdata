@@ -127,3 +127,10 @@ The same shape on every platform. A field a platform does not have is null, and 
 - [Douyin account videos (backup)](https://okdata.online/apis/douyin/backup/users/videos/list/) (`douyin.backup.users.videos.list`): $0.0025 per call · about 20 videos per page
 - [Douyin video search (backup)](https://okdata.online/apis/douyin/backup/videos/search/) (`douyin.backup.videos.search`): $0.03 per call · about 8 videos per page
 - [Bilibili account videos (backup)](https://okdata.online/apis/bilibili/backup/users/videos/list/) (`bilibili.backup.users.videos.list`): $0.0025 per call · about 20 videos per page
+- [Toutiao article](https://okdata.online/apis/toutiao/articles/get/) (`toutiao.articles.get`): $0.002 per call
+- [Toutiao video](https://okdata.online/apis/toutiao/videos/get/) (`toutiao.videos.get`): $0.002 per call
+- [Xigua Video search](https://okdata.online/apis/xigua/videos/search/) (`xigua.videos.search`): $0.002 per call · about 10 videos per page
+- [Xigua Video detail](https://okdata.online/apis/xigua/videos/get/) (`xigua.videos.get`): $0.004 per call
+- [Xigua Video creator videos](https://okdata.online/apis/xigua/users/videos/list/) (`xigua.users.videos.list`): $0.002 per call · about 30 videos per page
+- [Bluesky account posts](https://okdata.online/apis/bluesky/users/posts/list/) (`bluesky.users.posts.list`): $0.001 per call · about 30 posts per page
+- [Bluesky post](https://okdata.online/apis/bluesky/posts/get/) (`bluesky.posts.get`): $0.001 per call

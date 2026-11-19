@@ -1,6 +1,6 @@
 # TikTok video transcript API
 
-> What is said in a TikTok video, by ID or link: the whole text and timed segments, from the video's captions (TikTok's own, often auto-generated). lang picks the captions' language; a video without captions in it is not found and not charged.
+> What is said in a TikTok video, by ID or link: the whole text and timed segments, from the video's captions (TikTok's own, often auto-generated). lang picks the captions' language; a video without captions in it comes back not found and is charged like any lookup.
 
 Canonical page: https://okdata.online/apis/tiktok/videos/transcript/get/
 
@@ -13,7 +13,7 @@ Canonical page: https://okdata.online/apis/tiktok/videos/transcript/get/
 
 ## Price
 
-One call costs $0.002 and returns one transcript. 1,000 lookups cost $2.00. Failed calls are not charged.
+One call costs $0.002 and returns one transcript. 1,000 lookups cost $2.00. A lookup that reached the data source is charged even when it is not found or the source fails; calls stopped before reaching a source are free.
 
 ## Parameters
 
@@ -22,7 +22,7 @@ One call costs $0.002 and returns one transcript. 1,000 lookups cost $2.00. Fail
 | `id` | string | no |  | The video ID (digits). Give id or url. (e.g. `7665840565958872333`) |
 | `url` | string | no |  | A share link or page URL; the ID is read from it. (e.g. `https://www.tiktok.com/@nasa/video/7665840565958872333`) |
 | `lang` | string | no |  | The captions' language as a two-letter code (en, es, ja); the video's own captions when left out. (e.g. `en`) |
-| `view` | string: compact / standard / full | no | `standard` | How much of each object comes back. full adds platform-specific fields under ext. |
+| `view` | string: brief / compact / standard / full | no | `standard` | How much of each object comes back. brief: IDs, title, the first 100 characters of the text, link, time and the main counts, for scanning a list (then get what you need by ID). compact leaves out empty fields and cuts long text at 500 characters. full adds platform-specific fields under ext. |
 | `fields` | string[] | no |  | Fields to keep, by path (author.name), to save tokens. In a query string: comma-separated. |
 
 Give id or url; one of the two is enough. 
@@ -143,13 +143,13 @@ Or ask an agent that has the MCP server connected:
 
 ## Errors
 
-Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. They are not charged; only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
+Errors share one shape: code, request_id, message and message_zh (a fixed sentence per code), charged, retry, retry_after_seconds, param and docs_url, with the specifics in problems. An error from a call that reached the data source (not found, a failure or a timeout of the source) is charged once at this endpoint's price, with charged: true and amount; errors before that, such as bad parameters, are not charged. Only settlement_unknown is unknown until looked up. The full table: https://okdata.online/docs/errors/
 
 ## Questions
 
 ### How much does the TikTok video transcript API cost?
 
-One call costs $0.002 and returns one transcript. 1,000 lookups cost $2.00. Failed calls are not charged.
+One call costs $0.002 and returns one transcript. 1,000 lookups cost $2.00. A lookup that reached the data source is charged even when it is not found or the source fails; calls stopped before reaching a source are free.
 
 ### Can I pass a share link instead of an ID?
 
@@ -161,7 +161,7 @@ No. You send only your okdata API key. The data is public data from TikTok; noth
 
 ### Am I charged when a call fails?
 
-No. Every error response says charged: false, except a timeout, which says charged: null until the outcome is known. Resend with the same Idempotency-Key and you are never charged twice.
+Yes, once, when the call reached the data source: an empty answer, a not_found, a failure or a timeout of the source costs one call (one item for per-item endpoints), and the error says charged: true with amount. Calls refused before reaching a source, such as bad parameters or a low balance, cost nothing.
 
 ### What if TikTok does not show a field?
 
