@@ -11,7 +11,7 @@ agents and code: 250+ endpoints on 29 platforms, one key, pay per call, no platf
 
 <a id="english"></a>
 
-[okdata](https://okdata.online) reads public data from TikTok, YouTube, Instagram, X, Reddit, Amazon, Bluesky, Telegram,
+[okdata](https://okdata.online/?src=gh-okdata) reads public data from TikTok, YouTube, Instagram, X, Reddit, Amazon, Bluesky, Telegram,
 the Meta and Google ad libraries, Xiaohongshu (RedNote), Douyin, WeChat (Official Accounts, Channels and Search), Kuaishou,
 Bilibili, Weibo and Zhihu: posts, accounts, comments, hot lists, transcripts, creators and ads.
 250+ endpoints on 29 platforms, one key, one response shape. You pay per call or per item returned, from $0.0001,
@@ -135,7 +135,7 @@ endpoint at its price; `read_more` returns the rest of a long answer for free. M
   `meta.unavailable` says why.
 - **Billing.** `meta.billing.amount` is what the call cost, in USD. Most endpoints charge per call; some charge per
   item returned, up to a fixed amount per call. One call is one page; the next page (`page.next_cursor` sent back
-  as `cursor`) is a new call. What is and is not charged: [billing](https://okdata.online/docs/billing/).
+  as `cursor`) is a new call. What is and is not charged: [billing](https://okdata.online/docs/billing/?src=gh-okdata).
 - **Price cap.** `X-Max-Price` (`maxPrice` in TypeScript, `max_price` in Python and MCP) refuses a call that could
   cost more, before it runs and without charge.
 - **Safe retries.** Send an `Idempotency-Key`. The same key and request within 24 hours replays the stored result
@@ -219,7 +219,7 @@ Questions and bugs: open an issue. MIT licence. okdata is not affiliated with an
 
 ## 中文
 
-[okdata](https://okdata.online/zh/) 是给 AI 智能体和代码用的社媒数据接口：抖音、小红书、微信（公众号、视频号、搜一搜）、
+[okdata](https://okdata.online/zh/?src=gh-okdata) 是给 AI 智能体和代码用的社媒数据接口：抖音、小红书、微信（公众号、视频号、搜一搜）、
 快手、B站、微博、知乎、TikTok、X、YouTube、Instagram、Reddit、Telegram，以及 Meta 和 Google 的广告库，
 能查公开的内容、账号、评论、热榜、字幕、达人和广告。29 个平台、250 多个接口，一个 key，同一种返回结构。
 按次或按返回条数付费，最低 $0.0001，不用订阅，$10 起充，余额不过期。你这边不需要平台账号、Cookie，也不用扫码。
@@ -287,7 +287,7 @@ MCP 有五个工具：`find`（用中文或英文找接口）、`describe`（看
 ### 几个约定
 
 - **扣费**：`meta.billing.amount` 就是这次花的钱（美元）。大多数接口按次计费，少数按返回条数计费、每次有封顶。
-  一次调用一页，翻页是新的一次调用。哪些调用计费见[计费说明](https://okdata.online/zh/docs/billing/)。
+  一次调用一页，翻页是新的一次调用。哪些调用计费见[计费说明](https://okdata.online/zh/docs/billing/?src=gh-okdata)。
 - **价格上限**：`X-Max-Price`（TypeScript 里是 `maxPrice`，Python 和 MCP 里是 `max_price`）：可能超价的调用直接拒绝，不扣费。
 - **重试不重复扣费**：带上 `Idempotency-Key`，24 小时内同一个 key、同一个请求直接返回上次的结果，不再扣费。SDK 和命令行都会自动带。
 - **省 token**：`view=compact` 去掉空字段，`fields=id,text,metrics.likes` 只要需要的字段。
