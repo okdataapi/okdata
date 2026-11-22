@@ -3,7 +3,7 @@
 Public data from TikTok, YouTube, Instagram, X, Reddit, Amazon, RedNote (Xiaohongshu), Douyin, WeChat and more for AI
 agents and code: 250+ endpoints on 29 platforms, one key, pay per call, no platform accounts or cookies.
 
-[Website](https://okdata.online/?src=gh-okdata) · [Get a key: free trial, up to 333 calls](https://okdata.online/signup/?src=gh-okdata) · [Remote MCP](https://okdata.online/mcp/?src=gh-okdata) · [Prices](https://okdata.online/pricing/?src=gh-okdata)
+[Website](https://okdata.online/?src=gh-okdata) · [Get a key with free trial credit](https://okdata.online/signup/?src=gh-okdata) · [Remote MCP](https://okdata.online/mcp/?src=gh-okdata) · [Prices](https://okdata.online/pricing/?src=gh-okdata)
 
 **小红书数据接口 · 抖音数据 API · 公众号文章接口 · 快手 / B站 / 微博 / 知乎数据采集 · 社媒数据 MCP。**一个 Key 调用抖音、小红书、微信（公众号、视频号、搜一搜）、快手、B站、微博、知乎、TikTok、X、YouTube、Instagram、Reddit 的公开数据：搜内容、读评论、查博主、看热榜、拿字幕和广告。按次计费，不用订阅，不用平台账号和 Cookie。[中文文档](https://okdata.online/zh/?src=gh-okdata) · [免费注册](https://okdata.online/zh/signup/?src=gh-okdata)
 
