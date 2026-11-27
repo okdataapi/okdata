@@ -34,11 +34,11 @@ class _DouyinVideosComments:
     ) -> Page[Comment]:
         """Douyin video comments: Top-level comments on a video, hottest first (the platform's own order).
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The video ID. Example: 7301234567890123456.
-            sort: Result order. Only hot is available from our sources for now. Default hot.
+            sort: Result order. Only hot is available for now. Default hot.
             cursor: Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.
 
         https://okdata.online/apis/douyin/videos/comments/list/
@@ -68,7 +68,7 @@ class _DouyinVideos:
     ) -> Page[Post]:
         """Douyin video search: Videos matching keywords, with likes, comments, shares and the author.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 露营装备.
@@ -92,7 +92,7 @@ class _DouyinVideos:
     ) -> Item[Post]:
         """Douyin video detail: One video by ID or share link: text, metrics, author, music and hashtags.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The video ID. Give id or url. Example: 7301234567890123456.
@@ -115,7 +115,7 @@ class _DouyinVideos:
     ) -> Item[Post]:
         """Douyin video play count: A video's counts right now, by ID or link: plays, likes and shares. Plays are what most Douyin answers leave out. Nothing else about the video comes back; published_at is read from the video ID (to within a minute).
 
-        Price: $0.002 per call; not found costs $0.002. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call; not found costs $0.002. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The video ID (digits). With only a link, give it as url. Give id or url. Example: 7706732036270132480.
@@ -137,7 +137,7 @@ class _DouyinVideos:
     ) -> Page[Post]:
         """Douyin related videos: The videos Douyin recommends next to a video, by its ID, about 10 in one answer: caption, author, likes, comments, shares and saves. Recommendations change from call to call, and an ID of no video still gets a batch of unrelated ones.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             id: The video ID (digits). Example: 7706732036270132480.
@@ -159,7 +159,7 @@ class _DouyinVideos:
     ) -> Page[Post]:
         """Douyin video boards: One of Douyin's video boards for the last 24 hours: breakouts from small accounts, highest like rate, highest completion rate or most followers won. Each with caption, plays, likes, the author's name and followers, and the followers it brought.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 9 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 9 per page; each page is its own call.
 
         Args:
             board: Which board: breakouts from small accounts (the default), highest like rate, highest completion rate, most followers won. Default low_fan.
@@ -190,7 +190,7 @@ class _DouyinUsersVideos:
     ) -> Page[Post]:
         """Douyin account videos: An account's videos, newest first, with metrics.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The account ID (sec_uid / user id as the platform uses it). Example: MS4wLjABAAAA....
@@ -222,7 +222,7 @@ class _DouyinUsers:
     ) -> Item[Account]:
         """Douyin account profile: Followers, total likes, video count, bio and verification of an account.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The account ID (sec_uid / user id as the platform uses it). Example: MS4wLjABAAAA....
@@ -245,7 +245,7 @@ class _DouyinUsers:
     ) -> Page[Account]:
         """Douyin account search: Find Douyin accounts by keyword, about 30 a page: account ID (the sec_uid douyin.users.get takes), name, avatar, followers, video count and total likes. No bio or verification here; the profile has them.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 30 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 30 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 人民日报.
@@ -295,7 +295,7 @@ class _DouyinUsers:
     ) -> Union[Item[AccountHistory], Batch[AccountHistory]]:
         """Douyin account growth: How a Douyin account moved over the last 7 or 30 days, by its numeric ID, from 巨量算数: net new followers, new likes, comments, shares and videos, each with its change against the period before, and the totals now. Up to five accounts in one call (one unknown ID fails the whole batch). One period's sum, not a daily series.
 
-        Price: $0.002 per call; not found costs $0.002. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, ids.
+        Price: $0.002 per call; not found costs $0.002. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, ids.
 
         Args:
             id: One account's numeric Douyin ID (uid). Give id or ids. Not the MS4w… sec_uid and not the Douyin handle: it is ext.uid in douyin.users.get with view=full. Accounts with only a few hundred followers have no index data. Example: 104255897823.
@@ -326,7 +326,7 @@ class _DouyinTrends:
     ) -> Page[Trend]:
         """Douyin hot search board: The current hot search list with rank and heat.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 50 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 50 per page; each page is its own call.
 
         Args:
             cursor: Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.
@@ -355,7 +355,7 @@ class _DouyinXingtuCreatorsRates:
     ) -> Item[CreatorRate]:
         """Douyin Xingtu creator rate card: What a Douyin creator charges on Xingtu for each kind of sponsored work (integrated video, custom video and more), in yuan, whether each is open and how it is settled.
 
-        Price: $0.04 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.04 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: Xingtu creator ID (digits), from the Xingtu creator search; not the Douyin account ID. Example: 7283826197740388415.
@@ -384,7 +384,7 @@ class _DouyinXingtuCreatorsAudience:
     ) -> Item[Audience]:
         """Douyin Xingtu creator audience: Who follows a Douyin creator, by Xingtu creator ID: followers and share in each segment of gender, age, province, city (top ten), city tier, interest, phone brand, consumer group, shopping category and order size, with when Xingtu last measured it. A share is the segment's count over the total of the segments listed.
 
-        Price: $0.004 per call; not found costs $0.004. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.004 per call; not found costs $0.004. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The Xingtu creator ID (digits), from the Xingtu creator search; not the Douyin account ID. Example: 6763236383382306828.
@@ -414,7 +414,7 @@ class _DouyinXingtuCreatorsVideos:
     ) -> Page[XingtuCreatorPost]:
         """Douyin Xingtu creator videos: A Douyin creator's videos by Xingtu creator ID, newest first, 20 a page, with the figures Xingtu shows for each: views, likes, comments, completion and engagement rates, length. Sponsored and everyday videos come together, unmarked. A creator that does not exist reads like one without videos.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The Xingtu creator ID (digits), from the Xingtu creator search; not the Douyin account ID. Example: 6763236383382306828.
@@ -444,7 +444,7 @@ class _DouyinXingtuCreatorsKeywords:
     ) -> Item[XingtuCreatorKeywords]:
         """Douyin Xingtu creator keywords: The words Xingtu draws from a few of a Douyin creator's recent videos, by Xingtu creator ID: up to about 20, each with how often it came up (usually single digits). They often come from one or two videos, possibly a sponsored one, so they do not describe the creator's content as a whole; the content mix does.
 
-        Price: $0.002 per call; not found costs $0.002. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.002 per call; not found costs $0.002. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The Xingtu creator ID (digits), from the Xingtu creator search; not the Douyin account ID. Example: 6763236383382306828.
@@ -473,7 +473,7 @@ class _DouyinXingtuCreatorsScores:
     ) -> Item[XingtuCreatorScores]:
         """Douyin Xingtu creator scores: The six scores Xingtu gives a Douyin creator, by Xingtu creator ID: the overall Xingtu index and the reach, seeding, conversion, cooperation and value-for-money indexes, each with the score, the average of comparable creators, the rank and the share of creators ranked above.
 
-        Price: $0.008 per call; not found costs $0.008. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.008 per call; not found costs $0.008. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The Xingtu creator ID (digits), from the Xingtu creator search; not the Douyin account ID. Example: 6763236383382306828.
@@ -502,7 +502,7 @@ class _DouyinXingtuCreatorsContentMix:
     ) -> Item[XingtuCreatorContentMix]:
         """Douyin Xingtu creator content mix: What a Douyin creator's recent videos are about, by Xingtu creator ID: the number of videos in each of Xingtu's content categories and their share, to see whether the creator keeps to one subject.
 
-        Price: $0.004 per call; not found costs $0.004. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.004 per call; not found costs $0.004. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The Xingtu creator ID (digits), from the Xingtu creator search; not the Douyin account ID. Example: 6763236383382306828.
@@ -531,7 +531,7 @@ class _DouyinXingtuCreatorsConversion:
     ) -> Item[XingtuCreatorConversion]:
         """Douyin Xingtu creator conversion: How a Douyin creator's product videos sell, by Xingtu creator ID: videos counted and their median views, products recommended, and the bands Xingtu puts sales, sales per thousand views, product price, cost per click, link clicks and click rate in. A band is Xingtu's text, not an exact figure; many creators, big sellers too, have no bands, and a creator with no selling figures at all is not found.
 
-        Price: $0.004 per call; not found costs $0.004. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.004 per call; not found costs $0.004. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The Xingtu creator ID (digits), from the Xingtu creator search; not the Douyin account ID. Example: 6763236383382306828.
@@ -573,7 +573,7 @@ class _DouyinXingtuCreators:
     ) -> Page[Creator]:
         """Douyin Xingtu creator search: Find Douyin creators on Xingtu, the official creator marketplace, by what they post or by name, filtered by followers, recent engagement rate and gender. Each with followers, 30-day engagement rate and median views, content categories and what an integrated and a custom video cost (in yuan).
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 户外.
@@ -625,7 +625,7 @@ class _DouyinXingtuCreators:
     ) -> Union[Item[Creator], Batch[Creator]]:
         """Douyin Xingtu creator profile: A Douyin creator's profile on Xingtu by Xingtu creator ID: name, avatar, location, gender, followers and content categories. One ID also gives the Douyin account ID (sec_uid), handle, agency and content labels; several IDs (up to 50 in one call) give the integrated and custom video rates, their expected CPMs (in yuan) and the views a video is expected to get instead.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, ids.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, ids.
 
         Args:
             id: The Xingtu creator ID (digits), from the Xingtu creator search; not the Douyin account ID. Give id or ids. Example: 6763236383382306828.
@@ -648,7 +648,7 @@ class _DouyinXingtuCreators:
     ) -> Item[XingtuCreatorMetrics]:
         """Douyin Xingtu creator reach: How a Douyin creator's videos did over the last 30 or 90 days, by Xingtu creator ID: videos, median views, average likes, comments and shares, engagement and completion rates with where they rank, and the expected cost per thousand views and per interaction (in yuan). The figures cover all videos; Xingtu gives none for sponsored ones alone.
 
-        Price: $0.004 per call; not found costs $0.004. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.004 per call; not found costs $0.004. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The Xingtu creator ID (digits), from the Xingtu creator search; not the Douyin account ID. Example: 6763236383382306828.
@@ -679,7 +679,7 @@ class _DouyinXingtuCampaigns:
     ) -> Page[XingtuCampaign]:
         """Douyin Xingtu marketing calendar: The campaigns on Xingtu's marketing calendar that overlap a span of time: platform events, e-commerce and seasonal moments, creative and industry campaigns, each with name, description, kind, stage, sign-up period and running period. All in one answer.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 40 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 40 per page; each page is its own call.
 
         Args:
             since: Start of the span, as an ISO date or time. Example: 2026-10-01T00:00:00Z.
@@ -710,7 +710,7 @@ class _DouyinXingtuVideos:
     ) -> Item[Post]:
         """Douyin Xingtu video report: Xingtu's report on one Douyin video, by ID or link: plays, likes, comments, shares and saves, plus completion rate, engagement rate, length, the author's followers and the author's Xingtu creator ID (for the creator endpoints next). Only videos Xingtu covers, mostly its creators'.
 
-        Price: $0.004 per call; not found costs $0.004. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.004 per call; not found costs $0.004. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The video ID (digits). With only a link, give it as url. Give id or url. Example: 7704318118394367270.
@@ -753,7 +753,7 @@ class _DouyinCommentsReplies:
     ) -> Page[Comment]:
         """Douyin comment replies: The replies under a top-level comment, by the comment's ID and its video's ID, a page at a time: text, replier, likes, time posted and IP location. A comment that does not exist reads like one without replies: an empty page, not a 404.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The top-level comment ID (digits), from the video comments. Example: 7706733625702613803.
@@ -795,7 +795,7 @@ class _DouyinHashtagsVideos:
     ) -> Page[Post]:
         """Douyin hashtag videos: Videos under a hashtag, by the hashtag's ID, in Douyin's own order, most liked first or newest first: caption, author, likes, comments, shares, saves and time posted.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             id: The hashtag ID (digits): a video's text_extra hashtag_id, or the number in a douyin.com/hashtag/… link. Example: 7495235888088090635.
@@ -835,7 +835,7 @@ class _DouyinKeywords:
     ) -> Page[KeywordRelated]:
         """Douyin search suggestions: What Douyin's search box suggests as a keyword is typed (autocomplete), in the order it lists them, about 10 at a time. Words and places only, no index. A keyword with no suggestions gives an empty list.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             keyword: One keyword, as typed into the search box. Example: 露营.
@@ -866,7 +866,7 @@ class _DouyinIndexBrands:
     ) -> Item[BrandHistory]:
         """Douyin index: brand trends: A brand's search, content and spread indexes on Douyin day by day over a date range, from 巨量算数 (the Douyin index), with the brand's industry. An index is the platform’s score, not a count. Days are China-time calendar days.
 
-        Price: $0.002 per call; not found costs $0.002. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.002 per call; not found costs $0.002. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             brand: The brand name, spelled the way the Douyin index lists it. Example: 泡泡玛特.
@@ -891,7 +891,7 @@ class _DouyinIndexBrands:
     ) -> Item[BrandMetrics]:
         """Douyin index: brand vs industry: A brand's daily average search, content and spread indexes on Douyin over a date range (巨量算数), next to the averages of its whole industry and of the industry's top 3, 5, 10, 15 and 30 brands. An index is the platform’s score, not a count.
 
-        Price: $0.002 per call; not found costs $0.002. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.002 per call; not found costs $0.002. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             brand: The brand name, spelled the way the Douyin index lists it. Example: 泡泡玛特.
@@ -924,7 +924,7 @@ class _DouyinIndexCreatorsVideos:
     ) -> Page[Post]:
         """Douyin index: account top videos: The top videos 巨量算数 lists for a Douyin account over up to 30 days, by its numeric ID: up to 20, most liked first, with caption, link, day published, likes, comments, shares and the followers each brought. The tool mostly picks from the last day or two of the span, so end it on the day you want. One page; no plays.
 
-        Price: $0.002 per call; not found costs $0.002. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call; not found costs $0.002. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The account's numeric Douyin ID (uid). Not the MS4w… sec_uid and not the Douyin handle: it is ext.uid in douyin.users.get with view=full. Accounts with only a few hundred followers have no index data. Example: 104255897823.
@@ -955,7 +955,7 @@ class _DouyinIndexCreatorsAudience:
     ) -> Item[Audience]:
         """Douyin index: account followers: Who follows a Douyin account, from 巨量算数, by its numeric ID: the share of followers by gender, age, province, city (all of them), city tier, phone brand and interest. Any account with enough followers, not only marketplace creators; shares only, no head counts.
 
-        Price: $0.002 per call; not found costs $0.002. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.002 per call; not found costs $0.002. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The account's numeric Douyin ID (uid). Not the MS4w… sec_uid and not the Douyin handle: it is ext.uid in douyin.users.get with view=full. Accounts with only a few hundred followers have no index data. Example: 104255897823.
@@ -986,7 +986,7 @@ class _DouyinIndexCreators:
     ) -> Item[IndexCreatorMetrics]:
         """Douyin index: account daily averages: A Douyin account's daily averages from 巨量算数 over the last week and the last month, by its numeric ID: new likes, shares, comments and follows a day, each with its change against the period before. Follows are the tool's own count, larger than the net follower gain. An account the tool has nothing on is not found.
 
-        Price: $0.002 per call; not found costs $0.002. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.002 per call; not found costs $0.002. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The account's numeric Douyin ID (uid). Not the MS4w… sec_uid and not the Douyin handle: it is ext.uid in douyin.users.get with view=full. Accounts with only a few hundred followers have no index data. Example: 104255897823.
@@ -1017,7 +1017,7 @@ class _DouyinIndexKeywordsAudience:
     ) -> Item[KeywordAudience]:
         """Douyin index: keyword audience: Who is behind a keyword on Douyin over a date range, from 巨量算数: the share and TGI of each age group, gender, province, city, city tier and interest.
 
-        Price: $0.002 per call; not found costs $0.002. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.002 per call; not found costs $0.002. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             keyword: One keyword; letter case does not matter. Example: 咖啡.
@@ -1052,7 +1052,7 @@ class _DouyinIndexKeywords:
     ) -> Page[KeywordHistory]:
         """Douyin index: keyword trends: The search index and composite index of one keyword, or of up to five at once, day by day on Douyin over a date range, from 巨量算数 (the Douyin index), with the daily averages of the period, the one before and a year earlier. An index is the platform’s score, not a count. One item per keyword the index covers; others are left out.
 
-        Price: $0.006 per call. A call that reaches the data source is charged even when it fails or times out. About 1 per page; each page is its own call. Give exactly one of keywords, keyword.
+        Price: $0.006 per call. A call that reaches the platform is charged even when it fails or times out. About 1 per page; each page is its own call. Give exactly one of keywords, keyword.
 
         Args:
             keyword: One keyword (no comma). Give keyword or keywords. Example: 咖啡.
@@ -1077,7 +1077,7 @@ class _DouyinIndexKeywords:
     ) -> Page[KeywordRelated]:
         """Douyin index: related keywords: Keywords related to one keyword on Douyin in one week, from 巨量算数: those searched together with it and those that appear with it in videos, each with relevance, its place by relevance, search index and composite index. An index is the platform’s score, not a count.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 170 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 170 per page; each page is its own call.
 
         Args:
             keyword: One keyword; letter case does not matter. Example: 露营.
@@ -1107,7 +1107,7 @@ class _DouyinIndexTrends:
     ) -> Page[Trend]:
         """Douyin index: live hot topics: 巨量算数's live hot-topic board or its fastest-rising board, about 30 each: place, topic and topic index (the heat). The topic index is the platform's score, not a count.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 30 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 30 per page; each page is its own call.
 
         Args:
             board: Which board: the hottest topics now (the default) or the fastest rising. Default topics.
@@ -1136,7 +1136,7 @@ class _DouyinIndexVideos:
     ) -> Page[Post]:
         """Douyin index: top videos for a keyword: The 20 videos with the highest video index that 巨量算数 puts forward for a keyword: caption, link, the author's name, avatar and followers, likes, video index and time posted. One page; the author's ID is not given (douyin.videos.get has it).
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 露营.
@@ -1180,7 +1180,7 @@ class _DouyinBackupUsersVideos:
     ) -> Page[Post]:
         """Douyin account videos (backup): The backup of douyin.users.videos.list, for when it cannot serve: an account's videos, newest first, 20 a page, at a little more. Caption, author, likes, comments, shares, saves and time posted. An account that does not exist reads like one without videos: an empty page, not a 404.
 
-        Price: $0.0025 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call. Give exactly one of id, url.
+        Price: $0.0025 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call. Give exactly one of id, url.
 
         Args:
             id: The account ID (the sec_uid, starting MS4w). With only the app’s short link, give it as url. Give id or url. Example: MS4wLjABAAAA8U_l6rBzmy7bcy6xOJel4v0RzoR_wfAubGPeJimN__4.
@@ -1223,7 +1223,7 @@ class _DouyinBackupVideos:
     ) -> Page[Post]:
         """Douyin video search (backup): The backup of douyin.videos.search, for when it cannot serve: videos matching keywords in Douyin's own order, newest or most liked first, optionally only from the last day, week or half year. Caption, author, likes, comments, shares, saves and time posted.
 
-        Price: $0.03 per call. A call that reaches the data source is charged even when it fails or times out. About 8 per page; each page is its own call.
+        Price: $0.03 per call. A call that reaches the platform is charged even when it fails or times out. About 8 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 露营.
@@ -1283,7 +1283,7 @@ class _XiaohongshuNotesComments:
     ) -> Page[Comment]:
         """Xiaohongshu note comments: Comments on a note with likes and reply counts.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             id: The note ID. Example: 6650a1b2000000001e00abcd.
@@ -1317,7 +1317,7 @@ class _XiaohongshuNotes:
     ) -> Page[Post]:
         """Xiaohongshu note search: Notes matching keywords, newest or most popular first, with images and the author.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 防晒霜 推荐.
@@ -1342,7 +1342,7 @@ class _XiaohongshuNotes:
     ) -> Item[Post]:
         """Xiaohongshu note detail: Full text, all images (a video note gives its cover, not the video file), likes, saves and comments count of one note.
 
-        Price: $0.02 per call; not found costs $0.02. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.02 per call; not found costs $0.02. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The note ID. Give id or url. Example: 6650a1b2000000001e00abcd.
@@ -1373,7 +1373,7 @@ class _XiaohongshuUsersNotes:
     ) -> Page[Post]:
         """Xiaohongshu account notes: An account's notes, newest first.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The account ID (sec_uid / user id as the platform uses it). Example: 5f1234567890abcdef123456.
@@ -1405,7 +1405,7 @@ class _XiaohongshuUsers:
     ) -> Item[Account]:
         """Xiaohongshu account profile: Followers, likes and saves, note count and bio of an account.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The account ID (sec_uid / user id as the platform uses it). Example: 5f1234567890abcdef123456.
@@ -1428,7 +1428,7 @@ class _XiaohongshuUsers:
     ) -> Page[Account]:
         """Xiaohongshu account search: Find accounts by keyword: user ID, Xiaohongshu ID, name, avatar, followers (as the app rounds them) and official verification.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: Nike.
@@ -1458,7 +1458,7 @@ class _XiaohongshuTrends:
     ) -> Page[Trend]:
         """Xiaohongshu hot topics: The hot topics Xiaohongshu suggests to creators right now, with heat.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             cursor: Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.
@@ -1487,7 +1487,7 @@ class _XiaohongshuPgyCreatorsAudience:
     ) -> Item[Audience]:
         """Xiaohongshu PGY creator audience: Who follows a Xiaohongshu creator, by PGY creator ID: the share of each gender, age group, province, city, interest and phone brand, and the day the figures are of.
 
-        Price: $0.04 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.04 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: PGY creator ID (24 hex characters, the same as the Xiaohongshu user ID), from the PGY creator search. Example: 591662306a6a6967b63e7f16.
@@ -1523,7 +1523,7 @@ class _XiaohongshuPgyCreatorsNotes:
     ) -> Page[PgyCreatorPost]:
         """Xiaohongshu PGY creator notes: A page of a creator’s notes as PGY shows them (笔记案例), by PGY creator ID: reads, likes, saves, shop visitors, whether it was sponsored and for which brand. Sponsored or cross-domain sponsored notes alone, image or video notes alone, newest, most read or most engaged first, by content feature or category, with reads of organic traffic alone if wanted.
 
-        Price: $0.04 per call. A call that reaches the data source is charged even when it fails or times out. About 8 per page; each page is its own call.
+        Price: $0.04 per call. A call that reaches the platform is charged even when it fails or times out. About 8 per page; each page is its own call.
 
         Args:
             id: PGY creator ID (24 hex characters, the same as the Xiaohongshu user ID), from the PGY creator search. Example: 591662306a6a6967b63e7f16.
@@ -1560,7 +1560,7 @@ class _XiaohongshuPgyCreatorsFollowers:
     ) -> Item[FollowerHistory]:
         """Xiaohongshu PGY creator follower history: A creator’s follower count for each of the last 30 or 60 days, by PGY creator ID, with the net gain over the period and the gain as a share. Shows steady growth, sudden drops or bought followers.
 
-        Price: $0.04 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.04 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: PGY creator ID (24 hex characters, the same as the Xiaohongshu user ID), from the PGY creator search. Example: 591662306a6a6967b63e7f16.
@@ -1582,7 +1582,7 @@ class _XiaohongshuPgyCreatorsFollowers:
     ) -> Item[PgyCreatorFollowers]:
         """Xiaohongshu PGY creator follower quality: How much a creator’s followers are worth, by PGY creator ID: followers and the net gain over 30 days, and how many are active, engaged, reading and buying, each as a share of all followers and against comparable creators.
 
-        Price: $0.04 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.04 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: PGY creator ID (24 hex characters, the same as the Xiaohongshu user ID), from the PGY creator search. Example: 591662306a6a6967b63e7f16.
@@ -1612,7 +1612,7 @@ class _XiaohongshuPgyCreatorsCosts:
     ) -> Item[PgyCreatorCosts]:
         """Xiaohongshu PGY creator costs and summary: What a creator is expected to cost, by PGY creator ID: the estimated CPM, cost per interaction, per read and per shop visitor of an image note and of a video note, each against comparable creators; median impressions, reads, interactions and shop visitors of a note; follower growth and notes over 30 days; invitation reply rate and the easy-to-reach and active marks; PGY’s highlight, the content mix and the industries worked with. Of everyday or sponsored notes.
 
-        Price: $0.04 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.04 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: PGY creator ID (24 hex characters, the same as the Xiaohongshu user ID), from the PGY creator search. Example: 591662306a6a6967b63e7f16.
@@ -1636,7 +1636,7 @@ class _XiaohongshuPgyCreatorsCosts:
     ) -> Item[PgyCreatorCostHistory]:
         """Xiaohongshu PGY creator core figures history: A creator’s core figures for each of the last 30 or 90 days, by PGY creator ID: CPM, cost per interaction, per read and per shop visitor, and the median impressions, reads, interactions and shop visitors of a note, with the same figures for the whole period. Of everyday or sponsored notes.
 
-        Price: $0.04 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.04 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: PGY creator ID (24 hex characters, the same as the Xiaohongshu user ID), from the PGY creator search. Example: 591662306a6a6967b63e7f16.
@@ -1677,7 +1677,7 @@ class _XiaohongshuPgyCreators:
     ) -> Page[Creator]:
         """Xiaohongshu PGY creator search: Find Xiaohongshu creators on PGY (蒲公英), the official creator marketplace, by what their notes are about or by name, filtered by followers and note type, sorted by followers, engagement, reads or rate. Each with followers, median reads and engagements of everyday notes, content categories and what an image note and a video note cost (in yuan).
 
-        Price: $0.04 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.04 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 户外.
@@ -1704,7 +1704,7 @@ class _XiaohongshuPgyCreators:
     ) -> Item[Creator]:
         """Xiaohongshu PGY creator detail: A Xiaohongshu creator's PGY profile: followers, likes and saves, median reads and engagements, content and feature tags, and what an image note and a video note cost (in yuan) and whether each is open.
 
-        Price: $0.04 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.04 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: PGY creator ID (24 hex characters, the same as the Xiaohongshu user ID), from the PGY creator search. Example: 5dfa1ee20000000001001cb3.
@@ -1727,7 +1727,7 @@ class _XiaohongshuPgyCreators:
     ) -> Item[PgyCreatorMetrics]:
         """Xiaohongshu PGY creator note metrics: How a creator’s everyday or sponsored notes did over the last 30 or 90 days, by PGY creator ID: notes and video notes, median impressions, reads, interactions and follows, engagement and completion rates, the share of notes past 100 and 1,000 likes, the standing among comparable creators, and where impressions and reads came from. The full view adds each note’s figures and long-term reads of notes from about half a year back.
 
-        Price: $0.04 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.04 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: PGY creator ID (24 hex characters, the same as the Xiaohongshu user ID), from the PGY creator search. Example: 591662306a6a6967b63e7f16.
@@ -1751,7 +1751,7 @@ class _XiaohongshuPgyCreators:
     ) -> Page[Creator]:
         """Xiaohongshu PGY similar creators: The creators PGY recommends as similar to one, by PGY creator ID: ID, name, Xiaohongshu ID, location, content categories, followers, median reads and engagements, and what an image note and a video note cost (in yuan). Four a page, usually a handful to a few dozen in all.
 
-        Price: $0.04 per call. A call that reaches the data source is charged even when it fails or times out. About 4 per page; each page is its own call.
+        Price: $0.04 per call. A call that reaches the platform is charged even when it fails or times out. About 4 per page; each page is its own call.
 
         Args:
             id: PGY creator ID (24 hex characters, the same as the Xiaohongshu user ID), from the PGY creator search. Example: 591662306a6a6967b63e7f16.
@@ -1781,7 +1781,7 @@ class _XiaohongshuPgyKeywords:
     ) -> Item[KeywordHistory]:
         """Xiaohongshu PGY keyword search index: A keyword’s search index on Xiaohongshu day by day over about the last three months (the platform sets the period), with each day’s notes about it and how often they were shown, read and engaged with. The index is the platform’s measure, not a count of searches.
 
-        Price: $0.04 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.04 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             keyword: One keyword. Example: 面膜.
@@ -1802,7 +1802,7 @@ class _XiaohongshuPgyKeywords:
     ) -> Page[KeywordRelated]:
         """Xiaohongshu PGY related keywords: What people search on Xiaohongshu before and after a keyword, up to about 100 words in one answer, each with its place by relevance, its search index, the notes about it and their reads. For widening a seed keyword.
 
-        Price: $0.04 per call. A call that reaches the data source is charged even when it fails or times out. About 98 per page; each page is its own call.
+        Price: $0.04 per call. A call that reaches the platform is charged even when it fails or times out. About 98 per page; each page is its own call.
 
         Args:
             keyword: One keyword. Example: 面膜.
@@ -1835,7 +1835,7 @@ class _XiaohongshuPgyNotes:
     ) -> Page[Post]:
         """Xiaohongshu PGY trending notes: The trending notes of PGY’s content square: eight boards (Xiaohongshu hot, product seeding, e-commerce promotion, PGY sponsored, lead collection, e-commerce hot, seeding to shop, app promotion), whole or narrowed to some words, over the last 3, 7, 14 or 30 days, image or video notes alone if wanted. Each with title, time published, reads, likes, saves, comments, pictures and the creator’s ID, name and followers. Each board holds its top 100.
 
-        Price: $0.04 per call. A call that reaches the data source is charged even when it fails or times out. About 34 per page; each page is its own call.
+        Price: $0.04 per call. A call that reaches the platform is charged even when it fails or times out. About 34 per page; each page is its own call.
 
         Args:
             board: Which board: hot (Xiaohongshu hot, the default), seeding (product seeding), shop_promo (e-commerce promotion), pgy (PGY sponsored), leads (lead collection), shop_hot (e-commerce hot), direct_seeding (seeding to shop) or app_promo (app promotion). Default hot.
@@ -1860,7 +1860,7 @@ class _XiaohongshuPgyNotes:
     ) -> Item[PgyNote]:
         """Xiaohongshu PGY note figures: The figures PGY shows a brand for one note, by note ID: impressions, reads, likes, saves, comments, shares and the follows it brought, the brand it was reported for, the click-through band of the brand’s components, and its title, text, pictures, time published and creator. PGY has figures for its creators’ notes only; a note without them is not found.
 
-        Price: $0.04 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.04 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: Note ID (24 hex characters): the part after explore/ in a note link, or an id from the PGY creator notes. Example: 6ad04eaa000000000b0065ba.
@@ -1902,7 +1902,7 @@ class _XiaohongshuShopProductsReviews:
     ) -> Page[Review]:
         """Xiaohongshu shop product reviews: The first page of buyers' reviews of a product in Xiaohongshu's shop: stars, text, the variant bought, photos and likes. The app gives no further page.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 12 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 12 per page; each page is its own call.
 
         Args:
             id: The product ID (24 hex characters), from the shop product search. Example: 6441fb9a6cd6140001acf7b4.
@@ -1935,7 +1935,7 @@ class _XiaohongshuShopProducts:
     ) -> Page[Product]:
         """Xiaohongshu shop product search: Search products in Xiaohongshu's shop by keyword: title, current and original price in yuan, image and shop. Units sold are not shown as a number.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 便携咖啡机.
@@ -1957,7 +1957,7 @@ class _XiaohongshuShopProducts:
     ) -> Item[Product]:
         """Xiaohongshu shop product detail: A product in Xiaohongshu’s shop by its ID: title, current and original price in yuan, pictures, units sold, rating, reviews and shop. It is the product page an overseas app user sees, so promotions may differ from what users in China see.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The product ID (24 hex characters), from the shop product search. Example: 6441fb9a6cd6140001acf7b4.
@@ -1996,7 +1996,7 @@ class _XiaohongshuImages:
     ) -> Page[Post]:
         """Xiaohongshu image search: Pictures matching keywords, each with the note it comes from: the picture at full size, the note’s title, text, author, likes, comments and saves. Shares are not given here; the note detail has them.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 耐克.
@@ -2028,7 +2028,7 @@ class _XiaohongshuCommentsReplies:
     ) -> Page[Comment]:
         """Xiaohongshu comment replies: The replies under a top-level comment, by the comment’s ID and its note’s ID: text, replier, likes and time posted. A comment that does not exist reads as one without replies.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 5 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 5 per page; each page is its own call.
 
         Args:
             id: The top-level comment ID, from the note comments. Example: 6acbae7100000000120015e3.
@@ -2068,7 +2068,7 @@ class _XiaohongshuTopicsNotes:
     ) -> Page[Post]:
         """Xiaohongshu topic notes: The hottest notes under a topic (hashtag) page, about 10 in one answer: title, text, author, likes, comments, saves, shares, pictures and hashtags.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             id: The topic page ID (24 hex characters): the id in a topic link, e.g. a hashtag link in a note. Example: 5ee1c0a110694c00010b4ae9.
@@ -2098,7 +2098,7 @@ class _XiaohongshuTopics:
     ) -> Item[Topic]:
         """Xiaohongshu topic detail: A topic (hashtag) page by its ID: name, description, views and the number of people its page says are discussing it, with its link.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The topic page ID (24 hex characters): the id in a topic link, e.g. a hashtag link in a note. Example: 5ee1c0a110694c00010b4ae9.
@@ -2127,7 +2127,7 @@ class _XiaohongshuKeywords:
     ) -> Page[KeywordRelated]:
         """Xiaohongshu search suggestions: What Xiaohongshu’s search box suggests as a keyword is typed, in its order, about 10 at a time. Words and places only, no index.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             keyword: One keyword. Example: 露营.
@@ -2157,7 +2157,7 @@ class _XiaohongshuVideos:
     ) -> Item[Post]:
         """Xiaohongshu video note with its video: A video note by ID or link: title, text, author, likes, comments, saves and shares, plus the video file, its length and cover, the subtitles the platform made where it has them, and whether the note is a reported brand partnership. Video notes only; an image note is the note detail’s.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The note ID (24 hex characters). Give id or url. Example: 6ae3fe46000000000f0275ad.
@@ -2207,7 +2207,7 @@ class _WechatMpAccountsArticles:
     ) -> Page[Post]:
         """Official Account article history: An Official Account's published articles, newest first, without a QR login: the articles tab of its page by default, or its videos or pictures tab.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             id: The account original ID (gh_…) from accounts.search, or its WeChat ID. Example: gh_363b924965e9.
@@ -2238,7 +2238,7 @@ class _WechatMpAccountsOwner:
     ) -> Item[AccountOwner]:
         """Official Account owner: Who an Official Account is registered to, by its original ID: the company, body or person, its kind, registration number and country, the verification status, kind and date, when the account was registered, and the third-party services it has authorised.
 
-        Price: $0.15 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.15 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The account's original ID (gh_…); wechat.accounts.search or wechat_mp.accounts.search finds it by name. Example: gh_363b924965e9.
@@ -2270,7 +2270,7 @@ class _WechatMpAccounts:
     ) -> Page[Account]:
         """Official Account search: Find Official Accounts by name or keyword, with their original ID (gh_…). Charged per account returned; when the balance is below a full page, the first page shrinks to what it covers.
 
-        Price: $0.058 per item returned (at least $0.058), at most $0.58 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.058 per item returned (at least $0.058), at most $0.58 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 36氪.
@@ -2292,7 +2292,7 @@ class _WechatMpAccounts:
     ) -> Item[Account]:
         """Official Account profile: An Official Account by its original ID: name, IP location, number of original articles, the linked Channels account and whether it is banned. WeChat shows no bio, avatar or follower count here.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The account's original ID, mostly gh_… (not its name). Find it by name with wechat.accounts.search; an article's author.id is one too. Example: gh_363b924965e9.
@@ -2322,7 +2322,7 @@ class _WechatMpArticlesComments:
     ) -> Page[Comment]:
         """Official Account article comments: The featured comments on an article, by its link: text, commenter, likes, reply count, time posted, IP location and whether pinned. A comment's id goes to wechat_mp.comments.replies.list.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             url: The article link: the long link with __biz, mid, idx and sn, or the short /s/ link. Example: https://mp.weixin.qq.com/s?__biz=MjM5MjAxNDM4MA==&mid=2667044935&idx=1&sn=05212d520417484f4402bdad73f527ec.
@@ -2353,7 +2353,7 @@ class _WechatMpArticles:
     ) -> Item[Post]:
         """Official Account article detail: Full text of an article as plain text, with the account and the time it was published.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             url: A share link or page URL; the ID is read from it. Example: https://mp.weixin.qq.com/s/xxxxxxxx.
@@ -2374,7 +2374,7 @@ class _WechatMpArticles:
     ) -> Item[Post]:
         """Official Account article stats: The counts of an article right now, by its link: reads, likes, recommends (在看, in ext), shares, saves and comments. Only the counts: title and text come from wechat_mp.articles.get.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             url: The article link: the long link with __biz, mid, idx and sn, or the short /s/ link. Example: https://mp.weixin.qq.com/s?__biz=MjM5MjAxNDM4MA==&mid=2667044935&idx=1&sn=05212d520417484f4402bdad73f527ec.
@@ -2404,7 +2404,7 @@ class _WechatMpCommentsReplies:
     ) -> Page[Comment]:
         """Official Account comment replies: The replies under one comment on an article, by the comment's ID and the article's link: text, replier, likes, time posted and IP location. The first batch only, without further pages.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 3 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 3 per page; each page is its own call.
 
         Args:
             id: The comment ID (digits): the id wechat_mp.articles.comments.list gives. Example: 4898789068743115328.
@@ -2456,7 +2456,7 @@ class _BilibiliVideosComments:
     ) -> Page[Comment]:
         """Bilibili video comments: Comments on a video, hottest or newest first.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The video ID. Example: BV1xx411c7mD.
@@ -2490,7 +2490,7 @@ class _BilibiliVideos:
     ) -> Page[Post]:
         """Bilibili video search: Videos matching keywords, with views, danmaku, likes and coins.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: Claude Code 教程.
@@ -2514,7 +2514,7 @@ class _BilibiliVideos:
     ) -> Item[Post]:
         """Bilibili video detail: One video by BV ID or link.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The video ID. Give id or url. Example: BV1xx411c7mD.
@@ -2536,7 +2536,7 @@ class _BilibiliVideos:
     ) -> Page[Post]:
         """Bilibili popular videos: Bilibili's popular videos, 20 a page: title, description, uploader, views, likes, coins, saves, danmaku, length, section, IP location and why it is recommended.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             cursor: Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.
@@ -2565,7 +2565,7 @@ class _BilibiliTrends:
     ) -> Page[Trend]:
         """Bilibili hot searches: Bilibili's hot search terms right now, up to 50, with rank and heat.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 50 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 50 per page; each page is its own call.
 
         Args:
             board: Which list: hot searches is the only one. Default hot_search.
@@ -2595,7 +2595,7 @@ class _BilibiliUsersVideos:
     ) -> Page[Post]:
         """Bilibili account videos: An account's uploads, newest first, 30 a page: title, description, views, comments, danmaku, length and time published.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 30 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 30 per page; each page is its own call.
 
         Args:
             id: The user ID (mid, digits): the number after space.bilibili.com/ in a space link. Example: 8047632.
@@ -2626,7 +2626,7 @@ class _BilibiliUsers:
     ) -> Item[Account]:
         """Bilibili account profile: An account by user ID: name, bio, avatar, verification and what it says, followers, following, number of videos, total likes, level and live room link.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The user ID (mid, digits): the number after space.bilibili.com/ in a space link. Example: 8047632.
@@ -2657,7 +2657,7 @@ class _BilibiliCommentsReplies:
     ) -> Page[Comment]:
         """Bilibili comment replies: The replies to a comment, by the comment's ID and its video's BV ID: text, replier, likes, which reply each answers (parent_id), time posted and IP location.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The comment ID (digits): the id bilibili.videos.comments.list gives. Example: 318757099585.
@@ -2698,7 +2698,7 @@ class _BilibiliBackupUsersVideos:
     ) -> Page[Post]:
         """Bilibili account videos (backup): The backup of bilibili.users.videos.list, for when it cannot serve: an account's uploads, newest first, 20 a page (its data path pages by 20), at a little more. Title, cover, views, danmaku, length and time published; no description, likes or comment count. A user that does not exist reads like one without uploads: an empty page, not a 404.
 
-        Price: $0.0025 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.0025 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The user ID (mid, digits): the number after space.bilibili.com/ in a space link. Example: 8047632.
@@ -2761,7 +2761,7 @@ class _WeiboPostsComments:
     ) -> Page[Comment]:
         """Weibo post comments: Comments on a post by ID or link, hottest first: text, commenter, likes, reply count, time posted and IP location.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call. Give exactly one of id, url.
 
         Args:
             id: The post ID (digits). Give id or url. Example: 5364174473401962.
@@ -2793,7 +2793,7 @@ class _WeiboPostsLikers:
     ) -> Page[Account]:
         """Weibo post likers: The accounts that most recently liked a post, about 50, by ID or link: name, bio, avatar, verification and its kind, followers, following, posts, and the gender and region their profiles give.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 50 per page; each page is its own call. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 50 per page; each page is its own call. Give exactly one of id, url.
 
         Args:
             id: The post ID (digits). Give id or url. Example: 5364174473401962.
@@ -2827,7 +2827,7 @@ class _WeiboPosts:
     ) -> Page[Post]:
         """Weibo post search: Posts matching keywords, latest or hot, with reposts, comments and likes.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 新品发布.
@@ -2851,7 +2851,7 @@ class _WeiboPosts:
     ) -> Item[Post]:
         """Weibo post detail: One post by ID or link: the whole text (of a long post too), author, likes, comments, reposts, reads (plays on a video post), pictures, topics and IP location.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The post ID (digits). Give id or url. Example: 5364174473401962.
@@ -2881,7 +2881,7 @@ class _WeiboTrends:
     ) -> Page[Trend]:
         """Weibo hot search: The Weibo hot search list with rank and heat.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 50 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 50 per page; each page is its own call.
 
         Args:
             cursor: Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.
@@ -2911,7 +2911,7 @@ class _WeiboUsersPosts:
     ) -> Page[Post]:
         """Weibo account posts: An account's posts (its own and its reposts), newest first, by user ID: text (a long post is cut short here; ext.text_truncated says so), likes, comments, reposts, video plays, pictures and topics.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The user ID (uid, digits): the number after weibo.com/u/ in a profile link. Example: 2803301701.
@@ -2942,7 +2942,7 @@ class _WeiboUsersFollowers:
     ) -> Page[Account]:
         """Weibo account followers: The accounts following a user, 20 a page: name, bio, avatar, verification and its kind, followers, following, posts, when the account was opened, and the gender and region their profiles give. Weibo shows only the first few pages.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The user ID (uid, digits): the number after weibo.com/u/ in a profile link. Example: 2803301701.
@@ -2974,7 +2974,7 @@ class _WeiboUsers:
     ) -> Item[Account]:
         """Weibo account profile: Followers, post count, verification and bio of an account.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The account ID (sec_uid / user id as the platform uses it). Example: 1234567890.
@@ -2996,7 +2996,7 @@ class _WeiboUsers:
     ) -> Page[Account]:
         """Weibo account search: Accounts for keywords: user ID, name, avatar and profile link.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 小米.
@@ -3027,7 +3027,7 @@ class _WeiboCommentsReplies:
     ) -> Page[Comment]:
         """Weibo comment replies: The replies to a comment by its ID: text, replier, likes, which comment each answers (parent_id), time posted and IP location.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The comment ID (digits): the id weibo.posts.comments.list gives. Example: 5364175477933025.
@@ -3066,7 +3066,7 @@ class _WeiboBackupTrends:
     ) -> Page[Trend]:
         """Weibo hot search (backup): The backup of weibo.trends.list, for when it cannot serve: the Weibo hot search list (the app's), at a little more. The 50 ranked topics at their places, with heat; the pinned topic and paid rows are left out.
 
-        Price: $0.0025 per call. A call that reaches the data source is charged even when it fails or times out. About 50 per page; each page is its own call.
+        Price: $0.0025 per call. A call that reaches the platform is charged even when it fails or times out. About 50 per page; each page is its own call.
 
         Args:
             board: Which list: the hot search list is the only one. Default hot_search.
@@ -3118,7 +3118,7 @@ class _TiktokVideosComments:
     ) -> Page[Comment]:
         """TikTok video comments: Comments on a video with likes and reply counts.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 50 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 50 per page; each page is its own call.
 
         Args:
             id: The video ID. Example: 7305085486984858894.
@@ -3150,7 +3150,7 @@ class _TiktokVideosTranscript:
     ) -> Item[Transcript]:
         """TikTok video transcript: What is said in a TikTok video, by ID or link: the whole text and timed segments, from the video's captions (TikTok's own, often auto-generated). lang picks the captions' language; a video without captions in it comes back not found and is charged like any lookup.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The video ID (digits). Give id or url. Example: 7665840565958872333.
@@ -3185,7 +3185,7 @@ class _TiktokVideos:
     ) -> Page[Post]:
         """TikTok video search: Videos matching keywords worldwide, with plays, likes, comments and shares.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 30 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 30 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: ai agents.
@@ -3209,7 +3209,7 @@ class _TiktokVideos:
     ) -> Item[Post]:
         """TikTok video detail: One video by ID or link.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The video ID. Give id or url. Example: 7305085486984858894.
@@ -3241,7 +3241,7 @@ class _TiktokUsersVideos:
     ) -> Page[Post]:
         """TikTok account videos: The videos an account posted, by handle, 10 a page, newest or most popular first: caption, plays, likes, comments, shares, saves and time posted. Pinned videos are marked as such (ext.is_pinned).
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             username: The TikTok handle, with or without @. Example: nasa.
@@ -3274,7 +3274,7 @@ class _TiktokUsersFollowers:
     ) -> Page[Account]:
         """TikTok account followers: The accounts following a TikTok account, newest followers first, 20 a page, by handle or account ID: handle, name, bio, avatar, followers, following, video count, likes received, and (under ext) the follower's country or region and language.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call. Give exactly one of id, username.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call. Give exactly one of id, username.
 
         Args:
             username: The TikTok handle, with or without @. Give username or id. Example: nasa.
@@ -3307,7 +3307,7 @@ class _TiktokUsers:
     ) -> Item[Account]:
         """TikTok account profile: Followers, likes, video count and bio of an account.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             username: The handle, with or without @. Example: khaby.lame.
@@ -3329,7 +3329,7 @@ class _TiktokUsers:
     ) -> Page[Account]:
         """TikTok account search: Find TikTok accounts by keyword, 30 a page: handle, name, avatar, followers, following, video count and likes received.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 30 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 30 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: nike.
@@ -3361,7 +3361,7 @@ class _TiktokAds:
     ) -> Page[Ad]:
         """TikTok Ads Library search: Search TikTok's public Ads Library (ads shown in Europe) by keyword or by advertiser name: advertiser, headline, videos and images, first and last day shown and the library's bracket of people reached. A transparency record of all ads, not the Creative Center's showcase.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 12 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 12 per page; each page is its own call.
 
         Args:
             query: Keywords. Give query or advertiser. Example: espresso.
@@ -3396,7 +3396,7 @@ class _TiktokCreativeCenterAds:
     ) -> Page[Ad]:
         """TikTok Creative Center top ads: Search the Top Ads of TikTok's Creative Center by keyword: the ad's video, caption and brand, for one country over the last 7, 30 or 180 days. With view=full also likes, click-through rate, budget level, objective and industry. A showcase of ads that did well, without run dates.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: coffee.
@@ -3421,7 +3421,7 @@ class _TiktokCreativeCenterAds:
     ) -> Item[Ad]:
         """TikTok Creative Center top ad: One Top Ad of TikTok's Creative Center by its ID: the ad's video and cover, caption, brand, landing page, and under ext its likes, comments, shares, length, objective, industry and the countries it ran in. A showcase entry, without run dates.
 
-        Price: $0.002 per call; not found costs $0.002. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.002 per call; not found costs $0.002. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The Top Ad ID (digits), from the Creative Center top ads search. Example: 7686210433094729735.
@@ -3461,7 +3461,7 @@ class _TiktokShopProductsReviews:
     ) -> Page[Review]:
         """TikTok Shop product reviews: Buyers' reviews of a TikTok Shop product: stars, text, the variant bought, photos and whether the purchase is verified.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The product ID. Example: 1732296652516463425.
@@ -3495,7 +3495,7 @@ class _TiktokShopProducts:
     ) -> Page[Product]:
         """TikTok Shop product search: Search TikTok Shop products by keyword: title, current and original price, units sold, rating, number of reviews, image and shop.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: portable coffee maker.
@@ -3520,7 +3520,7 @@ class _TiktokShopProducts:
     ) -> Item[Product]:
         """TikTok Shop product detail: One TikTok Shop product by ID or link: title, price and discount, units sold, rating, number of reviews, all images, and the shop with its rating and followers.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The product ID. Give id or url. Example: 1732296652516463425.
@@ -3552,7 +3552,7 @@ class _TiktokShopSellersProducts:
     ) -> Page[Product]:
         """TikTok Shop seller products: The products a TikTok Shop seller in the United States has on sale, by the seller's ID, a page at a time (TikTok sets the size, often 10 to 20): title, current and original price, rating, number of reviews, units sold and image.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The seller ID (digits): the last part of the shop's link. Example: 7495128284160625473.
@@ -3603,7 +3603,7 @@ class _TiktokCommentsReplies:
     ) -> Page[Comment]:
         """TikTok comment replies: The replies to a comment, by the comment's ID and its video's ID, 20 a page: text, replier, likes, time posted and which comment each one answers. A comment that does not exist reads like one without replies: an empty page, not a 404.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The comment ID (digits), from the video comments. Example: 7666131725864813319.
@@ -3644,7 +3644,7 @@ class _TiktokHashtagsVideos:
     ) -> Page[Post]:
         """TikTok hashtag videos: The videos under a hashtag, by its name, about 20 a page in TikTok's order: caption, author, plays, likes, comments, shares, saves, hashtags and time posted, with length, cover and music under ext.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The hashtag name, with or without #. Example: nasa.
@@ -3699,7 +3699,7 @@ class _XPostsReplies:
     ) -> Page[Post]:
         """X post replies: The replies under a post, in the order X ranks them, about 35 a page. A reply is a post itself, so each comes back as a post: text, author, time posted, views, likes and its own reply count.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 35 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 35 per page; each page is its own call.
 
         Args:
             id: The post ID (the digits after /status/ in its link). Example: 2120216592395174382.
@@ -3731,7 +3731,7 @@ class _XPostsQuotes:
     ) -> Page[Post]:
         """X post quotes: Posts that quote a post, newest or most popular first, 20 a page: what people added, who they are and how far it went.
 
-        Price: $0.0003 per item returned (at least $0.0003), at most $0.006 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.0003 per item returned (at least $0.0003), at most $0.006 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The ID of the post that was quoted. Example: 2120216592395174382.
@@ -3763,7 +3763,7 @@ class _XPostsRetweeters:
     ) -> Page[Account]:
         """X post retweeters: The accounts that retweeted a post, about 100 a page: handle, name, bio and follower count.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 100 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 100 per page; each page is its own call.
 
         Args:
             id: The post ID (the digits after /status/ in its link). Example: 2120216592395174382.
@@ -3793,7 +3793,7 @@ class _XPostsArticle:
     ) -> Item[Post]:
         """X article: The long-form article attached to a post, by the post ID: title, the whole text, author, time published, views, likes and replies.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The ID of the post the article is attached to. Example: 1905545699552375179.
@@ -3827,7 +3827,7 @@ class _XPosts:
     ) -> Item[Post]:
         """X post detail: One post by ID or link: text, media, views, likes, reposts and replies.
 
-        Price: $0.0003 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.0003 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The post ID. Give id or url. Example: 1850000000000000000.
@@ -3851,7 +3851,7 @@ class _XPosts:
     ) -> Page[Post]:
         """X post search: Posts matching a query (X search operators work), latest or top.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: "claude code" lang:zh.
@@ -3883,7 +3883,7 @@ class _XUsersPosts:
     ) -> Page[Post]:
         """X account posts: An account's posts, newest first.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             username: The handle, with or without @. Example: openai.
@@ -3914,7 +3914,7 @@ class _XUsersFollowers:
     ) -> Page[Account]:
         """X account followers: The accounts following an account, newest followers first, 200 a page: handle, name, bio, followers and post count.
 
-        Price: $0.0001 per item returned (at least $0.0004), at most $0.02 per call; an empty answer costs $0.0004. A call that reaches the data source is charged even when it fails or times out. About 200 per page; each page is its own call.
+        Price: $0.0001 per item returned (at least $0.0004), at most $0.02 per call; an empty answer costs $0.0004. A call that reaches the platform is charged even when it fails or times out. About 200 per page; each page is its own call.
 
         Args:
             username: The X handle, with or without @. Example: NASA.
@@ -3945,7 +3945,7 @@ class _XUsersFollowing:
     ) -> Page[Account]:
         """X account following: The accounts an account follows, most recently followed first, 200 a page: handle, name, bio, followers and post count.
 
-        Price: $0.0001 per item returned (at least $0.0004), at most $0.02 per call; an empty answer costs $0.0004. A call that reaches the data source is charged even when it fails or times out. About 200 per page; each page is its own call.
+        Price: $0.0001 per item returned (at least $0.0004), at most $0.02 per call; an empty answer costs $0.0004. A call that reaches the platform is charged even when it fails or times out. About 200 per page; each page is its own call.
 
         Args:
             username: The X handle, with or without @. Example: WHO.
@@ -3976,7 +3976,7 @@ class _XUsersMentions:
     ) -> Page[Post]:
         """X account mentions: Posts that mention an account, newest first, 20 a page: text, author, time posted, views, likes and reposts.
 
-        Price: $0.0003 per item returned (at least $0.0003), at most $0.006 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.0003 per item returned (at least $0.0003), at most $0.006 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             username: The X handle, with or without @. Example: NASA.
@@ -4037,7 +4037,7 @@ class _XUsers:
     ) -> Union[Item[Account], Batch[Account]]:
         """X account profile: An account by handle or numeric ID, or up to 100 accounts by ID in one call: followers, following, post count, bio and verification. IDs that find no account are listed under data.missing and not charged; a batch that finds none costs one account.
 
-        Price: $0.0004 per item returned (at least $0.0004), at most $0.04 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, username, ids.
+        Price: $0.0004 per item returned (at least $0.0004), at most $0.04 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, username, ids.
 
         Args:
             id: The numeric account ID. Give one of id, username or ids. Example: 4398626122.
@@ -4061,7 +4061,7 @@ class _XUsers:
     ) -> Page[Account]:
         """X account search: Accounts matching keywords, 20 a page: handle, name, bio, followers, following, post count and verification.
 
-        Price: $0.0004 per item returned (at least $0.0004), at most $0.008 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.0004 per item returned (at least $0.0004), at most $0.008 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: Smithsonian.
@@ -4092,7 +4092,7 @@ class _XTrends:
     ) -> Page[Trend]:
         """X trending topics: Trending topics worldwide or for one country.
 
-        Price: $0.009 per call. A call that reaches the data source is charged even when it fails or times out. About 30 per page; each page is its own call.
+        Price: $0.009 per call. A call that reaches the platform is charged even when it fails or times out. About 30 per page; each page is its own call.
 
         Args:
             country: ISO country code; worldwide when omitted. Example: US.
@@ -4123,7 +4123,7 @@ class _XThreadsPosts:
     ) -> Page[Post]:
         """X thread: The posts of a thread, from the ID of any post in it: the post it started from, the author's follow-ups and the replies in between. X sets the page size, up to about 50.
 
-        Price: $0.0003 per item returned (at least $0.0003), at most $0.015 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.0003 per item returned (at least $0.0003), at most $0.015 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The ID of any post in the thread. Example: 2120216594244849690.
@@ -4163,7 +4163,7 @@ class _XListsPosts:
     ) -> Page[Post]:
         """X list posts: The timeline of a list, newest first, about 100 posts a page: text, author, time posted, views, likes and reposts.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 100 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 100 per page; each page is its own call.
 
         Args:
             id: The list ID (the digits after /i/lists/ in its link). Example: 84839422.
@@ -4194,7 +4194,7 @@ class _XListsMembers:
     ) -> Page[Account]:
         """X list members: The accounts a list is made of, 20 a page: handle, name, bio, followers and verification.
 
-        Price: $0.0004 per item returned (at least $0.0004), at most $0.008 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.0004 per item returned (at least $0.0004), at most $0.008 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The list ID (the digits after /i/lists/ in its link). Example: 84839422.
@@ -4224,7 +4224,7 @@ class _XListsFollowers:
     ) -> Page[Account]:
         """X list followers: Up to 20 accounts that follow a list: handle, name, bio, followers and verification. One page only; there is no next page.
 
-        Price: $0.0004 per item returned (at least $0.0004), at most $0.008 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.0004 per item returned (at least $0.0004), at most $0.008 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The list ID (the digits after /i/lists/ in its link). Example: 84839422.
@@ -4265,7 +4265,7 @@ class _XCommunitiesPosts:
     ) -> Page[Post]:
         """X community posts: Posts in a community, newest first, 20 a page: text, author, time posted, views, likes and reposts.
 
-        Price: $0.0003 per item returned (at least $0.0003), at most $0.006 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.0003 per item returned (at least $0.0003), at most $0.006 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The community ID (the digits after /i/communities/ in its link). Example: 1539231166569410560.
@@ -4296,7 +4296,7 @@ class _XCommunitiesMembers:
     ) -> Page[Account]:
         """X community members: The accounts that have joined a community, 20 a page: handle, name, bio, followers and verification.
 
-        Price: $0.0004 per item returned (at least $0.0004), at most $0.008 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.0004 per item returned (at least $0.0004), at most $0.008 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The community ID (the digits after /i/communities/ in its link). Example: 1539231166569410560.
@@ -4328,7 +4328,7 @@ class _XCommunities:
     ) -> Item[Community]:
         """X community profile: A community by ID: name, description, member count, when it was created, and under ext its moderators, how people join and its topic.
 
-        Price: $0.0004 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.0004 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The community ID (the digits after /i/communities/ in its link). Example: 1493446837214187523.
@@ -4373,7 +4373,7 @@ class _YoutubeVideosComments:
     ) -> Page[Comment]:
         """YouTube video comments: Comments on a video, top or newest first.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The video ID. Example: dQw4w9WgXcQ.
@@ -4405,7 +4405,7 @@ class _YoutubeVideosTranscript:
     ) -> Item[Transcript]:
         """YouTube video transcript: The transcript of a video with timestamps, in the original or a chosen language.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The video ID. Example: dQw4w9WgXcQ.
@@ -4439,7 +4439,7 @@ class _YoutubeVideos:
     ) -> Page[Post]:
         """YouTube video search: Videos matching keywords with views, length and channel.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: claude code tutorial.
@@ -4463,7 +4463,7 @@ class _YoutubeVideos:
     ) -> Item[Post]:
         """YouTube video detail: One video by ID or link: title, description, views, likes and channel.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The video ID. Give id or url. Example: dQw4w9WgXcQ.
@@ -4494,7 +4494,7 @@ class _YoutubeCommentsReplies:
     ) -> Page[Comment]:
         """YouTube comment replies: The replies under a comment, by the comment's replies token, about 10 at a time: text, replier (handle, avatar, verification), likes, and roughly when it was posted (YouTube says "6 years ago"). post_id and parent_id are read from the token.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             id: The comment's replies token (YouTube's continuation for its replies, starting Eg0S), not the comment ID: ext.replies_token of the comment in youtube.videos.comments.list with view=full. Example: Eg0SC2RRdzR3OVdnWGNRGAYygwEaUBIaVWd6S1lrc3FlUTVnQTN0MGcwRjRBYUFCQWciAggAKhhVQ3VBWEZrZ3N3MUw3eGFDZm5kNUpKT3cyC2RRdzR3OVdnWGNRQAFICoIBAggBQi9jb21tZW50LXJlcGxpZXMtaXRlbS1VZ3pLWWtzcWVRNWdBM3QwZzBGNEFhQUJBZw%3D%3D.
@@ -4535,7 +4535,7 @@ class _YoutubeChannelsPosts:
     ) -> Page[Post]:
         """YouTube channel posts: The posts on a channel's Posts tab (once Community), newest first, about 10 a page, by channel ID or handle: text, pictures, likes, the video a post shares (ext.video_id, its cover in images), and roughly when it was posted (YouTube says "4 days ago"). A channel ID nobody has reads like a channel without posts: an empty page.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call. Give exactly one of id, username.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call. Give exactly one of id, username.
 
         Args:
             id: The channel ID, starting with UC. Give id or username. Example: UCLA_DiR1FfKNvjuUpBHmylQ.
@@ -4570,13 +4570,13 @@ class _YoutubeChannelsVideos:
     ) -> Page[Post]:
         """YouTube channel videos: A channel's videos or its Shorts, newest first, about 30 a page, by channel ID or handle: title, views, cover and, for videos, length and roughly when it was published (YouTube says "3 weeks ago"). A channel ID nobody has reads like a channel without such videos: an empty page.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 30 per page; each page is its own call. Give exactly one of id, username.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 30 per page; each page is its own call. Give exactly one of id, username.
 
         Args:
             id: The channel ID, starting with UC. Give id or username. Example: UCLA_DiR1FfKNvjuUpBHmylQ.
             username: The channel's handle, with or without @. Give id or username. Example: NASA.
             type: Regular videos (the default) or Shorts. Default video.
-            sort: Newest first; the only order this source has (no most-viewed order). Default latest.
+            sort: Newest first; the only order available (no most-viewed order). Default latest.
             cursor: Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.
 
         https://okdata.online/apis/youtube/channels/videos/list/
@@ -4606,7 +4606,7 @@ class _YoutubeChannels:
     ) -> Item[Account]:
         """YouTube channel profile: A channel by ID or handle: name, description, avatar, verification, subscribers and video count (rounded as YouTube shows them), and under ext its total views, the day it joined, the links in its About section, country and banner. The handle comes back when you ask by handle.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, username.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, username.
 
         Args:
             id: The channel ID, starting with UC. Give id or username. Example: UCLA_DiR1FfKNvjuUpBHmylQ.
@@ -4629,7 +4629,7 @@ class _YoutubeChannels:
     ) -> Page[Account]:
         """YouTube channel search: Find channels by keywords, 20 a page in YouTube's order: channel ID, name, the start of the description, avatar and subscribers (rounded as YouTube shows them). No handle or badge here; youtube.channels.get gives the badge.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: nasa.
@@ -4660,7 +4660,7 @@ class _YoutubePosts:
     ) -> Item[Post]:
         """YouTube post detail: One channel post (once a Community post) by ID or link: text, channel, pictures, likes, the video it shares (ext.video_id, its cover in images), and roughly when it was posted.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The post ID, starting with Ug (what follows /post/ in its link). Give id or url. Example: Ugkx-7xgRw-Uc9lRS3_2RvS2zASPTZOFtIlw.
@@ -4707,7 +4707,7 @@ class _MetaAds:
     ) -> Page[Ad]:
         """Meta Ad Library search: Search the Meta Ad Library (Facebook, Instagram, Messenger) by keyword: advertiser, copy, headline, images and videos, landing page, where it runs and since when. Can be limited to one country, to image or video ads, and to ads running now or stopped.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 30 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 30 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: portable espresso.
@@ -4734,7 +4734,7 @@ class _MetaAds:
     ) -> Item[Ad]:
         """Meta Ad Library ad detail: One ad of the Meta Ad Library by its library ID or link: advertiser, copy, images and videos, landing page, platforms, first and last day shown, and whether it is still running.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The Ad Library ID. Give id or url. Example: 744979408183770.
@@ -4770,7 +4770,7 @@ class _MetaAdvertisersAds:
     ) -> Page[Ad]:
         """Meta advertiser ads: The ads one advertiser (a Facebook page) runs in the Meta Ad Library, by the page ID or the brand's name: copy, creative, landing page, platforms and dates. The way to see what a competitor is running now.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 30 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 30 per page; each page is its own call.
 
         Args:
             id: The advertiser's Facebook page ID. Give id or name. Example: 30147264485.
@@ -4828,7 +4828,7 @@ class _GoogleAdvertisersAds:
     ) -> Page[Ad]:
         """Google advertiser ads: An advertiser's ads in the Google Ads Transparency Center (Search, YouTube, Display, Shopping, Maps, Play), by advertiser ID or by the brand's website domain: format, preview image, first and last time shown. 40 ads a page.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 40 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 40 per page; each page is its own call.
 
         Args:
             id: The advertiser ID (AR…), from the advertiser search. Give id or domain. Example: AR17172796163137470465.
@@ -4864,7 +4864,7 @@ class _GoogleAdvertisers:
     ) -> Page[Advertiser]:
         """Google Ads Transparency advertiser search: Find advertisers in the Google Ads Transparency Center by name: advertiser ID, the name Google verified, the country it is registered in and the center's estimate of how many ads it has. The verified name is often the legal entity, not the brand.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: Stanley.
@@ -4906,7 +4906,7 @@ class _InstagramUsersPosts:
     ) -> Page[Post]:
         """Instagram account posts: An account's posts, newest first, 12 a page, or its reels only: caption, likes, comments, plays, time posted, images and the other authors of a collab post.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 12 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 12 per page; each page is its own call.
 
         Args:
             username: The handle, with or without @. Example: nasa.
@@ -4938,7 +4938,7 @@ class _InstagramUsers:
     ) -> Item[Account]:
         """Instagram account profile: An Instagram account by handle: name, bio, followers, following, post count, verification, whether it is private, and the website and links the profile gives.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             username: The handle, with or without @. Example: nasa.
@@ -4960,7 +4960,7 @@ class _InstagramUsers:
     ) -> Page[Account]:
         """Instagram account search: Find Instagram accounts by keyword, about 20 in one answer and no further pages: handle, name, avatar, verification and whether it is private.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: nike.
@@ -4992,7 +4992,7 @@ class _InstagramPostsComments:
     ) -> Page[Comment]:
         """Instagram post comments: Comments on a post or reel, newest first, about 15 a page: text, commenter, likes and time posted.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 15 per page; each page is its own call. Give exactly one of id, url.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 15 per page; each page is its own call. Give exactly one of id, url.
 
         Args:
             id: The shortcode: what follows /p/ or /reel/ in the link. Give id or url. Example: DeCPVhERA8e.
@@ -5024,7 +5024,7 @@ class _InstagramPostsTranscript:
     ) -> Item[Transcript]:
         """Instagram reel transcript: What is said in a reel or video post, by shortcode or link, with timestamps. Videos up to two minutes long.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The shortcode: what follows /p/ or /reel/ in the link. Give id or url. Example: DeCPVhERA8e.
@@ -5057,7 +5057,7 @@ class _InstagramPosts:
     ) -> Item[Post]:
         """Instagram post detail: One post or reel by shortcode or link: caption, author, likes, comments and plays, images, and the other authors of a collab post.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The shortcode: what follows /p/ or /reel/ in the link. Give id or url. Example: DeCPVhERA8e.
@@ -5089,7 +5089,7 @@ class _InstagramCommentsReplies:
     ) -> Page[Comment]:
         """Instagram comment replies: The replies to one comment, by the comment's ID and its post's shortcode: text, replier, likes and time posted.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 15 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 15 per page; each page is its own call.
 
         Args:
             id: The comment ID (digits), from the post comments. Example: 17968670751170878.
@@ -5130,7 +5130,7 @@ class _InstagramHashtagsPosts:
     ) -> Page[Post]:
         """Instagram hashtag posts: Public posts under a hashtag, about 10 a page, as search engines find them: caption, author, likes, comments and time posted. Not every post under the tag, and not in time order.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             id: The hashtag, without #. Example: nasa.
@@ -5184,7 +5184,7 @@ class _RedditPostsComments:
     ) -> Page[Comment]:
         """Reddit post comments: Comments on a post with the first levels of replies (parent_id says which comment a reply answers): text, commenter, score and reply count. Reddit's default order, newest or top score first.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call. Give exactly one of id, url.
 
         Args:
             id: The post ID, with or without the t3_ prefix. Give id or url. Example: t3_1nnrvkr.
@@ -5217,7 +5217,7 @@ class _RedditPostsTranscript:
     ) -> Item[Transcript]:
         """Reddit video transcript: The captions of a Reddit-hosted video post, with timestamps. A post without captions comes back not_found and is charged like any lookup.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The post ID, with or without the t3_ prefix. Give id or url. Example: t3_1nnrvkr.
@@ -5252,7 +5252,7 @@ class _RedditPosts:
     ) -> Page[Post]:
         """Reddit post search: Posts matching keywords across Reddit, by relevance, newest or top score, optionally within a period: title, text, author, community, score and comment count.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 25 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 25 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: saturn rings.
@@ -5277,7 +5277,7 @@ class _RedditPosts:
     ) -> Item[Post]:
         """Reddit post detail: One post by ID or link: title, full text, author, community, score, upvote ratio and comment count.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The post ID, with or without the t3_ prefix. Give id or url. Example: t3_1nnrvkr.
@@ -5307,7 +5307,7 @@ class _RedditPopularPosts:
     ) -> Page[Post]:
         """Reddit Popular feed: The posts on Reddit's Popular feed right now, hottest first: title, community, score and comment count.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             cursor: Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.
@@ -5348,7 +5348,7 @@ class _RedditSubredditsPosts:
     ) -> Page[Post]:
         """Reddit community posts: A community's posts, hot, newest or top score first. Top score covers the last day unless published_within asks for a week, month, year or all time.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. About 25 per page; each page is its own call.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. About 25 per page; each page is its own call.
 
         Args:
             id: The community name, with or without r/. Example: nasa.
@@ -5381,7 +5381,7 @@ class _RedditSubreddits:
     ) -> Item[Account]:
         """Reddit community profile: A community (subreddit) as an account: title, description, members (in followers), when it was created, and weekly visitors and contributions.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The community name, with or without r/. Example: nasa.
@@ -5410,7 +5410,7 @@ class _RedditTrends:
     ) -> Page[Trend]:
         """Reddit trending searches: The searches trending on Reddit today, in the order the app lists them.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 6 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 6 per page; each page is its own call.
 
         Args:
             cursor: Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.
@@ -5440,7 +5440,7 @@ class _RedditUsersPosts:
     ) -> Page[Post]:
         """Reddit user posts: The posts a user has made, newest first: title, text, community, score and comment count.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 25 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 25 per page; each page is its own call.
 
         Args:
             username: The username, with or without u/. Example: nasa.
@@ -5471,7 +5471,7 @@ class _RedditUsersSubreddits:
     ) -> Page[Account]:
         """Reddit user active communities: The communities a user is active in, each as an account: name, description and members (in followers). The whole list in one answer.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 30 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 30 per page; each page is its own call.
 
         Args:
             username: The username, with or without u/. Example: nasa.
@@ -5503,7 +5503,7 @@ class _RedditUsers:
     ) -> Item[Account]:
         """Reddit user profile: A user's public profile: display name, bio, verification, karma, post and comment counts and when the account was created.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             username: The username, with or without u/. Example: nasa.
@@ -5547,7 +5547,7 @@ class _KuaishouVideosComments:
     ) -> Page[Comment]:
         """Kuaishou video comments: Top-level comments on a video, newest first: text, commenter, likes, time posted and IP location.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call. Give exactly one of id, url.
 
         Args:
             id: The video ID: the 3x… part of the web link. Give id or url. Example: 3xv88urbnic5abk.
@@ -5583,7 +5583,7 @@ class _KuaishouVideos:
     ) -> Page[Post]:
         """Kuaishou video search: Videos matching keywords, newest or most liked first, filtered by time posted and length: caption, author, plays, likes, comments and shares.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 露营装备.
@@ -5609,7 +5609,7 @@ class _KuaishouVideos:
     ) -> Item[Post]:
         """Kuaishou video detail: One video by ID or link (a v.kuaishou.com short link works too): caption, author, plays, likes, comments and shares.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The video ID: the 3x… part of the web link. Give id or url. Example: 3xv88urbnic5abk.
@@ -5641,7 +5641,7 @@ class _KuaishouCommentsReplies:
     ) -> Page[Comment]:
         """Kuaishou comment replies: The replies under a top-level comment, by the comment's ID and its video's ID: text, replier, likes, time posted and IP location.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The top-level comment ID (digits). Example: 908850553827.
@@ -5683,7 +5683,7 @@ class _KuaishouUsersVideos:
     ) -> Page[Post]:
         """Kuaishou account videos: An account's videos, newest or most popular first: caption, plays, likes, comments and time posted.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The user ID (digits, not the Kuaishou handle), from a search or a video’s author.id. Example: 1096637401.
@@ -5715,7 +5715,7 @@ class _KuaishouUsers:
     ) -> Item[Account]:
         """Kuaishou account profile: An account by user ID: name, handle, bio, followers, following, video count, total likes, verification and IP location.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The user ID (digits, not the Kuaishou handle), from a search or a video’s author.id. Example: 1096637401.
@@ -5740,7 +5740,7 @@ class _KuaishouUsers:
     ) -> Page[Account]:
         """Kuaishou account search: Find accounts by keyword, optionally only verified ones or those live now, by gender, or ordered by followers: user ID, name, handle, bio, followers and verification.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 人民日报.
@@ -5773,7 +5773,7 @@ class _KuaishouTrends:
     ) -> Page[Trend]:
         """Kuaishou hot list: Kuaishou's hot list: 50 trending topics and the one pinned above them, with heat.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 51 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 51 per page; each page is its own call.
 
         Args:
             cursor: Opaque cursor from page.next_cursor of the previous call. Each page is a separate call.
@@ -5817,7 +5817,7 @@ class _ZhihuPosts:
     ) -> Page[Post]:
         """Zhihu search: Answers and articles matching keywords, by relevance, newest or most upvoted, or answers only or articles only: title (the question, for an answer), full text, author, upvotes, comments and saves.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 咖啡机推荐.
@@ -5850,7 +5850,7 @@ class _ZhihuQuestionsAnswers:
     ) -> Page[Post]:
         """Zhihu question answers: The first 20 answers to a question, by ID or link, in Zhihu's own order: the question as title, full text, author and their followers, upvotes, comments, saves and time posted. One page: there is no next.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call. Give exactly one of id, url.
 
         Args:
             id: The question ID (digits): the number after zhihu.com/question/. Give id or url. Example: 55043447.
@@ -5882,7 +5882,7 @@ class _ZhihuQuestions:
     ) -> Item[Post]:
         """Zhihu question detail: One question by ID or link: its title, the details added under it, when it was asked, and how many views it has, with its answer and follower counts under ext.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The question ID (digits): the number after zhihu.com/question/. Give id or url. Example: 55043447.
@@ -5913,7 +5913,7 @@ class _ZhihuAnswersComments:
     ) -> Page[Comment]:
         """Zhihu answer comments: The top-level comments on an answer, by the answer's ID, a page at a time in Zhihu's default order: text, commenter, likes, reply count, time posted and IP location.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             id: The answer ID (digits): the number after /answer/ in its link. Example: 2509154330.
@@ -5945,7 +5945,7 @@ class _ZhihuAnswers:
     ) -> Item[Post]:
         """Zhihu answer detail: One answer by ID or link: the question it answers (as title), the full text, its author and when it was posted.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The answer ID (digits): the number after /answer/ in its link. Give id or url. Example: 2430879961.
@@ -5976,7 +5976,7 @@ class _ZhihuCommentsReplies:
     ) -> Page[Comment]:
         """Zhihu comment replies: The replies under a top-level comment, by the comment's ID, 20 a page: text, replier, likes, IP location and which comment each one answers.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call. Paused for now: calls answer capability_paused and are not charged.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call. Paused for now: calls answer capability_paused and are not charged.
 
         Args:
             id: The top-level comment ID (digits), from zhihu.answers.comments.list. Example: 10114474814.
@@ -6016,7 +6016,7 @@ class _ZhihuArticles:
     ) -> Item[Post]:
         """Zhihu article detail: One column article by ID or link: title, full text, author, upvotes, comment count and the topics it is filed under (as hashtags).
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The article ID (digits): the number after zhuanlan.zhihu.com/p/. Give id or url. Example: 521711978.
@@ -6047,7 +6047,7 @@ class _ZhihuColumnsArticles:
     ) -> Page[Post]:
         """Zhihu column articles: The articles in a column, by the column's ID, 20 a page: title, text, author, time published, upvotes and comment count.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The column ID: what follows zhuanlan.zhihu.com/ in the column's link (a word, or c_ and digits). Example: intelligentunit.
@@ -6087,7 +6087,7 @@ class _ZhihuPins:
     ) -> Item[Post]:
         """Zhihu pin detail: One pin (a short post, 想法) by ID or link: text, pictures, author, likes, comments, saves, reposts and time posted.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The pin ID (digits): the number after zhihu.com/pin/. Give id or url. Example: 2042267446984402904.
@@ -6116,7 +6116,7 @@ class _ZhihuTrends:
     ) -> Page[Trend]:
         """Zhihu hot list: The Zhihu hot list: the questions everyone is reading now, with rank and heat.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 30 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 30 per page; each page is its own call.
 
         https://okdata.online/apis/zhihu/trends/list/
         """
@@ -6143,7 +6143,7 @@ class _ZhihuUsersFollowers:
     ) -> Page[Account]:
         """Zhihu user followers: The people following an account, by its handle, 20 a page: name, handle, headline, avatar, follower count, and (under ext) answer and article counts and whether it is an organisation.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             username: The handle in the profile's link (url_token): what follows zhihu.com/people/. Example: zhihuadmin.
@@ -6174,7 +6174,7 @@ class _ZhihuUsersAnswers:
     ) -> Page[Post]:
         """Zhihu user answers: The answers a person wrote, by their handle, 20 a page, newest first: the question (as title), the text, upvotes, comments and time posted.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call. Paused for now: calls answer capability_paused and are not charged.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call. Paused for now: calls answer capability_paused and are not charged.
 
         Args:
             username: The handle in the profile's link (url_token): what follows zhihu.com/people/. Example: zhihuadmin.
@@ -6205,7 +6205,7 @@ class _ZhihuUsersArticles:
     ) -> Page[Post]:
         """Zhihu user articles: The column articles a person wrote, by their handle, 20 a page, newest first: title, text, upvotes, comments and time published.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call. Paused for now: calls answer capability_paused and are not charged.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call. Paused for now: calls answer capability_paused and are not charged.
 
         Args:
             username: The handle in the profile's link (url_token): what follows zhihu.com/people/. Example: zhihuadmin.
@@ -6236,7 +6236,7 @@ class _ZhihuUsersPins:
     ) -> Page[Post]:
         """Zhihu user pins: The pins (short posts, 想法) a person posted, by their handle, 20 a page, newest first: text, pictures, likes, comments, saves, reposts and time posted.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call. Paused for now: calls answer capability_paused and are not charged.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call. Paused for now: calls answer capability_paused and are not charged.
 
         Args:
             username: The handle in the profile's link (url_token): what follows zhihu.com/people/. Example: zhihuadmin.
@@ -6270,7 +6270,7 @@ class _ZhihuUsers:
     ) -> Item[Account]:
         """Zhihu user profile: A person's profile by the handle in their link: name, headline and follower count, with answer and article counts, whether it is an organisation and IP location under ext.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             username: The handle in the profile's link (url_token): what follows zhihu.com/people/. Example: zhihuadmin.
@@ -6292,7 +6292,7 @@ class _ZhihuUsers:
     ) -> Page[Account]:
         """Zhihu user search: People and organisations matching keywords, 20 a page: name and follower count, with answer and article counts, upvotes received and whether it is an organisation under ext. The headline is in the profile (zhihu.users.get).
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 人民日报.
@@ -6340,7 +6340,7 @@ class _WechatChannelsVideosComments:
     ) -> Page[Comment]:
         """WeChat Channels video comments: Top-level comments on a video, hottest first: text, commenter, likes, reply count, time posted and IP location.
 
-        Price: $0.015 per call. A call that reaches the data source is charged even when it fails or times out. About 25 per page; each page is its own call.
+        Price: $0.015 per call. A call that reaches the platform is charged even when it fails or times out. About 25 per page; each page is its own call.
 
         Args:
             id: The video ID (digits): the id a video list or detail gives. Example: 15051893554318805499.
@@ -6370,7 +6370,7 @@ class _WechatChannelsVideosShareLink:
     ) -> Item[ChannelsShareLink]:
         """WeChat Channels video share link: A link that opens a Channels video in WeChat (weixin.qq.com/sph/…), made from the video's ID. Each call makes a new link and older ones keep working; a link cannot be built from the ID by hand.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The video ID (digits): the id a video list or detail gives. A search result's export/… ID goes through wechat_channels.videos.get first. Example: 15051893554318805499.
@@ -6404,7 +6404,7 @@ class _WechatChannelsVideos:
     ) -> Page[Post]:
         """WeChat Channels video search: Channels videos for keywords through WeChat Search, by relevance, newest or hottest, filtered by time posted: description, the account name and avatar, time posted, length and cover (the url). The id is an export/… ID that wechat_channels.videos.get turns into the video, its numeric ID and the account ID; it expires, so use it soon.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 露营装备推荐.
@@ -6429,7 +6429,7 @@ class _WechatChannelsVideos:
     ) -> Item[Post]:
         """WeChat Channels video detail: One video by its ID, a search result's export/… ID or its share link: description, author (with the account ID), time posted, likes, comments, shares, saves and location. url is the video file (encrypted: decrypt it with ext.decode_key from the same answer).
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The video ID (digits), or a search result's export/… ID. Give id or url. Example: 15051893554318805499.
@@ -6451,7 +6451,7 @@ class _WechatChannelsVideos:
     ) -> Item[Post]:
         """WeChat Channels video stats: The latest counts of a Channels video by its ID: likes, comments, shares and saves, with its description and account. The counts may be a few hours old; ext.counted_at says when they were taken. Cheaper than the whole video (wechat_channels.videos.get).
 
-        Price: $0.015 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.015 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The video ID (digits): the id a video list or detail gives. Example: 15051893554318805499.
@@ -6481,7 +6481,7 @@ class _WechatChannelsUsersVideos:
     ) -> Page[Post]:
         """WeChat Channels account videos: An account's videos, newest first, about 15 a page: description, time posted, likes, comments, shares and saves, length. url is the video file (encrypted: decrypt it with ext.decode_key from the same answer).
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 15 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 15 per page; each page is its own call.
 
         Args:
             id: The account ID: starts with v2_ and ends with @finder. Find it with wechat_channels.users.search, or read a video's author.id. The sph… ID the app shows is not it. Example: v2_060000231003b20faec8c6e4811dc1d4c602ee30b0771bbcf220c67926bb76ab7702ac335a53@finder.
@@ -6512,7 +6512,7 @@ class _WechatChannelsUsersLiveReplays:
     ) -> Page[Post]:
         """WeChat Channels live replays: An account's live-stream replays, newest first, up to about 50 a page: title, time, likes, comments and shares. url is the video file (encrypted: decrypt it with ext.decode_key from the same answer).
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 48 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 48 per page; each page is its own call.
 
         Args:
             id: The account ID: starts with v2_ and ends with @finder. Find it with wechat_channels.users.search, or read a video's author.id. The sph… ID the app shows is not it. Example: v2_060000231003b20faec8cae1811ac4d5c702ea32b0771737aa785454f7f8177114cc4d248d66@finder.
@@ -6542,7 +6542,7 @@ class _WechatChannelsUsersCollections:
     ) -> Page[ChannelsCollection]:
         """WeChat Channels account collections: Every public collection (playlist) of a Channels account, in one answer: name, description, cover, number of videos and when it was last updated. A collection's id is what wechat_channels.collections.videos.list takes.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 7 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 7 per page; each page is its own call.
 
         Args:
             id: The account ID: starts with v2_ and ends with @finder. Find it with wechat_channels.users.search, or read a video's author.id. The sph… ID the app shows is not it. Example: v2_060000231003b20faec8c6e4811dc1d4c602ee30b0771bbcf220c67926bb76ab7702ac335a53@finder.
@@ -6575,7 +6575,7 @@ class _WechatChannelsUsers:
     ) -> Page[Account]:
         """WeChat Channels account search: Find a Channels account by its name through WeChat Search: account ID (v2_…@finder), name, avatar and who verified it. WeChat Search usually returns the one account whose name matches best.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 1 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 1 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 央视新闻.
@@ -6597,7 +6597,7 @@ class _WechatChannelsUsers:
     ) -> Item[Account]:
         """WeChat Channels account profile: A Channels account by its ID: name, signature, avatar, IP location, number of videos, live hours and the linked Official Account. Followers and total likes are null when WeChat hides them.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The account ID: starts with v2_ and ends with @finder. Find it with wechat_channels.users.search, or read a video's author.id. The sph… ID the app shows is not it. Example: v2_060000231003b20faec8c6e4811dc1d4c602ee30b0771bbcf220c67926bb76ab7702ac335a53@finder.
@@ -6628,7 +6628,7 @@ class _WechatChannelsCommentsReplies:
     ) -> Page[Comment]:
         """WeChat Channels comment replies: The replies under a top-level comment, by the comment's ID and its video's ID: text, replier, likes, time posted and IP location.
 
-        Price: $0.015 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.015 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The top-level comment ID (digits), from the video comments. Example: 15051922449692694726.
@@ -6669,7 +6669,7 @@ class _WechatChannelsCollectionsVideos:
     ) -> Page[Post]:
         """WeChat Channels collection videos: The videos in a Channels collection, in the collection's own order (oldest first), 20 a page: description, account, time posted, likes, comments, shares and saves, length. url is the video file (encrypted: decrypt it with ext.decode_key from the same answer).
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The collection ID (digits): the id wechat_channels.users.collections.list gives. Example: 14939347649320519707.
@@ -6709,7 +6709,7 @@ class _WechatChannelsBackupUsersVideos:
     ) -> Page[Post]:
         """WeChat Channels account videos (backup): The backup of wechat_channels.users.videos.list: the same parameters and result, 15 a page (a live stream in progress comes first).
 
-        Price: $0.06 per call. A call that reaches the data source is charged even when it fails or times out. About 15 per page; each page is its own call.
+        Price: $0.06 per call. A call that reaches the platform is charged even when it fails or times out. About 15 per page; each page is its own call.
 
         Args:
             id: The account ID: starts with v2_ and ends with @finder. Find it with wechat_channels.users.search, or read a video's author.id. The sph… ID the app shows is not it. Example: v2_060000231003b20faec8c6e4811dc1d4c602ee30b0771bbcf220c67926bb76ab7702ac335a53@finder.
@@ -6740,7 +6740,7 @@ class _WechatChannelsBackupUsers:
     ) -> Item[Account]:
         """WeChat Channels account profile (backup): The backup of wechat_channels.users.get: the same parameters and result, without the number of videos.
 
-        Price: $0.03 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.03 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The account ID: starts with v2_ and ends with @finder. Find it with wechat_channels.users.search, or read a video's author.id. The sph… ID the app shows is not it. Example: v2_060000231003b20faec8c6e4811dc1d4c602ee30b0771bbcf220c67926bb76ab7702ac335a53@finder.
@@ -6772,7 +6772,7 @@ class _WechatChannelsBackupVideos:
     ) -> Page[Post]:
         """WeChat Channels video search (backup): The backup of wechat_channels.videos.search: the same parameters and result, plus comment and share counts (no saves).
 
-        Price: $0.15 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.15 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 露营装备推荐.
@@ -6831,7 +6831,7 @@ class _WechatPosts:
     ) -> Page[Post]:
         """WeChat Search articles and videos: WeChat Search results for keywords: Official Account articles and Channels videos mixed (type says which), by relevance, newest or hottest, filtered by time posted, or articles or videos only. Title or description, the source account name, time posted; articles with their link (and a band of reads on some), videos with likes and an export/… ID for wechat_channels.videos.get. WeChat Search gives no account ID.
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 咖啡店开业.
@@ -6865,7 +6865,7 @@ class _WechatAccounts:
     ) -> Page[Account]:
         """WeChat Official Account live search: Official Accounts and service accounts for keywords, live from WeChat Search, closest first (less related ones may follow): original ID, WeChat ID, name, bio, avatar, whether verified and by whom, number of original articles. Charged per call; no follower or read counts (wechat_mp.accounts.search gives estimates of those).
 
-        Price: $0.02 per call. A call that reaches the data source is charged even when it fails or times out. About 8 per page; each page is its own call.
+        Price: $0.02 per call. A call that reaches the platform is charged even when it fails or times out. About 8 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 36氪.
@@ -6895,7 +6895,7 @@ class _WechatIndexKeywords:
     ) -> Page[KeywordHistory]:
         """WeChat Index: A keyword's WeChat Index over the last 30 days, one figure a day (points[].composite_index). The index is WeChat's attention score across Search, articles, Moments and more, not a count of searches, and does not compare with Douyin's or Xiaohongshu's; days are China calendar days (UTC+8).
 
-        Price: $0.15 per call. A call that reaches the data source is charged even when it fails or times out. About 1 per page; each page is its own call.
+        Price: $0.15 per call. A call that reaches the platform is charged even when it fails or times out. About 1 per page; each page is its own call.
 
         Args:
             keyword: One keyword. Example: 咖啡.
@@ -6933,7 +6933,7 @@ class _WechatKeywords:
     ) -> Page[KeywordRelated]:
         """WeChat Search suggestions: The suggestions WeChat Search lists under its search box for a keyword, in its order, about 9 at a time (the keyword itself left out). Words and their places only, without an index.
 
-        Price: $0.15 per call. A call that reaches the data source is charged even when it fails or times out. About 9 per page; each page is its own call.
+        Price: $0.15 per call. A call that reaches the platform is charged even when it fails or times out. About 9 per page; each page is its own call.
 
         Args:
             keyword: One keyword. Example: 咖啡.
@@ -6962,7 +6962,7 @@ class _WechatMiniprograms:
     ) -> Page[Miniprogram]:
         """WeChat mini program search: Mini programs for keywords through WeChat Search, the first page (about 25): name, description, icon, original ID and AppID (some brand ones show none), the owner and whether verified, recent users as WeChat shows them (the floor of its band: 100000 for 100k+), and whether it is a mini game.
 
-        Price: $0.15 per call. A call that reaches the data source is charged even when it fails or times out. About 25 per page; each page is its own call.
+        Price: $0.15 per call. A call that reaches the platform is charged even when it fails or times out. About 25 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 外卖.
@@ -6995,7 +6995,7 @@ class _WechatBackupPosts:
     ) -> Page[Post]:
         """WeChat Search articles and videos (backup): The backup of wechat.posts.search: the same parameters and result.
 
-        Price: $0.15 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.15 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 咖啡店开业.
@@ -7052,7 +7052,7 @@ class _TelegramChannelsMessages:
     ) -> Page[Post]:
         """Telegram channel messages: A public channel's messages, newest first, 20 a page: text, time posted, views (rounded from a thousand up, as t.me shows them) and images, video covers included. Each id (handle/number, as in telegram/401) goes straight to the message endpoint.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             username: The public channel's handle (what follows t.me/), with or without @. Example: telegram.
@@ -7083,7 +7083,7 @@ class _TelegramChannels:
     ) -> Item[Account]:
         """Telegram channel profile: A public Telegram channel by handle: name, description, avatar, subscribers (rounded, as t.me shows them) and verification, and under ext the photo, video, file and link counts it shows.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             username: The public channel's handle (what follows t.me/), with or without @. Example: telegram.
@@ -7113,7 +7113,7 @@ class _TelegramMessages:
     ) -> Item[Post]:
         """Telegram message detail: One message of a public channel, by handle/number or its t.me link: text, time posted, views and images, video covers included.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The channel's handle and the message number joined by a slash, as in telegram/401. Give id or url. Example: telegram/401.
@@ -7156,7 +7156,7 @@ class _AmazonProductsReviews:
     ) -> Page[Review]:
         """Amazon product reviews: Customer reviews of an Amazon product: stars, title and text, date, the variant bought, photos, helpful votes and whether the purchase is verified.
 
-        Price: $0.006 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.006 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             id: The ASIN: the 10-character product ID after /dp/ in an Amazon link. Example: B0GTS6KPPB.
@@ -7192,7 +7192,7 @@ class _AmazonProducts:
     ) -> Page[Product]:
         """Amazon product search: Search an Amazon store by keyword, as a shopper sees the results: title, price and list price, star rating, number of ratings, units bought last month, Prime, Best Seller and Amazon's Choice badges, and the photo.
 
-        Price: $0.006 per call. A call that reaches the data source is charged even when it fails or times out. About 48 per page; each page is its own call.
+        Price: $0.006 per call. A call that reaches the platform is charged even when it fails or times out. About 48 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: portable espresso maker.
@@ -7217,7 +7217,7 @@ class _AmazonProducts:
     ) -> Item[Product]:
         """Amazon product details: One Amazon product by ASIN: title, price and list price, rating and number of ratings, units bought last month, all photos, brand, the "About this item" bullets, category path and Best Sellers Rank.
 
-        Price: $0.006 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.006 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The ASIN: the 10-character product ID after /dp/ in an Amazon link. Example: B0GTS6KPPB.
@@ -7250,7 +7250,7 @@ class _AmazonBestsellers:
     ) -> Page[Product]:
         """Amazon Best Sellers: An Amazon Best Sellers list for a category, in rank order: rank, title, price, rating, number of ratings and photo. Also New Releases, Movers & Shakers, Most Wished For and Gift Ideas.
 
-        Price: $0.006 per call. A call that reaches the data source is charged even when it fails or times out. About 50 per page; each page is its own call.
+        Price: $0.006 per call. A call that reaches the platform is charged even when it fails or times out. About 50 per page; each page is its own call.
 
         Args:
             category: The category as it appears in the Best Sellers link: kitchen, electronics, beauty, sporting-goods, pet-supplies… Example: kitchen.
@@ -7294,7 +7294,7 @@ class _AliexpressProductsReviews:
     ) -> Page[Review]:
         """AliExpress product reviews: Buyers' reviews of an AliExpress product: stars, text (with an English translation), date, the variant bought, photos and helpful votes.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The AliExpress item ID: the number in /item/<id>.html. Example: 3256805498946261.
@@ -7329,7 +7329,7 @@ class _AliexpressProducts:
     ) -> Page[Product]:
         """AliExpress product search: Search AliExpress by keyword: title, price in US dollars, units sold, star rating and image, in AliExpress's order or by sales or price.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: portable espresso maker.
@@ -7354,7 +7354,7 @@ class _AliexpressProducts:
     ) -> Item[Product]:
         """AliExpress product details: One AliExpress product by ID: title, price, units sold, rating, number of reviews, images and the store.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Paused for now: calls answer capability_paused and are not charged.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Paused for now: calls answer capability_paused and are not charged.
 
         Args:
             id: The AliExpress item ID: the number in /item/<id>.html. Example: 3256805498946261.
@@ -7395,7 +7395,7 @@ class _TaobaoProductsReviews:
     ) -> Page[Review]:
         """Taobao product reviews: Buyers' reviews of a Taobao or Tmall product: text, date, the variant bought, photos and likes, newest first or in Taobao's order.
 
-        Price: $0.043 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.043 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The Taobao or Tmall item ID: the id= number in an item.taobao.com or detail.tmall.com link. Example: 708174321498.
@@ -7432,7 +7432,7 @@ class _TaobaoProducts:
     ) -> Page[Product]:
         """Taobao product search: Search Taobao and Tmall by keyword: title, price and list price, buyers in the last month, the shop and where it ships from, by sales, price or Taobao's own order, with a price range and a Tmall-only switch.
 
-        Price: $0.043 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.043 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 咖啡磨豆机.
@@ -7458,7 +7458,7 @@ class _TaobaoProducts:
     ) -> Item[Product]:
         """Taobao product details: One Taobao or Tmall product by ID: title, price, all main images and the video, item properties, the variants (SKUs) with their prices and stock, where it ships from, and the shop.
 
-        Price: $0.033 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.033 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The Taobao or Tmall item ID: the id= number in an item.taobao.com or detail.tmall.com link. Example: 708174321498.
@@ -7490,7 +7490,7 @@ class _TaobaoShopsProducts:
     ) -> Page[Product]:
         """Taobao shop products: The products a Taobao or Tmall shop sells, 60 a page: title, price and list price, buyers in the last 30 days, review count and image, by sales, newest, seller credit or price. Takes the seller ID and the shop ID, both in a product's details.
 
-        Price: $0.043 per call. A call that reaches the data source is charged even when it fails or times out. About 60 per page; each page is its own call.
+        Price: $0.043 per call. A call that reaches the platform is charged even when it fails or times out. About 60 per page; each page is its own call.
 
         Args:
             id: The seller ID (also called user ID): shop.id in a product's details or in search results. Example: 4219453987.
@@ -7543,7 +7543,7 @@ class _Alibaba1688ProductsReviews:
     ) -> Page[Review]:
         """1688 product reviews: Buyers' reviews of a 1688 offer: stars, text, date and the variant bought, in 1688's order or newest first.
 
-        Price: $0.022 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.022 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             id: The 1688 offer ID: the number in detail.1688.com/offer/<id>.html. Example: 1083411694147.
@@ -7579,7 +7579,7 @@ class _Alibaba1688Products:
     ) -> Page[Product]:
         """1688 product search: Search 1688, China's wholesale marketplace, by keyword: title, wholesale price, minimum order, units sold, repurchase rate and the supplier (factory or trader, location), by sales or price.
 
-        Price: $0.022 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.022 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 咖啡磨豆机.
@@ -7604,7 +7604,7 @@ class _Alibaba1688Products:
     ) -> Item[Product]:
         """1688 product details: One 1688 offer by ID: title, price range and tiered wholesale prices, minimum order, units sold this year, images and video, variants with stock, shipping fee and origin, and the supplier.
 
-        Price: $0.022 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.022 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The 1688 offer ID: the number in detail.1688.com/offer/<id>.html. Example: 1083411694147.
@@ -7635,7 +7635,7 @@ class _Alibaba1688ShopsProducts:
     ) -> Page[Product]:
         """1688 supplier products: The offers a 1688 supplier sells, by its member ID: title, wholesale and dropshipping price, units sold, category and listing date, sorted by sales, price or date.
 
-        Price: $0.022 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.022 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The supplier's member ID, starting b2b-: the shop.id in search results or product details. Example: b2b-2222843280068b7e78.
@@ -7687,7 +7687,7 @@ class _XianyuProducts:
     ) -> Page[Product]:
         """Xianyu listing search: Search Xianyu (Goofish), China's second-hand marketplace, by keyword: title, asking price and original price, the seller, their area and how many want it, newest, cheapest or by seller credit.
 
-        Price: $0.022 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.022 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 咖啡机.
@@ -7710,7 +7710,7 @@ class _XianyuProducts:
     ) -> Item[Product]:
         """Xianyu listing details: One Xianyu listing by ID: the full description, asking and original price, condition, all photos, views, wants and favorites, shipping fee, and the seller with their city and items sold.
 
-        Price: $0.022 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.022 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The Xianyu (Goofish) item ID: the itemId= number in a goofish.com link. Example: 1094089094175.
@@ -7749,7 +7749,7 @@ class _DouyinShopProductsReviews:
     ) -> Page[Review]:
         """Douyin Shop product reviews: Buyers' reviews of a Douyin Shop product: stars, text, date, the variant bought, photos and likes, with the shop's reply.
 
-        Price: $0.039 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call.
+        Price: $0.039 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call.
 
         Args:
             id: The Douyin Shop product ID: the id= number in a haohuo.jinritemai.com link. Example: 3750620912119054828.
@@ -7781,7 +7781,7 @@ class _DouyinShopProducts:
     ) -> Page[Product]:
         """Douyin Shop product search: Search Douyin Shop products in the creator affiliate marketplace (精选联盟) by keyword: title, final price, monthly sales, the shop and its score, and the commission rate a creator earns per sale.
 
-        Price: $0.054 per call. A call that reaches the data source is charged even when it fails or times out. About 30 per page; each page is its own call.
+        Price: $0.054 per call. A call that reaches the platform is charged even when it fails or times out. About 30 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 咖啡机.
@@ -7803,7 +7803,7 @@ class _DouyinShopProducts:
     ) -> Item[Product]:
         """Douyin Shop product details: One Douyin Shop product by ID: title, total units sold, the share of good reviews, all images and detail images, service promises (free returns, freight insurance) and the shop. The price is not in this answer; search gives it.
 
-        Price: $0.039 per call. A call that reaches the data source is charged even when it fails or times out.
+        Price: $0.039 per call. A call that reaches the platform is charged even when it fails or times out.
 
         Args:
             id: The Douyin Shop product ID: the id= number in a haohuo.jinritemai.com link. Example: 3750620912119054828.
@@ -7833,7 +7833,7 @@ class _DouyinShopShopsProducts:
     ) -> Page[Product]:
         """Douyin Shop store products: The products a Douyin Shop store sells, by shop ID: title, price, monthly sales, cover image and service tags.
 
-        Price: $0.043 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.043 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             id: The shop ID: the shop.id in search results or product details. Example: 284912688.
@@ -7883,7 +7883,7 @@ class _ToutiaoArticles:
     ) -> Item[Post]:
         """Toutiao article: One Toutiao article by ID or link, with its full text: title, author, time published, reads, likes, comments, shares and saves, and the pictures in it. ext adds the province it was posted from and, for a reprint, the original link.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The article ID: the digits after /article/ in its toutiao.com link. Give id or url. Example: 7450114952884503059.
@@ -7914,7 +7914,7 @@ class _ToutiaoVideos:
     ) -> Item[Post]:
         """Toutiao video: One Toutiao video by ID or link: title, author and followers, time published, plays, likes, comments, shares, saves, length and cover.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The video ID: the digits after /video/ in its toutiao.com link. Give id or url. Example: 7709330516603961894.
@@ -7946,7 +7946,7 @@ class _ToutiaoPostsComments:
     ) -> Page[Comment]:
         """Toutiao comments: Top-level comments on a Toutiao article or video, 20 a page, hottest first: text, commenter, likes, reply count, time posted and the commenter's province.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call. Give exactly one of id, url.
 
         Args:
             id: The article or video ID: the digits after /article/ or /video/ in its toutiao.com link. Give id or url. Example: 7450114952884503059.
@@ -7987,7 +7987,7 @@ class _ToutiaoUsers:
     ) -> Item[Account]:
         """Toutiao account profile: A Toutiao account by user ID or profile link: name, bio, avatar, verification, followers as Toutiao shows them and total likes. ext splits the followers into Toutiao and Xigua Video, and adds the video count and the province the account posts from.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The user ID: digits, from toutiao.com/c/user/<id>/ or a post's author.id. Give id or url. Example: 51050126444.
@@ -8016,7 +8016,7 @@ class _ToutiaoTrends:
     ) -> Page[Trend]:
         """Toutiao hot board: The Toutiao hot board: the 50 news events read most right now, with rank and heat.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 50 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 50 per page; each page is its own call.
 
         https://okdata.online/apis/toutiao/trends/list/
         """
@@ -8057,7 +8057,7 @@ class _XiguaVideosComments:
     ) -> Page[Comment]:
         """Xigua Video comments: Top-level comments on a video, 20 a page, hottest first: text, commenter, likes, reply count, time posted and the commenter's province.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 20 per page; each page is its own call. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 20 per page; each page is its own call. Give exactly one of id, url.
 
         Args:
             id: The video ID: the digits in its ixigua.com link (the same ID as on Toutiao). Give id or url. Example: 7709330516603961894.
@@ -8089,7 +8089,7 @@ class _XiguaVideos:
     ) -> Page[Post]:
         """Xigua Video search: The top videos for keywords, up to 10 in one answer (no further pages), in Xigua's order: title, author, plays, comments, length, cover and time published.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 10 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 10 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: 露营装备.
@@ -8111,7 +8111,7 @@ class _XiguaVideos:
     ) -> Item[Post]:
         """Xigua Video detail: One Xigua video by ID or link: title, author and followers, time published, plays, likes, comments, shares, saves, length and cover.
 
-        Price: $0.004 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.004 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The video ID: the digits in its ixigua.com link (the same ID as on Toutiao). Give id or url. Example: 7709330516603961894.
@@ -8143,7 +8143,7 @@ class _XiguaUsersVideos:
     ) -> Page[Post]:
         """Xigua Video creator videos: A creator's videos, newest first, about 30 a page: title, plays, likes, comments, shares, saves, length, cover and time published.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 30 per page; each page is its own call. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 30 per page; each page is its own call. Give exactly one of id, url.
 
         Args:
             id: The creator's user ID: digits, from ixigua.com/home/<id>/ or a video's author.id (the same ID as on Toutiao). Give id or url. Example: 51050126444.
@@ -8176,7 +8176,7 @@ class _XiguaUsers:
     ) -> Item[Account]:
         """Xigua Video creator profile: A creator by user ID or profile link: name, bio, avatar, verification, followers as Xigua shows them, video count and total likes. ext gives the Toutiao and Xigua followers apart, total shares and the province the creator posts from.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The creator's user ID: digits, from ixigua.com/home/<id>/ or a video's author.id (the same ID as on Toutiao). Give id or url. Example: 51050126444.
@@ -8215,7 +8215,7 @@ class _BaiduTrends:
     ) -> Page[Trend]:
         """Baidu hot search: Baidu hot search: the 50 searches rising most across China right now, with rank and heat.
 
-        Price: $0.002 per call. A call that reaches the data source is charged even when it fails or times out. About 50 per page; each page is its own call.
+        Price: $0.002 per call. A call that reaches the platform is charged even when it fails or times out. About 50 per page; each page is its own call.
 
         https://okdata.online/apis/baidu/trends/list/
         """
@@ -8253,7 +8253,7 @@ class _BlueskyUsersPosts:
     ) -> Page[Post]:
         """Bluesky account posts: An account's posts, newest first, 30 a page, as its profile tabs show them: posts (the default), posts and replies, or media only. Each has the text, pictures or video, likes, replies, reposts, saves and time. Reposts are listed as on the profile: the original post, with ext.reposted_at.
 
-        Price: $0.001 per call. A call that reaches the data source is charged even when it fails or times out. About 30 per page; each page is its own call. Give exactly one of id, url.
+        Price: $0.001 per call. A call that reaches the platform is charged even when it fails or times out. About 30 per page; each page is its own call. Give exactly one of id, url.
 
         Args:
             id: The account's handle (bsky.app, name.bsky.social, with or without @) or its DID (did:plc:…); a bare name is read as name.bsky.social. Give id or url. Example: bsky.app.
@@ -8287,7 +8287,7 @@ class _BlueskyUsers:
     ) -> Item[Account]:
         """Bluesky profile: A Bluesky account by handle, DID or profile link: display name, handle, bio, avatar, the verification badge, followers, following and post count. ext adds when it joined, its banner, pinned post and how many lists, feeds and starter packs it made.
 
-        Price: $0.001 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.001 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The account's handle (bsky.app, name.bsky.social, with or without @) or its DID (did:plc:…); a bare name is read as name.bsky.social. Give id or url. Example: bsky.app.
@@ -8310,7 +8310,7 @@ class _BlueskyUsers:
     ) -> Page[Account]:
         """Bluesky account search: Accounts whose name, handle or bio match the keywords, 25 a page in Bluesky's order: handle, display name, bio, avatar and the verification badge. Search results carry no counts; bluesky.users.get has them.
 
-        Price: $0.001 per call. A call that reaches the data source is charged even when it fails or times out. About 25 per page; each page is its own call.
+        Price: $0.001 per call. A call that reaches the platform is charged even when it fails or times out. About 25 per page; each page is its own call.
 
         Args:
             query: Keywords, as a person would type them into the platform search box. Example: nasa.
@@ -8341,7 +8341,7 @@ class _BlueskyPostsComments:
     ) -> Page[Comment]:
         """Bluesky post replies: The direct replies to a post in Bluesky's order, all in one answer (up to about 200, no further page): text, author, likes, reply count and time. A reply is a post too: pass its id here for the replies under it.
 
-        Price: $0.001 per call. A call that reaches the data source is charged even when it fails or times out. About 200 per page; each page is its own call. Give exactly one of id, url.
+        Price: $0.001 per call. A call that reaches the platform is charged even when it fails or times out. About 200 per page; each page is its own call. Give exactly one of id, url.
 
         Args:
             id: The post's at:// URI, as the id of any Bluesky post in our answers (at://<DID>/app.bsky.feed.post/<key>). Give id or url. Example: at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.post/3n22yg6lg2k2f.
@@ -8373,7 +8373,7 @@ class _BlueskyPosts:
     ) -> Item[Post]:
         """Bluesky post: One post by its at:// URI or bsky.app link: text, language, pictures or video, hashtags, author, time, and likes, replies, reposts, quotes and saves. ext names the post it replies to or quotes, and any link card.
 
-        Price: $0.001 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.001 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The post's at:// URI, as the id of any Bluesky post in our answers (at://<DID>/app.bsky.feed.post/<key>). Give id or url. Example: at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.post/3n22yg6lg2k2f.
@@ -8417,7 +8417,7 @@ class _AppStoreAppsReviews:
     ) -> Page[Review]:
         """App Store reviews: Written customer reviews of an app in one country's store, newest or most helpful first, 50 a page and at most 10 pages (about 500 a country): stars, title and text, the app version reviewed (in variant), the reviewer's name, date and helpful votes (in likes).
 
-        Price: $0.001 per call; an empty answer costs $0. A call that reaches the data source is charged even when it fails or times out. About 50 per page; each page is its own call. Give exactly one of id, url.
+        Price: $0.001 per call; an empty answer costs $0. A call that reaches the platform is charged even when it fails or times out. About 50 per page; each page is its own call. Give exactly one of id, url.
 
         Args:
             id: The app's App Store ID: the digits after id in its apps.apple.com link. Give id or url. Example: 6448311069.
@@ -8453,7 +8453,7 @@ class _AppStoreApps:
     ) -> Item[Product]:
         """App Store app details: One iPhone, iPad or Mac app by App Store ID or link, in any country's store: name, price and currency, average stars and number of ratings (in reviews), developer and screenshots. ext adds the bundle ID, current version and its release notes, release dates, category, age rating, size, languages and the current version's rating.
 
-        Price: $0.001 per call. A call that reaches the data source is charged even when it fails or times out. Give exactly one of id, url.
+        Price: $0.001 per call. A call that reaches the platform is charged even when it fails or times out. Give exactly one of id, url.
 
         Args:
             id: The app's App Store ID: the digits after id in its apps.apple.com link. Give id or url. Example: 6448311069.
@@ -8494,7 +8494,7 @@ class _AllTrends:
     ) -> Page[Trend]:
         """All hot lists in one call: The hot lists of Weibo, Zhihu, Baidu, Toutiao, Douyin, Bilibili, Xiaohongshu and Kuaishou in one call: rank, entry, heat and link, each marked with its platform. Ask for some platforms only, and cap how many entries each gives.
 
-        Price: $0.03 per call. A call that reaches the data source is charged even when it fails or times out. About 400 per page; each page is its own call.
+        Price: $0.03 per call. A call that reaches the platform is charged even when it fails or times out. About 400 per page; each page is its own call.
 
         Args:
             platforms: Comma-separated platforms to include, any of weibo, zhihu, baidu, toutiao, douyin, bilibili, xiaohongshu, kuaishou; all of them when left out. Example: weibo,zhihu,douyin.

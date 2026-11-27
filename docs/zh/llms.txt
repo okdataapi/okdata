@@ -9,7 +9,7 @@
 - 基础地址 `https://api.okdata.online`。请求头 `Authorization: Bearer $OKDATA_API_KEY`；Key 以 `okd_` 开头，绝不放进网址。
 - 路径是把接口 id 的点换成斜杠放在 /v1 下：`douyin.videos.comments.list` → `GET /v1/douyin/videos/comments/list`。参数放查询字符串。
 - 一次调用返回一页：`data.items` 或 `data.item`、`page.next_cursor`（作为 `cursor` 传回即下一页，24 小时内有效、只能用于同一接口和参数，每页单独计费）和 `meta.billing.amount`（美元）。
-- 错误带 `code`、`charged`、`retry` 和 `retry_after_seconds`。请求到了数据源的调用，失败、超时或查不到也照常计费（`charged` 为 true，并给出 `amount`）；参数错误不扣费；`not_found` 是最终结果；只有 `settlement_unknown` 返回 `charged: null`（用同一个 Idempotency-Key 重发）。
+- 错误带 `code`、`charged`、`retry` 和 `retry_after_seconds`。请求到了平台的调用，失败、超时或查不到也照常计费（`charged` 为 true，并给出 `amount`）；参数错误不扣费；`not_found` 是最终结果；只有 `settlement_unknown` 返回 `charged: null`（用同一个 Idempotency-Key 重发）。
 - 带上 `Idempotency-Key`：24 小时内同一个 Key 加同一个请求返回保存的结果，只扣一次费。
 - `view=brief|compact|standard|full` 和 `fields=id,text,metrics.likes` 控制返回多少字段。`view=brief`（ID、标题、正文前 100 字、链接、时间、主要数字）适合先扫一遍列表，再按 ID 取详情。
 - MCP（Streamable HTTP）：`https://api.okdata.online/mcp`，工具 `find`, `describe`, `call`, `read_more`, `account`。免费、不需要 Key 的：`find`、`describe`、`account`。

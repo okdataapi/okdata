@@ -9,7 +9,7 @@ Catalog 328d5a2ee651819d, price book 5835acf0f45c7fc4. 中文版：https://okdat
 - Base URL `https://api.okdata.online`. Send `Authorization: Bearer $OKDATA_API_KEY`; keys start with `okd_` and never go in a URL.
 - The path is the endpoint id with dots as slashes under /v1: `douyin.videos.comments.list` → `GET /v1/douyin/videos/comments/list`. Parameters go in the query string.
 - One call returns one page: `data.items` or `data.item`, `page.next_cursor` (pass it back as `cursor`: opaque, 24 hours, same endpoint and parameters; each page is its own charge) and `meta.billing.amount` in US dollars.
-- Errors carry `code`, `charged`, `retry` and `retry_after_seconds`. A call that reached a data source is charged even when it fails, times out or is not found (`charged: true` with `amount`); bad parameters are not; `not_found` is final; only `settlement_unknown` has `charged: null` (resend with the same Idempotency-Key).
+- Errors carry `code`, `charged`, `retry` and `retry_after_seconds`. A call that reached the platform is charged even when it fails, times out or is not found (`charged: true` with `amount`); bad parameters are not; `not_found` is final; only `settlement_unknown` has `charged: null` (resend with the same Idempotency-Key).
 - Send an `Idempotency-Key`: the same key and request within 24 hours return the stored result and are charged once.
 - `view=brief|compact|standard|full` and `fields=id,text,metrics.likes` choose how much comes back. `view=brief` (IDs, title, 100 characters of text, link, time, main counts) is for scanning a list; then get what you need by ID.
 - MCP (Streamable HTTP): `https://api.okdata.online/mcp`, tools `find`, `describe`, `call`, `read_more`, `account`. Free and keyless: `find`, `describe`, `account`.

@@ -629,8 +629,8 @@
           ],
           "default": "hot",
           "description": {
-            "en": "Result order. Only hot is available from our sources for now.",
-            "zh": "排序方式。目前数据源只提供最热排序。"
+            "en": "Result order. Only hot is available for now.",
+            "zh": "排序方式。目前只提供最热排序。"
           }
         },
         {
@@ -18618,7 +18618,7 @@
         "zh": "视频号账号信息（备用版）"
       },
       "group": {
-        "en": "Backup sources",
+        "en": "Backup",
         "zh": "备用版"
       },
       "aliases": {
@@ -18711,7 +18711,7 @@
         "zh": "视频号账号作品（备用版）"
       },
       "group": {
-        "en": "Backup sources",
+        "en": "Backup",
         "zh": "备用版"
       },
       "aliases": {
@@ -18814,7 +18814,7 @@
         "zh": "视频号视频搜索（备用版）"
       },
       "group": {
-        "en": "Backup sources",
+        "en": "Backup",
         "zh": "备用版"
       },
       "aliases": {
@@ -18946,7 +18946,7 @@
         "zh": "微信搜一搜综合搜索（备用版）"
       },
       "group": {
-        "en": "Backup sources",
+        "en": "Backup",
         "zh": "备用版"
       },
       "aliases": {
@@ -20024,8 +20024,8 @@
           ],
           "default": "latest",
           "description": {
-            "en": "Newest first; the only order this source has (no most-viewed order).",
-            "zh": "从新到旧；这个数据源只有这一种顺序（没有按播放数排）。"
+            "en": "Newest first; the only order available (no most-viewed order).",
+            "zh": "从新到旧；这个接口只有这一种顺序（没有按播放数排）。"
           }
         },
         {

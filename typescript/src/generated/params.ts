@@ -23,7 +23,7 @@ export type DouyinVideosGetParams = CommonParams & ExactlyOne<{
 export type DouyinVideosCommentsListParams = CommonParams & {
   /** The video ID. Example: `7301234567890123456`. */
   id: string;
-  /** Result order. Only hot is available from our sources for now. Default `hot`. */
+  /** Result order. Only hot is available for now. Default `hot`. */
   sort?: 'hot';
   /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
   cursor?: string;
@@ -1600,7 +1600,7 @@ export type YoutubeChannelsSearchParams = CommonParams & {
 export type YoutubeChannelsVideosListParams = CommonParams & {
   /** Regular videos (the default) or Shorts. Default `video`. */
   type?: 'video' | 'short';
-  /** Newest first; the only order this source has (no most-viewed order). Default `latest`. */
+  /** Newest first; the only order available (no most-viewed order). Default `latest`. */
   sort?: 'latest';
   /** Opaque cursor from page.next_cursor of the previous call. Each page is a separate call. */
   cursor?: string;

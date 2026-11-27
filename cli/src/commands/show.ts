@@ -21,7 +21,7 @@ function chargesLine(e: CatalogEndpoint): string {
   const parts = [priceLine(e)];
   if (e.list && e.chargeWhenEmpty !== e.price) parts.push(`empty answer $${e.chargeWhenEmpty}`);
   if (Number(e.chargeWhenNotFound) > 0) parts.push(`not found $${e.chargeWhenNotFound}`);
-  parts.push('charged even when the data source fails or times out');
+  parts.push('charged even when the platform fails or times out');
   return parts.join('; ');
 }
 

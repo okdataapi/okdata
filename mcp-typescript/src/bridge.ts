@@ -19,7 +19,7 @@ import {
 import { KEYS_URL, remoteHeaders, type BridgeConfig } from './config.js';
 import { VERSION } from './version.js';
 
-/** How long a tool call may take: the remote may try more than one data source before it answers. */
+/** How long a tool call may take: the remote may retry automatically on its side before it answers. */
 export const CALL_TIMEOUT_MS = 180_000;
 const CONNECT_TIMEOUT_MS = 30_000;
 

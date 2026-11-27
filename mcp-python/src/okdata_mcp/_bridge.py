@@ -24,7 +24,7 @@ from ._config import KEYS_URL, Settings, remote_headers
 from ._version import __version__
 
 CALL_TIMEOUT = 180.0
-"""Seconds a tool call may take: the remote may try more than one data source before it answers."""
+"""Seconds a tool call may take: the remote may retry automatically on its side before it answers."""
 CONNECT_TIMEOUT = 30.0
 NO_ANSWER = -32050
 """The JSON-RPC error code this bridge gives a request the remote server did not answer."""

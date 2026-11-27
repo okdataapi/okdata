@@ -92,7 +92,7 @@ Every endpoint with its parameters, fields and price: [okdata.online/apis](https
 |---|---|---|
 | `find` | free, no key | The endpoint for a need in plain words, English or 中文, with its price and a ready call. |
 | `describe` | free, no key | Parameters, fields, price and an example of up to 5 endpoints. |
-| `call` | charged | One page of data from one endpoint, at the price `describe` showed, also when the source finds nothing or fails. |
+| `call` | charged | One page of data from one endpoint, at the price `describe` showed, also when the platform finds nothing or fails. |
 | `read_more` | free | The rest of an answer cut at about 20 KB, or the same result in another view, for 24 hours. |
 | `account` | free | The balance, a call's receipt, usage by day or endpoint; `status` (no key) says which endpoints are up. |
 

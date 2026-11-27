@@ -13,7 +13,7 @@ Your account (free):
   balance              Balance, this key's limits, rate tier
   more <request_id>    A call's kept result again, free for 24 h (--view, --fields, --out; --receipt: the call record)
 
-Call (charged once it reaches a data source, even when that fails; calls refused before that are free):
+Call (charged once it reaches the platform, even when that fails; calls refused before that are free):
   call <id> name=value…
                        --view compact|standard|full  --fields id,text  --max-price 0.05
                        --pages N --max-spend 0.10 (follow next_cursor within a budget)

@@ -78,7 +78,7 @@
   {
     "name": "call",
     "title": "Call a capability",
-    "description": "One page from one capability, charged per call or per item returned, also when an answer that reached the data source is empty, not found or failed. Give the capability and only the parameters describe lists for it. The first lines of the answer give the items, the charge, the balance, the result ID and how to go on: cursor for the next page (a new charged call), read_more for the rest of an answer cut at about 20 KB (free). Then one JSON item per line. Needs an API key.",
+    "description": "One page from one capability, charged per call or per item returned, also when an answer that reached the platform is empty, not found or failed. Give the capability and only the parameters describe lists for it. The first lines of the answer give the items, the charge, the balance, the result ID and how to go on: cursor for the next page (a new charged call), read_more for the rest of an answer cut at about 20 KB (free). Then one JSON item per line. Needs an API key.",
     "inputSchema": {
       "type": "object",
       "properties": {
