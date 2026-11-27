@@ -137,8 +137,8 @@
       "retry": "no",
       "message": "The platform says this does not exist or is not public",
       "message_zh": "平台上没有这个内容，或不公开",
-      "meaning": "The post, account or page does not exist or is not public. When the lookup reached the platform, or the endpoint's charge_when_not_found is above 0, this answer is charged: the body then says charged: true and amount.",
-      "meaning_zh": "内容、账号或页面不存在或不公开。这次查询请求到了平台，或者接口的 charge_when_not_found 大于 0 时，这个结果会计费：返回体里 charged 为 true，并给出 amount。",
+      "meaning": "The post, account or page does not exist or is not public. When the lookup reached the platform and was billed, or the endpoint's charge_when_not_found is above 0, this answer is charged: the body then says charged: true and amount.",
+      "meaning_zh": "内容、账号或页面不存在或不公开。这次查询请求到了平台、且产生了费用，或者接口的 charge_when_not_found 大于 0 时，这个结果会计费：返回体里 charged 为 true，并给出 amount。",
       "fix": "Final answer; retrying will not change it.",
       "fix_zh": "这是最终结果，重试也一样。",
       "docs_url": "https://okdata.online/docs/errors/#not_found"
@@ -280,8 +280,8 @@
       "retry": "yes",
       "message": "No result came back this time; retry shortly",
       "message_zh": "这次没有取到结果，可以稍后重试",
-      "meaning": "The request failed even after we retried automatically on our side. If it reached the platform, it is charged once at the endpoint's price (charged: true and amount); otherwise nothing is charged.",
-      "meaning_zh": "我们这边自动重试后，这次请求仍然失败了。如果请求已经到了平台，就按接口价格计一次费（charged 为 true，并给出 amount）；否则不计费。",
+      "meaning": "The request failed even after we retried automatically on our side. If it reached the platform and the request was billed, it is charged once at the endpoint's price (charged: true and amount); otherwise nothing is charged.",
+      "meaning_zh": "我们这边自动重试后，这次请求仍然失败了。如果请求到了平台、且这次请求产生了费用，就按接口价格计一次费（charged 为 true，并给出 amount）；否则不计费。",
       "fix": "Retry with backoff; check the status page if it persists.",
       "fix_zh": "退避后重试；持续失败就看状态页。",
       "docs_url": "https://okdata.online/docs/errors/#upstream_failed"
@@ -306,8 +306,8 @@
       "retry": "yes",
       "message": "The service is busy; retry shortly",
       "message_zh": "服务繁忙，可以稍后重试",
-      "meaning": "This endpoint is at capacity right now. If the request reached the platform, it is charged once at the endpoint's price (charged: true and amount); otherwise nothing is charged.",
-      "meaning_zh": "这个接口现在满负荷。如果请求已经到了平台，就按接口价格计一次费（charged 为 true，并给出 amount）；否则不计费。",
+      "meaning": "This endpoint is at capacity right now. If the request reached the platform and was billed, it is charged once at the endpoint's price (charged: true and amount); otherwise nothing is charged.",
+      "meaning_zh": "这个接口现在满负荷。如果请求到了平台、且这次请求产生了费用，就按接口价格计一次费（charged 为 true，并给出 amount）；否则不计费。",
       "fix": "Retry with backoff.",
       "fix_zh": "退避后重试。",
       "docs_url": "https://okdata.online/docs/errors/#upstream_busy"
@@ -332,8 +332,8 @@
       "retry": "yes",
       "message": "The data did not arrive in time",
       "message_zh": "数据没有及时返回",
-      "meaning": "The data did not come back in time. If the request had reached the platform, it is charged once at the endpoint's price (charged: true and amount); otherwise the hold is released.",
-      "meaning_zh": "数据没有及时返回。如果请求已经到了平台，就按接口价格计一次费（charged 为 true，并给出 amount）；否则预扣退回。",
+      "meaning": "The data did not come back in time. If the request had reached the platform and was billed, it is charged once at the endpoint's price (charged: true and amount); otherwise the hold is released.",
+      "meaning_zh": "数据没有及时返回。如果请求到了平台、且这次请求产生了费用，就按接口价格计一次费（charged 为 true，并给出 amount）；否则预扣退回。",
       "fix": "Retry with backoff.",
       "fix_zh": "退避后重试。",
       "docs_url": "https://okdata.online/docs/errors/#timeout"

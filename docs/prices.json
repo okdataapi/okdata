@@ -7,7 +7,7 @@
     "call": "unit=call: each call costs price, however many items come back.",
     "item": "unit=item: price times the items returned, at least one item, at most max_charge per call.",
     "failures": "A call that reached the platform is charged once at its price (one item for unit=item) even when the answer is empty, not found, a failure or a timeout on the platform's side; calls refused before reaching the platform (parameters, balance, limits) and errors on our side are never charged.",
-    "empty_and_not_found": "charge_when_empty and charge_when_not_found are what those answers cost when the call did not reach the platform; when it did, they cost one unit like a failure (see failures).",
+    "empty_and_not_found": "charge_when_empty and charge_when_not_found are what those answers cost when the request was not billed on the platform; when it was, they cost one unit like a failure (see failures).",
     "idempotency": "Resending with the same Idempotency-Key within 24 hours replays the stored result at no charge.",
     "paging": "Each page is its own call and its own charge."
   },
